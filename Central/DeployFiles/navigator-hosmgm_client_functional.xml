@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FndNavigator xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Legacy="false" Source="hosmgm\client\navigator-functional.xml">
+  <FndNavigatorEntries>
+    <FndNavigatorEntry>
+      <Key>HOSPIT_MANA_SYSTEM</Key>
+      <Name>Hospital Management System</Name>
+      <Url />
+      <Type>Folder</Type>
+      <ParentKey>NAVIGATOR_Root</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>HOSPIT_MANA_SYSTEM.DOCT</Key>
+      <Name>Doctor</Name>
+      <Url>ifsapf:tbwDoctor</Url>
+      <Type>TableWindow</Type>
+      <ParentKey>HOSPIT_MANA_SYSTEM</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>HOSPIT_MANA_SYSTEM.PATINT_DETALS</Key>
+      <Name>Patient Details</Name>
+      <Url>ifsapf:frmPatient</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>HOSPIT_MANA_SYSTEM</ParentKey>
+      <Ordinal>90</Ordinal>
+    </FndNavigatorEntry>
+  </FndNavigatorEntries>
+  <FndShortcutItems />
+</FndNavigator>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FndNavigator xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Legacy="false" Source="libsys\client\navigator-functional.xml">
+  <FndNavigatorEntries>
+    <FndNavigatorEntry>
+      <Key>LIBRRY</Key>
+      <Name>Library</Name>
+      <Url />
+      <Type>Folder</Type>
+      <ParentKey>NAVIGATOR_Root</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>LIBRRY.DETANT</Key>
+      <Name>DetailOfStudent</Name>
+      <Url>ifsapf:frmStudentDetails</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>LIBRRY</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>LIBRRY.AUTH</Key>
+      <Name>Author</Name>
+      <Url>ifsapf:tbwAuthor</Url>
+      <Type>TableWindow</Type>
+      <ParentKey>LIBRRY</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>LIBRRY.BOOKLS</Key>
+      <Name>BookDetails</Name>
+      <Url>ifsapf:tbwbook</Url>
+      <Type>TableWindow</Type>
+      <ParentKey>LIBRRY</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+  </FndNavigatorEntries>
+  <FndShortcutItems />
+</FndNavigator>

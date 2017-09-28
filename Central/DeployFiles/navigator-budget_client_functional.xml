@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FndNavigator xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Legacy="false" Source="budget\client\navigator-functional.xml">
+  <FndNavigatorEntries>
+    <FndNavigatorEntry>
+      <Key>BUDG</Key>
+      <Name>Budget</Name>
+      <Url />
+      <Type>Folder</Type>
+      <ParentKey>NAVIGATOR_Root</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>BUDG.CONTRO_BUDG_COMBINON</Key>
+      <Name>Control Budget Combination</Name>
+      <Url>ifsapf:frmControlBudgetCombination</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>BUDG</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>BUDG.TEST</Key>
+      <Name>test</Name>
+      <Url>ifsapf:frmControlBudgetCombination</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>BUDG</ParentKey>
+      <Ordinal>50</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>BUDG.DATA</Key>
+      <Name>Data</Name>
+      <Url>ifsapf:tbwData</Url>
+      <Type>TableWindow</Type>
+      <ParentKey>BUDG</ParentKey>
+      <Ordinal>150</Ordinal>
+    </FndNavigatorEntry>
+  </FndNavigatorEntries>
+  <FndShortcutItems />
+</FndNavigator>

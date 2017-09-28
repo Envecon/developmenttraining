@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd">
+  <assemblyIdentity name="Ifs.Fnd.MSBuildTasks" processorArchitecture="msil" publicKeyToken="FF90F512E10AEF0D" version="4.52.9.0" />
+  <file name="Ifs.Fnd.MSBuildTasks.dll" />
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.Build.Utilities.v4.0" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscorlib" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Windows.Forms" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.Build.Tasks.v4.0" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.Build.Framework" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Ifs.Fnd.Explorer.Interfaces" publicKeyToken="ff90f512e10aef0d" version="4.52.9.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Core" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ICSharpCode.SharpZipLib" publicKeyToken="1b03e6acf1164f73" version="0.85.5.452" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Xml" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Ifs.Fnd.Core" publicKeyToken="ff90f512e10aef0d" version="4.52.9.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.Build" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.CSharp" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Drawing" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Xml.Linq" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscorlib" publicKeyToken="b77a5c561934e089" version="2.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+</assembly>

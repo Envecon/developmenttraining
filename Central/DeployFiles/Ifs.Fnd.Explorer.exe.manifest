@@ -1,0 +1,2790 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Ifs.Fnd.Explorer.exe" version="9.1611.1421.1805" publicKeyToken="2df0e6a420104e3b" language="neutral" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="ifsAppsCompLogo.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Ifs.Fnd.Explorer" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="x86" />
+    <commandLine file="Ifs.Fnd.Explorer.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="4" minorVersion="10" buildNumber="0" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="C1.Win.C1FlexGrid.4.dll" size="1291128">
+      <assemblyIdentity name="C1.Win.C1FlexGrid.4" version="4.6.20142.843" publicKeyToken="79882D576C6336DA" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>16u4zD4iYMi2LR1u4K/boyXXbgU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Charts.v13.2.Core.dll" size="580600">
+      <assemblyIdentity name="DevExpress.Charts.v13.2.Core" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>qflXIDF/QZhQ5qi8+kJfaFnNTq4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Data.v13.2.dll" size="3238904">
+      <assemblyIdentity name="DevExpress.Data.v13.2" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>kMNsmaJGGIlEiH5I/A9hvbit90w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Xpf.Charts.v13.2.dll" size="1777144">
+      <assemblyIdentity name="DevExpress.Xpf.Charts.v13.2" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>cr8ANe2E0GENdve4PKD+5wJ5lM8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Xpf.Core.v13.2.dll" size="5533688">
+      <assemblyIdentity name="DevExpress.Xpf.Core.v13.2" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>luMAYzOG+4tEzCXCQ2hVKwSqj9k=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Xpf.Gauges.v13.2.dll" size="1573368">
+      <assemblyIdentity name="DevExpress.Xpf.Gauges.v13.2" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>9mrVn/OyAXXLUsn3Paks9x1pZtU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DevExpress.Xpf.Mvvm.v13.2.dll" size="202744">
+      <assemblyIdentity name="DevExpress.Xpf.Mvvm.v13.2" version="13.2.7.0" publicKeyToken="B88D1754D700E49A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CUdL0/pHK9rCp8+fTUdbp1puDvM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ICSharpCode.SharpZipLib.dll" size="192512">
+      <assemblyIdentity name="ICSharpCode.SharpZipLib" version="0.85.5.452" publicKeyToken="1B03E6ACF1164F73" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1pnltGoU6k18BS5Bk/hfCk8rKes=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.AdConfiguration.dll" size="364544" group="Ifs.Application.AdConfiguration">
+      <assemblyIdentity name="Ifs.Application.AdConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>JF6X93zDtET+f+k6WlSqoSzBvqE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.AddressControlBasicData.dll" size="36864">
+      <assemblyIdentity name="Ifs.Application.AddressControlBasicData" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ENFBFho/eNOsAOLiNNwPU4WlGVE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.AdSyncJobLogs.dll" size="77824" group="Ifs.Application.AdSyncJobLogs">
+      <assemblyIdentity name="Ifs.Application.AdSyncJobLogs" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>KAiCvJHbUvpJvtw7uZJg/m5JF9U=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.AnalysisPanel.dll" size="212992">
+      <assemblyIdentity name="Ifs.Application.AnalysisPanel" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>qLPP66wHcS7gAoksc8OKKvXprZE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ApplicationFormsPlugins.dll" size="20480">
+      <assemblyIdentity name="Ifs.Application.ApplicationFormsPlugins" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>tl8PswICpls4zjhO7s3f2b+0Zrk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ApplicationMonitoring.dll" size="466944" group="Ifs.Application.ApplicationMonitoring">
+      <assemblyIdentity name="Ifs.Application.ApplicationMonitoring" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>23Dy801Y3VKQGmQ0FUfgcgey/yo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ApplicationSearchConfiguration.dll" size="270336" group="Ifs.Application.ApplicationSearchConfiguration">
+      <assemblyIdentity name="Ifs.Application.ApplicationSearchConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Ni/+yH/75/hZMLQeRuUSnj8xtA0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Appsrv.dll" size="1368064" group="Ifs.Application.Appsrv">
+      <assemblyIdentity name="Ifs.Application.Appsrv" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hKYF9FqKls3lkvc15dWqxcLmkOM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.BackGroundJobAdmin.dll" size="393216" group="Ifs.Application.BackGroundJobAdmin">
+      <assemblyIdentity name="Ifs.Application.BackGroundJobAdmin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HsJ/V48in5dZ8w4Xb3q/wh9LYh0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.BAReportServicePlugin.dll" size="32768">
+      <assemblyIdentity name="Ifs.Application.BAReportServicePlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>nO4ck5gdPzUf0d6aGtGvMPP5gdQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.BAReportsPlugin.dll" size="57344">
+      <assemblyIdentity name="Ifs.Application.BAReportsPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SyQ4wzPzl3s2w57QJUF5EqP8atw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.BAReportViewer.dll" size="61440" group="Ifs.Application.BAReportViewer">
+      <assemblyIdentity name="Ifs.Application.BAReportViewer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Er8Mjchs9KQfZu1lgENImZ221Wc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.BatchQueueAdministration.dll" size="94208" group="Ifs.Application.BatchQueueAdministration">
+      <assemblyIdentity name="Ifs.Application.BatchQueueAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>RXwTi4MAV8b12PsRsF5BxcoyzWE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Biaxsv_.dll" size="141312" group="Ifs.Application.Biaxsv_">
+      <assemblyIdentity name="Ifs.Application.Biaxsv_" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>LI6AUqtw0JiioseYuJRzu8KR6FA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Biint_.dll" size="11264" group="Ifs.Application.Biint_">
+      <assemblyIdentity name="Ifs.Application.Biint_" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>4BcOYSYGW6pFiIBo8euQs2KMvxs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.BIReportServicePlugin.dll" size="32768">
+      <assemblyIdentity name="Ifs.Application.BIReportServicePlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>auSK3IxuUjilqL+R80PXsPhr6ZM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Biserv.ExcelReportAdmin.dll" size="320000" group="Ifs.Application.Biserv.ExcelReportAdmin">
+      <assemblyIdentity name="Ifs.Application.Biserv.ExcelReportAdmin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>wuVZK16BFAUBvagvaBlZN/mANGY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.BusinessIntelligencePlugins.dll" size="53248">
+      <assemblyIdentity name="Ifs.Application.BusinessIntelligencePlugins" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hE7jX5LaZtjaK09svEqrnH2h7s8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ClientProfileExplorerPlugin.dll" size="94208">
+      <assemblyIdentity name="Ifs.Application.ClientProfileExplorerPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>WEngd3BSn/VRC/Bm5jsdH/KGA20=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.CommonMessages.dll" size="49152" group="Ifs.Application.CommonMessages">
+      <assemblyIdentity name="Ifs.Application.CommonMessages" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>5HIOmWuANvDIzSF7Ro3bD2xEPNk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ComponentDependencies.dll" size="98304" group="Ifs.Application.ComponentDependencies">
+      <assemblyIdentity name="Ifs.Application.ComponentDependencies" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>BbtOjlTnbDsJIhydEasxHSzCipo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.CompositePageDesignersPlugin.dll" size="5632">
+      <assemblyIdentity name="Ifs.Application.CompositePageDesignersPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>vEE4aYQK1xFD9eDcimPQhuM/v6c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ConnectPlugins.dll" size="196608">
+      <assemblyIdentity name="Ifs.Application.ConnectPlugins" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1LRHG7AHKQN2WnGXDS2VQfCb/cU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ContextSubstitutionVariables.dll" size="49152" group="Ifs.Application.ContextSubstitutionVariables">
+      <assemblyIdentity name="Ifs.Application.ContextSubstitutionVariables" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>BkUsQAobwHNDslm07xCzuxL4X20=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.CrystalQuickReport.dll" size="32768" group="Ifs.Application.CrystalQuickReport">
+      <assemblyIdentity name="Ifs.Application.CrystalQuickReport" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>jAyWAGTIvzv4hwHITdp5M3Vqvog=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.CustomerSupport.dll" size="208896" group="Ifs.Application.CustomerSupport">
+      <assemblyIdentity name="Ifs.Application.CustomerSupport" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>O/wZqzQ272Dic403USIl24HWpOA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.CustomMenus.dll" size="425984" group="Ifs.Application.CustomMenus">
+      <assemblyIdentity name="Ifs.Application.CustomMenus" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>JvguiT9lrXmpOy839l4/PtS/ODM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.CustomObjectsAdmin.dll" size="1168896" group="Ifs.Application.CustomObjectsAdmin">
+      <assemblyIdentity name="Ifs.Application.CustomObjectsAdmin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>G5/VXaivOTguR2DQ5wg3YdmBJ00=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.DatabaseAlertLog.dll" size="36864" group="Ifs.Application.DatabaseAlertLog">
+      <assemblyIdentity name="Ifs.Application.DatabaseAlertLog" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>r+J7g24YO2isAMo0g43ckEi8KOA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.DomainConfiguration.dll" size="32768" group="Ifs.Application.DomainConfiguration">
+      <assemblyIdentity name="Ifs.Application.DomainConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>a+6AP819szDI2SatpTst45bYXvA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Enterp.dll" size="2793472" group="Ifs.Application.Enterp">
+      <assemblyIdentity name="Ifs.Application.Enterp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>dUTkfb360rnD2J00OR2XrAeYiUU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Enterp_.dll" size="1515520" group="Ifs.Application.Enterp_">
+      <assemblyIdentity name="Ifs.Application.Enterp_" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>xi6DkEq5hDMofi7TgXhvHBfNt+o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.EventAdministration.dll" size="724992" group="Ifs.Application.EventAdministration">
+      <assemblyIdentity name="Ifs.Application.EventAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>tF7ekfBigddyxJ+3WzaPqaZ/24Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ExcelReportAdministration.dll" size="1544192" group="Ifs.Application.ExcelReportAdministration">
+      <assemblyIdentity name="Ifs.Application.ExcelReportAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>upG/pA8OYCtsFcGPL7hq8NbQoxo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ExploreMaterializedViewsPlugin.dll" size="147456">
+      <assemblyIdentity name="Ifs.Application.ExploreMaterializedViewsPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>xQE1c/Ari1e7c91fh8/08yjSH6c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ExploreMobileUsersPlugin.dll" size="32768">
+      <assemblyIdentity name="Ifs.Application.ExploreMobileUsersPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>5E9Jc8vJsa9S3v9vYhXlpnVYJ+E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ExplorePermissionSetsPlugin.dll" size="98304">
+      <assemblyIdentity name="Ifs.Application.ExplorePermissionSetsPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>7AnzZnP063CQw6gTGeNlEhx9oQc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ExploreQuickReportsPlugin.dll" size="49664">
+      <assemblyIdentity name="Ifs.Application.ExploreQuickReportsPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>LdaK+Md/2M9ryVKrpBPPFQH8l3U=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ExploreUsersPlugin.dll" size="274432">
+      <assemblyIdentity name="Ifs.Application.ExploreUsersPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SrCZqKHpOdCAsb1k5/hnzS/MW7k=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.F1Configuration.dll" size="163840" group="Ifs.Application.F1Configuration">
+      <assemblyIdentity name="Ifs.Application.F1Configuration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>yREGDuaNLxN2c8wmEGc/6zYUaqU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.FilterAdministration.dll" size="106496" group="Ifs.Application.FilterAdministration">
+      <assemblyIdentity name="Ifs.Application.FilterAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>b4XIyHAj+fnGwfFmx61HLqQ455M=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.AppServerTasks.dll" size="16896" group="Ifs.Application.Fndadm.AppServerTasks">
+      <assemblyIdentity name="Ifs.Application.Fndadm.AppServerTasks" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>vqV+htbNN7JE7/YOJqwsMIPHrHA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.BackgroundProcessing.dll" size="131072" group="Ifs.Application.Fndadm.BackgroundProcessing">
+      <assemblyIdentity name="Ifs.Application.Fndadm.BackgroundProcessing" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>4qvG1xpL/7nQItJ/9Zlx2+epPhc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.Connectivity.dll" size="421888" group="Ifs.Application.Fndadm.Connectivity">
+      <assemblyIdentity name="Ifs.Application.Fndadm.Connectivity" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>aAPJB9Ks2DXFPNxTbOjfozle9GU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.DataArchive.dll" size="356352" group="Ifs.Application.Fndadm.DataArchive">
+      <assemblyIdentity name="Ifs.Application.Fndadm.DataArchive" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>lR6b86Xv8JL+h6ZzZsXTzkGohww=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.IALConfiguration.dll" size="147456" group="Ifs.Application.Fndadm.IALConfiguration">
+      <assemblyIdentity name="Ifs.Application.Fndadm.IALConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>IO+dB0A2x4238/8kIXStx+4Dnxc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.IMPackage.dll" size="63488" group="Ifs.Application.Fndadm.IMPackage">
+      <assemblyIdentity name="Ifs.Application.Fndadm.IMPackage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>l2f6vNzDQETVnj0iuQX2oCo6RbE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.InstalledPatches.dll" size="15360" group="Ifs.Application.Fndadm.InstalledPatches">
+      <assemblyIdentity name="Ifs.Application.Fndadm.InstalledPatches" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Xxm4/1p4PzL4K413NI+ynJWgQCQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.LogicalUnits.dll" size="145920" group="Ifs.Application.Fndadm.LogicalUnits">
+      <assemblyIdentity name="Ifs.Application.Fndadm.LogicalUnits" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>DRA+ujI1R/ebV5u/PZRUkRvmtNg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.MessageQueues.dll" size="72704" group="Ifs.Application.Fndadm.MessageQueues">
+      <assemblyIdentity name="Ifs.Application.Fndadm.MessageQueues" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>fs3vOziCm5UGdNKMpPR+Y9pGaBI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.ObjectTracking.dll" size="51200" group="Ifs.Application.Fndadm.ObjectTracking">
+      <assemblyIdentity name="Ifs.Application.Fndadm.ObjectTracking" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>aBOSi1WlcXhUM8I4ubCsvuMNfEM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.OracleAdministration.dll" size="606208" group="Ifs.Application.Fndadm.OracleAdministration">
+      <assemblyIdentity name="Ifs.Application.Fndadm.OracleAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2ZYPvgfej1tgOmWl/vZq5hGHKKE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.OracleAQAdmin.dll" size="37376" group="Ifs.Application.Fndadm.OracleAQAdmin">
+      <assemblyIdentity name="Ifs.Application.Fndadm.OracleAQAdmin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>iDB+VB8ZaTL8vDfBnbzr9E/BAcE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.PackageCode.dll" size="45056" group="Ifs.Application.Fndadm.PackageCode">
+      <assemblyIdentity name="Ifs.Application.Fndadm.PackageCode" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>jlep0g23wJF6iMDyDdVC/wtDKJo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.QueryHint.dll" size="131072" group="Ifs.Application.Fndadm.QueryHint">
+      <assemblyIdentity name="Ifs.Application.Fndadm.QueryHint" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>EynG6yI5QlSzQJQ4UeZLrz9n984=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.QuickReport.dll" size="54784" group="Ifs.Application.Fndadm.QuickReport">
+      <assemblyIdentity name="Ifs.Application.Fndadm.QuickReport" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>dktF6jHpQZLkFwbbRGZeMTiFVg8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.Replication.dll" size="585728" group="Ifs.Application.Fndadm.Replication">
+      <assemblyIdentity name="Ifs.Application.Fndadm.Replication" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>51m6Rgst0zYllolcRkUBeCEFszA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.ReportFonts.dll" size="52736" group="Ifs.Application.Fndadm.ReportFonts">
+      <assemblyIdentity name="Ifs.Application.Fndadm.ReportFonts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1Gj2ORHoU00U4OooWS2efLGDoF4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.ReportingConfiguration.dll" size="45056" group="Ifs.Application.Fndadm.ReportingConfiguration">
+      <assemblyIdentity name="Ifs.Application.Fndadm.ReportingConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>moNBwP2P8vvV4bkqG5it1kZ3uAU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.SecurityAdministration.dll" size="59392" group="Ifs.Application.Fndadm.SecurityAdministration">
+      <assemblyIdentity name="Ifs.Application.Fndadm.SecurityAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>rl7jOI/VmK+DwkpYNiPpdrPQJQw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.SQLQueryTool.dll" size="131072" group="Ifs.Application.Fndadm.SQLQueryTool">
+      <assemblyIdentity name="Ifs.Application.Fndadm.SQLQueryTool" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2yA3VEmxgMwmSVd81YaZMbh8mNU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndadm.WebBrowser.dll" size="9728" group="Ifs.Application.Fndadm.WebBrowser">
+      <assemblyIdentity name="Ifs.Application.Fndadm.WebBrowser" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>3FA+tbmCY6g6LimR4nN90x+LMzE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndcob.ConfigurationPackage.dll" size="488960" group="Ifs.Application.Fndcob.ConfigurationPackage">
+      <assemblyIdentity name="Ifs.Application.Fndcob.ConfigurationPackage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>KMpjlWR4OMev04gzZgR8mBNkbuI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.fnddev.PerformanceAnalyzer.dll" size="78848" group="Ifs.Application.fnddev.PerformanceAnalyzer">
+      <assemblyIdentity name="Ifs.Application.fnddev.PerformanceAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>OVWKKxhv9hvkssXaCH8L6j+dTTM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmig_.dll" size="790528" group="Ifs.Application.Fndmig_">
+      <assemblyIdentity name="Ifs.Application.Fndmig_" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>sYTAdjc7+x/eQr08id+VoxdjKyw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.AppParams.dll" size="19968" group="Ifs.Application.Fndmob.AppParams">
+      <assemblyIdentity name="Ifs.Application.Fndmob.AppParams" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>jVtlokiAywuUiHbqtW3Zin1cnKU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.DeviceActivation.dll" size="78848" group="Ifs.Application.Fndmob.DeviceActivation">
+      <assemblyIdentity name="Ifs.Application.Fndmob.DeviceActivation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>IvPzJXBNIyz3ZR9DFU3Q4Szz/9o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.MobileApplication.dll" size="203264" group="Ifs.Application.Fndmob.MobileApplication">
+      <assemblyIdentity name="Ifs.Application.Fndmob.MobileApplication" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>0XNH0n91eAjw/wRZLpszzzThiCI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.MobileFailedTransactions.dll" size="12288" group="Ifs.Application.Fndmob.MobileFailedTransactions">
+      <assemblyIdentity name="Ifs.Application.Fndmob.MobileFailedTransactions" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>T0+XNRkUsK3fFGRSzl8PHJnIDJ0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.MobileLogs.dll" size="25600" group="Ifs.Application.Fndmob.MobileLogs">
+      <assemblyIdentity name="Ifs.Application.Fndmob.MobileLogs" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>9+uVFy0ysYUJTerFS/cMIjhaoPw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.MobileUserAdministration.dll" size="93184" group="Ifs.Application.Fndmob.MobileUserAdministration">
+      <assemblyIdentity name="Ifs.Application.Fndmob.MobileUserAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ob2lbKk+N6O4zq/Zha0zuNEajWs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndmob.Synchronization.dll" size="118784" group="Ifs.Application.Fndmob.Synchronization">
+      <assemblyIdentity name="Ifs.Application.Fndmob.Synchronization" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SJgu1bGEAthXv7TNcKra0ZmCCDQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndrpl.dll" size="184320" group="Ifs.Application.Fndrpl">
+      <assemblyIdentity name="Ifs.Application.Fndrpl" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>zfXnGDi5j+30rEmQv+FJJa3R7fk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Fndrre.ManageReportRules.dll" size="147968" group="Ifs.Application.Fndrre.ManageReportRules">
+      <assemblyIdentity name="Ifs.Application.Fndrre.ManageReportRules" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>g4tkBZ8nfG2nj3NK5PHCNJ/fzxQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.HistoryLogAdministration.dll" size="204800" group="Ifs.Application.HistoryLogAdministration">
+      <assemblyIdentity name="Ifs.Application.HistoryLogAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>mekKLiTDGRzdVHEiRv93Wr2hZR4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.HttpTester.dll" size="180224" group="Ifs.Application.HttpTester">
+      <assemblyIdentity name="Ifs.Application.HttpTester" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>O+3CMwhBiezcm1vp+KIK92m3SnA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.InformationCards.dll" size="118784">
+      <assemblyIdentity name="Ifs.Application.InformationCards" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SFhxXa2MFRv5330hdCz9yitoySU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.InfoServices.dll" size="733184" group="Ifs.Application.InfoServices">
+      <assemblyIdentity name="Ifs.Application.InfoServices" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>gTbod5ynCsehBkGO53WLhlYrHyg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.InfoServicesConfiguration.dll" size="98304" group="Ifs.Application.InfoServicesConfiguration">
+      <assemblyIdentity name="Ifs.Application.InfoServicesConfiguration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>vBEecYYbXN/Q+yWVsNiXpWezh9c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.InfoServicesFramework.dll" size="506880">
+      <assemblyIdentity name="Ifs.Application.InfoServicesFramework" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>7Pevto7F0ogYjAqfFZgIZbW/Au4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.InfoServicesPlugins.dll" size="90112">
+      <assemblyIdentity name="Ifs.Application.InfoServicesPlugins" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>quEgR3mCW6kHkzNYqCBvvx5Ow9o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.LicenseManagement.dll" size="159744" group="Ifs.Application.LicenseManagement">
+      <assemblyIdentity name="Ifs.Application.LicenseManagement" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>IlCttzyHitYxWsb6EKn326LNhFo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Localize.dll" size="81920" group="Ifs.Application.Localize">
+      <assemblyIdentity name="Ifs.Application.Localize" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>bfryiFT4hedSwe3kG6XMDJG+e3E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageInMessage.dll" size="434176" group="Ifs.Application.ManageInMessage">
+      <assemblyIdentity name="Ifs.Application.ManageInMessage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>bfZB4VfHbSbwObyL5ba7TB0sVdY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageInvalidObjects.dll" size="49152" group="Ifs.Application.ManageInvalidObjects">
+      <assemblyIdentity name="Ifs.Application.ManageInvalidObjects" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SoDau7PSUGa04WwL5yTXLscW//c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageLogicalPrinters.dll" size="36864" group="Ifs.Application.ManageLogicalPrinters">
+      <assemblyIdentity name="Ifs.Application.ManageLogicalPrinters" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ytxuj0xadMYMmn1ZZ4R8pteEVeU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageMyTodo.dll" size="270336" group="Ifs.Application.ManageMyTodo">
+      <assemblyIdentity name="Ifs.Application.ManageMyTodo" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>GJrfV0K2/4tDyK28UWCEw6VBlTs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.ManageNotes.dll" size="110592">
+      <assemblyIdentity name="Ifs.Application.ManageNotes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>J0bEweIjy9CELmrl3DRYjtoy+e8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageOutMessage.dll" size="483328" group="Ifs.Application.ManageOutMessage">
+      <assemblyIdentity name="Ifs.Application.ManageOutMessage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>0Q6f/4XwK2CJcnTzMtc8m9NQmaM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageReportDefinitions.dll" size="167936" group="Ifs.Application.ManageReportDefinitions">
+      <assemblyIdentity name="Ifs.Application.ManageReportDefinitions" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>IshR9iojCHPnuoK/MfHOO17d9ns=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageSavedSearches.dll" size="65536" group="Ifs.Application.ManageSavedSearches">
+      <assemblyIdentity name="Ifs.Application.ManageSavedSearches" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>enSrlGw9WJc/D1qcVcUM1m6raso=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageSystemInformation.dll" size="61440" group="Ifs.Application.ManageSystemInformation">
+      <assemblyIdentity name="Ifs.Application.ManageSystemInformation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>A9Xdg3lJeo6G2KdXSrtDrZSYTp4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageSystemParameters.dll" size="106496" group="Ifs.Application.ManageSystemParameters">
+      <assemblyIdentity name="Ifs.Application.ManageSystemParameters" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>NFe+Qmg/HOdLnbQnFnU9mxsQrZ8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ManageTemplates.dll" size="69632" group="Ifs.Application.ManageTemplates">
+      <assemblyIdentity name="Ifs.Application.ManageTemplates" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>cuECQlLDbvydXQ4DRiBTiwUvCBA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.MediaLibraryPlugin.dll" size="167936">
+      <assemblyIdentity name="Ifs.Application.MediaLibraryPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>T1mSA4mdlPQa1w1hFs3VlCV5QWc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MessageArchive.dll" size="155648" group="Ifs.Application.MessageArchive">
+      <assemblyIdentity name="Ifs.Application.MessageArchive" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>WpaWI0jxivuFQy85Dfvmxi6TiPM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MessageQueues.dll" size="282624" group="Ifs.Application.MessageQueues">
+      <assemblyIdentity name="Ifs.Application.MessageQueues" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1ydD0ngUB/hmO2FL47Pz2AuZqM0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MessageRouting.dll" size="540672" group="Ifs.Application.MessageRouting">
+      <assemblyIdentity name="Ifs.Application.MessageRouting" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>WOA/wwHJ1R6q19okrorHQheJN9I=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MobileFailedTransactions.dll" size="245760" group="Ifs.Application.MobileFailedTransactions">
+      <assemblyIdentity name="Ifs.Application.MobileFailedTransactions" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>o93b9wVwtoz5MQKhjSa3VD7nAP4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MobileUserAdministration.dll" size="57344" group="Ifs.Application.MobileUserAdministration">
+      <assemblyIdentity name="Ifs.Application.MobileUserAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>gH9ytZs2Hu2QhUu9OV/iJHm7JZA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MsbiIntegration.dll" size="565248" group="Ifs.Application.MsbiIntegration">
+      <assemblyIdentity name="Ifs.Application.MsbiIntegration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>w15oEEW+C1ijiD8aMQQzTyOPGt8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.MyStartPage.dll" size="357888" group="Ifs.Application.MyStartPage">
+      <assemblyIdentity name="Ifs.Application.MyStartPage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>zgzPZKQAvnGmIJEdmERq6iMZZmw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.MyTodoSendToPlugin.dll" size="126976">
+      <assemblyIdentity name="Ifs.Application.MyTodoSendToPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>oOl2DGmrCps4x9qBW/L56/EFfa8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.PresentationObject.dll" size="200704" group="Ifs.Application.PresentationObject">
+      <assemblyIdentity name="Ifs.Application.PresentationObject" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2JR+2rZJQSyzqoVga/4cjoRLEtc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.PresentationObjectNew.dll" size="176128" group="Ifs.Application.PresentationObjectNew">
+      <assemblyIdentity name="Ifs.Application.PresentationObjectNew" version="1.0.0.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>qVy7q4vtwUxDYyQlH4iVVWA/Pyk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.PreviewHandler.dll" size="35328" group="Ifs.Application.PreviewHandler">
+      <assemblyIdentity name="Ifs.Application.PreviewHandler" version="9.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>+t7ePrLJR7tJl9ufktyt+EQ/cOI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.PrintServerPluginRegistration.dll" size="45056" group="Ifs.Application.PrintServerPluginRegistration">
+      <assemblyIdentity name="Ifs.Application.PrintServerPluginRegistration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1T/KPHlUoCVRuSOokLeQDWAyzp0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ProductArea.dll" size="14336" group="Ifs.Application.ProductArea">
+      <assemblyIdentity name="Ifs.Application.ProductArea" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>xh4c+tZ6JBValCCuAROSTj/R83s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.QuickReporting.dll" size="278528" group="Ifs.Application.QuickReporting">
+      <assemblyIdentity name="Ifs.Application.QuickReporting" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>q719YBmobfDGR7x6vDC9ZDba68Y=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.SavedSearchMigrationTool.dll" size="124928" group="Ifs.Application.SavedSearchMigrationTool">
+      <assemblyIdentity name="Ifs.Application.SavedSearchMigrationTool" version="1.0.6074.17609" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CmfxPR2SmQNujh5wFkD8ewjAb/c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.SecurityAdministration.dll" size="1404928" group="Ifs.Application.SecurityAdministration">
+      <assemblyIdentity name="Ifs.Application.SecurityAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>kyJStA5psJ08zDw//l8bmdES1TU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.SecurityCheckpointAdministration.dll" size="172032" group="Ifs.Application.SecurityCheckpointAdministration">
+      <assemblyIdentity name="Ifs.Application.SecurityCheckpointAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>vzmQCHycwszQldmaKYJ/SLf0L5E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.SegregationOfDutiesAdministration.dll" size="462848" group="Ifs.Application.SegregationOfDutiesAdministration">
+      <assemblyIdentity name="Ifs.Application.SegregationOfDutiesAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>KFKsknku+yvpnTtjiv0mVCrXy44=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.SelectionViewer.dll" size="59904" group="Ifs.Application.SelectionViewer">
+      <assemblyIdentity name="Ifs.Application.SelectionViewer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>J+ovbL+eDDUHlwxCuWbwLMjHVH8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.SendToMail.dll" size="32768">
+      <assemblyIdentity name="Ifs.Application.SendToMail" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SiTiNQvYnck5F4MCiVmaqKwj8kc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ServerCacheAdministration.dll" size="77824" group="Ifs.Application.ServerCacheAdministration">
+      <assemblyIdentity name="Ifs.Application.ServerCacheAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ciZb4kZF+/CXXJw1gO4dF181+Yc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.ServerLogAdministration.dll" size="81920" group="Ifs.Application.ServerLogAdministration">
+      <assemblyIdentity name="Ifs.Application.ServerLogAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Wkg2dyQnKGmumsjCt798SJ8hNKw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.Streams.dll" size="72704" group="Ifs.Application.Streams">
+      <assemblyIdentity name="Ifs.Application.Streams" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Ao1k8rC5afg5GDZnZS5nrnusMsc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TaskAdministration.dll" size="192512" group="Ifs.Application.TaskAdministration">
+      <assemblyIdentity name="Ifs.Application.TaskAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2E+JyzozIDrJ1+iUYSuMNBuMP2M=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TaskChainAdministration.dll" size="155648" group="Ifs.Application.TaskChainAdministration">
+      <assemblyIdentity name="Ifs.Application.TaskChainAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>KmQvSbrilGWYzSO0enbwVWvqCd4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TaskChainScheduling.dll" size="278528" group="Ifs.Application.TaskChainScheduling">
+      <assemblyIdentity name="Ifs.Application.TaskChainScheduling" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>gRFOQc6gqQKfhdRRQzXsE+CEt6U=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TaskScheduling.dll" size="262144" group="Ifs.Application.TaskScheduling">
+      <assemblyIdentity name="Ifs.Application.TaskScheduling" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Udg2SqceSV0DYbugaF+S4ngTYxY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.TechnicalObjectReferenceAttachmentPlugin.dll" size="155648">
+      <assemblyIdentity name="Ifs.Application.TechnicalObjectReferenceAttachmentPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>lfVgsArKZelXByTM41+5I4HG/ho=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermAdministration.dll" size="360448" group="Ifs.Application.TermAdministration">
+      <assemblyIdentity name="Ifs.Application.TermAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hcZiCHc4F157Il/9V5aH95u19mY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermBasicData.dll" size="303104" group="Ifs.Application.TermBasicData">
+      <assemblyIdentity name="Ifs.Application.TermBasicData" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HlpdsyXxVQVoErO/uow+Ff46XQk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermBinding.dll" size="241664" group="Ifs.Application.TermBinding">
+      <assemblyIdentity name="Ifs.Application.TermBinding" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>PsdgUrTQH6Ny+jZmG0qO8c3+1Pg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermExplorer.dll" size="286720" group="Ifs.Application.TermExplorer">
+      <assemblyIdentity name="Ifs.Application.TermExplorer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>icOn+kLHaq7vhE34sdf4TG6qNWw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.TermExplorerPlugin.dll" size="159744">
+      <assemblyIdentity name="Ifs.Application.TermExplorerPlugin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>B1JLa2rmZqqYfCf2NW/1uFILtqI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermExportImport.dll" size="122880" group="Ifs.Application.TermExportImport">
+      <assemblyIdentity name="Ifs.Application.TermExportImport" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>5H03IRbJJAgXEK+W3JFH8Kwg7lM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermManagement.dll" size="282624" group="Ifs.Application.TermManagement">
+      <assemblyIdentity name="Ifs.Application.TermManagement" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>QT4LlQYokpXth5PtRa2NoI6z4sM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.TermSearch.dll" size="81920">
+      <assemblyIdentity name="Ifs.Application.TermSearch" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>VbPX9tEHBijJLHLT5H5d1y9Wndw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Application.TermSearchPlugins.dll" size="147456">
+      <assemblyIdentity name="Ifs.Application.TermSearchPlugins" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>FqATySnr5bcuWBmKRKRra94Dovw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermStatistic.dll" size="114688" group="Ifs.Application.TermStatistic">
+      <assemblyIdentity name="Ifs.Application.TermStatistic" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>/8YnClOnmkd3ydGIiwvsbvpbDnw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermTools.dll" size="368640" group="Ifs.Application.TermTools">
+      <assemblyIdentity name="Ifs.Application.TermTools" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>G4RbnZbJyT7XwPNFFNBxR3Fpy2o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermTranslation.dll" size="184320" group="Ifs.Application.TermTranslation">
+      <assemblyIdentity name="Ifs.Application.TermTranslation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SLcZNHAQQWCsbDXS6nSoFOKQm6g=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermUsageTranslation.dll" size="151552" group="Ifs.Application.TermUsageTranslation">
+      <assemblyIdentity name="Ifs.Application.TermUsageTranslation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>qt2VglGPKIOoN9gmF2fbpSiTT60=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermUtilities.dll" size="126976" group="Ifs.Application.TermUtilities">
+      <assemblyIdentity name="Ifs.Application.TermUtilities" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>VzlQUXTKyvwbtid3+awl5HB0bi8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TermXMLUtilities.dll" size="90112" group="Ifs.Application.TermXMLUtilities">
+      <assemblyIdentity name="Ifs.Application.TermXMLUtilities" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>BcOi35PCvHuReIGRpU5ZRnEIRZI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TextTranslation.dll" size="151552" group="Ifs.Application.TextTranslation">
+      <assemblyIdentity name="Ifs.Application.TextTranslation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hIRQMxCIHXK/y/hsONB7bV6/A7s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TranslatableCodeScanning.dll" size="188416" group="Ifs.Application.TranslatableCodeScanning">
+      <assemblyIdentity name="Ifs.Application.TranslatableCodeScanning" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>xkOno1v73VARcmtjV7nYCr+EA7M=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.TranslationExchange.dll" size="128000" group="Ifs.Application.TranslationExchange">
+      <assemblyIdentity name="Ifs.Application.TranslationExchange" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>sFM/sCDJMXjyg8tJ1AAkVSeoyzU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.UsedLanguages.dll" size="57344" group="Ifs.Application.UsedLanguages">
+      <assemblyIdentity name="Ifs.Application.UsedLanguages" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>/uVKXw0mVqKeME1Bpk1hfIN6cgE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.UserAdministration.dll" size="1585152" group="Ifs.Application.UserAdministration">
+      <assemblyIdentity name="Ifs.Application.UserAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>iFIwfobEUdqAnEouP0Af4bB6kSk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.UserProfileAdministration.dll" size="507904" group="Ifs.Application.UserProfileAdministration">
+      <assemblyIdentity name="Ifs.Application.UserProfileAdministration" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>E8LK4qSd89ETY7fhtHTbuzUFAoA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Application.WorkflowSettings.dll" size="61440" group="Ifs.Application.WorkflowSettings">
+      <assemblyIdentity name="Ifs.Application.WorkflowSettings" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Av9Q2B/Lxng3LKBw8Q8HecdFgks=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.AccessProvider.dll" size="155648">
+      <assemblyIdentity name="Ifs.Fnd.AccessProvider" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Q1Nb2kpecIdTy0Y3GhnY3NtGj38=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.AccessProvider.Interactive.dll" size="229376">
+      <assemblyIdentity name="Ifs.Fnd.AccessProvider.Interactive" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>rOLhP0k4sc8bH0JHNo59QOeb40c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-US\Ifs.Fnd.AccessProvider.Interactive.resources.dll" size="3072">
+      <assemblyIdentity name="Ifs.Fnd.AccessProvider.Interactive.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="en-US" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>3r3zMxxOBIsUtUu7CwIy8j3xuvM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.AccessProvider.Interactive.resources.dll" size="7168">
+      <assemblyIdentity name="Ifs.Fnd.AccessProvider.Interactive.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>zmEkLNGGTVqXp0HmwR8FXNTvrNs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.AccessProvider.resources.dll" size="3072">
+      <assemblyIdentity name="Ifs.Fnd.AccessProvider.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>RBxna3pNnSoNDQKYg56Tb4aM3Ls=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.ApplicationForms.dll" size="3268608">
+      <assemblyIdentity name="Ifs.Fnd.ApplicationForms" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>s79rNCGeOHy/Oy0w0M9BppsJdnc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.ApplicationFormsIntegration.dll" size="34816">
+      <assemblyIdentity name="Ifs.Fnd.ApplicationFormsIntegration" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>lC38OlDNViC75ubCXnaBD6A4fuI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.ApplicationSearch.dll" size="188416">
+      <assemblyIdentity name="Ifs.Fnd.ApplicationSearch" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Ena/Z2xvte86gi15kr7uFGhhT+Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Buffer.dll" size="28672">
+      <assemblyIdentity name="Ifs.Fnd.Buffer" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2CylGMdz8+1jXaomKoIQ1pGi6Ys=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.CompositePageRenderer.dll" size="6453760">
+      <assemblyIdentity name="Ifs.Fnd.CompositePageRenderer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>W0vNoqSKAGR2kPaWtE9PqkO+Y9I=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Core.dll" size="212992">
+      <assemblyIdentity name="Ifs.Fnd.Core" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1JcndtDeDBB+Wj4e+3nrgkc/iZk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.Core.resources.dll" size="5632">
+      <assemblyIdentity name="Ifs.Fnd.Core.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>J+JQfbs+NyNcuQrjMvLkRPMt6gA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="plugins\Ifs.Fnd.CustomObjectsPlugin.dll" size="7168">
+      <assemblyIdentity name="Ifs.Fnd.CustomObjectsPlugin" version="1.0.0.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>m3CMIRUJmbAd+NqjwCv4rSMp1Tg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.CustomObjectsServiceProvider.dll" size="281600">
+      <assemblyIdentity name="Ifs.Fnd.CustomObjectsServiceProvider" version="1.0.0.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>koIkvXeLXxfO4zMhdPsvRkX/N/I=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Data.dll" size="139264">
+      <assemblyIdentity name="Ifs.Fnd.Data" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ZXgDb5WvsEi2EiJ7ZAUi/EVYon0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Data.ADONetProvider.dll" size="40960">
+      <assemblyIdentity name="Ifs.Fnd.Data.ADONetProvider" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>TBSMPxNqo2L4yGHwueLK9n5hnUQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Diagnostics.dll" size="393216">
+      <assemblyIdentity name="Ifs.Fnd.Diagnostics" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>oV0pORbQtCknvvsk9pN8hTBaSaI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-US\Ifs.Fnd.Diagnostics.resources.dll" size="3072">
+      <assemblyIdentity name="Ifs.Fnd.Diagnostics.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="en-US" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>JVuepbbvuQYDaFnD5wTQ+wNVCLo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.Diagnostics.resources.dll" size="6656">
+      <assemblyIdentity name="Ifs.Fnd.Diagnostics.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>GtuCDii7oPXO6SCYhb8fVXVWn7E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-US\Ifs.Fnd.Enumerations.resources.dll" size="2048" group="Ifs.Language.en-US">
+      <assemblyIdentity name="Ifs.Fnd.Enumerations.resources" version="0.0.0.0" language="en-US" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>6L0ML0g6xte6NU732/KtbpkUH7M=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency optional="true">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.Enumerations.resources.dll" size="43008" group="Ifs.Language.sv-SE">
+      <assemblyIdentity name="Ifs.Fnd.Enumerations.resources" version="0.0.0.0" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>OuO8oZdBiNqO7ir1K7hUCuw1+PA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Explorer.exe" size="208896">
+      <assemblyIdentity name="Ifs.Fnd.Explorer" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ibiNyxqzopFjsvDPds9pPPybabM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Explorer.Extenders.dll" size="1417216">
+      <assemblyIdentity name="Ifs.Fnd.Explorer.Extenders" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>8ZUI0eOx8raOiWUsS2ZZEDyIODw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Explorer.Interfaces.dll" size="204800">
+      <assemblyIdentity name="Ifs.Fnd.Explorer.Interfaces" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>qCtda59DOiIc+QuO4MqAGnHeX3Q=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Explorer.UI.dll" size="2297856">
+      <assemblyIdentity name="Ifs.Fnd.Explorer.UI" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ZTERTT6EG1lNwlVvaS2BijXQFP8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-US\Ifs.Fnd.Explorer.UI.resources.dll" size="9216">
+      <assemblyIdentity name="Ifs.Fnd.Explorer.UI.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="en-US" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Hsrg0IXGk51YkXyeU/wbMnfCGqQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="sv-SE\Ifs.Fnd.Explorer.UI.resources.dll" size="67072">
+      <assemblyIdentity name="Ifs.Fnd.Explorer.UI.resources" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="sv-SE" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>NiTiU1SeusX3hsJYq+FW0rfWMxE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Feature.dll" size="262144">
+      <assemblyIdentity name="Ifs.Fnd.Feature" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HlD5WpIbo0sEuVFaS6RlNhaOWno=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Mail.dll" size="10240">
+      <assemblyIdentity name="Ifs.Fnd.Mail" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>zKm+ZHIfCAZB7ig+Nzju5RllGg0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.MSBuildTasks.dll" size="147456">
+      <assemblyIdentity name="Ifs.Fnd.MSBuildTasks" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>an52QjgnwXFzMm633bHN0PyrbN8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.QueryEditor.dll" size="186368">
+      <assemblyIdentity name="Ifs.Fnd.QueryEditor" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>HAH0dAk899/LYBmUxocycfnE/7c=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.StartPage.dll" size="75776">
+      <assemblyIdentity name="Ifs.Fnd.StartPage" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>+1aRBYN3NMDV18KPAtdnAZx97L8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.ThemeManager.dll" size="167936">
+      <assemblyIdentity name="Ifs.Fnd.ThemeManager" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>1x4ROmy9dhFmJbLuCXTEgSJgW9o=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.CommonControls.dll" size="1232896">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.CommonControls" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>+faYrlERTZg5ruD3i8DNHH1iuck=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.ConditionalFields.dll" size="100352">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.ConditionalFields" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>9MxbK6iN2t0YKgq1is+5W7WraWE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.DataBinding.dll" size="77824">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.DataBinding" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>QtNnInwWXjzkBdApu+xXAt4/toA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.DataGrid.dll" size="1159168">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.DataGrid" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>TX29cZIhRH04N5pxBiL4+alDOi4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.FrameworkControls.dll" size="155648">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.FrameworkControls" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>znu29KqbArF8V6EFwo8a/YW+r/A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.InfoServicesControls.dll" size="50176">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.InfoServicesControls" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CjcpnvR98nB5mKynQnDS+grlFk4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.InfoViz.dll" size="942080">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.InfoViz" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>nARzVj/p1FXqqYO8bmq/YZp4Acw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.Interfaces.dll" size="28672">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.Interfaces" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>SYqF3nYvM/ThELCIhQi8W6VPZTY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Ifs.Fnd.Windows.Forms.SearchControls.dll" size="73216">
+      <assemblyIdentity name="Ifs.Fnd.Windows.Forms.SearchControls" version="4.52.9.0" publicKeyToken="FF90F512E10AEF0D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CBRnwVG3vaC7HUOPwZsuEtI17Jw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Interop.Word.dll" size="781104">
+      <assemblyIdentity name="Microsoft.Office.Interop.Word" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>kD8iqLFBbkwA3zIezWbPn8IHKKE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PPJ.Runtime.4.dll" size="1767424">
+      <assemblyIdentity name="PPJ.Runtime.4" version="4.0.1046.0" publicKeyToken="17BEF35E11B84171" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>gCPTh2ZSntCC+YDueoGO4FVknHg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PPJ.Runtime.Vis.4.dll" size="322048">
+      <assemblyIdentity name="PPJ.Runtime.Vis.4" version="4.0.1046.0" publicKeyToken="17BEF35E11B84171" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>5BVwSDe7/GiPVJpFv+FJL5VXau8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Datalogics.PDFL.dll" size="700416" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>WXIO0S4cTlix1vudNFm5OYw5xuA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="dictionary.xml.gz" size="26599">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>T9KknjsdeAwT4PPJYpmsk0uLQSs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100ACE.dll" size="1109320" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>c0W8CvakkVR3pS4ya5Rj0uhnZxM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100AdobeXMP.dll" size="404296" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>arPwNveOpuGknxOCPagfCrjYpN0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100AGM.dll" size="5715272" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ZsqBTQEL9Xy3LBsaMBLh9Px1IAE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100ARE.dll" size="325448" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>qBNodb8gIBhvvlFK3hkgqHxyfNA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100AXE8SharedExpat.dll" size="175432" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>EAX4Qil6DubORrJK8N4kyxhyy6Y=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100BIB.dll" size="191816" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6Rh/LJNRZmaMWqfg+1aGeby9l3g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100BIBUtils.dll" size="249672" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>+lT2ouLfopG8nQ6q95fPhi53OQw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100CoolType.dll" size="3086664" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ntNsgjFx/ZDWDFWQV54tGKH3DRY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100JP2KLib.dll" size="686408" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>F6A91ar1g6fF1Yj3ZRwz734/uVA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100PDFL.dll" size="6735688" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>0YdZhKZPhLXUX+FBkew7UyAIC5c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100PDFLPINVOKE.dll" size="4904960" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>XHDnrpEe4xz63KCq7QTT/C4F6wM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100pdfport.dll" size="1034568" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>0GFHGbM+iC4eDg6COsiqYOh5+pM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="DL100pdfsettings.dll" size="264008" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>T9yLITma2J7DYuVG/MJCOPegBrU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="en-US\Ifs.Language.en-US.zip" size="212431" group="Ifs.Language.en-US" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>fe/dvI0uJHWH4VsQHHV2/R1Fr7c=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Ifs.Fnd.Explorer.exe.config" size="1828">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>l/khk0EcVt4hnqcgbXoH1D7Eovc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Ifs.Fnd.Windows.Forms.FndXGantt.dll" size="76800" group="NETRONIC.XGantt" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ISq/bZPk2lij+OWv8vzZ++SKL50=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ifsAppsCompLogo.ico" size="30648">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>HBfWeaydvgwTfyFCHspddf7g4i4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="MapSource.xml" size="8571">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>A4LGMUb03AsTY/rmtfRCoBFafrg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="mfc100u.dll" size="4368720" group="NETRONIC.XGantt" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>D4uQgUszJ1zzn5XnaZJ0l9qUYL8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.Common.dll" size="8740512" group="Ifs.Application.MsbiIntegration" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>3e+tETwREokxlt2iWHh92WNU6L0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.ReportViewer.WinForms.dll" size="564904" group="Ifs.Application.MsbiIntegration" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>jZKKoW8CytammXBpvKrQKbYeKzM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" size="524" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>cPdIL19cic4J4m10XFMqlBXNUxM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.CRT\msvcm90.dll" size="224768" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>tVogb8kezDre2mXShlIqpp8ErIg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.CRT\msvcp90.dll" size="568832" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>ojDmTgpYMFRKJYkPcM6ckpYkWUU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.CRT\msvcr90.dll" size="655872" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>KSaO8M0iCtPF6YEr79P1dZsnomY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.MFC\mfc90.dll" size="1156600" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>b027Nqjn5ZThKiqe1Lca8PqnYsE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.MFC\mfc90u.dll" size="1162744" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>eRieb3iHyo9B+xdgO9nC1GGA788=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.MFC\mfcm90.dll" size="59904" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>awloWHI8doSLhdY7TaM0KZvs7Vs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.MFC\mfcm90u.dll" size="59904" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>SF3loMoFZMEurMONGzn171ZwouI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Microsoft.VC90.MFC\Microsoft.VC90.MFC.manifest" size="548" group="Ifs.Application.InfoServices" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>xrosJSxtECkRAV0CEfbKtICVkxw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="msvcp100.dll" size="421200">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>CqPKrCT9+dnUxhjiu/CgYwNs1V0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="msvcp120.dll" size="455328">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>79HjBsEJLBf2lEzGv5ob+tTRRhM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="msvcr100.dll" size="770384">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>FzgFBhYWnVsXta2sP/A3C4xkJzQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="msvcr120.dll" size="970912">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>8Z6dgxcWHtx9PpY8wPxGvV5KVaE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="navigator.xml.gz" size="16640">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>kcTEloVuD7bdCJYLJxXsqb88X34=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="NETRONIC.XGantt.dll" size="9063848" group="NETRONIC.XGantt" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>/0pL3EUH599vB1k+etrBUnXKB2Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="sv-SE\Ifs.Language.sv-SE.zip" size="623481" group="Ifs.Language.sv-SE" optional="true">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6ireeb8ujtxCbTp3a6Z3+hM1IuA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Terms.resources.zip" size="232690">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>1LN/FPqQSTu93TjvuYnn/4GpvGM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="themes\themes.zip" size="719748">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>51TXO6fufZFt0D3Ku/+l47F1DBU=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=CORPNET\jarose" issuerKeyHash="da89a32b582883072322ae24a30d0db58ad48faa" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>frk9mQdG82ewa7/4C4b5vLRc2nN8H/dBgMP+Yfmwx3k=</DigestValue></Reference></SignedInfo><SignatureValue>pSbOAez9baKQ/EGah99sJXbkeIGnjoGjkyb5TN2RZ4+dSEeHNAEMG3fhgSz6sHH3PyzO7BIzJuwrNMiWsTkfziScSOci/HxwK/aqzSGifTxacTejlbvC37G9c+wQAws4Na4wNUH1Fnf1j85A/tH1ImhVhq9zGL+B/WSrUALXZBM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>wFGSlr9pLLTcdahJFOsehruQsfS3N+FrU6jnKTXSYIBqylQXqP38b2eOl2fu2WEelWHzAhLAi+9vDT7YTUggIKVTHRhJL8UdDpGWfKtnTS/eMXblmrsbXCeJuK2eb/FgZ+uBL99NTCQrTyNrrBGjoN2eNZ1CFrqEauzFM8sg1KE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="79c7b0f961fec38041f71f7c73da5cb4bcf9860bf8bf6bb067f34607993db97e" Description="" Url=""><as:assemblyIdentity name="Ifs.Fnd.Explorer.exe" version="9.1611.1421.1805" publicKeyToken="2df0e6a420104e3b" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=CORPNET\jarose</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>rO8He1SShOrJpPLZQZOVW1gIiUvadSs++12VTJsb7LM=</DigestValue></Reference></SignedInfo><SignatureValue>gMdbYvzejpfY/M4IRBKgvBdrKd8GTnuGtvx3zwM4s3fILoi1gN7e/dqMAEpoRN5p5Ds2e3mcZ94PLlm6vpgNbHYcZ5h+UGjw1DF6O59E9ASiHDq16iDYhEmWbNMNIr3WrrJBxzHL5YQEq7cujWXIy5nvOfIp9pUWopHn7Fc+ryc=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>wFGSlr9pLLTcdahJFOsehruQsfS3N+FrU6jnKTXSYIBqylQXqP38b2eOl2fu2WEelWHzAhLAi+9vDT7YTUggIKVTHRhJL8UdDpGWfKtnTS/eMXblmrsbXCeJuK2eb/FgZ+uBL99NTCQrTyNrrBGjoN2eNZ1CFrqEauzFM8sg1KE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIICRDCCAa2gAwIBAgIQvwIBYyPbjK5DqCKeb+pGDjANBgkqhkiG9w0BAQsFADAnMSUwIwYDVQQDHhwAQwBPAFIAUABOAEUAVABcAGoAYQByAG8AcwBlMB4XDTE0MTIxNzE2MjkzOFoXDTM5MTIzMTIzNTk1OVowJzElMCMGA1UEAx4cAEMATwBSAFAATgBFAFQAXABqAGEAcgBvAHMAZTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwFGSlr9pLLTcdahJFOsehruQsfS3N+FrU6jnKTXSYIBqylQXqP38b2eOl2fu2WEelWHzAhLAi+9vDT7YTUggIKVTHRhJL8UdDpGWfKtnTS/eMXblmrsbXCeJuK2eb/FgZ+uBL99NTCQrTyNrrBGjoN2eNZ1CFrqEauzFM8sg1KECAwEAAaNxMG8wEwYDVR0lBAwwCgYIKwYBBQUHAwMwWAYDVR0BBFEwT4AQXbctQb/VqwnEjxRKLd2onaEpMCcxJTAjBgNVBAMeHABDAE8AUgBQAE4ARQBUAFwAagBhAHIAbwBzAGWCEL8CAWMj24yuQ6ginm/qRg4wDQYJKoZIhvcNAQELBQADgYEABXGC/Pw/dSGkoP3GJWnQrQpavbK/bJOMm/OgFLiNn25hGU1OpyhUHN8sKCebUUdlWifIbMaA+klSPJ0bpyoKGpeewGt57FzOk4KQOsBlPjRbsOL4reEYRhRpF5ixXtpcasfS5geaKh1VKLPClRZPXyHps9LCUtOxrlfxmljA3kk=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

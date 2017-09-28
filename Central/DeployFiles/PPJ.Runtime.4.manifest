@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd">
+  <assemblyIdentity name="PPJ.Runtime.4" processorArchitecture="msil" publicKeyToken="17BEF35E11B84171" version="4.0.1046.0" />
+  <file name="PPJ.Runtime.4.dll" />
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscorlib" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Xml" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Data" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Windows.Forms" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Design" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Drawing" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="C1.Win.C1Ribbon.4" publicKeyToken="79882d576c6336da" version="4.0.20142.597" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Configuration" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="C1.Win.C1FlexGrid.4" publicKeyToken="79882d576c6336da" version="4.6.20142.843" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Oracle.DataAccess" publicKeyToken="89b483f429c47342" version="2.111.7.20" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Oracle.ManagedDataAccess" publicKeyToken="89b483f429c47342" version="4.121.1.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="EnvDTE" publicKeyToken="b03f5f7f11d50a3a" version="8.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Core" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="SkinSoft.VisualStyler" publicKeyToken="0fda9f423e1d9830" version="1.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.EnterpriseServices" publicKeyToken="b03f5f7f11d50a3a" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Data.OracleClient" publicKeyToken="b77a5c561934e089" version="4.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscorlib" publicKeyToken="b77a5c561934e089" version="2.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscorlib" publicKeyToken="b77a5c561934e089" version="1.0.3300.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Microsoft.VisualStudio.Shell.Design" publicKeyToken="b03f5f7f11d50a3a" version="12.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="System.Windows.Forms" publicKeyToken="b77a5c561934e089" version="2.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+</assembly>

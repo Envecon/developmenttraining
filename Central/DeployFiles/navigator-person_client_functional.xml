@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FndNavigator xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Legacy="false" Source="person\client\navigator-functional.xml">
+  <FndNavigatorEntries>
+    <FndNavigatorEntry>
+      <Key>TAB_SELEON</Key>
+      <Name>Tab Selection</Name>
+      <Url />
+      <Type>Folder</Type>
+      <ParentKey>NAVIGATOR_Root</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>TAB_SELEON.TAB</Key>
+      <Name>Tab</Name>
+      <Url>ifsapf:frmTabSelection</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>TAB_SELEON</ParentKey>
+      <Ordinal>100</Ordinal>
+    </FndNavigatorEntry>
+  </FndNavigatorEntries>
+  <FndShortcutItems />
+</FndNavigator>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TranslatableContexts version="1.0" client="RWC">
+  <Contexts>
+    <Context name="Ifs.Application.Trnent.Properties.Resources">
+      <Resource name="Ifs.Application.Trnent.Properties.Resources.TEXT_InvalidChar">
+        <Control name="TEXT_InvalidChar" type="Message" />
+        <Text>Country ID cannot contain single quotes.</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.Properties.Resources.TITLE_Areas">
+        <Control name="TITLE_Areas" type="Message" />
+        <Text>Areas - '&amp;0 - &amp;1'</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.Properties.Resources.TITLE_BranchOverview">
+        <Control name="TITLE_BranchOverview" type="Message" />
+        <Text>&amp;0 - Branches</Text>
+      </Resource>
+    </Context>
+    <Context name="Ifs.Application.Trnent.tbwAreas">
+      <Resource name="Ifs.Application.Trnent.tbwAreas.$this.Text">
+        <Control name="$this" type="Table Window" />
+        <Text>tbwAreas</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwAreas.colsArea.Title">
+        <Control name="colsArea" type="Data Field" />
+        <Text>Area</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwAreas.colsAreaId.Title">
+        <Control name="colsAreaId" type="Data Field" />
+        <Text>Area ID</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwAreas.colsCountryId.Title">
+        <Control name="colsCountryId" type="Data Field" />
+        <Text>Country ID</Text>
+      </Resource>
+    </Context>
+    <Context name="Ifs.Application.Trnent.tbwBranches">
+      <Resource name="Ifs.Application.Trnent.tbwBranches.$this.Text">
+        <Control name="$this" type="Table Window" />
+        <Text>Branches</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colnTimeOffset.Title">
+        <Control name="colnTimeOffset" type="Data Field" />
+        <Text>Time Offset</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsAreaId.Title">
+        <Control name="colsAreaId" type="Data Field" />
+        <Text>Area Id</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsBranchId.Title">
+        <Control name="colsBranchId" type="Data Field" />
+        <Text>Branch Id</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsCompanyId.Title">
+        <Control name="colsCompanyId" type="Data Field" />
+        <Text>Company Id</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsCountry.Title">
+        <Control name="colsCountry" type="Data Field" />
+        <Text>Country</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsCountryId.Title">
+        <Control name="colsCountryId" type="Data Field" />
+        <Text>Country Id</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsGetArea.Title">
+        <Control name="colsGetArea" type="Data Field" />
+        <Text>Area</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwBranches.colsName.Title">
+        <Control name="colsName" type="Data Field" />
+        <Text>Name</Text>
+      </Resource>
+    </Context>
+    <Context name="Ifs.Application.Trnent.tbwCompanies">
+      <Resource name="Ifs.Application.Trnent.tbwCompanies.$this.Text">
+        <Control name="$this" type="Table Window" />
+        <Text>Companies</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCompanies.coldCreationDate.Title">
+        <Control name="coldCreationDate" type="Data Field" />
+        <Text>Creation Date</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCompanies.colsComments.Title">
+        <Control name="colsComments" type="Data Field" />
+        <Text>Comments</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCompanies.colsCompanyId.Title">
+        <Control name="colsCompanyId" type="Data Field" />
+        <Text>Company Id</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCompanies.colsName.Title">
+        <Control name="colsName" type="Data Field" />
+        <Text>Name</Text>
+      </Resource>
+    </Context>
+    <Context name="Ifs.Application.Trnent.tbwCountries">
+      <Resource name="Ifs.Application.Trnent.tbwCountries.$this.Text">
+        <Control name="$this" type="Table Window" />
+        <Text>Countries</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCountries.cmdArea.Caption">
+        <Control name="cmdArea" type="Command" />
+        <Text>View Areas...</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCountries.cmdArea.ToolTip">
+        <Control name="cmdArea" type="Message" />
+        <Text>View Areas...</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCountries.cmdClickMe.Caption">
+        <Control name="cmdClickMe" type="Command" />
+        <Text>Click Here!</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCountries.colsCountry.Title">
+        <Control name="colsCountry" type="Data Field" />
+        <Text>Country</Text>
+      </Resource>
+      <Resource name="Ifs.Application.Trnent.tbwCountries.colsCountryId.Title">
+        <Control name="colsCountryId" type="Data Field" />
+        <Text>Country ID</Text>
+      </Resource>
+    </Context>
+  </Contexts>
+</TranslatableContexts>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogicalUnits version="1.0" module="MDMEXT" type="LU" layer="Core">
+   <LogicalUnit name="MdmBasicData">
+      <Text><![CDATA[Mdm Basic Data]]></Text>
+      <View ID="MdmBasicData.MDM_BASIC_DATA">
+         <Text><![CDATA[Mdm Basic Data]]></Text>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.STATUS">
+            <Text><![CDATA[Status]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.CREATED_BY">
+            <Text><![CDATA[Created By]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.CREATED_DATE">
+            <Text><![CDATA[Created Date]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.PROFILE_ID">
+            <Text><![CDATA[Approval Template Id]]></Text>
+         </Column>
+         <Column ID="MdmBasicData.MDM_BASIC_DATA.NOTES">
+            <Text><![CDATA[Notes]]></Text>
+         </Column>
+      </View>
+   </LogicalUnit>
+</LogicalUnits>

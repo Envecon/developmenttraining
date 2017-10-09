@@ -1,0 +1,72 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmBasicData
+--  Component:    MDMEXT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 9.802.3691.20170420
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Template_Id IS
+   Flags      = 'KMI--'
+   Datatype   = 'STRING(30)/UPPERCASE'
+   Prompt     = 'Template Id';
+COLUMN Revision IS
+   Flags      = 'A-I--'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Revision';
+COLUMN Description IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(50)'
+   Prompt     = 'Description';
+COLUMN Status IS
+   Flags      = 'A-I--'
+   Datatype   = 'STRING(15)'
+   Prompt     = 'Status';
+COLUMN Created_By IS
+   Flags      = 'A-I--'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Created By'
+   Column     = 'ifsapp.fnd_session_api.Get_Fnd_User';
+COLUMN Created_Date IS
+   Flags      = 'A-I--'
+   Datatype   = 'DATE/DATE'
+   Prompt     = 'Created Date'
+   Column     = 'sysdate';
+COLUMN Profile_Id IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Approval Template Id';
+COLUMN Notes IS
+   Flags      = 'A-IU-'
+   Datatype   = 'LONG_TEXT'
+   Prompt     = 'Notes';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Mdm_Basic_Data IS
+   Prompt     = 'Mdm Basic Data'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       description                    description,
+       status                         status,
+       ifsapp.fnd_session_api.Get_Fnd_User created_by,
+       sysdate                        created_date,
+       profile_id                     profile_id,
+       notes                          notes,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_basic_data_tab;

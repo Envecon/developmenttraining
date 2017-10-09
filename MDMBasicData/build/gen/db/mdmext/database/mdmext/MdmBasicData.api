@@ -1,0 +1,239 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmBasicData
+--  Type:         Entity
+--  Component:    MDMEXT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Basic_Data_API specification
+
+CREATE OR REPLACE PACKAGE Mdm_Basic_Data_API IS
+
+module_  CONSTANT VARCHAR2(25) := 'MDMEXT';
+lu_name_ CONSTANT VARCHAR2(25) := 'MdmBasicData';
+lu_type_ CONSTANT VARCHAR2(25) := 'Entity';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Public_Rec IS RECORD
+  (template_id                    MDM_BASIC_DATA_TAB.template_id%TYPE,
+   "rowid"                        rowid,
+   rowversion                     MDM_BASIC_DATA_TAB.rowversion%TYPE,
+   rowkey                         MDM_BASIC_DATA_TAB.rowkey%TYPE,
+   revision                       MDM_BASIC_DATA_TAB.revision%TYPE,
+   description                    MDM_BASIC_DATA_TAB.description%TYPE,
+   status                         MDM_BASIC_DATA_TAB.status%TYPE,
+   created_by                     MDM_BASIC_DATA_TAB.created_by%TYPE,
+   created_date                   MDM_BASIC_DATA_TAB.created_date%TYPE,
+   profile_id                     MDM_BASIC_DATA_TAB.profile_id%TYPE,
+   notes                          MDM_BASIC_DATA_TAB.notes%TYPE);
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+-- Get_Key_By_Rowkey
+--   Returns a table record with only keys (other attributes are NULL) based on a rowkey.
+--
+-- Exist
+--   Checks if given pointer (e.g. primary key) to an instance of this
+--   logical unit exists. If not an exception will be raised.
+--
+-- Exists
+--   Same check as Exist, but returns a BOOLEAN value instead of exception.
+--
+-- Get_Revision
+--   Fetches the Revision attribute for a record.
+--
+-- Get_Description
+--   Fetches the Description attribute for a record.
+--
+-- Get_Status
+--   Fetches the Status attribute for a record.
+--
+-- Get_Created_By
+--   Fetches the CreatedBy attribute for a record.
+--
+-- Get_Created_Date
+--   Fetches the CreatedDate attribute for a record.
+--
+-- Get_Profile_Id
+--   Fetches the ProfileId attribute for a record.
+--
+-- Get_Notes
+--   Fetches the Notes attribute for a record.
+--
+-- Get
+--   Fetches a record containing the public attributes.
+--
+-- Get_Objkey
+--   Fetches the objkey attribute for a record.
+--
+-- Write_Notes__
+--   Write CLOB column Notes to database.
+--
+-- Lock__
+--   Client-support to lock a specific instance of the logical unit.
+--
+-- Remove__
+--   Client-support interface to remove LU instances.
+--   action_ = 'CHECK'
+--   Check whether a specific LU-instance may be removed or not.
+--   The procedure fetches the complete record by calling procedure
+--   Get_Object_By_Id___. Then the check is made by calling procedure
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Get_Key_By_Rowkey)
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_basic_data_tab%ROWTYPE;
+
+--@PoReadOnly(Exist)
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2 );
+
+--@PoReadOnly(Exists)
+FUNCTION Exists (
+   template_id_ IN VARCHAR2 ) RETURN BOOLEAN;
+
+--@PoReadOnly(Get_Revision)
+FUNCTION Get_Revision (
+   template_id_ IN VARCHAR2 ) RETURN NUMBER;
+
+--@PoReadOnly(Get_Description)
+FUNCTION Get_Description (
+   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Status)
+FUNCTION Get_Status (
+   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Created_By)
+FUNCTION Get_Created_By (
+   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Created_Date)
+FUNCTION Get_Created_Date (
+   template_id_ IN VARCHAR2 ) RETURN DATE;
+
+--@PoReadOnly(Get_Profile_Id)
+FUNCTION Get_Profile_Id (
+   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Notes)
+FUNCTION Get_Notes (
+   template_id_ IN VARCHAR2 ) RETURN CLOB;
+
+--@PoReadOnly(Get)
+FUNCTION Get (
+   template_id_ IN VARCHAR2 ) RETURN Public_Rec;
+
+--@PoReadOnly(Get_Objkey)
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+PROCEDURE Write_Notes__ (
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   rowid_      IN     ROWID,
+   lob_loc_    IN     CLOB );
+
+--@PoReadOnly(Lock__)
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 );
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+-- New__
+--   Client-support interface to create LU instances.
+--   action_ = 'PREPARE'
+--   Default values and handle of information to client.
+--   The default values are set in procedure Prepare_Insert___.
+--   action_ = 'CHECK'
+--   Check all attributes before creating new object and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___.
+--   action_ = 'DO'
+--   Creation of new instances of the logical unit and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___
+--   before calling procedure Insert___.
+--
+-- Modify__
+--   Client-support interface to modify attributes for LU instances.
+--   action_ = 'CHECK'
+--   Check all attributes before modifying an existing object and
+--   handle of information to client. The attribute list is unpacked,
+--   checked and prepared(defaults) in procedures Unpack___ and Check_Update___.
+--   action_ = 'DO'
+--   Modification of an existing instance of the logical unit. The
+--   procedure unpacks the attributes, checks all values before
+--   procedure Update___ is called.
+--
+-- Active__
+--
+-- Reopen__
+-----------------------------------------------------------------------------
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Active__ (info_   OUT VARCHAR2,
+                    objid_ IN OUT NOCOPY VARCHAR2 ,
+                    objversion_ IN OUT NOCOPY VARCHAR2);
+
+PROCEDURE Reopen__ (info_   OUT VARCHAR2,
+                    objid_ IN OUT NOCOPY VARCHAR2 ,
+                    objversion_ IN OUT NOCOPY VARCHAR2,
+                    new_event__ IN VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+-- Approval_Process__
+-----------------------------------------------------------------------------
+
+PROCEDURE Approval_Process__ (lu_name_ IN VARCHAR2,
+                              attr_   IN VARCHAR2);
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Mdm_Basic_Data_API;
+/
+SHOW ERROR
+
+

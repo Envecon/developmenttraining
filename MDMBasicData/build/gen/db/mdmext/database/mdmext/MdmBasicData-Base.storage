@@ -1,0 +1,39 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmBasicData
+--  Component:    MDMEXT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 9.802.3691.20170420
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE mdm_basic_data_tab IS (
+   template_id                    VARCHAR2(30)   NOT NULL,
+   revision                       NUMBER         DEFAULT 1 NULL,
+   description                    VARCHAR2(50)   NULL,
+   status                         VARCHAR2(15)   NULL,
+   created_by                     VARCHAR2(10)   NULL,
+   created_date                   DATE           NULL,
+   profile_id                     VARCHAR2(10)   NULL,
+   notes                          CLOB           NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY mdm_basic_data_pk IS mdm_basic_data_tab (
+   template_id);
+
+
+UNIQUE CONSTRAINT mdm_basic_data_rk IS mdm_basic_data_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

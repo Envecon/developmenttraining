@@ -290,7 +290,9 @@ PROCEDURE Reopen__ (
 --   procedure unpacks the attributes, checks all values before
 --   procedure Update___ is called.
 --
--- Approval_Process__
+-- C_Approval_Process__
+--
+-- C_Active__
 -----------------------------------------------------------------------------
 
 PROCEDURE Modify__ (
@@ -300,8 +302,15 @@ PROCEDURE Modify__ (
    attr_       IN OUT NOCOPY VARCHAR2,
    action_     IN     VARCHAR2 );
 
-PROCEDURE Approval_Process__ (lu_name_ IN VARCHAR2,
+PROCEDURE C_Approval_Process__ (lu_name_ IN VARCHAR2,
                               attr_   IN VARCHAR2);
+
+PROCEDURE C_Active__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
 
 -----------------------------------------------------------------------------
 -------------------- FOUNDATION1 METHODS ------------------------------------

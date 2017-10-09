@@ -19,7 +19,7 @@ layer Core;
 
 -------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
 
-PROCEDURE Approval_Process__ (lu_name_ IN VARCHAR2,
+PROCEDURE C_Approval_Process__ (lu_name_ IN VARCHAR2,
                               attr_   IN VARCHAR2)
 IS
 
@@ -57,7 +57,7 @@ IS
      trace_sys.Message('lu_name_' || lu_name_);
      trace_sys.Message('profile_id_' || profile_id_);
    
-END Approval_Process__;
+END C_Approval_Process__;
 
 @Override
 PROCEDURE Prepare_Insert___ (
@@ -96,9 +96,39 @@ BEGIN
    super(info_, objid_, objversion_, attr_, action_);
    --Add post-processing code here
     END IF;
-END Modify__;
+ END Modify__;
+ 
+PROCEDURE C_Active__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      rec_ mdm_basic_data_header_tab%ROWTYPE;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         NULL;
+      ELSIF (action_ = 'DO') THEN
+         rec_ := Lock_By_Id___(objid_, objversion_);
+         Finite_State_Machine___(rec_, 'Active', attr_);
+         objversion_ := to_char(rec_.rowversion,'YYYYMMDDHH24MISS');
+         Finite_State_Add_To_Attr___(rec_, attr_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
 
-
+BEGIN
+    Base(info_, objid_, objversion_, attr_, action_);
+END C_Active__;
 
 -------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
 

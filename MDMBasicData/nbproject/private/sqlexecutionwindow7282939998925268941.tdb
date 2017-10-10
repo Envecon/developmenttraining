@@ -1,0 +1,2 @@
+select * from module_tab
+where module ='MDMGT' 

@@ -82,7 +82,7 @@ PROCEDURE Modify__ (
 IS
     status__     VARCHAR2(25);
    CURSOR c1 IS
-   select status from MDM_BASIC_DATA_HEADER v
+   select STATE from MDM_BASIC_DATA_HEADER v
  where v.objid = objid_
  and v.objversion = objversion_;
 BEGIN

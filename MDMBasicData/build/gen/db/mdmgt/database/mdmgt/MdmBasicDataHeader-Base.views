@@ -4,7 +4,7 @@
 --  Component:    MDMGT
 --
 --  Template:     3.0
---  Built by:     IFS Developer Studio 9.802.3691.20170420
+--  Built by:     IFS Developer Studio 10.82.731.20170505
 --
 --  NOTE! Do not edit!! This file is completely generated and will be
 --        overwritten next time the corresponding model is saved.
@@ -27,10 +27,6 @@ COLUMN Description IS
    Flags      = 'AMIU-'
    Datatype   = 'STRING(50)'
    Prompt     = 'Description';
-COLUMN Status IS
-   Flags      = 'AMI--'
-   Datatype   = 'STRING(15)'
-   Prompt     = 'Status';
 COLUMN Created_By IS
    Flags      = 'AMI--'
    Datatype   = 'STRING(10)'
@@ -39,7 +35,7 @@ COLUMN Created_Date IS
    Flags      = 'AMI--'
    Datatype   = 'DATE/DATE'
    Prompt     = 'Created Date';
-COLUMN Approval_Template_Id IS
+COLUMN Profile_Id IS
    Flags      = 'A-IUL'
    Datatype   = 'STRING(10)'
    Prompt     = 'Approval Template Id'
@@ -64,10 +60,9 @@ SELECT
        template_id                    template_id,
        revision                       revision,
        description                    description,
-       status                         status,
        created_by                     created_by,
        created_date                   created_date,
-       approval_template_id           approval_template_id,
+       profile_id                     profile_id,
        notes                          notes,
        rowstate                       objstate,
        Mdm_Basic_Data_Header_API.Finite_State_Events__(rowstate)                     objevents,

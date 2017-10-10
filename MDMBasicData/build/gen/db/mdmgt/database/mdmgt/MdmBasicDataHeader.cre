@@ -27,10 +27,9 @@ BEGIN
    Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
    Database_SYS.Set_Table_Column(columns_, 'REVISION', 'NUMBER', 'N');
    Database_SYS.Set_Table_Column(columns_, 'DESCRIPTION', 'VARCHAR2(50)', 'N');
-   Database_SYS.Set_Table_Column(columns_, 'STATUS', 'VARCHAR2(15)', 'N');
    Database_SYS.Set_Table_Column(columns_, 'CREATED_BY', 'VARCHAR2(10)', 'N');
    Database_SYS.Set_Table_Column(columns_, 'CREATED_DATE', 'DATE', 'N');
-   Database_SYS.Set_Table_Column(columns_, 'APPROVAL_TEMPLATE_ID', 'VARCHAR2(10)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'PROFILE_ID', 'VARCHAR2(10)', 'Y');
    Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
    Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
    Database_SYS.Set_Table_Column(columns_, 'ROWSTATE', 'VARCHAR2(20)', 'N');

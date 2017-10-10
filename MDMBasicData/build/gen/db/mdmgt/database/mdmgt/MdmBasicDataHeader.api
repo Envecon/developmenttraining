@@ -42,10 +42,9 @@ TYPE Public_Rec IS RECORD
    rowstate                       MDM_BASIC_DATA_HEADER_TAB.rowstate%TYPE,
    revision                       MDM_BASIC_DATA_HEADER_TAB.revision%TYPE,
    description                    MDM_BASIC_DATA_HEADER_TAB.description%TYPE,
-   status                         MDM_BASIC_DATA_HEADER_TAB.status%TYPE,
    created_by                     MDM_BASIC_DATA_HEADER_TAB.created_by%TYPE,
    created_date                   MDM_BASIC_DATA_HEADER_TAB.created_date%TYPE,
-   approval_template_id           MDM_BASIC_DATA_HEADER_TAB.approval_template_id%TYPE,
+   profile_id                     MDM_BASIC_DATA_HEADER_TAB.profile_id%TYPE,
    notes                          MDM_BASIC_DATA_HEADER_TAB.notes%TYPE);
 
 
@@ -68,17 +67,14 @@ TYPE Public_Rec IS RECORD
 -- Get_Description
 --   Fetches the Description attribute for a record.
 --
--- Get_Status
---   Fetches the Status attribute for a record.
---
 -- Get_Created_By
 --   Fetches the CreatedBy attribute for a record.
 --
 -- Get_Created_Date
 --   Fetches the CreatedDate attribute for a record.
 --
--- Get_Approval_Template_Id
---   Fetches the ApprovalTemplateId attribute for a record.
+-- Get_Profile_Id
+--   Fetches the ProfileId attribute for a record.
 --
 -- Get_Notes
 --   Fetches the Notes attribute for a record.
@@ -138,10 +134,6 @@ FUNCTION Get_Revision (
 FUNCTION Get_Description (
    template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
 
---@PoReadOnly(Get_Status)
-FUNCTION Get_Status (
-   template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
-
 --@PoReadOnly(Get_Created_By)
 FUNCTION Get_Created_By (
    template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
@@ -150,8 +142,8 @@ FUNCTION Get_Created_By (
 FUNCTION Get_Created_Date (
    template_id_ IN VARCHAR2 ) RETURN DATE;
 
---@PoReadOnly(Get_Approval_Template_Id)
-FUNCTION Get_Approval_Template_Id (
+--@PoReadOnly(Get_Profile_Id)
+FUNCTION Get_Profile_Id (
    template_id_ IN VARCHAR2 ) RETURN VARCHAR2;
 
 --@PoReadOnly(Get_Notes)

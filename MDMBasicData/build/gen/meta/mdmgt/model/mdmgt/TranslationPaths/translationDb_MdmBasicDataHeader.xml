@@ -13,16 +13,13 @@
          <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.DESCRIPTION">
             <Text><![CDATA[Description]]></Text>
          </Column>
-         <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.STATUS">
-            <Text><![CDATA[Status]]></Text>
-         </Column>
          <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.CREATED_BY">
             <Text><![CDATA[Created By]]></Text>
          </Column>
          <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.CREATED_DATE">
             <Text><![CDATA[Created Date]]></Text>
          </Column>
-         <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.APPROVAL_TEMPLATE_ID">
+         <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.PROFILE_ID">
             <Text><![CDATA[Approval Template Id]]></Text>
          </Column>
          <Column ID="MdmBasicDataHeader.MDM_BASIC_DATA_HEADER.NOTES">

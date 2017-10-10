@@ -21,9 +21,6 @@
    <property name="server.app.libs"        value="lib/server/dist"/>
    <property name="server.thirdparty.libs" value="${basedir}/lib/jars/thirdparty"/>
 
-   <property name="mobile.framework.libs"  value="lib/mobile/javaruntime"/>
-   <property name="mobile.apps.dist"       value="lib/mobile/dist"/>
-
    <property name="web.ear.name"  value="fndweb.ear"/>
    <property name="webclient.dir" value="lib/webclient"/>
    <property name="webclient.fndweb.ear" value="${webclient.dir}/${web.ear.name}"/>
@@ -50,10 +47,6 @@
    <property name="websvc.dist"           value="${basedir}/${dist.dir}/services"/>
    <property name="websvc.gen.src.dir"    value="${build.generated.sources.dir}/services"/>
    <property name="websvc.module.name"    value="ifsservices"/>
-
-   <property name="mobile.build"         value="${basedir}/${build.classes.dir}/mobile"/>
-   <property name="mobile.dist"          value="${basedir}/${dist.dir}/mobile"/>
-   <property name="mobile.gen.src.dir"   value="${build.generated.sources.dir}/mobile"/>
 
    <property name="build.root"          value="${basedir}/workspace"/>
    <property name="generate.root"       value="${basedir}"/>
@@ -116,18 +109,6 @@
       </classpath>
    </taskdef>
 
-   <taskdef name="prepareMobileBuild" classname="ifs.dev.buildtasks.PrepareMobileBuildTask">
-      <classpath>
-         <fileset dir="${codegen.modules.path}">
-            <include name="ifs-dev-client.jar"/>
-            <include name="ifs-dev-buildtasks.jar"/>
-            <include name="ifs-dev-model.jar"/>
-            <include name="ifs-dev-model-*.jar"/>
-            <include name="ifs-dev-util.jar"/>
-         </fileset>                  
-      </classpath>
-   </taskdef>
-
    <taskdef name="packJars" classname="ifs.dev.buildtasks.PackageJarTask">
       <classpath>
          <fileset dir="${codegen.modules.path}">
@@ -153,19 +134,7 @@
          </fileset>
       </classpath>
    </taskdef>
-
-   <taskdef name="removeUnusedFiles" classname="ifs.dev.buildtasks.RemoveUnusedFilesTask">
-      <classpath>
-         <fileset dir="${codegen.modules.path}">
-            <include name="ifs-dev-client.jar"/>
-            <include name="ifs-dev-buildtasks.jar"/>
-            <include name="ifs-dev-model.jar"/>
-            <include name="ifs-dev-model-*.jar"/>
-            <include name="ifs-dev-util.jar"/>
-         </fileset>
-      </classpath>
-   </taskdef>
-
+   
    <typedef name="modelselector" classname="ifs.dev.buildtasks.ModelFileSelector">
       <classpath>
          <fileset dir="${codegen.modules.path}">
@@ -1937,29 +1906,7 @@
          <param name="group.id" value="ifs.dev.maven.plugins"/>
       </antcall>
    </target>
-
-   <target name="remove-unused-files">
-      <initJars buildFolder="${build.root}" development="TRUE" />
-      <removeUnusedFiles buildFolder="${build.root}"
-                         generateFolder="${generate.root}"
-                         classFolder="${ws.build}"
-                         extJarsFolder="${ext.jars.folder}"
-                         targetVersion="${applications.version}"
-                         jarsFolder="${ws.dist}">
-                         <fileset dir="${build.root}">
-                            <modelselector selectedBuildObjects="${build.source.artifacts}"/>
-                         </fileset>
-                         <requiredJars dir="${ws.dist}">
-                            <include name="ifs-fnd-j2ee-ejb.jar"/>
-                            <include name="ifs-fnd-gateway-servlet.jar"/>
-                            <include name="applicationsupport-ejb.jar"/>
-                            <include name="clientservices-ejb.jar"/>
-                            <include name="termruntimemanagement-ejb.jar"/>
-                            <include name="anonymousaccess-ejb.jar"/>
-                         </requiredJars>
-      </removeUnusedFiles>
-   </target>
-
+   
    <!-- ============================================================== -->
    <!--                   TARGETS FOR JAVACLIENT BUILD                 -->
    <!-- ============================================================== -->
@@ -2040,241 +1987,6 @@
 
    <target name="dist-client-jars" depends="compile-client,pack-client-jars">
        <echo>Java clients built succesfully</echo>
-   </target>
-
-
-            
-  <!-- ============================================================== -->
-  <!--               TARGETS FOR MOBILE CLIENT DEVELOPMENT            -->
-  <!-- ============================================================== -->
-
-   <path id="mobile.classpath">
-      <fileset dir="${mobile.framework.libs}">
-         <include name="**/*.jar"/>
-      </fileset>
-   </path>
-
-   <path id="mobile.sources"/>
-
-   <target name="mobile-dist" depends="mobile-init,prepare-mobile-build,mobile-compile,mobile-pack-mobs"/>
-
-   <target name="mobile-init-check">
-      <fail unless="build.mobile.artifacts">No Mobile Applications to build.</fail>
-   </target>
-
-   <target name="mobile-init" depends="mobile-init-check">
-      <tstamp/>
-      <mkdir dir="${mobile.dist}"/>
-      <mkdir dir="${mobile.build}"/>
-      <initJars buildFolder="${build.root}" development="TRUE" />
-   </target>
-
-  <!-- build the mobile models in mobile apps node -->
-   <target name="prepare-mobile-build">
-      <prepareMobileBuild   targetVersion="${applications.version}"
-                            generateFolder="${generate.root}"
-                            classFolder="${mobile.build}"
-                            jarsFolder="${mobile.dist}"
-                            modelCacheFolder="${basedir}/nbproject/private"                            
-                            development="true"
-                            buildimpl="true"
-                            mobAppDefinitionFile="${mobile.dist}/mobapp-definition.xml"
-                            mobAppTranslationPathsFile="${mobile.dist}/mobapp-trans-paths.xml"
-                            buildFolder="${build.root}">
-                            <fileset dir="${build.root}">
-                                <modelselector selectedBuildObjects="${build.mobile.artifacts}"/>
-                            </fileset>
-      </prepareMobileBuild>
-   </target>
-
-   <target name="mobile-compile">
-      <javac includeantruntime="false" excludes="**/.ifs/**" debug="true" debuglevel="lines,vars,source" destdir="${mobile.build}" optimize="true" source="1.3" target="1.3" deprecation="on">
-         <src refid="mobile.sources"/>
-         <classpath refid="mobile.classpath"/>
-      </javac>
-   </target>
-
-
-   <target name="mobile-pack-mobs">
-      <packJars parallel="true"/>
-   </target>
-
-   <target name="mobile-clean">
-      <delete dir="${mobile.gen.src.dir}"/>
-      <delete dir="${mobile.build}"/>
-      <delete dir="${mobile.dist}"/>
-      <delete dir="${mobile-temp}"/>
-   </target>
-
-   <target name="mobile-run-from-classes" depends="mobile-init,prepare-mobile-build,mobile-compile,mobile-internal-init-temp">
-      <echo message="*** Running Mobile Client (from classes)... ***" level="info"/>
-      <path id="debug.sourcepath">
-         <path refid="mobile.sources"/>
-      </path>
-      <path id="cp">
-         <path path="${mobile.build}"/>
-         <path path="${lib.mob};${lib.mob.cmn};${lib.mob.util};${lib.ibx};${lib.jsf};${lib.swt};${lib.db};${lib.common};${lib.ap};${filedownloadhandler};${instmob.javaclient};${instmobf.javaclient};${appfile.javaclient};${appstore.javaclient};${synch.javaclient};${clintinst.javaclient};${dev.javaclient};${dev.location};${devdet.javaclient};${manmob.javaclient};${profile.javaclient};${runtime.javaclient};${rrentityactsync.javaclient};${devcont.javaclient};${dev.javaclient};${tmp.javaclient};${ses.info.javaclient}"/>
-      </path>
-      <antcall target="mobile-internal-run">
-         <reference refid="debug.sourcepath" torefid="${debug.sourcepath}"/>
-         <reference refid="cp" torefid="${cp}"/>
-      </antcall>
-   </target>
-
-   <target name="mobile-run" depends="mobile-init,prepare-mobile-build,mobile-compile,mobile-internal-init-temp, mobile-internal-update-mob-files">
-      <echo message="*** Running Mobile Client (from mob files)... ***" level="info"/>
-      <path id="debug.sourcepath">
-         <path refid="mobile.sources"/>
-      </path>
-      <path id="cp">
-         <path path="${lib.mob};${lib.mob.cmn};${lib.mob.util};${lib.ibx};${lib.jsf};${lib.swt};${lib.db};${lib.common};${lib.ap};${filedownloadhandler};${instmob.javaclient};${instmobf.javaclient};${appfile.javaclient};${appstore.javaclient};${synch.javaclient};${clintinst.javaclient};${dev.javaclient};${dev.location};${devdet.javaclient};${manmob.javaclient};${profile.javaclient};${runtime.javaclient};${rrentityactsync.javaclient};${devcont.javaclient};${dev.javaclient};${tmp.javaclient};${ses.info.javaclient}"/>
-      </path>
-      <antcall target="mobile-internal-run">
-         <reference refid="debug.sourcepath" torefid="${debug.sourcepath}"/>
-         <reference refid="cp" torefid="${cp}"/>
-      </antcall>
-   </target>
-
-
-   <target name="mobile-debug" depends="mobile-init,prepare-mobile-build,mobile-compile,mobile-internal-init-temp">
-      <echo message="*** Debug Mobile Client... ***" level="info"/>
-      <path id="debug.sourcepath">
-         <path refid="mobile.sources"/>
-      </path>
-      <path id="cp">
-         <path path="${mobile.build}"/>
-         <path path="${lib.mob};${lib.mob.cmn};${lib.mob.util};${lib.ibx};${lib.jsf};${lib.swt};${lib.db};${lib.common};${lib.ap};${filedownloadhandler};${instmob.javaclient};${instmobf.javaclient};${appfile.javaclient};${appstore.javaclient};${synch.javaclient};${clintinst.javaclient};${dev.javaclient};${dev.location};${devdet.javaclient};${manmob.javaclient};${profile.javaclient};${runtime.javaclient};${rrentityactsync.javaclient};${devcont.javaclient};${dev.javaclient};${tmp.javaclient};${ses.info.javaclient}"/>
-      </path>
-      <antcall target="mobile-internal-debug">
-         <reference refid="debug.sourcepath" torefid="${debug.sourcepath}"/>
-         <reference refid="cp" torefid="${cp}"/>
-      </antcall>
-   </target>
-
-    <!-- Run IFS Mobile Client with an emulator -->
-   <target name="mobile-run-emulator">
-      <echo message="*** Running Mobile Client (with emulator)... ***" level="info"/>
-        <!-- TODO - KATHUK -->
-   </target>
-
-    <!-- =========================================== -->
-    <!--          Run IFS Mobile Client              -->
-    <!-- =========================================== -->
-   <property environment="env"/>
-   <exec dir="${basedir}" executable="hostname" outputproperty="env.COMPUTERNAME"/>
-   <property name="mobile-device-locale" value="en-GB"/>
-   <property name="mobile-server-locale" value="en-US"/>
-   <property name="mobile-device-name" value="${env.COMPUTERNAME}"/>
-   <property name="mobile-server-tracing" value="FALSE"/>
-   <property name="mobile-start-up-url" value="ifsmob://ifs.mobile.client.${mobile.main.app}Definition"/>
-
-   <property name="mobile-temp" value="tmp_mobile"/>
-   <property name="mobile-home" value="lib/mobile/"/>
-   <property name="mobile-javaruntime" value="${mobile-home}/javaruntime"/>
-   <property name="mobile-dll" value="${mobile-home}/dll"/>
-
-   <property name="lib.mob"  value="${mobile-javaruntime}/ifs-mob.jar"/>
-   <property name="lib.mob.cmn"  value="${mobile-javaruntime}/ifs-mob-cmn.jar"/>
-   <property name="lib.mob.util"  value="${mobile-javaruntime}/ifs-mob-util.jar"/>
-   <property name="lib.ibx"  value="${mobile-javaruntime}/ifs-ibx.jar"/>
-   <property name="lib.jsf"  value="${mobile-javaruntime}/ifs-mob-jsf.jar"/>
-   <property name="lib.swt"  value="${mobile-javaruntime}/swt-ext.jar"/>
-   <property name="lib.db"  value="${mobile-javaruntime}/db2ejdbc.jar"/>
-   <property name="lib.common"  value="${mobile-javaruntime}/util.jar"/>
-   <property name="lib.ap"  value="${mobile-javaruntime}/ifs-mob-ap.jar"/>
-   <property name="filedownloadhandler"  value="${mobile-javaruntime}/filedownloadhandler.jar"/>
-   <property name="failed.javaclient"  value="${mobile-javaruntime}/failedmobiletransaction.jar"/>
-   <property name="instmob.javaclient"  value="${mobile-javaruntime}/installedmobileapplication.jar"/>
-   <property name="instmobf.javaclient"  value="${mobile-javaruntime}/installedmobileapplicationfile.jar"/>
-   <property name="appfile.javaclient"  value="${mobile-javaruntime}/mobileapplicationfile.jar"/>
-   <property name="appstore.javaclient"  value="${mobile-javaruntime}/mobileapplicationstore-ejb.jar"/>
-   <property name="synch.javaclient"  value="${mobile-javaruntime}/mobileapplicationsynchoptimizer.jar"/>
-   <property name="clintinst.javaclient"  value="${mobile-javaruntime}/mobileclientinstallation-ejb.jar"/>
-   <property name="dev.javaclient"  value="${mobile-javaruntime}/mobiledevice.jar"/>
-   <property name="devdet.javaclient"  value="${mobile-javaruntime}/mobiledevicedetail.jar"/>
-   <property name="dev.location"  value="${mobile-javaruntime}/mobiledevicelocation.jar"/>
-   <property name="manmob.javaclient"  value="${mobile-javaruntime}/managemobileserver-ejb.jar"/>
-   <property name="profile.javaclient"  value="${mobile-javaruntime}/clientprofile.jar"/>
-   <property name="runtime.javaclient"  value="${mobile-javaruntime}/mobileclientruntime-ejb.jar"/>
-   <property name="rrentityactsync.javaclient"  value="${mobile-javaruntime}/rrentityactivitysync.jar"/>
-   <property name="devcont.javaclient"  value="${mobile-javaruntime}/mobiledevicecontent.jar"/>
-   <property name="dev.javaclient"  value="${mobile-javaruntime}/mobiledevice.jar"/>
-   <property name="tmp.javaclient"  value="${mobile-javaruntime}/mobiletempsynchrepository.jar"/>
-   <property name="ses.info.javaclient"  value="${mobile-javaruntime}/mobilesessioninformation.jar"/>
-   <property name="inapp.file.javaclient"  value="${mobile-javaruntime}/installedmobileapplicationfile.jar"/>
-   <property name="enum.javaclient"  value="${mobile-javaruntime}/fndmob-enumerations.jar"/>
-
-
-     <!-- Internal Task: Run Mobile Client -->
-   <target name="mobile-internal-run">
-      <java classname="ifs.fnd.mf.navigator.FndMain" fork="true">
-         <classpath refid="${cp}"/>
-         <sysproperty key="java.library.path" path="${mobile-javaruntime};${mobile-dll}"/>
-         <arg value="${mobile-start-up-url}"/>
-         <arg value="CONF=${mobile-temp}/ifs-mob.cfg.xml"/>
-      </java>
-   </target>
-
-    <!-- Internal Task: Debug Mobile Client -->
-   <target name="mobile-internal-debug">
-      <nbjpdastart addressproperty="jpda.address" name="Mobile Client Framework" transport="dt_socket">
-         <classpath refid="${cp}"/>
-         <sourcepath refid="${debug.sourcepath}"/>
-      </nbjpdastart>
-      <java classname="ifs.fnd.mf.navigator.FndMain" fork="true">
-         <classpath refid="${cp}"/>
-         <jvmarg value="-Xdebug"/>
-         <jvmarg value="-Xnoagent"/>
-         <jvmarg value="-Djava.compiler=none"/>
-         <jvmarg value="-Xrunjdwp:transport=dt_socket,address=${jpda.address}"/>
-         <jvmarg value="-Difs.fnd.ap.debug=true"/>
-         <sysproperty key="java.library.path" path="${mobile-javaruntime};${mobile-dll}"/>
-         <arg value="${mobile-start-up-url}"/>
-         <arg value="CONF=${mobile-temp}/ifs-mob.cfg.xml"/>
-      </java>
-   </target>
-
-
-    <!-- Internal task: check mob.config -->
-   <target name="mobile-internal-check-mob-config">
-      <available file="${mobile-temp}/ifs-mob.cfg.xml" property="mob-config.present"/>
-   </target>
-
-    <!-- Internal task: init mob.config -->
-   <target name="mobile-internal-init-mob-config" depends="mobile-internal-check-mob-config" unless="mob-config.present">
-      <mkdir dir="${mobile-temp}"/>
-      <echo file="${mobile-temp}/ifs-mob.cfg.xml"><![CDATA[
-<IFSMobileClient>
-    <Config OS="Windows XP" Name="Windows XP" Type="winxp">
-        <UserInterface State="0" Style="1264" ShowLOVLabelAsHyperlink="TRUE">
-            <Navigator AutoHide="FALSE" ShowAsIcons="FALSE" ShowIconIndex="FALSE">
-                <AddressBar Visible="TRUE" Docking="128">
-                    <HomePage URL="${mobile-start-up-url}"/>
-                    </AddressBar>
-                <StatusBar Visible="TRUE"/>
-                <ToolBar Docking="128" ToolItems="ALL"/>
-            </Navigator>
-            <Grid MinFetchLimit="100"/>
-        </UserInterface>
-        <Runtime Path="${mobile-javaruntime}" Locale="${mobile-device-locale}" LocalName="${mobile-device-name}" Rules="65535" DevMode="TRUE">
-            <Communication Driver="JAP" Compressed="TRUE" Locale="${mobile-server-locale}" ConnectTo="${mobile-server-url}" ConnectionStringParameters="%CONNECTION_STRING%${mobile-server-url-params}"/>
-            <Connection RetryWait="10000" RetryCount="3"/>
-            <Database Path="${mobile-temp}" Encrypted="FALSE"/>
-            <Rules Developer="TRUE"/>
-        </Runtime>
-        <Tracing Target="CONSOLE" ServerTracing="${mobile-server-tracing}" ExtendedErrors="FALSE"/>
-    </Config>
-</IFSMobileClient>
-]]>
-      </echo>
-   </target>
-
-    <!-- Internal task: initialize mobile data folder -->
-   <target name="mobile-internal-init-temp" depends="mobile-internal-init-mob-config"/>
-
-    <!-- Internal Task: Update mob files in the mobile data folder -->
-   <target name="mobile-internal-update-mob-files">
-        <!-- TODO - KATHUK -->
    </target>
 
 

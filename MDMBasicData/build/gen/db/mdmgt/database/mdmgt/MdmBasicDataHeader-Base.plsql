@@ -4,7 +4,7 @@
 --  Component:    MDMGT
 --
 --  Template:     3.0
---  Built by:     IFS Developer Studio 9.802.3691.20170420
+--  Built by:     IFS Developer Studio 10.82.731.20170505
 --
 --  NOTE! Do not edit!! This file is completely generated and will be
 --        overwritten next time the corresponding model is saved.
@@ -25,10 +25,9 @@ TYPE Public_Rec IS RECORD
    rowstate                       MDM_BASIC_DATA_HEADER_TAB.rowstate%TYPE,
    revision                       MDM_BASIC_DATA_HEADER_TAB.revision%TYPE,
    description                    MDM_BASIC_DATA_HEADER_TAB.description%TYPE,
-   status                         MDM_BASIC_DATA_HEADER_TAB.status%TYPE,
    created_by                     MDM_BASIC_DATA_HEADER_TAB.created_by%TYPE,
    created_date                   MDM_BASIC_DATA_HEADER_TAB.created_date%TYPE,
-   approval_template_id           MDM_BASIC_DATA_HEADER_TAB.approval_template_id%TYPE,
+   profile_id                     MDM_BASIC_DATA_HEADER_TAB.profile_id%TYPE,
    notes                          MDM_BASIC_DATA_HEADER_TAB.notes%TYPE);
 
 -------------------- PRIVATE DECLARATIONS -----------------------------------
@@ -37,10 +36,9 @@ TYPE Indicator_Rec IS RECORD
   (template_id                    BOOLEAN := FALSE,
    revision                       BOOLEAN := FALSE,
    description                    BOOLEAN := FALSE,
-   status                         BOOLEAN := FALSE,
    created_by                     BOOLEAN := FALSE,
    created_date                   BOOLEAN := FALSE,
-   approval_template_id           BOOLEAN := FALSE,
+   profile_id                     BOOLEAN := FALSE,
    notes                          BOOLEAN := FALSE);
 
 -------------------- BASE METHODS -------------------------------------------
@@ -370,18 +368,15 @@ BEGIN
       WHEN ('DESCRIPTION') THEN
          newrec_.description := value_;
          indrec_.description := TRUE;
-      WHEN ('STATUS') THEN
-         newrec_.status := value_;
-         indrec_.status := TRUE;
       WHEN ('CREATED_BY') THEN
          newrec_.created_by := value_;
          indrec_.created_by := TRUE;
       WHEN ('CREATED_DATE') THEN
          newrec_.created_date := Client_SYS.Attr_Value_To_Date(value_);
          indrec_.created_date := TRUE;
-      WHEN ('APPROVAL_TEMPLATE_ID') THEN
-         newrec_.approval_template_id := value_;
-         indrec_.approval_template_id := TRUE;
+      WHEN ('PROFILE_ID') THEN
+         newrec_.profile_id := value_;
+         indrec_.profile_id := TRUE;
       ELSE
          Client_SYS.Add_To_Attr(name_, value_, msg_);
       END CASE;
@@ -411,17 +406,14 @@ BEGIN
    IF (rec_.description IS NOT NULL) THEN
       Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
    END IF;
-   IF (rec_.status IS NOT NULL) THEN
-      Client_SYS.Add_To_Attr('STATUS', rec_.status, attr_);
-   END IF;
    IF (rec_.created_by IS NOT NULL) THEN
       Client_SYS.Add_To_Attr('CREATED_BY', rec_.created_by, attr_);
    END IF;
    IF (rec_.created_date IS NOT NULL) THEN
       Client_SYS.Add_To_Attr('CREATED_DATE', rec_.created_date, attr_);
    END IF;
-   IF (rec_.approval_template_id IS NOT NULL) THEN
-      Client_SYS.Add_To_Attr('APPROVAL_TEMPLATE_ID', rec_.approval_template_id, attr_);
+   IF (rec_.profile_id IS NOT NULL) THEN
+      Client_SYS.Add_To_Attr('PROFILE_ID', rec_.profile_id, attr_);
    END IF;
    RETURN attr_;
 END Pack___;
@@ -443,17 +435,14 @@ BEGIN
    IF (indrec_.description) THEN
       Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
    END IF;
-   IF (indrec_.status) THEN
-      Client_SYS.Add_To_Attr('STATUS', rec_.status, attr_);
-   END IF;
    IF (indrec_.created_by) THEN
       Client_SYS.Add_To_Attr('CREATED_BY', rec_.created_by, attr_);
    END IF;
    IF (indrec_.created_date) THEN
       Client_SYS.Add_To_Attr('CREATED_DATE', rec_.created_date, attr_);
    END IF;
-   IF (indrec_.approval_template_id) THEN
-      Client_SYS.Add_To_Attr('APPROVAL_TEMPLATE_ID', rec_.approval_template_id, attr_);
+   IF (indrec_.profile_id) THEN
+      Client_SYS.Add_To_Attr('PROFILE_ID', rec_.profile_id, attr_);
    END IF;
    RETURN attr_;
 END Pack___;
@@ -472,10 +461,9 @@ BEGIN
    Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
    Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
    Client_SYS.Add_To_Attr('DESCRIPTION', rec_.description, attr_);
-   Client_SYS.Add_To_Attr('STATUS', rec_.status, attr_);
    Client_SYS.Add_To_Attr('CREATED_BY', rec_.created_by, attr_);
    Client_SYS.Add_To_Attr('CREATED_DATE', rec_.created_date, attr_);
-   Client_SYS.Add_To_Attr('APPROVAL_TEMPLATE_ID', rec_.approval_template_id, attr_);
+   Client_SYS.Add_To_Attr('PROFILE_ID', rec_.profile_id, attr_);
    Client_SYS.Add_To_Attr('ROWKEY', rec_.rowkey, attr_);
    Client_SYS.Add_To_Attr('ROWSTATE', rec_.rowstate, attr_);
    RETURN attr_;
@@ -503,10 +491,9 @@ BEGIN
    indrec_.template_id := rec_.template_id IS NOT NULL;
    indrec_.revision := rec_.revision IS NOT NULL;
    indrec_.description := rec_.description IS NOT NULL;
-   indrec_.status := rec_.status IS NOT NULL;
    indrec_.created_by := rec_.created_by IS NOT NULL;
    indrec_.created_date := rec_.created_date IS NOT NULL;
-   indrec_.approval_template_id := rec_.approval_template_id IS NOT NULL;
+   indrec_.profile_id := rec_.profile_id IS NOT NULL;
    RETURN indrec_;
 END Get_Indicator_Rec___;
 
@@ -522,10 +509,9 @@ BEGIN
    indrec_.template_id := Validate_SYS.Is_Changed(oldrec_.template_id, newrec_.template_id);
    indrec_.revision := Validate_SYS.Is_Changed(oldrec_.revision, newrec_.revision);
    indrec_.description := Validate_SYS.Is_Changed(oldrec_.description, newrec_.description);
-   indrec_.status := Validate_SYS.Is_Changed(oldrec_.status, newrec_.status);
    indrec_.created_by := Validate_SYS.Is_Changed(oldrec_.created_by, newrec_.created_by);
    indrec_.created_date := Validate_SYS.Is_Changed(oldrec_.created_date, newrec_.created_date);
-   indrec_.approval_template_id := Validate_SYS.Is_Changed(oldrec_.approval_template_id, newrec_.approval_template_id);
+   indrec_.profile_id := Validate_SYS.Is_Changed(oldrec_.profile_id, newrec_.profile_id);
    RETURN indrec_;
 END Get_Indicator_Rec___;
 
@@ -539,15 +525,14 @@ PROCEDURE Check_Common___ (
    attr_   IN OUT VARCHAR2 )
 IS
 BEGIN
-   IF (newrec_.approval_template_id IS NOT NULL)
-   AND (indrec_.approval_template_id)
-   AND (Validate_SYS.Is_Changed(oldrec_.approval_template_id, newrec_.approval_template_id)) THEN
-      Approval_Profile_API.Exist(newrec_.approval_template_id);
+   IF (newrec_.profile_id IS NOT NULL)
+   AND (indrec_.profile_id)
+   AND (Validate_SYS.Is_Changed(oldrec_.profile_id, newrec_.profile_id)) THEN
+      Approval_Profile_API.Exist(newrec_.profile_id);
    END IF;
    Error_SYS.Check_Not_Null(lu_name_, 'TEMPLATE_ID', newrec_.template_id);
    Error_SYS.Check_Not_Null(lu_name_, 'REVISION', newrec_.revision);
    Error_SYS.Check_Not_Null(lu_name_, 'DESCRIPTION', newrec_.description);
-   Error_SYS.Check_Not_Null(lu_name_, 'STATUS', newrec_.status);
    Error_SYS.Check_Not_Null(lu_name_, 'CREATED_BY', newrec_.created_by);
    Error_SYS.Check_Not_Null(lu_name_, 'CREATED_DATE', newrec_.created_date);
 END Check_Common___;
@@ -651,7 +636,6 @@ IS
 BEGIN
    Validate_SYS.Item_Update(lu_name_, 'TEMPLATE_ID', indrec_.template_id);
    Validate_SYS.Item_Update(lu_name_, 'REVISION', indrec_.revision);
-   Validate_SYS.Item_Update(lu_name_, 'STATUS', indrec_.status);
    Validate_SYS.Item_Update(lu_name_, 'CREATED_BY', indrec_.created_by);
    Validate_SYS.Item_Update(lu_name_, 'CREATED_DATE', indrec_.created_date);
    Check_Common___(oldrec_, newrec_, indrec_, attr_);
@@ -993,30 +977,6 @@ EXCEPTION
 END Get_Description;
 
 
--- Get_Status
---   Fetches the Status attribute for a record.
-@UncheckedAccess
-FUNCTION Get_Status (
-   template_id_ IN VARCHAR2 ) RETURN VARCHAR2
-IS
-   temp_ mdm_basic_data_header_tab.status%TYPE;
-BEGIN
-   IF (template_id_ IS NULL) THEN
-      RETURN NULL;
-   END IF;
-   SELECT status
-      INTO  temp_
-      FROM  mdm_basic_data_header_tab
-      WHERE template_id = template_id_;
-   RETURN temp_;
-EXCEPTION
-   WHEN no_data_found THEN
-      RETURN NULL;
-   WHEN too_many_rows THEN
-      Raise_Too_Many_Rows___(template_id_, 'Get_Status');
-END Get_Status;
-
-
 -- Get_Created_By
 --   Fetches the CreatedBy attribute for a record.
 @UncheckedAccess
@@ -1065,18 +1025,18 @@ EXCEPTION
 END Get_Created_Date;
 
 
--- Get_Approval_Template_Id
---   Fetches the ApprovalTemplateId attribute for a record.
+-- Get_Profile_Id
+--   Fetches the ProfileId attribute for a record.
 @UncheckedAccess
-FUNCTION Get_Approval_Template_Id (
+FUNCTION Get_Profile_Id (
    template_id_ IN VARCHAR2 ) RETURN VARCHAR2
 IS
-   temp_ mdm_basic_data_header_tab.approval_template_id%TYPE;
+   temp_ mdm_basic_data_header_tab.profile_id%TYPE;
 BEGIN
    IF (template_id_ IS NULL) THEN
       RETURN NULL;
    END IF;
-   SELECT approval_template_id
+   SELECT profile_id
       INTO  temp_
       FROM  mdm_basic_data_header_tab
       WHERE template_id = template_id_;
@@ -1085,8 +1045,8 @@ EXCEPTION
    WHEN no_data_found THEN
       RETURN NULL;
    WHEN too_many_rows THEN
-      Raise_Too_Many_Rows___(template_id_, 'Get_Approval_Template_Id');
-END Get_Approval_Template_Id;
+      Raise_Too_Many_Rows___(template_id_, 'Get_Profile_Id');
+END Get_Profile_Id;
 
 
 -- Get_Notes
@@ -1128,10 +1088,9 @@ BEGIN
           rowid, rowversion, rowkey, rowstate,
           revision, 
           description, 
-          status, 
           created_by, 
           created_date, 
-          approval_template_id, 
+          profile_id, 
           notes
       INTO  temp_
       FROM  mdm_basic_data_header_tab

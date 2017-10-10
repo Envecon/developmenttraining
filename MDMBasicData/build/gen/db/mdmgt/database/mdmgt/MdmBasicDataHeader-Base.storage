@@ -4,7 +4,7 @@
 --  Component:    MDMGT
 --
 --  Template:     3.0
---  Built by:     IFS Developer Studio 9.802.3691.20170420
+--  Built by:     IFS Developer Studio 10.82.731.20170505
 --
 --  NOTE! Do not edit!! This file is completely generated and will be
 --        overwritten next time the corresponding model is saved.
@@ -19,10 +19,9 @@ TABLE mdm_basic_data_header_tab IS (
    template_id                    VARCHAR2(30)   NOT NULL,
    revision                       NUMBER         NOT NULL,
    description                    VARCHAR2(50)   NOT NULL,
-   status                         VARCHAR2(15)   NOT NULL,
    created_by                     VARCHAR2(10)   NOT NULL,
    created_date                   DATE           NOT NULL,
-   approval_template_id           VARCHAR2(10)   NULL,
+   profile_id                     VARCHAR2(10)   NULL,
    notes                          CLOB           NULL,
    rowversion                     DATE           NOT NULL,
    rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL,

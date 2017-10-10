@@ -1,0 +1,8 @@
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\bin\Debug\Ifs.Application.MdmBasicData.dll
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\bin\Debug\Ifs.Application.MdmBasicData.pdb
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.csprojResolveAssemblyReference.cache
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.frmMdmBasicData.resources
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.Properties.Resources.resources
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.csproj.GenerateResource.Cache
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.dll
+C:\Nikitha1\workspace\mdmgt\source\mdmgt\client\Ifs.Application.MdmBasicData\obj\Debug\Ifs.Application.MdmBasicData.pdb

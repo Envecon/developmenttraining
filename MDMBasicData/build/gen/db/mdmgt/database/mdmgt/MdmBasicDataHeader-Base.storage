@@ -22,7 +22,7 @@ TABLE mdm_basic_data_header_tab IS (
    status                         VARCHAR2(15)   NOT NULL,
    created_by                     VARCHAR2(10)   NOT NULL,
    created_date                   DATE           NOT NULL,
-   approval_template_id           VARCHAR2(10)   NULL,
+   profile_id                     VARCHAR2(10)   NULL,
    notes                          CLOB           NULL,
    rowversion                     DATE           NOT NULL,
    rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL,

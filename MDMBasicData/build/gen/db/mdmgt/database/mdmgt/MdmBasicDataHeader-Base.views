@@ -39,7 +39,7 @@ COLUMN Created_Date IS
    Flags      = 'AMI--'
    Datatype   = 'DATE/DATE'
    Prompt     = 'Created Date';
-COLUMN Approval_Template_Id IS
+COLUMN Profile_Id IS
    Flags      = 'A-IUL'
    Datatype   = 'STRING(10)'
    Prompt     = 'Approval Template Id'
@@ -67,7 +67,7 @@ SELECT
        status                         status,
        created_by                     created_by,
        created_date                   created_date,
-       approval_template_id           approval_template_id,
+       profile_id                     profile_id,
        notes                          notes,
        rowstate                       objstate,
        Mdm_Basic_Data_Header_API.Finite_State_Events__(rowstate)                     objevents,

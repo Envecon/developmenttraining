@@ -67,7 +67,7 @@ namespace Ifs.Application.MdmBasicData
             this.dfsProfileId = new Ifs.Fnd.ApplicationForms.cDataField();
             this.labelProfileId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.ecmbTemplateId = new Ifs.Fnd.ApplicationForms.cRecSelComboBox();
-            this.labelTemplateId1 = new Ifs.Fnd.ApplicationForms.cBackgroundText();
+            this.labelTemplateId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,12 +75,17 @@ namespace Ifs.Application.MdmBasicData
             // 
             resources.ApplyResources(this._cTabManager, "_cTabManager");
             // 
+            // picTab
+            // 
+            resources.ApplyResources(this.picTab, "picTab");
+            // 
             // commandManager
             // 
             this.commandManager.Commands.Add(this.cmdActive);
             this.commandManager.Commands.Add(this.cmdReOpen);
             this.commandManager.Commands.Add(this.cmdCreateRevision);
             this.commandManager.ContextMenus.Add(this.contextMenu);
+            this.commandManager.ImageList = null;
             // 
             // dfnRevision
             // 
@@ -223,7 +228,6 @@ namespace Ifs.Application.MdmBasicData
             // 
             // ecmbTemplateId
             // 
-            this.picTab.SetControlTabPages(this.ecmbTemplateId, "Name0");
             this.ecmbTemplateId.FormattingEnabled = true;
             resources.ApplyResources(this.ecmbTemplateId, "ecmbTemplateId");
             this.ecmbTemplateId.Name = "ecmbTemplateId";
@@ -233,18 +237,17 @@ namespace Ifs.Application.MdmBasicData
             this.ecmbTemplateId.NamedProperties.Put("LovReference", "");
             this.ecmbTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
             // 
-            // labelTemplateId1
+            // labelTemplateId
             // 
-            resources.ApplyResources(this.labelTemplateId1, "labelTemplateId1");
-            this.picTab.SetControlTabPages(this.labelTemplateId1, "Name0");
-            this.labelTemplateId1.Name = "labelTemplateId1";
+            resources.ApplyResources(this.labelTemplateId, "labelTemplateId");
+            this.labelTemplateId.Name = "labelTemplateId";
             // 
             // frmMdmBasicData
             // 
             resources.ApplyResources(this, "$this");
             this.ContextMenuStrip = this.contextMenu;
             this.Controls.Add(this.ecmbTemplateId);
-            this.Controls.Add(this.labelTemplateId1);
+            this.Controls.Add(this.labelTemplateId);
             this.Controls.Add(this.dfsProfileId);
             this.Controls.Add(this.labelProfileId);
             this.Controls.Add(this.dfsState);
@@ -277,7 +280,7 @@ namespace Ifs.Application.MdmBasicData
             this.Controls.SetChildIndex(this.dfsState, 0);
             this.Controls.SetChildIndex(this.labelProfileId, 0);
             this.Controls.SetChildIndex(this.dfsProfileId, 0);
-            this.Controls.SetChildIndex(this.labelTemplateId1, 0);
+            this.Controls.SetChildIndex(this.labelTemplateId, 0);
             this.Controls.SetChildIndex(this.ecmbTemplateId, 0);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -322,6 +325,6 @@ namespace Ifs.Application.MdmBasicData
         protected cDataField dfsProfileId;
         protected cBackgroundText labelProfileId;
         protected cRecSelComboBox ecmbTemplateId;
-        protected cBackgroundText labelTemplateId1;
+        protected cBackgroundText labelTemplateId;
     }
 }

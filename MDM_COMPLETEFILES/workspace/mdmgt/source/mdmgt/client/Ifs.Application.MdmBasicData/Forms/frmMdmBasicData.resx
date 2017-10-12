@@ -119,13 +119,26 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_cTabManager.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 41</value>
+    <value>26, 26</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Name" xml:space="preserve">
     <value>_cTabManager</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Type" xml:space="preserve">
     <value>Ifs.Fnd.ApplicationForms.cTabManager, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="picTab.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="picTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 114</value>
+  </data>
+  <data name="picTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>598, 218</value>
+  </data>
+  <data name="picTab.TabSetup" xml:space="preserve">
+    <value>{Name=Source Mapping;Label=Source Mapping;Form=tbwSourceMap}{Name=Method List;Label=Method List;Form=tbwMethodList}</value>
   </data>
   <data name="&gt;&gt;picTab.Name" xml:space="preserve">
     <value>picTab</value>
@@ -179,7 +192,6 @@
   <data name="dfnRevision.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dfnRevision.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -478,7 +490,7 @@
     <value>30</value>
   </data>
   <data name="ecmbTemplateId.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 21</value>
+    <value>118, 21</value>
   </data>
   <data name="ecmbTemplateId.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -495,31 +507,31 @@
   <data name="&gt;&gt;ecmbTemplateId.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelTemplateId1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelTemplateId.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelTemplateId1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelTemplateId.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 5</value>
   </data>
-  <data name="labelTemplateId1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelTemplateId.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
   </data>
-  <data name="labelTemplateId1.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelTemplateId.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="labelTemplateId1.Text" xml:space="preserve">
+  <data name="labelTemplateId.Text" xml:space="preserve">
     <value>Template Id:</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId1.Name" xml:space="preserve">
-    <value>labelTemplateId1</value>
+  <data name="&gt;&gt;labelTemplateId.Name" xml:space="preserve">
+    <value>labelTemplateId</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId1.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId.Type" xml:space="preserve">
     <value>Ifs.Fnd.ApplicationForms.cBackgroundText, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

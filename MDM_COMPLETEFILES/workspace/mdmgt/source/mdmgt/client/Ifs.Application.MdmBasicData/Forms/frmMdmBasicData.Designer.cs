@@ -47,6 +47,8 @@ namespace Ifs.Application.MdmBasicData
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMdmBasicData));
+            this.dfnRevision = new Ifs.Fnd.ApplicationForms.cDataField();
+            this.labelRevision = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.dfsDescription = new Ifs.Fnd.ApplicationForms.cDataField();
             this.labelDescription = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.dfsCreatedBy = new Ifs.Fnd.ApplicationForms.cDataField();
@@ -64,10 +66,8 @@ namespace Ifs.Application.MdmBasicData
             this.tsMenuItemCreateRevision = new Ifs.Fnd.Windows.Forms.FndToolStripMenuItem(this.components);
             this.dfsProfileId = new Ifs.Fnd.ApplicationForms.cDataField();
             this.labelProfileId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
-            this.dfnRevision = new Ifs.Fnd.ApplicationForms.cDataField();
-            this.labelRevision = new Ifs.Fnd.ApplicationForms.cBackgroundText();
-            this.dfsTemplateId = new Ifs.Fnd.ApplicationForms.cDataField();
-            this.labelTemplateId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
+            this.ecmbTemplateId = new Ifs.Fnd.ApplicationForms.cRecSelComboBox();
+            this.labelTemplateId1 = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,19 +75,28 @@ namespace Ifs.Application.MdmBasicData
             // 
             resources.ApplyResources(this._cTabManager, "_cTabManager");
             // 
-            // picTab
-            // 
-            resources.ApplyResources(this.picTab, "picTab");
-            this.picTab.SelectedIndex = 1;
-            this.picTab.Load += new System.EventHandler(this.picTab_Load);
-            // 
             // commandManager
             // 
             this.commandManager.Commands.Add(this.cmdActive);
             this.commandManager.Commands.Add(this.cmdReOpen);
             this.commandManager.Commands.Add(this.cmdCreateRevision);
             this.commandManager.ContextMenus.Add(this.contextMenu);
-            this.commandManager.ImageList = null;
+            // 
+            // dfnRevision
+            // 
+            this.dfnRevision.DataType = PPJ.Runtime.Windows.DataType.Number;
+            resources.ApplyResources(this.dfnRevision, "dfnRevision");
+            this.dfnRevision.Name = "dfnRevision";
+            this.dfnRevision.NamedProperties.Put("EnumerateMethod", "");
+            this.dfnRevision.NamedProperties.Put("FieldFlags", "291");
+            this.dfnRevision.NamedProperties.Put("Format", "");
+            this.dfnRevision.NamedProperties.Put("LovReference", "");
+            this.dfnRevision.NamedProperties.Put("SqlColumn", "REVISION");
+            // 
+            // labelRevision
+            // 
+            resources.ApplyResources(this.labelRevision, "labelRevision");
+            this.labelRevision.Name = "labelRevision";
             // 
             // dfsDescription
             // 
@@ -189,7 +198,7 @@ namespace Ifs.Application.MdmBasicData
             this.tsMenuItemReOpen.Command = this.cmdReOpen;
             this.tsMenuItemReOpen.Name = "tsMenuItemReOpen";
             resources.ApplyResources(this.tsMenuItemReOpen, "tsMenuItemReOpen");
-            this.tsMenuItemReOpen.Text = "ReOpen";
+            this.tsMenuItemReOpen.Text = "Reopen";
             // 
             // tsMenuItemCreateRevision
             // 
@@ -203,7 +212,7 @@ namespace Ifs.Application.MdmBasicData
             resources.ApplyResources(this.dfsProfileId, "dfsProfileId");
             this.dfsProfileId.Name = "dfsProfileId";
             this.dfsProfileId.NamedProperties.Put("EnumerateMethod", "");
-            this.dfsProfileId.NamedProperties.Put("FieldFlags", "290");
+            this.dfsProfileId.NamedProperties.Put("FieldFlags", "294");
             this.dfsProfileId.NamedProperties.Put("LovReference", "APPROVAL_PROFILE");
             this.dfsProfileId.NamedProperties.Put("SqlColumn", "PROFILE_ID");
             // 
@@ -212,45 +221,30 @@ namespace Ifs.Application.MdmBasicData
             resources.ApplyResources(this.labelProfileId, "labelProfileId");
             this.labelProfileId.Name = "labelProfileId";
             // 
-            // dfnRevision
+            // ecmbTemplateId
             // 
-            this.dfnRevision.DataType = PPJ.Runtime.Windows.DataType.Number;
-            resources.ApplyResources(this.dfnRevision, "dfnRevision");
-            this.dfnRevision.Name = "dfnRevision";
-            this.dfnRevision.NamedProperties.Put("EnumerateMethod", "");
-            this.dfnRevision.NamedProperties.Put("FieldFlags", "162");
-            this.dfnRevision.NamedProperties.Put("Format", "");
-            this.dfnRevision.NamedProperties.Put("LovReference", "");
-            this.dfnRevision.NamedProperties.Put("SqlColumn", "REVISION");
+            this.picTab.SetControlTabPages(this.ecmbTemplateId, "Name0");
+            this.ecmbTemplateId.FormattingEnabled = true;
+            resources.ApplyResources(this.ecmbTemplateId, "ecmbTemplateId");
+            this.ecmbTemplateId.Name = "ecmbTemplateId";
+            this.ecmbTemplateId.NamedProperties.Put("EnumerateMethod", "");
+            this.ecmbTemplateId.NamedProperties.Put("FieldFlags", "162");
+            this.ecmbTemplateId.NamedProperties.Put("Format", "9");
+            this.ecmbTemplateId.NamedProperties.Put("LovReference", "");
+            this.ecmbTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
             // 
-            // labelRevision
+            // labelTemplateId1
             // 
-            resources.ApplyResources(this.labelRevision, "labelRevision");
-            this.labelRevision.Name = "labelRevision";
-            // 
-            // dfsTemplateId
-            // 
-            this.dfsTemplateId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            resources.ApplyResources(this.dfsTemplateId, "dfsTemplateId");
-            this.dfsTemplateId.Name = "dfsTemplateId";
-            this.dfsTemplateId.NamedProperties.Put("EnumerateMethod", "");
-            this.dfsTemplateId.NamedProperties.Put("FieldFlags", "162");
-            this.dfsTemplateId.NamedProperties.Put("LovReference", "");
-            this.dfsTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
-            // 
-            // labelTemplateId
-            // 
-            resources.ApplyResources(this.labelTemplateId, "labelTemplateId");
-            this.labelTemplateId.Name = "labelTemplateId";
+            resources.ApplyResources(this.labelTemplateId1, "labelTemplateId1");
+            this.picTab.SetControlTabPages(this.labelTemplateId1, "Name0");
+            this.labelTemplateId1.Name = "labelTemplateId1";
             // 
             // frmMdmBasicData
             // 
             resources.ApplyResources(this, "$this");
             this.ContextMenuStrip = this.contextMenu;
-            this.Controls.Add(this.dfsTemplateId);
-            this.Controls.Add(this.labelTemplateId);
-            this.Controls.Add(this.dfnRevision);
-            this.Controls.Add(this.labelRevision);
+            this.Controls.Add(this.ecmbTemplateId);
+            this.Controls.Add(this.labelTemplateId1);
             this.Controls.Add(this.dfsProfileId);
             this.Controls.Add(this.labelProfileId);
             this.Controls.Add(this.dfsState);
@@ -261,13 +255,18 @@ namespace Ifs.Application.MdmBasicData
             this.Controls.Add(this.labelCreatedBy);
             this.Controls.Add(this.dfsDescription);
             this.Controls.Add(this.labelDescription);
+            this.Controls.Add(this.dfnRevision);
+            this.Controls.Add(this.labelRevision);
             this.Name = "frmMdmBasicData";
             this.NamedProperties.Put("LogicalUnit", "MdmBasicDataHeader");
             this.NamedProperties.Put("Module", "MDMGT");
             this.NamedProperties.Put("PackageName", "MDM_BASIC_DATA_HEADER_API");
             this.NamedProperties.Put("SourceFlags", "4545");
             this.NamedProperties.Put("ViewName", "MDM_BASIC_DATA_HEADER");
+            this.WindowActions += new PPJ.Runtime.Windows.WindowActionsEventHandler(this.frmMdmBasicData_WindowActions);
             this.Controls.SetChildIndex(this.picTab, 0);
+            this.Controls.SetChildIndex(this.labelRevision, 0);
+            this.Controls.SetChildIndex(this.dfnRevision, 0);
             this.Controls.SetChildIndex(this.labelDescription, 0);
             this.Controls.SetChildIndex(this.dfsDescription, 0);
             this.Controls.SetChildIndex(this.labelCreatedBy, 0);
@@ -278,10 +277,8 @@ namespace Ifs.Application.MdmBasicData
             this.Controls.SetChildIndex(this.dfsState, 0);
             this.Controls.SetChildIndex(this.labelProfileId, 0);
             this.Controls.SetChildIndex(this.dfsProfileId, 0);
-            this.Controls.SetChildIndex(this.labelRevision, 0);
-            this.Controls.SetChildIndex(this.dfnRevision, 0);
-            this.Controls.SetChildIndex(this.labelTemplateId, 0);
-            this.Controls.SetChildIndex(this.dfsTemplateId, 0);
+            this.Controls.SetChildIndex(this.labelTemplateId1, 0);
+            this.Controls.SetChildIndex(this.ecmbTemplateId, 0);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -305,6 +302,8 @@ namespace Ifs.Application.MdmBasicData
         }
         #endregion
 
+        protected cDataField dfnRevision;
+        protected cBackgroundText labelRevision;
         protected cDataField dfsDescription;
         protected cBackgroundText labelDescription;
         protected cDataField dfsCreatedBy;
@@ -322,9 +321,7 @@ namespace Ifs.Application.MdmBasicData
         protected Fnd.Windows.Forms.FndToolStripMenuItem tsMenuItemCreateRevision;
         protected cDataField dfsProfileId;
         protected cBackgroundText labelProfileId;
-        protected cDataField dfnRevision;
-        protected cBackgroundText labelRevision;
-        protected cDataField dfsTemplateId;
-        protected cBackgroundText labelTemplateId;
+        protected cRecSelComboBox ecmbTemplateId;
+        protected cBackgroundText labelTemplateId1;
     }
 }

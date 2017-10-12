@@ -1141,7 +1141,7 @@ END Get_Objkey;
 FUNCTION Get_Db_Values___ RETURN VARCHAR2 DETERMINISTIC
 IS
 BEGIN
-   RETURN('New^Active^Obsolete^');
+   RETURN('New^Activated^Obsoleted^');
 END Get_Db_Values___;
 
 
@@ -1150,7 +1150,7 @@ END Get_Db_Values___;
 FUNCTION Get_Client_Values___ RETURN VARCHAR2 DETERMINISTIC
 IS
 BEGIN
-   RETURN('New^Active^Obsolete^');
+   RETURN('New^Activated^Obsoleted^');
 END Get_Client_Values___;
 
 
@@ -1187,23 +1187,21 @@ BEGIN
       ELSE
          Error_SYS.State_Event_Not_Handled(lu_name_, event_, Finite_State_Decode__(state_));
       END IF;
-   ELSIF (state_ = 'Active') THEN
+   ELSIF (state_ = 'Activated') THEN
       IF (event_ = 'Obsolete') THEN
-         Finite_State_Set___(rec_, 'Obsolete');
+         Finite_State_Set___(rec_, 'Obsoleted');
       ELSIF (event_ = 'Reopen') THEN
          Finite_State_Set___(rec_, 'New');
       ELSE
          Error_SYS.State_Event_Not_Handled(lu_name_, event_, Finite_State_Decode__(state_));
       END IF;
    ELSIF (state_ = 'New') THEN
-      IF (event_ = 'Action') THEN
-         Finite_State_Set___(rec_, 'Active');
-      ELSIF (event_ = 'Obsolete') THEN
-         Finite_State_Set___(rec_, 'Obsolete');
+      IF (event_ = 'Active') THEN
+         Finite_State_Set___(rec_, 'Activated');
       ELSE
          Error_SYS.State_Event_Not_Handled(lu_name_, event_, Finite_State_Decode__(state_));
       END IF;
-   ELSIF (state_ = 'Obsolete') THEN
+   ELSIF (state_ = 'Obsoleted') THEN
       Error_SYS.State_Event_Not_Handled(lu_name_, event_, Finite_State_Decode__(state_));
    ELSE
       Error_SYS.State_Not_Exist(lu_name_, Finite_State_Decode__(state_));
@@ -1306,11 +1304,11 @@ IS
 BEGIN
    IF (db_state_ IS NULL) THEN
       RETURN NULL;
-   ELSIF (db_state_ = 'Active') THEN
-      RETURN 'Obsolete^Reopen^';
+   ELSIF (db_state_ = 'Activated') THEN
+      RETURN 'Reopen^Obsolete^';
    ELSIF (db_state_ = 'New') THEN
-      RETURN 'Action^Obsolete^';
-   ELSIF (db_state_ = 'Obsolete') THEN
+      RETURN 'Active^';
+   ELSIF (db_state_ = 'Obsoleted') THEN
       RETURN NULL;
    ELSE
       RETURN NULL;
@@ -1325,13 +1323,13 @@ PROCEDURE Enumerate_Events__ (
    db_events_ OUT VARCHAR2 )
 IS
 BEGIN
-   db_events_ := 'Action^Obsolete^Reopen^';
+   db_events_ := 'Active^Obsolete^Reopen^';
 END Enumerate_Events__;
 
 
--- Action__
---   Executes the Action event logic as defined in the state machine.
-PROCEDURE Action__ (
+-- Active__
+--   Executes the Active event logic as defined in the state machine.
+PROCEDURE Active__ (
    info_       OUT    VARCHAR2,
    objid_      IN     VARCHAR2,
    objversion_ IN OUT VARCHAR2,
@@ -1344,12 +1342,12 @@ BEGIN
       NULL;
    ELSIF (action_ = 'DO') THEN
       rec_ := Lock_By_Id___(objid_, objversion_);
-      Finite_State_Machine___(rec_, 'Action', attr_);
+      Finite_State_Machine___(rec_, 'Active', attr_);
       objversion_ := to_char(rec_.rowversion,'YYYYMMDDHH24MISS');
       Finite_State_Add_To_Attr___(rec_, attr_);
    END IF;
    info_ := Client_SYS.Get_All_Info;
-END Action__;
+END Active__;
 
 
 -- Obsolete__

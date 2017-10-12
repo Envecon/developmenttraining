@@ -10,71 +10,7 @@
          <DIAGRAM_TYPE>STATE_MACHINE</DIAGRAM_TYPE>
          <NODES>
             <DIAGRAM_NODE>
-               <ID>7b112620-ada5-11e7-2958-9ac2f4fe88d4</ID>
-               <NODE_TYPE>STATE</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>StateName</NAME>
-                     <VALUE>Obsolete</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>StateType</NAME>
-                     <VALUE>FinalState</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>SubStateOf</NAME>
-                     <VALUE></VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <LOCATION>
-                  <POINT>
-                     <X>367</X>
-                     <Y>204</Y>
-                  </POINT>
-               </LOCATION>
-               <SIZE>
-                  <POINT>
-                     <X>51</X>
-                     <Y>40</Y>
-                  </POINT>
-               </SIZE>
-            </DIAGRAM_NODE>
-            <DIAGRAM_NODE>
-               <ID>7b10ff12-ada5-11e7-2958-9ac2f4fe88d4</ID>
-               <NODE_TYPE>STATE</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>StateName</NAME>
-                     <VALUE>Active</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>StateType</NAME>
-                     <VALUE>State</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>SubStateOf</NAME>
-                     <VALUE></VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <LOCATION>
-                  <POINT>
-                     <X>184</X>
-                     <Y>310</Y>
-                  </POINT>
-               </LOCATION>
-               <SIZE>
-                  <POINT>
-                     <X>104</X>
-                     <Y>41</Y>
-                  </POINT>
-               </SIZE>
-            </DIAGRAM_NODE>
-            <DIAGRAM_NODE>
-               <ID>7b10ff10-ada5-11e7-2958-9ac2f4fe88d4</ID>
+               <ID>0785b3c0-adb8-11e7-2958-9ac2f4fe88d4</ID>
                <NODE_TYPE>STATE</NODE_TYPE>
                <MINIMIZED>0</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
@@ -94,8 +30,8 @@
                </PROPERTIES>
                <LOCATION>
                   <POINT>
-                     <X>205</X>
-                     <Y>38</Y>
+                     <X>-27</X>
+                     <Y>53</Y>
                   </POINT>
                </LOCATION>
                <SIZE>
@@ -106,7 +42,71 @@
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
-               <ID>7b10ff11-ada5-11e7-2958-9ac2f4fe88d4</ID>
+               <ID>7f45c290-adba-11e7-2958-9ac2f4fe88d4</ID>
+               <NODE_TYPE>STATE</NODE_TYPE>
+               <MINIMIZED>0</MINIMIZED>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>StateName</NAME>
+                     <VALUE>Obsoleted</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>StateType</NAME>
+                     <VALUE>FinalState</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>SubStateOf</NAME>
+                     <VALUE></VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <LOCATION>
+                  <POINT>
+                     <X>159</X>
+                     <Y>242</Y>
+                  </POINT>
+               </LOCATION>
+               <SIZE>
+                  <POINT>
+                     <X>58</X>
+                     <Y>40</Y>
+                  </POINT>
+               </SIZE>
+            </DIAGRAM_NODE>
+            <DIAGRAM_NODE>
+               <ID>7cf8d740-adb8-11e7-2958-9ac2f4fe88d4</ID>
+               <NODE_TYPE>STATE</NODE_TYPE>
+               <MINIMIZED>0</MINIMIZED>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>StateName</NAME>
+                     <VALUE>Activated</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>StateType</NAME>
+                     <VALUE>State</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>SubStateOf</NAME>
+                     <VALUE></VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <LOCATION>
+                  <POINT>
+                     <X>-55</X>
+                     <Y>252</Y>
+                  </POINT>
+               </LOCATION>
+               <SIZE>
+                  <POINT>
+                     <X>104</X>
+                     <Y>41</Y>
+                  </POINT>
+               </SIZE>
+            </DIAGRAM_NODE>
+            <DIAGRAM_NODE>
+               <ID>21bb4c00-adb8-11e7-2958-9ac2f4fe88d4</ID>
                <NODE_TYPE>STATE</NODE_TYPE>
                <MINIMIZED>0</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
@@ -126,8 +126,8 @@
                </PROPERTIES>
                <LOCATION>
                   <POINT>
-                     <X>165</X>
-                     <Y>101</Y>
+                     <X>-66</X>
+                     <Y>132</Y>
                   </POINT>
                </LOCATION>
                <SIZE>
@@ -141,100 +141,8 @@
          <EDGES>
             <DIAGRAM_EDGE>
                <EDGE_TYPE>TRANSITION</EDGE_TYPE>
-               <SOURCE_NODE_ID>7b10ff12-ada5-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>7b112620-ada5-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>ToState</NAME>
-                     <VALUE>Obsolete</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>DisplayText</NAME>
-                     <VALUE>Obsolete</VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <CONTROL_POINTS>
-                  <POINT>
-                     <X>262</X>
-                     <Y>300</Y>
-                  </POINT>
-                  <POINT>
-                     <X>367</X>
-                     <Y>239</Y>
-                  </POINT>
-               </CONTROL_POINTS>
-            </DIAGRAM_EDGE>
-            <DIAGRAM_EDGE>
-               <EDGE_TYPE>TRANSITION</EDGE_TYPE>
-               <SOURCE_NODE_ID>7b10ff11-ada5-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>7b10ff12-ada5-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>ToState</NAME>
-                     <VALUE>Active</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>DisplayText</NAME>
-                     <VALUE>Action</VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <CONTROL_POINTS>
-                  <POINT>
-                     <X>183</X>
-                     <Y>132</Y>
-                  </POINT>
-                  <POINT>
-                     <X>77</X>
-                     <Y>220</Y>
-                  </POINT>
-                  <POINT>
-                     <X>195</X>
-                     <Y>300</Y>
-                  </POINT>
-               </CONTROL_POINTS>
-               <LABEL_LOCATION>
-                  <POINT>
-                     <X>8</X>
-                     <Y>0</Y>
-                  </POINT>
-               </LABEL_LOCATION>
-            </DIAGRAM_EDGE>
-            <DIAGRAM_EDGE>
-               <EDGE_TYPE>TRANSITION</EDGE_TYPE>
-               <SOURCE_NODE_ID>7b10ff12-ada5-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>7b10ff11-ada5-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>ToState</NAME>
-                     <VALUE>New</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>DisplayText</NAME>
-                     <VALUE>Reopen</VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <CONTROL_POINTS>
-                  <POINT>
-                     <X>224</X>
-                     <Y>300</Y>
-                  </POINT>
-                  <POINT>
-                     <X>220</X>
-                     <Y>241</Y>
-                  </POINT>
-                  <POINT>
-                     <X>209</X>
-                     <Y>132</Y>
-                  </POINT>
-               </CONTROL_POINTS>
-            </DIAGRAM_EDGE>
-            <DIAGRAM_EDGE>
-               <EDGE_TYPE>TRANSITION</EDGE_TYPE>
-               <SOURCE_NODE_ID>7b10ff10-ada5-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>7b10ff11-ada5-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
+               <SOURCE_NODE_ID>0785b3c0-adb8-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>21bb4c00-adb8-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -248,24 +156,96 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>205</X>
-                     <Y>47</Y>
+                     <X>-27</X>
+                     <Y>62</Y>
                   </POINT>
                   <POINT>
-                     <X>206</X>
-                     <Y>91</Y>
+                     <X>-25</X>
+                     <Y>122</Y>
                   </POINT>
                </CONTROL_POINTS>
             </DIAGRAM_EDGE>
             <DIAGRAM_EDGE>
                <EDGE_TYPE>TRANSITION</EDGE_TYPE>
-               <SOURCE_NODE_ID>7b10ff11-ada5-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>7b112620-ada5-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
+               <SOURCE_NODE_ID>21bb4c00-adb8-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>7cf8d740-adb8-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
                      <NAME>ToState</NAME>
-                     <VALUE>Obsolete</VALUE>
+                     <VALUE>Activated</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>DisplayText</NAME>
+                     <VALUE>Active</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <CONTROL_POINTS>
+                  <POINT>
+                     <X>-31</X>
+                     <Y>163</Y>
+                  </POINT>
+                  <POINT>
+                     <X>-50</X>
+                     <Y>215</Y>
+                  </POINT>
+                  <POINT>
+                     <X>-29</X>
+                     <Y>242</Y>
+                  </POINT>
+               </CONTROL_POINTS>
+               <LABEL_LOCATION>
+                  <POINT>
+                     <X>9</X>
+                     <Y>-1</Y>
+                  </POINT>
+               </LABEL_LOCATION>
+            </DIAGRAM_EDGE>
+            <DIAGRAM_EDGE>
+               <EDGE_TYPE>TRANSITION</EDGE_TYPE>
+               <SOURCE_NODE_ID>7cf8d740-adb8-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>21bb4c00-adb8-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>ToState</NAME>
+                     <VALUE>New</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>DisplayText</NAME>
+                     <VALUE>Reopen</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <CONTROL_POINTS>
+                  <POINT>
+                     <X>-5</X>
+                     <Y>242</Y>
+                  </POINT>
+                  <POINT>
+                     <X>8</X>
+                     <Y>207</Y>
+                  </POINT>
+                  <POINT>
+                     <X>-14</X>
+                     <Y>163</Y>
+                  </POINT>
+               </CONTROL_POINTS>
+               <LABEL_LOCATION>
+                  <POINT>
+                     <X>6</X>
+                     <Y>7</Y>
+                  </POINT>
+               </LABEL_LOCATION>
+            </DIAGRAM_EDGE>
+            <DIAGRAM_EDGE>
+               <EDGE_TYPE>TRANSITION</EDGE_TYPE>
+               <SOURCE_NODE_ID>7cf8d740-adb8-11e7-2958-9ac2f4fe88d4</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>7f45c290-adba-11e7-2958-9ac2f4fe88d4</TARGET_NODE_ID>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>ToState</NAME>
+                     <VALUE>Obsoleted</VALUE>
                   </PROPERTY>
                   <PROPERTY>
                      <NAME>DisplayText</NAME>
@@ -274,12 +254,12 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>241</X>
-                     <Y>132</Y>
+                     <X>39</X>
+                     <Y>262</Y>
                   </POINT>
                   <POINT>
-                     <X>367</X>
-                     <Y>208</Y>
+                     <X>159</X>
+                     <Y>262</Y>
                   </POINT>
                </CONTROL_POINTS>
             </DIAGRAM_EDGE>
@@ -422,50 +402,31 @@
          </TRANSITIONS>
       </STATE>
       <STATE>
-         <CODE_GENERATION_PROPERTIES>
-            <CODE_GENERATION_PROPERTIES>
-               <CONSTANT_NAME>NEW_STATE</CONSTANT_NAME>
-            </CODE_GENERATION_PROPERTIES>
-         </CODE_GENERATION_PROPERTIES>
          <NAME>New</NAME>
          <STATE_TYPE>STATE</STATE_TYPE>
          <TRANSITIONS>
             <TRANSITION>
-               <EVENT>Action</EVENT>
-               <TO_STATE>Active</TO_STATE>
-            </TRANSITION>
-            <TRANSITION>
-               <EVENT>Obsolete</EVENT>
-               <TO_STATE>Obsolete</TO_STATE>
+               <EVENT>Active</EVENT>
+               <TO_STATE>Activated</TO_STATE>
             </TRANSITION>
          </TRANSITIONS>
       </STATE>
       <STATE>
-         <CODE_GENERATION_PROPERTIES>
-            <CODE_GENERATION_PROPERTIES>
-               <CONSTANT_NAME>ACTIVE_STATE</CONSTANT_NAME>
-            </CODE_GENERATION_PROPERTIES>
-         </CODE_GENERATION_PROPERTIES>
-         <NAME>Active</NAME>
+         <NAME>Activated</NAME>
          <STATE_TYPE>STATE</STATE_TYPE>
          <TRANSITIONS>
-            <TRANSITION>
-               <EVENT>Obsolete</EVENT>
-               <TO_STATE>Obsolete</TO_STATE>
-            </TRANSITION>
             <TRANSITION>
                <EVENT>Reopen</EVENT>
                <TO_STATE>New</TO_STATE>
             </TRANSITION>
+            <TRANSITION>
+               <EVENT>Obsolete</EVENT>
+               <TO_STATE>Obsoleted</TO_STATE>
+            </TRANSITION>
          </TRANSITIONS>
       </STATE>
       <STATE>
-         <CODE_GENERATION_PROPERTIES>
-            <CODE_GENERATION_PROPERTIES>
-               <CONSTANT_NAME>OBSOLETE_STATE</CONSTANT_NAME>
-            </CODE_GENERATION_PROPERTIES>
-         </CODE_GENERATION_PROPERTIES>
-         <NAME>Obsolete</NAME>
+         <NAME>Obsoleted</NAME>
          <STATE_TYPE>FINAL_STATE</STATE_TYPE>
       </STATE>
    </STATES>

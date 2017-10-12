@@ -119,29 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_cTabManager.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 26</value>
+    <value>156, 41</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Name" xml:space="preserve">
     <value>_cTabManager</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Type" xml:space="preserve">
     <value>Ifs.Fnd.ApplicationForms.cTabManager, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="picTab.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="picTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 42</value>
-  </data>
-  <data name="picTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 72, 5, 5</value>
-  </data>
-  <data name="picTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 302</value>
-  </data>
-  <data name="picTab.TabSetup" xml:space="preserve">
-    <value>{Name=Source Mapping;Label=Source Mapping;Form=tbwSourceMap}{Name=Method List;Label=Method List;Form=tbwMethodList}</value>
   </data>
   <data name="&gt;&gt;picTab.Name" xml:space="preserve">
     <value>picTab</value>
@@ -162,7 +146,7 @@
     <value>Active</value>
   </data>
   <data name="cmdReOpen.Caption" xml:space="preserve">
-    <value>ReOpen</value>
+    <value>Reopen</value>
   </data>
   <data name="cmdCreateRevision.Caption" xml:space="preserve">
     <value>Create Revision</value>
@@ -185,10 +169,62 @@
   <data name="&gt;&gt;contextMenu.Type" xml:space="preserve">
     <value>Ifs.Fnd.Windows.Forms.FndContextMenuStrip, Ifs.Fnd.Windows.Forms.CommonControls, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
   </data>
+  <data name="dfnRevision.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 21</value>
+  </data>
+  <data name="dfnRevision.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dfnRevision.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dfnRevision.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;dfnRevision.Name" xml:space="preserve">
+    <value>dfnRevision</value>
+  </data>
+  <data name="&gt;&gt;dfnRevision.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cDataField, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;dfnRevision.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dfnRevision.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="labelRevision.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRevision.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 5</value>
+  </data>
+  <data name="labelRevision.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="labelRevision.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelRevision.Text" xml:space="preserve">
+    <value>Revision:</value>
+  </data>
+  <data name="&gt;&gt;labelRevision.Name" xml:space="preserve">
+    <value>labelRevision</value>
+  </data>
+  <data name="&gt;&gt;labelRevision.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cBackgroundText, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;labelRevision.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelRevision.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <data name="dfsDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>244, 21</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dfsDescription.MaxLength" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
@@ -208,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dfsDescription.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="labelDescription.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -235,7 +271,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelDescription.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="dfsCreatedBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 71</value>
@@ -259,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dfsCreatedBy.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="labelCreatedBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelCreatedBy.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="dfdCreatedDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 71</value>
@@ -307,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dfdCreatedDate.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="labelCreatedDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -334,7 +370,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelCreatedDate.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="dfsState.Location" type="System.Drawing.Point, System.Drawing">
     <value>442, 21</value>
@@ -358,7 +394,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dfsState.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="labelState.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -385,7 +421,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelState.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="dfsProfileId.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 71</value>
@@ -406,7 +442,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dfsProfileId.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="labelProfileId.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,108 +469,57 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelProfileId.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="dfnRevision.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 20</value>
-  </data>
-  <data name="dfnRevision.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 21</value>
-  </data>
-  <data name="dfnRevision.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="dfnRevision.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;dfnRevision.Name" xml:space="preserve">
-    <value>dfnRevision</value>
-  </data>
-  <data name="&gt;&gt;dfnRevision.Type" xml:space="preserve">
-    <value>Ifs.Fnd.ApplicationForms.cDataField, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
-  </data>
-  <data name="&gt;&gt;dfnRevision.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dfnRevision.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="labelRevision.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelRevision.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 4</value>
-  </data>
-  <data name="labelRevision.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="labelRevision.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="labelRevision.Text" xml:space="preserve">
-    <value>Revision:</value>
-  </data>
-  <data name="&gt;&gt;labelRevision.Name" xml:space="preserve">
-    <value>labelRevision</value>
-  </data>
-  <data name="&gt;&gt;labelRevision.Type" xml:space="preserve">
-    <value>Ifs.Fnd.ApplicationForms.cBackgroundText, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
-  </data>
-  <data name="&gt;&gt;labelRevision.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelRevision.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="dfsTemplateId.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ecmbTemplateId.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 21</value>
   </data>
-  <data name="dfsTemplateId.MaxLength" type="System.Int32, mscorlib">
+  <data name="ecmbTemplateId.MaxLength" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="dfsTemplateId.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 21</value>
+  <data name="ecmbTemplateId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 21</value>
   </data>
-  <data name="dfsTemplateId.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="ecmbTemplateId.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="&gt;&gt;dfsTemplateId.Name" xml:space="preserve">
-    <value>dfsTemplateId</value>
+  <data name="&gt;&gt;ecmbTemplateId.Name" xml:space="preserve">
+    <value>ecmbTemplateId</value>
   </data>
-  <data name="&gt;&gt;dfsTemplateId.Type" xml:space="preserve">
-    <value>Ifs.Fnd.ApplicationForms.cDataField, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  <data name="&gt;&gt;ecmbTemplateId.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cRecSelComboBox, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
   </data>
-  <data name="&gt;&gt;dfsTemplateId.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ecmbTemplateId.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;dfsTemplateId.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ecmbTemplateId.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="labelTemplateId.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelTemplateId1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelTemplateId.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="labelTemplateId1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 5</value>
   </data>
-  <data name="labelTemplateId.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelTemplateId1.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
   </data>
-  <data name="labelTemplateId.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="labelTemplateId1.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="labelTemplateId.Text" xml:space="preserve">
+  <data name="labelTemplateId1.Text" xml:space="preserve">
     <value>Template Id:</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId.Name" xml:space="preserve">
-    <value>labelTemplateId</value>
+  <data name="&gt;&gt;labelTemplateId1.Name" xml:space="preserve">
+    <value>labelTemplateId1</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId1.Type" xml:space="preserve">
     <value>Ifs.Fnd.ApplicationForms.cBackgroundText, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelTemplateId.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTemplateId1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -544,7 +529,7 @@
     <value>False</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>751, 344</value>
+    <value>622, 344</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>MDM Basic Data</value>

@@ -35,27 +35,35 @@
   <ItemGroup>
     <Reference Include="Ifs.Fnd.ApplicationForms">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.ApplicationForms.dll</HintPath>
     </Reference>
     <Reference Include="Ifs.Fnd.Core">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.Core.dll</HintPath>
     </Reference>
     <Reference Include="Ifs.Fnd.Explorer.Interfaces">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.Explorer.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Ifs.Fnd.Feature">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.Feature.dll</HintPath>
     </Reference>
     <Reference Include="Ifs.Fnd.Windows.Forms.CommonControls">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.Windows.Forms.CommonControls.dll</HintPath>
     </Reference>
     <Reference Include="Ifs.Fnd.Windows.Forms.Interfaces">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\Ifs.Fnd.Windows.Forms.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="PPJ.Runtime.4">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\PPJ.Runtime.4.dll</HintPath>
     </Reference>
     <Reference Include="PPJ.Runtime.Vis.4">
       <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\DeployFiles\PPJ.Runtime.Vis.4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,9 +82,30 @@
     <Compile Include="Forms\frmMdmBasicData.Designer.cs">
       <DependentUpon>frmMdmBasicData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\tbwMethodList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\tbwMethodList.Designer.cs">
+      <DependentUpon>tbwMethodList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\tbwSourceMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\tbwSourceMap.Designer.cs">
+      <DependentUpon>tbwSourceMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmMdmBasicData.resx">
       <DependentUpon>frmMdmBasicData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\tbwMethodList.resx">
+      <DependentUpon>tbwMethodList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\tbwSourceMap.resx">
+      <DependentUpon>tbwSourceMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,6 +117,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Ifs.Application.MdmBasicData.dll" />
+    <Content Include="bin\Debug\Ifs.Application.MdmBasicData.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

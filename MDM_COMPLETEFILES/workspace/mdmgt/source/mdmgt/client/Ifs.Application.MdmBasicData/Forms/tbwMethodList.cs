@@ -32,7 +32,7 @@ namespace Ifs.Application.MdmBasicData
 
     /// <summary>
     /// </summary>
-    public partial class frmMdmBasicData : cMasterDetailTabFormWindow
+    public partial class tbwMethodList : cTableWindow
     {
         #region Member Variables
 
@@ -43,7 +43,7 @@ namespace Ifs.Application.MdmBasicData
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        public frmMdmBasicData()
+        public tbwMethodList()
         {
             // This call is required by the Windows Form Designer.
             InitializeComponent();
@@ -59,59 +59,12 @@ namespace Ifs.Application.MdmBasicData
         /// <param name="handle"></param>
         /// <returns></returns>
         [DebuggerStepThrough]
-        public new static frmMdmBasicData FromHandle(SalWindowHandle handle)
+        public new static tbwMethodList FromHandle(SalWindowHandle handle)
         {
-            return ((frmMdmBasicData)SalWindow.FromHandle(handle, typeof(frmMdmBasicData)));
+            return ((tbwMethodList)SalWindow.FromHandle(handle, typeof(tbwMethodList)));
         }
 
         #endregion
-
-        private void picTab_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelStatus_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dfsStatus_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmdActive_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmdActive_Inquire(object sender, Fnd.Windows.Forms.FndCommandInquireEventArgs e)
-        {
-            ((Ifs.Fnd.Windows.Forms.FndCommand)sender).Enabled = true;
-        }
-
-        private void cmdReOpen_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmdReOpen_Inquire(object sender, Fnd.Windows.Forms.FndCommandInquireEventArgs e)
-        {
-            ((Ifs.Fnd.Windows.Forms.FndCommand)sender).Enabled = true;
-        }
-
-        private void cmdCreateRevision_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmdCreateRevision_Inquire(object sender, Fnd.Windows.Forms.FndCommandInquireEventArgs e)
-        {
-            ((Ifs.Fnd.Windows.Forms.FndCommand)sender).Enabled = true;
-        }
-
-
 
         #region Properties
 

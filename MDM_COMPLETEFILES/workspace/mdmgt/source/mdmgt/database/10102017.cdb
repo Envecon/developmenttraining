@@ -12,6 +12,8 @@
 -----------------------------------------------------------------------------
 
 SET SERVEROUTPUT ON
+
+
 -----------------------------------------------------------------------------
 --
 --  Logical unit: MdmBasicDataHeader
@@ -82,6 +84,213 @@ BEGIN
    Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
 END;
 /
+
+
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmSourceMap
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'COLUMN_NAME', 'VARCHAR2(2000)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DESCRIPTION', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'DATA_TYPE', 'VARCHAR2(10)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'LENGTH', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DEFAULT_VALUE', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'FLAGS', 'VARCHAR2(10)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'NOTE_TEXT', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'DB_CLIENT_VALUES', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'MANDATORY', 'VARCHAR2(5)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_PK';
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION');
+   Database_SYS.Set_Table_Column(columns_, 'COLUMN_NAME');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_RK';
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmMethodList
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'MDM_METHOD_LIST_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'EXECUTE_SEQ', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'VIEW_NAME', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'METHOD_NAME', 'VARCHAR2(100)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ON_NEW', 'VARCHAR2(5)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ON_MODIFY', 'VARCHAR2(5)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_METHOD_LIST_PK';
+   table_name_ VARCHAR2(30) := 'MDM_METHOD_LIST_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'EXECUTE_SEQ');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_METHOD_LIST_RK';
+   table_name_ VARCHAR2(30) := 'MDM_METHOD_LIST_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHeader
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'MDM_REQUEST_HEADER_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REQUEST_NO', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DESCRIPTION', 'VARCHAR2(50)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REQUESTED_BY', 'VARCHAR2(10)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REQUESTED_DATE', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'APPROVAL_REQUIRED', 'VARCHAR2(5)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'APPROVAL_REJECTED', 'VARCHAR2(5)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_REQUEST_HEADER_PK';
+   table_name_ VARCHAR2(30) := 'MDM_REQUEST_HEADER_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID');
+   Database_SYS.Set_Table_Column(columns_, 'REQUEST_NO');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_REQUEST_HEADER_RK';
+   table_name_ VARCHAR2(30) := 'MDM_REQUEST_HEADER_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
 
 
 

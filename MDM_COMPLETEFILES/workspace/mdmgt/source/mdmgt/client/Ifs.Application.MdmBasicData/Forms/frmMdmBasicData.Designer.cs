@@ -78,6 +78,7 @@ namespace Ifs.Application.MdmBasicData
             // picTab
             // 
             resources.ApplyResources(this.picTab, "picTab");
+            this.picTab.SelectedIndex = 1;
             this.picTab.Load += new System.EventHandler(this.picTab_Load);
             // 
             // commandManager

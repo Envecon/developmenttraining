@@ -84,13 +84,11 @@ BEGIN
 END;
 /
 
-
-
---
 DECLARE
   sequence_name_ VARCHAR2(30) := 'MDM_REQUEST_NO_SEQ';
 BEGIN
    Database_SYS.Create_Sequence(sequence_name_, 'INCREMENT BY 1 START WITH 1 NOCACHE', TRUE);
 END;
+/
 
 SET SERVEROUTPUT OFF

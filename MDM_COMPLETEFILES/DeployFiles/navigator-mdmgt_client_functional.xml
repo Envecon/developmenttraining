@@ -17,6 +17,14 @@
       <ParentKey>MDM_BASI_DATA</ParentKey>
       <Ordinal>100</Ordinal>
     </FndNavigatorEntry>
+    <FndNavigatorEntry>
+      <Key>MDM_BASI_DATA.MDM_REQUST</Key>
+      <Name>MDM REquest</Name>
+      <Url>ifsapf:frmMdmRequestHeader</Url>
+      <Type>FormWindow</Type>
+      <ParentKey>MDM_BASI_DATA</ParentKey>
+      <Ordinal>120</Ordinal>
+    </FndNavigatorEntry>
   </FndNavigatorEntries>
   <FndShortcutItems />
 </FndNavigator>

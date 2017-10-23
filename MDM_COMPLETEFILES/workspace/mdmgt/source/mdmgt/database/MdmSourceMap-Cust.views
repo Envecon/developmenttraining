@@ -13,6 +13,31 @@ layer Cust;
 
 -------------------- PUBLIC VIEW DEFINITIONS --------------------------------
 
+VIEW Mdm_General IS
+   Prompt     = 'Mdm Source Map'
+SELECT
+       s.template_id                    template_id,
+       s.revision                       revision,
+       r.request_no                      request_no,
+       s.column_name                    column_name,
+       s.description                    description,
+       s.data_type                      data_type,
+       s.length                         length,
+       s.default_value                  default_value,
+       s.flags                          flags,
+       s.note_text                      note_text,
+       s.db_client_values               db_client_values,
+       s.mandatory                      mandatory,
+       s.rowkey                         objkey,
+       to_char(s.rowversion,'YYYYMMDDHH24MISS') objversion,
+       s.rowid                          objid
+       
+FROM   mdm_source_map_tab s,mdm_request_header_tab r
+where (s.default_value is not null
+or s.mandatory = 'TRUE') AND 
+s.template_id=r.template_id
+AND
+s.revision=r.revision;
 
 -------------------- PRIVATE VIEW DEFINITIONS -------------------------------
 

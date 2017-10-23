@@ -6,35 +6,7 @@
          <DIAGRAM_TYPE>ENTITY_OVERVIEW</DIAGRAM_TYPE>
          <NODES>
             <DIAGRAM_NODE>
-               <ID>b8a07280-adb8-11e7-3ff7-ff9994ff23f2</ID>
-               <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>EntityName</NAME>
-                     <VALUE>MdmBasicDataHeader</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>ShowMethods</NAME>
-                     <VALUE>false</VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <LOCATION>
-                  <POINT>
-                     <X>366</X>
-                     <Y>53</Y>
-                  </POINT>
-               </LOCATION>
-               <SIZE>
-                  <POINT>
-                     <X>209</X>
-                     <Y>171</Y>
-                  </POINT>
-               </SIZE>
-            </DIAGRAM_NODE>
-            <DIAGRAM_NODE>
-               <ID>3f6431b0-adbb-11e7-3ff7-ff9994ff23f2</ID>
+               <ID>52bedd90-afd3-11e7-3db8-86817d10ed72</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
                <MINIMIZED>0</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
@@ -50,8 +22,8 @@
                </PROPERTIES>
                <LOCATION>
                   <POINT>
-                     <X>750</X>
-                     <Y>41</Y>
+                     <X>60</X>
+                     <Y>21</Y>
                   </POINT>
                </LOCATION>
                <SIZE>
@@ -62,14 +34,14 @@
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
-               <ID>815e85a0-ae58-11e7-2a5d-fbd0814d61e6</ID>
+               <ID>52d3ec30-afd3-11e7-3db8-86817d10ed72</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
                <MINIMIZED>0</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
                      <NAME>EntityName</NAME>
-                     <VALUE>MdmRequestHeader</VALUE>
+                     <VALUE>MdmBasicDataHeader</VALUE>
                   </PROPERTY>
                   <PROPERTY>
                      <NAME>ShowMethods</NAME>
@@ -78,14 +50,42 @@
                </PROPERTIES>
                <LOCATION>
                   <POINT>
-                     <X>23</X>
-                     <Y>46</Y>
+                     <X>240</X>
+                     <Y>334</Y>
                   </POINT>
                </LOCATION>
                <SIZE>
                   <POINT>
-                     <X>182</X>
-                     <Y>190</Y>
+                     <X>209</X>
+                     <Y>171</Y>
+                  </POINT>
+               </SIZE>
+            </DIAGRAM_NODE>
+            <DIAGRAM_NODE>
+               <ID>52c5bb60-afd3-11e7-3db8-86817d10ed72</ID>
+               <NODE_TYPE>ENTITY</NODE_TYPE>
+               <MINIMIZED>0</MINIMIZED>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>EntityName</NAME>
+                     <VALUE>MdmMethodList</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>ShowMethods</NAME>
+                     <VALUE>false</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <LOCATION>
+                  <POINT>
+                     <X>455</X>
+                     <Y>41</Y>
+                  </POINT>
+               </LOCATION>
+               <SIZE>
+                  <POINT>
+                     <X>157</X>
+                     <Y>171</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
@@ -93,8 +93,42 @@
          <EDGES>
             <DIAGRAM_EDGE>
                <EDGE_TYPE>ASSOCIATION</EDGE_TYPE>
-               <SOURCE_NODE_ID>3f6431b0-adbb-11e7-3ff7-ff9994ff23f2</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>b8a07280-adb8-11e7-3ff7-ff9994ff23f2</TARGET_NODE_ID>
+               <SOURCE_NODE_ID>52c5bb60-afd3-11e7-3db8-86817d10ed72</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>52d3ec30-afd3-11e7-3db8-86817d10ed72</TARGET_NODE_ID>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>AssociationName</NAME>
+                     <VALUE>MethodLists</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>AssociationTarget</NAME>
+                     <VALUE>MdmBasicDataHeader</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>AssociationParent</NAME>
+                     <VALUE>MdmMethodList</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>IsParent</NAME>
+                     <VALUE>true</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <CONTROL_POINTS>
+                  <POINT>
+                     <X>477</X>
+                     <Y>211</Y>
+                  </POINT>
+                  <POINT>
+                     <X>398</X>
+                     <Y>333</Y>
+                  </POINT>
+               </CONTROL_POINTS>
+            </DIAGRAM_EDGE>
+            <DIAGRAM_EDGE>
+               <EDGE_TYPE>ASSOCIATION</EDGE_TYPE>
+               <SOURCE_NODE_ID>52bedd90-afd3-11e7-3db8-86817d10ed72</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>52d3ec30-afd3-11e7-3db8-86817d10ed72</TARGET_NODE_ID>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -116,60 +150,14 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>749</X>
-                     <Y>157</Y>
+                     <X>218</X>
+                     <Y>250</Y>
                   </POINT>
                   <POINT>
-                     <X>574</X>
-                     <Y>144</Y>
+                     <X>279</X>
+                     <Y>333</Y>
                   </POINT>
                </CONTROL_POINTS>
-               <LABEL_LOCATION>
-                  <POINT>
-                     <X>-14</X>
-                     <Y>18</Y>
-                  </POINT>
-               </LABEL_LOCATION>
-            </DIAGRAM_EDGE>
-            <DIAGRAM_EDGE>
-               <EDGE_TYPE>ASSOCIATION</EDGE_TYPE>
-               <SOURCE_NODE_ID>815e85a0-ae58-11e7-2a5d-fbd0814d61e6</SOURCE_NODE_ID>
-               <TARGET_NODE_ID>b8a07280-adb8-11e7-3ff7-ff9994ff23f2</TARGET_NODE_ID>
-               <IS_MERGED>0</IS_MERGED>
-               <PROPERTIES>
-                  <PROPERTY>
-                     <NAME>AssociationName</NAME>
-                     <VALUE>RequestHeaders</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>AssociationTarget</NAME>
-                     <VALUE>MdmBasicDataHeader</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>AssociationParent</NAME>
-                     <VALUE>MdmRequestHeader</VALUE>
-                  </PROPERTY>
-                  <PROPERTY>
-                     <NAME>IsParent</NAME>
-                     <VALUE>true</VALUE>
-                  </PROPERTY>
-               </PROPERTIES>
-               <CONTROL_POINTS>
-                  <POINT>
-                     <X>204</X>
-                     <Y>139</Y>
-                  </POINT>
-                  <POINT>
-                     <X>365</X>
-                     <Y>138</Y>
-                  </POINT>
-               </CONTROL_POINTS>
-               <LABEL_LOCATION>
-                  <POINT>
-                     <X>-48</X>
-                     <Y>20</Y>
-                  </POINT>
-               </LABEL_LOCATION>
             </DIAGRAM_EDGE>
          </EDGES>
       </DIAGRAM>

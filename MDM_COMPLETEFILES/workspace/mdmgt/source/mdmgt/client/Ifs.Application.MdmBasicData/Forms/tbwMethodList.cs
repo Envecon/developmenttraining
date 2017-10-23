@@ -26,12 +26,17 @@ using System.Diagnostics;
 using Ifs.Fnd.ApplicationForms;
 using PPJ.Runtime;
 using PPJ.Runtime.Windows;
+using Ifs.Fnd.Windows.Forms;
+using PPJ.Runtime.Sql;
 
 namespace Ifs.Application.MdmBasicData
 {
 
     /// <summary>
     /// </summary>
+    ///
+    [FndWindowRegistration("MDM_METHOD_LIST", "MdmMethodList")]
+    [FndDynamicTabPage("frmMdmBasicData.picTab", "METHODLIST", "tbwMethodList", "TAB_NAME_MethodList", 0)]
     public partial class tbwMethodList : cTableWindow
     {
         #region Member Variables
@@ -72,11 +77,63 @@ namespace Ifs.Application.MdmBasicData
 
         #region Methods
 
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public new SalNumber DataSourceSaveMarkCommitted()
+        {
+            #region Local Variables
+            SalString sFormName = "";
+            #endregion
+
+            #region Actions
+            using (new SalContext(this))
+            {
+                ((cTableManager)this).DataSourceSaveMarkCommitted();
+                ((cTableManager)this).DataSourceRefresh(Ifs.Fnd.ApplicationForms.Const.METHOD_Execute);
+            }
+
+            return 0;
+            #endregion
+        }
+
         #endregion
 
         #region Overrides
-
+        public override SalNumber vrtDataSourceSaveMarkCommitted()
+        {
+            return this.DataSourceSaveMarkCommitted();
+        }
         #endregion
+
+        private void tableWindow_colsMethodName_WindowActions(object sender, WindowActionsEventArgs e)
+        {
+            switch (e.ActionType)
+            {
+                case Ifs.Fnd.ApplicationForms.Const.PM_DataItemEditor:
+                    if (colsViewName != null)
+                    {
+                        colsMethodName.Text = colsViewName.Text + "_API";
+                    }
+                    break;
+            }
+        }
+        private void Method_ON_PM_DataItemSave(object sender, WindowActionsEventArgs e)
+        {
+            SalString sResult = "";
+            SalString sObjid = "";
+            SignatureHints hints = SignatureHints.NewContext();
+            // hints.Add("Mdm_method_list_API.Find_Method_Name", System.Data.ParameterDirection.Input, System.Data.ParameterDirection.Input);
+            //DbPLSQLTransaction(cSessionManager.c_hSql, "&AO.Mdm_method_list_API.Find_Method_Name( :hWndForm.tbwMethodList.colsViewName, :hWndForm.tbwMethodList.colsMethodName)");
+            hints.Add("Mdm_method_list_API.Find_Method_Name", System.Data.ParameterDirection.Input, System.Data.ParameterDirection.Input);
+            DbPLSQLBlock(cSessionManager.c_hSql, ":i_hWndFrame.tbwMethodList.sObjid := &AO.Mdm_method_list_API.Find_Method_Name (:hWndForm.tbwMethodList.colsViewName, :hWndForm.tbwMethodList.colsMethodName)");
+            sResult = sObjid;
+        }
+
+        
+
+
 
         #region Window Actions
 

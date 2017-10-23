@@ -130,7 +130,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;__colObjid.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;__colObjversion.Name" xml:space="preserve">
     <value>__colObjversion</value>
@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;__colObjversion.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>2</value>
   </data>
   <data name="colsColumnName.Title" xml:space="preserve">
     <value>Column Name</value>
@@ -157,7 +157,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsColumnName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="colsDataType.Title" xml:space="preserve">
     <value>Data Type</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsDataType.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="colsDescription.Title" xml:space="preserve">
     <value>Description</value>
@@ -187,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsDescription.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="colsFlags.Title" xml:space="preserve">
     <value>Flags</value>
@@ -206,7 +206,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsFlags.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="colnLength.Title" xml:space="preserve">
     <value>Length</value>
@@ -224,7 +224,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colnLength.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="colsDefaultValue.Title" xml:space="preserve">
     <value>Default Value</value>
@@ -239,7 +239,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsDefaultValue.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="colsDbClientValues.Title" xml:space="preserve">
     <value>IID Values</value>
@@ -254,7 +254,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsDbClientValues.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="colsNoteText.Title" xml:space="preserve">
     <value>Notes</value>
@@ -269,7 +269,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsNoteText.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>10</value>
   </data>
   <data name="colMandatory.Title" xml:space="preserve">
     <value>Mandatory</value>
@@ -299,7 +299,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsTemplateId.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="colnRevision.Title" xml:space="preserve">
     <value>Revision</value>
@@ -314,7 +314,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colnRevision.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>13</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

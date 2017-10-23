@@ -32,6 +32,9 @@ namespace Ifs.Application.MdmBasicData
 
     /// <summary>
     /// </summary>
+
+    [FndWindowRegistration("MDM_SOURCE_MAP", "MdmSourceMap")]
+    [FndDynamicTabPage("frmMdmBasicData.picTab", "SOURCEMAP", "tbwSourceMap", "TAB_NAME_SourceMap", 0)]
     public partial class tbwSourceMap : cTableWindow
     {
         #region Member Variables
@@ -72,9 +75,34 @@ namespace Ifs.Application.MdmBasicData
 
         #region Methods
 
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public new SalNumber DataSourceSaveMarkCommitted()
+        {
+            #region Local Variables
+            SalString sFormName = "";
+            #endregion
+
+            #region Actions
+            using (new SalContext(this))
+            {
+                ((cTableManager)this).DataSourceSaveMarkCommitted();
+                ((cTableManager)this).DataSourceRefresh(Ifs.Fnd.ApplicationForms.Const.METHOD_Execute);
+            }
+
+            return 0;
+            #endregion
+        }
+
         #endregion
 
         #region Overrides
+
+        public override SalNumber vrtDataSourceSaveMarkCommitted()
+        {
+            return this.DataSourceSaveMarkCommitted();
+        }
 
         #endregion
 

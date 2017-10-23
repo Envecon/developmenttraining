@@ -66,7 +66,7 @@ namespace Ifs.Application.MdmBasicData
             this.tsMenuItemCreateRevision = new Ifs.Fnd.Windows.Forms.FndToolStripMenuItem(this.components);
             this.dfsProfileId = new Ifs.Fnd.ApplicationForms.cDataField();
             this.labelProfileId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
-            this.ecmbTemplateId = new Ifs.Fnd.ApplicationForms.cRecSelComboBox();
+            this.ecmbTemplateId = new Ifs.Fnd.ApplicationForms.cRecListDataField();
             this.labelTemplateId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,7 @@ namespace Ifs.Application.MdmBasicData
             // picTab
             // 
             resources.ApplyResources(this.picTab, "picTab");
+            this.picTab.SelectedIndex = 1;
             // 
             // commandManager
             // 
@@ -96,6 +97,7 @@ namespace Ifs.Application.MdmBasicData
             this.dfnRevision.NamedProperties.Put("FieldFlags", "291");
             this.dfnRevision.NamedProperties.Put("Format", "");
             this.dfnRevision.NamedProperties.Put("LovReference", "");
+            this.dfnRevision.NamedProperties.Put("ParentName", "ecmbTemplateId");
             this.dfnRevision.NamedProperties.Put("SqlColumn", "REVISION");
             // 
             // labelRevision
@@ -110,6 +112,7 @@ namespace Ifs.Application.MdmBasicData
             this.dfsDescription.NamedProperties.Put("EnumerateMethod", "");
             this.dfsDescription.NamedProperties.Put("FieldFlags", "295");
             this.dfsDescription.NamedProperties.Put("LovReference", "");
+            this.dfsDescription.NamedProperties.Put("ParentName", "ecmbTemplateId");
             this.dfsDescription.NamedProperties.Put("SqlColumn", "DESCRIPTION");
             // 
             // labelDescription
@@ -154,6 +157,7 @@ namespace Ifs.Application.MdmBasicData
             this.dfsState.NamedProperties.Put("EnumerateMethod", "");
             this.dfsState.NamedProperties.Put("FieldFlags", "288");
             this.dfsState.NamedProperties.Put("LovReference", "");
+            this.dfsState.NamedProperties.Put("ParentName", "ecmbTemplateId");
             this.dfsState.NamedProperties.Put("SqlColumn", "STATE");
             // 
             // labelState
@@ -228,14 +232,14 @@ namespace Ifs.Application.MdmBasicData
             // 
             // ecmbTemplateId
             // 
-            this.ecmbTemplateId.FormattingEnabled = true;
+            this.ecmbTemplateId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             resources.ApplyResources(this.ecmbTemplateId, "ecmbTemplateId");
             this.ecmbTemplateId.Name = "ecmbTemplateId";
             this.ecmbTemplateId.NamedProperties.Put("EnumerateMethod", "");
             this.ecmbTemplateId.NamedProperties.Put("FieldFlags", "162");
-            this.ecmbTemplateId.NamedProperties.Put("Format", "9");
             this.ecmbTemplateId.NamedProperties.Put("LovReference", "");
             this.ecmbTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
+            this.ecmbTemplateId.WindowActions += new PPJ.Runtime.Windows.WindowActionsEventHandler(this.ecmbTemplateId_WindowActions);
             // 
             // labelTemplateId
             // 
@@ -324,7 +328,7 @@ namespace Ifs.Application.MdmBasicData
         protected Fnd.Windows.Forms.FndToolStripMenuItem tsMenuItemCreateRevision;
         protected cDataField dfsProfileId;
         protected cBackgroundText labelProfileId;
-        protected cRecSelComboBox ecmbTemplateId;
+        protected cRecListDataField ecmbTemplateId;
         protected cBackgroundText labelTemplateId;
     }
 }

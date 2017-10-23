@@ -142,7 +142,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;__colObjversion.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="colnExecuteSeq.Title" xml:space="preserve">
     <value>Execute Seq</value>
@@ -159,21 +159,6 @@
   <data name="&gt;&gt;colnExecuteSeq.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="colsMethodName.Title" xml:space="preserve">
-    <value>Method Name</value>
-  </data>
-  <data name="&gt;&gt;colsMethodName.Name" xml:space="preserve">
-    <value>colsMethodName</value>
-  </data>
-  <data name="&gt;&gt;colsMethodName.Type" xml:space="preserve">
-    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
-  </data>
-  <data name="&gt;&gt;colsMethodName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;colsMethodName.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="colOnNew.Title" xml:space="preserve">
     <value>New</value>
   </data>
@@ -187,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colOnNew.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="colsViewName.Title" xml:space="preserve">
     <value>View Name</value>
@@ -202,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colsViewName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="colOnModify.Title" xml:space="preserve">
     <value>Modify</value>
@@ -217,7 +202,52 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;colOnModify.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
+  </data>
+  <data name="colsTemplateId.Title" xml:space="preserve">
+    <value>Template Id</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Name" xml:space="preserve">
+    <value>colsTemplateId</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="colnRevision.Title" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Name" xml:space="preserve">
+    <value>colnRevision</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="colsMethodName.Title" xml:space="preserve">
+    <value>Method Name</value>
+  </data>
+  <data name="&gt;&gt;colsMethodName.Name" xml:space="preserve">
+    <value>colsMethodName</value>
+  </data>
+  <data name="&gt;&gt;colsMethodName.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsMethodName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsMethodName.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -20,87 +20,6 @@ layer Cust;
 -------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
 
 @Override
-PROCEDURE Insert___ (
-   objid_      OUT    VARCHAR2,
-   objversion_ OUT    VARCHAR2,
-   newrec_     IN OUT mdm_basic_data_header_tab%ROWTYPE,
-   attr_       IN OUT VARCHAR2 )
-IS
-  --(+)BHBEIN(START) Added variable
-  new_access_person_      varchar2(2000);
-  new_access_group_       varchar2(2000);
-  --(+)BHBEIN(End)
-BEGIN
-   --Add pre-processing code here
-   super(objid_, objversion_, newrec_, attr_);
-   --Add post-processing code here
-  -- Cc_Approval_Process__(new_access_person_,new_access_group_,lu_name_,newrec_ );
-END Insert___;
-
-@Override
-PROCEDURE Update___ (
-   objid_      IN     VARCHAR2,
-   oldrec_     IN     mdm_basic_data_header_tab%ROWTYPE,
-   newrec_     IN OUT mdm_basic_data_header_tab%ROWTYPE,
-   attr_       IN OUT VARCHAR2,
-   objversion_ IN OUT VARCHAR2,
-   by_keys_    IN     BOOLEAN DEFAULT FALSE )
-IS
-    --(+)BHBEIN(START) Added variable
-  new_access_person_      varchar2(2000);
-  new_access_group_       varchar2(2000);
-  --(+)BHBEIN(End)
-   CURSOR cGet_Prof_id(template_id_ VARCHAR2,revision_ NUMBER )
-IS
-   select v.profile_id from mdm_basic_data_header_tab v
-where v.template_id = template_id_
-and v.revision = revision_;
-prf_id_      VARCHAR2(50);
-
-info1_    varchar2(22000);
-count_   number;
-key_ref_ VARCHAR2(2000);
-cursor cget_count
-is 
-select count(*) from approval_routing
-where lu_name like lu_name_
-and key_ref like key_ref_;
-
-cursor cgetobj 
-is
-select * from approval_routing
-where lu_name like lu_name_
-and key_ref like key_ref_;
-
-BEGIN 
-   --(+)BHBEIN (START) on 10/10/2017
-   key_ref_ :=  'TEMPLATE_ID='||newrec_.template_id||'^';
-   open cget_count;
-  fetch cget_count into count_;
-  close cget_count;
-  Trace_SYS.Message('count_-->'||count_);
-   /*if count_ > 0  then 
-  for i in cgetobj loop
-  approval_routing_api.Remove__(info1_,i.objid,i.objversion,'DO');
-  end loop;
-  Cc_Approval_Process__(new_access_person_,new_access_group_,lu_name_,newrec_ );
-  else
-   OPEN cGet_Prof_id(newrec_.template_id,newrec_.revision);
-   FETCH cGet_Prof_id INTO prf_id_;
-   CLOSE cGet_Prof_id;
-   Trace_SYS.Message('prf_id_-->'||prf_id_);
-   Trace_SYS.Message('newrec_.profile_id -->'||newrec_.profile_id);
-   IF prf_id_ != newrec_.profile_id  THEN
-      Cc_Approval_Process__(new_access_person_,new_access_group_,lu_name_,newrec_ );
-   END IF;
-   end if;
-   --(+)BHBEIN(END)*/
-   --Add pre-processing code here
-   super(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
-   --Add post-processing code here
-END Update___;
-
-@Override
 PROCEDURE Prepare_Insert___ (
    attr_ IN OUT VARCHAR2 )
 IS
@@ -128,8 +47,8 @@ BEGIN
    OPEN c1 ;
     FETCH c1 INTO status__ ;
     CLOSE c1;
-    IF status__ = 'Active' THEN
-   Error_SYS.Record_General(lu_name_,'   :  You can''t Update any Data. Because of Status is '||status__);
+    IF status__ = 'Activated' THEN
+   Error_SYS.Record_General(lu_name_,'MODIFY:  You can''t Update any Data. Because of Status is '||status__);
     ELSE       
    --Add pre-processing code here
    super(info_, objid_, objversion_, attr_, action_);
@@ -351,7 +270,11 @@ IS
       
       key_value_from_        VARCHAR2(2000);   
       active_rev_           mdm_basic_data_header.revision%TYPE;
-   
+   CURSOR cGet_Count IS
+   select count(*) from mdm_method_list v
+where v.template_id  = template_id_
+and v.revision = old_revision_;
+vcounr_    NUMBER;
    BEGIN
    source_rec_ := Get_Object_By_Keys___(template_id_, old_revision_);
    Client_SYS.Clear_Attr(attr_);  
@@ -372,9 +295,84 @@ IS
       new_rev_tem_no_  := newrec_.TEMPLATE_ID;
       new_rev_tem_rev_     := newrec_.revision;
       dest_tem_revision_       := newrec_.revision;     
-     -- C_Copy_Template_Source___ ( dest_tem_action_, new_rev_tem_rev_, template_id_, old_revision_);
-      
+      OPEN cGet_Count;
+      FETCH cGet_Count INTO vcounr_;
+      CLOSE cGet_Count;
+      IF vcounr_ > 0 THEN 
+      C_Copy_Template_Source___ (  template_id_, old_revision_,new_rev_tem_rev_);
+      END IF;
    END C_Copy__;
+   
+   PROCEDURE C_Copy_Template_Source___ (
+   template_id_           IN  VARCHAR2,
+   old_revision_          IN  NUMBER,
+   new_revision_      IN  NUMBER)
+IS     
+    attr_      varchar2(32000);
+    info_    VARCHAR2(2000);
+    objid_     VARCHAR2(50);
+    objversion_ VARCHAR2(50);
+    action_      VARCHAR2(10) := 'DO';
+      CURSOR get_Map_info_ IS
+         select * from mdm_method_list v
+where v.template_id = template_id_
+and v.revision = old_revision_;
+      
+   BEGIN
+   for i in get_Map_info_ loop
+          Client_Sys.Clear_Attr(attr_);   
+          Client_Sys.Add_To_Attr('TEMPLATE_ID',i.template_id,attr_ );
+          Client_Sys.Add_To_Attr('REVISION',new_revision_,attr_ );
+          Client_Sys.Add_To_Attr('EXECUTE_SEQ',i.EXECUTE_SEQ,attr_ );
+          Client_Sys.Add_To_Attr('VIEW_NAME',i.VIEW_NAME,attr_ );
+          Client_Sys.Add_To_Attr('METHOD_NAME',i.METHOD_NAME,attr_ );
+          Client_Sys.Add_To_Attr('ON_NEW',I.ON_NEW,attr_ );
+          Client_Sys.Add_To_Attr('ON_MODIFY',i.ON_MODIFY,attr_ );
+   
+    Mdm_Method_List_Api.New__(info_,objid_ ,objversion_ ,attr_ ,action_ );
+    
+   end loop;
+   
+END C_Copy_Template_Source___;
+
+@UncheckedAccess
+FUNCTION Get_Status (
+   template_id_       IN VARCHAR2,
+   revision_ IN NUMBER) RETURN VARCHAR2
+IS
+   objstate_  mdm_basic_data_header_tab.rowstate%TYPE;
+   CURSOR status IS
+   SELECT v.rowstate
+   FROM   mdm_basic_data_header_tab v
+   WHERE  v.template_id = template_id_
+   AND v.revision = revision_+1;
+BEGIN
+   OPEN status;
+   FETCH status INTO objstate_;
+   CLOSE status;
+   RETURN Finite_State_Decode__(objstate_);
+END Get_Status;
+
+
+
+@UncheckedAccess
+FUNCTION Get_Objid (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN VARCHAR2
+IS
+temp_ MDM_BASIC_DATA_HEADER.objid%TYPE;
+   CURSOR get_attr IS
+      SELECT v.objid
+      FROM MDM_BASIC_DATA_HEADER v
+      WHERE  v.template_id = template_id_
+   AND v.revision = revision_+1;
+BEGIN
+   OPEN get_attr;
+   FETCH get_attr INTO temp_;
+   CLOSE get_attr;
+   RETURN temp_;
+END Get_Objid;
+
 
 -------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
 

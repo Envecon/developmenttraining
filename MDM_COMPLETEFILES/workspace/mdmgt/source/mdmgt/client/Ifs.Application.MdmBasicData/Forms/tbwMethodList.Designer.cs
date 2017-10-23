@@ -47,11 +47,21 @@ namespace Ifs.Application.MdmBasicData
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(tbwMethodList));
             this.colnExecuteSeq = new Ifs.Fnd.ApplicationForms.cColumn();
-            this.colsMethodName = new Ifs.Fnd.ApplicationForms.cColumn();
             this.colOnNew = new Ifs.Fnd.ApplicationForms.cCheckBoxColumn();
             this.colsViewName = new Ifs.Fnd.ApplicationForms.cColumn();
             this.colOnModify = new Ifs.Fnd.ApplicationForms.cCheckBoxColumn();
+            this.colsTemplateId = new Ifs.Fnd.ApplicationForms.cColumn();
+            this.colnRevision = new Ifs.Fnd.ApplicationForms.cColumn();
+            this.colsMethodName = new Ifs.Fnd.ApplicationForms.cColumn();
             this.SuspendLayout();
+            // 
+            // commandManager
+            // 
+            this.commandManager.ImageList = null;
+            // 
+            // __colObjversion
+            // 
+            this.@__colObjversion.Position = 3;
             // 
             // colnExecuteSeq
             // 
@@ -62,23 +72,12 @@ namespace Ifs.Application.MdmBasicData
             this.colnExecuteSeq.NamedProperties.Put("Format", "");
             this.colnExecuteSeq.NamedProperties.Put("LovReference", "");
             this.colnExecuteSeq.NamedProperties.Put("SqlColumn", "EXECUTE_SEQ");
-            this.colnExecuteSeq.Position = 3;
+            this.colnExecuteSeq.Position = 2;
             this.colnExecuteSeq.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             resources.ApplyResources(this.colnExecuteSeq, "colnExecuteSeq");
             // 
-            // colsMethodName
-            // 
-            this.colsMethodName.Name = "colsMethodName";
-            this.colsMethodName.NamedProperties.Put("EnumerateMethod", "");
-            this.colsMethodName.NamedProperties.Put("FieldFlags", "295");
-            this.colsMethodName.NamedProperties.Put("LovReference", "");
-            this.colsMethodName.NamedProperties.Put("SqlColumn", "METHOD_NAME");
-            this.colsMethodName.Position = 5;
-            resources.ApplyResources(this.colsMethodName, "colsMethodName");
-            // 
             // colOnNew
             // 
-            this.colOnNew.DataType = PPJ.Runtime.Windows.DataType.Binary;
             this.colOnNew.Name = "colOnNew";
             this.colOnNew.NamedProperties.Put("EnumerateMethod", "");
             this.colOnNew.NamedProperties.Put("FieldFlags", "295");
@@ -99,7 +98,6 @@ namespace Ifs.Application.MdmBasicData
             // 
             // colOnModify
             // 
-            this.colOnModify.DataType = PPJ.Runtime.Windows.DataType.Binary;
             this.colOnModify.Name = "colOnModify";
             this.colOnModify.NamedProperties.Put("EnumerateMethod", "");
             this.colOnModify.NamedProperties.Put("FieldFlags", "295");
@@ -108,24 +106,63 @@ namespace Ifs.Application.MdmBasicData
             this.colOnModify.Position = 7;
             resources.ApplyResources(this.colOnModify, "colOnModify");
             // 
+            // colsTemplateId
+            // 
+            this.colsTemplateId.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.colsTemplateId.MaxLength = 30;
+            this.colsTemplateId.Name = "colsTemplateId";
+            this.colsTemplateId.NamedProperties.Put("EnumerateMethod", "");
+            this.colsTemplateId.NamedProperties.Put("FieldFlags", "4195");
+            this.colsTemplateId.NamedProperties.Put("LovReference", "");
+            this.colsTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
+            this.colsTemplateId.Position = 8;
+            resources.ApplyResources(this.colsTemplateId, "colsTemplateId");
+            // 
+            // colnRevision
+            // 
+            this.colnRevision.DataType = PPJ.Runtime.Windows.DataType.Number;
+            this.colnRevision.Name = "colnRevision";
+            this.colnRevision.NamedProperties.Put("EnumerateMethod", "");
+            this.colnRevision.NamedProperties.Put("FieldFlags", "4195");
+            this.colnRevision.NamedProperties.Put("Format", "");
+            this.colnRevision.NamedProperties.Put("LovReference", "MDM_BASIC_DATA_HEADER(TEMPLATE_ID)");
+            this.colnRevision.NamedProperties.Put("SqlColumn", "REVISION");
+            this.colnRevision.Position = 9;
+            this.colnRevision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            resources.ApplyResources(this.colnRevision, "colnRevision");
+            // 
+            // colsMethodName
+            // 
+            this.colsMethodName.Name = "colsMethodName";
+            this.colsMethodName.NamedProperties.Put("EnumerateMethod", "");
+            this.colsMethodName.NamedProperties.Put("FieldFlags", "294");
+            this.colsMethodName.NamedProperties.Put("LovReference", "");
+            this.colsMethodName.NamedProperties.Put("SqlColumn", "METHOD_NAME");
+            this.colsMethodName.Position = 5;
+            resources.ApplyResources(this.colsMethodName, "colsMethodName");
+            // 
             // tbwMethodList
             // 
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.colnExecuteSeq);
-            this.Controls.Add(this.colsViewName);
             this.Controls.Add(this.colsMethodName);
-            this.Controls.Add(this.colOnModify);
+            this.Controls.Add(this.colsViewName);
             this.Controls.Add(this.colOnNew);
+            this.Controls.Add(this.colOnModify);
+            this.Controls.Add(this.colsTemplateId);
+            this.Controls.Add(this.colnRevision);
             this.Name = "tbwMethodList";
             this.NamedProperties.Put("LogicalUnit", "MdmMethodList");
             this.NamedProperties.Put("Module", "MDMGT");
             this.NamedProperties.Put("PackageName", "MDM_METHOD_LIST_API");
             this.NamedProperties.Put("ViewName", "MDM_METHOD_LIST");
-            this.Controls.SetChildIndex(this.colOnNew, 0);
+            this.Controls.SetChildIndex(this.colnRevision, 0);
+            this.Controls.SetChildIndex(this.colsTemplateId, 0);
             this.Controls.SetChildIndex(this.colOnModify, 0);
-            this.Controls.SetChildIndex(this.@__colObjversion, 0);
-            this.Controls.SetChildIndex(this.colsMethodName, 0);
+            this.Controls.SetChildIndex(this.colOnNew, 0);
             this.Controls.SetChildIndex(this.colsViewName, 0);
+            this.Controls.SetChildIndex(this.colsMethodName, 0);
+            this.Controls.SetChildIndex(this.@__colObjversion, 0);
             this.Controls.SetChildIndex(this.colnExecuteSeq, 0);
             this.Controls.SetChildIndex(this.@__colObjid, 0);
             this.ResumeLayout(false);
@@ -150,9 +187,11 @@ namespace Ifs.Application.MdmBasicData
         #endregion
 
         protected cColumn colnExecuteSeq;
-        protected cColumn colsMethodName;
         protected cCheckBoxColumn colOnNew;
         protected cColumn colsViewName;
         protected cCheckBoxColumn colOnModify;
+        protected cColumn colsTemplateId;
+        protected cColumn colnRevision;
+        protected cColumn colsMethodName;
     }
 }

@@ -59,10 +59,6 @@ namespace Ifs.Application.MdmBasicData
             this.colnRevision = new Ifs.Fnd.ApplicationForms.cColumn();
             this.SuspendLayout();
             // 
-            // __colObjversion
-            // 
-            this.@__colObjversion.Position = 10;
-            // 
             // colsColumnName
             // 
             this.colsColumnName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -72,7 +68,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsColumnName.NamedProperties.Put("FieldFlags", "179");
             this.colsColumnName.NamedProperties.Put("LovReference", "");
             this.colsColumnName.NamedProperties.Put("SqlColumn", "COLUMN_NAME");
-            this.colsColumnName.Position = 4;
+            this.colsColumnName.Position = 3;
             resources.ApplyResources(this.colsColumnName, "colsColumnName");
             // 
             // colsDataType
@@ -84,7 +80,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsDataType.NamedProperties.Put("FieldFlags", "295");
             this.colsDataType.NamedProperties.Put("LovReference", "");
             this.colsDataType.NamedProperties.Put("SqlColumn", "DATA_TYPE");
-            this.colsDataType.Position = 7;
+            this.colsDataType.Position = 6;
             resources.ApplyResources(this.colsDataType, "colsDataType");
             // 
             // colsDescription
@@ -94,7 +90,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsDescription.NamedProperties.Put("FieldFlags", "294");
             this.colsDescription.NamedProperties.Put("LovReference", "");
             this.colsDescription.NamedProperties.Put("SqlColumn", "DESCRIPTION");
-            this.colsDescription.Position = 5;
+            this.colsDescription.Position = 4;
             resources.ApplyResources(this.colsDescription, "colsDescription");
             // 
             // colsFlags
@@ -106,7 +102,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsFlags.NamedProperties.Put("FieldFlags", "290");
             this.colsFlags.NamedProperties.Put("LovReference", "");
             this.colsFlags.NamedProperties.Put("SqlColumn", "FLAGS");
-            this.colsFlags.Position = 6;
+            this.colsFlags.Position = 5;
             resources.ApplyResources(this.colsFlags, "colsFlags");
             // 
             // colnLength
@@ -118,7 +114,7 @@ namespace Ifs.Application.MdmBasicData
             this.colnLength.NamedProperties.Put("Format", "");
             this.colnLength.NamedProperties.Put("LovReference", "");
             this.colnLength.NamedProperties.Put("SqlColumn", "LENGTH");
-            this.colnLength.Position = 8;
+            this.colnLength.Position = 7;
             this.colnLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             resources.ApplyResources(this.colnLength, "colnLength");
             // 
@@ -130,7 +126,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsDefaultValue.NamedProperties.Put("FieldFlags", "310");
             this.colsDefaultValue.NamedProperties.Put("LovReference", "");
             this.colsDefaultValue.NamedProperties.Put("SqlColumn", "DEFAULT_VALUE");
-            this.colsDefaultValue.Position = 9;
+            this.colsDefaultValue.Position = 8;
             resources.ApplyResources(this.colsDefaultValue, "colsDefaultValue");
             // 
             // colsDbClientValues
@@ -141,7 +137,7 @@ namespace Ifs.Application.MdmBasicData
             this.colsDbClientValues.NamedProperties.Put("FieldFlags", "306");
             this.colsDbClientValues.NamedProperties.Put("LovReference", "");
             this.colsDbClientValues.NamedProperties.Put("SqlColumn", "DB_CLIENT_VALUES");
-            this.colsDbClientValues.Position = 11;
+            this.colsDbClientValues.Position = 9;
             resources.ApplyResources(this.colsDbClientValues, "colsDbClientValues");
             // 
             // colsNoteText
@@ -152,18 +148,17 @@ namespace Ifs.Application.MdmBasicData
             this.colsNoteText.NamedProperties.Put("FieldFlags", "310");
             this.colsNoteText.NamedProperties.Put("LovReference", "");
             this.colsNoteText.NamedProperties.Put("SqlColumn", "NOTE_TEXT");
-            this.colsNoteText.Position = 12;
+            this.colsNoteText.Position = 10;
             resources.ApplyResources(this.colsNoteText, "colsNoteText");
             // 
             // colMandatory
             // 
-            this.colMandatory.DataType = PPJ.Runtime.Windows.DataType.Binary;
             this.colMandatory.Name = "colMandatory";
             this.colMandatory.NamedProperties.Put("EnumerateMethod", "");
             this.colMandatory.NamedProperties.Put("FieldFlags", "292");
             this.colMandatory.NamedProperties.Put("LovReference", "");
             this.colMandatory.NamedProperties.Put("SqlColumn", "MANDATORY");
-            this.colMandatory.Position = 13;
+            this.colMandatory.Position = 11;
             resources.ApplyResources(this.colMandatory, "colMandatory");
             // 
             // colsTemplateId
@@ -172,10 +167,10 @@ namespace Ifs.Application.MdmBasicData
             this.colsTemplateId.MaxLength = 30;
             this.colsTemplateId.Name = "colsTemplateId";
             this.colsTemplateId.NamedProperties.Put("EnumerateMethod", "");
-            this.colsTemplateId.NamedProperties.Put("FieldFlags", "99");
+            this.colsTemplateId.NamedProperties.Put("FieldFlags", "4195");
             this.colsTemplateId.NamedProperties.Put("LovReference", "");
             this.colsTemplateId.NamedProperties.Put("SqlColumn", "TEMPLATE_ID");
-            this.colsTemplateId.Position = 2;
+            this.colsTemplateId.Position = 12;
             resources.ApplyResources(this.colsTemplateId, "colsTemplateId");
             // 
             // colnRevision
@@ -183,19 +178,17 @@ namespace Ifs.Application.MdmBasicData
             this.colnRevision.DataType = PPJ.Runtime.Windows.DataType.Number;
             this.colnRevision.Name = "colnRevision";
             this.colnRevision.NamedProperties.Put("EnumerateMethod", "");
-            this.colnRevision.NamedProperties.Put("FieldFlags", "99");
+            this.colnRevision.NamedProperties.Put("FieldFlags", "4195");
             this.colnRevision.NamedProperties.Put("Format", "");
             this.colnRevision.NamedProperties.Put("LovReference", "MDM_BASIC_DATA_HEADER(TEMPLATE_ID)");
             this.colnRevision.NamedProperties.Put("SqlColumn", "REVISION");
-            this.colnRevision.Position = 3;
+            this.colnRevision.Position = 13;
             this.colnRevision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             resources.ApplyResources(this.colnRevision, "colnRevision");
             // 
             // tbwSourceMap
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.colsTemplateId);
-            this.Controls.Add(this.colnRevision);
             this.Controls.Add(this.colsColumnName);
             this.Controls.Add(this.colsDescription);
             this.Controls.Add(this.colsFlags);
@@ -203,26 +196,28 @@ namespace Ifs.Application.MdmBasicData
             this.Controls.Add(this.colnLength);
             this.Controls.Add(this.colsDefaultValue);
             this.Controls.Add(this.colsDbClientValues);
-            this.Controls.Add(this.colMandatory);
             this.Controls.Add(this.colsNoteText);
+            this.Controls.Add(this.colsTemplateId);
+            this.Controls.Add(this.colMandatory);
+            this.Controls.Add(this.colnRevision);
             this.Name = "tbwSourceMap";
             this.NamedProperties.Put("LogicalUnit", "MdmSourceMap");
             this.NamedProperties.Put("Module", "MDMGT");
             this.NamedProperties.Put("PackageName", "MDM_SOURCE_MAP_API");
             this.NamedProperties.Put("ViewName", "MDM_SOURCE_MAP");
-            this.Controls.SetChildIndex(this.colsNoteText, 0);
+            this.Controls.SetChildIndex(this.colnRevision, 0);
             this.Controls.SetChildIndex(this.colMandatory, 0);
+            this.Controls.SetChildIndex(this.colsTemplateId, 0);
+            this.Controls.SetChildIndex(this.colsNoteText, 0);
             this.Controls.SetChildIndex(this.colsDbClientValues, 0);
-            this.Controls.SetChildIndex(this.@__colObjversion, 0);
             this.Controls.SetChildIndex(this.colsDefaultValue, 0);
             this.Controls.SetChildIndex(this.colnLength, 0);
             this.Controls.SetChildIndex(this.colsDataType, 0);
             this.Controls.SetChildIndex(this.colsFlags, 0);
             this.Controls.SetChildIndex(this.colsDescription, 0);
             this.Controls.SetChildIndex(this.colsColumnName, 0);
+            this.Controls.SetChildIndex(this.@__colObjversion, 0);
             this.Controls.SetChildIndex(this.@__colObjid, 0);
-            this.Controls.SetChildIndex(this.colnRevision, 0);
-            this.Controls.SetChildIndex(this.colsTemplateId, 0);
             this.ResumeLayout(false);
 
         }

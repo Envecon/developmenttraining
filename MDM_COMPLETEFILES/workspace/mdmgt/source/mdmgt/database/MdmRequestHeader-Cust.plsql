@@ -30,7 +30,8 @@ BEGIN
    Client_SYS.Add_To_Attr('REQUEST_NO', MDM_REQUEST_NO_SEQ.NEXTVAL, attr_);
    Client_SYS.Add_To_Attr('REQUESTED_BY', fnd_session_api.Get_Fnd_User, attr_);
    Client_SYS.Add_To_Attr('REQUESTED_DATE', SYSDATE, attr_);
-   Client_SYS.Add_To_Attr('STATE', 'NEW', attr_);
+   Client_SYS.Add_To_Attr('STATE', 'New', attr_);
+  
 END Prepare_Insert___;
 
 

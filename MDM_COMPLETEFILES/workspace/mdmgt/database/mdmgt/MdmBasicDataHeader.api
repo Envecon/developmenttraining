@@ -1,0 +1,189 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmBasicDataHeader
+--
+--  IFS/Design Template Version 2.5
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+DEFINE MODULE        = MDMGT
+DEFINE LU            = MdmBasicDataHeader
+DEFINE PKG           = MDM_BASIC_DATA_HEADER_API
+
+PROMPT Creating &PKG context
+
+BEGIN
+   Installation_SYS.Create_Context('&LU'||'_CTX', 'DOMAIN_SYS', NULL, 'GLOBALLY', TRUE);
+END;
+/
+
+PROMPT Creating &PKG specification
+
+CREATE OR REPLACE PACKAGE &PKG IS
+
+module_  CONSTANT VARCHAR2(25) := '&MODULE';
+lu_name_ CONSTANT VARCHAR2(25) := '&LU';
+lu_type_ CONSTANT VARCHAR2(15) := 'EntityWithState';
+
+TYPE Public_Rec IS RECORD
+   (description MDM_BASIC_DATA_HEADER_TAB.description%TYPE,
+    created_by MDM_BASIC_DATA_HEADER_TAB.created_by%TYPE,
+    created_date MDM_BASIC_DATA_HEADER_TAB.created_date%TYPE,
+    profile_id MDM_BASIC_DATA_HEADER_TAB.profile_id%TYPE,
+    notes MDM_BASIC_DATA_HEADER_TAB.notes%TYPE);
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE FINITE STATE MACHINE ---------------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Finite_State_Decode__ (
+   db_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+PRAGMA restrict_references(Finite_State_Decode__, WNDS, TRUST);
+
+FUNCTION Finite_State_Encode__ (
+   client_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+PRAGMA restrict_references(Finite_State_Encode__, WNDS, TRUST);
+
+PROCEDURE Enumerate_States__ (
+   client_values_ OUT VARCHAR2);
+
+PROCEDURE Enumerate_States_Db__ (
+   db_values_ OUT VARCHAR2);
+
+FUNCTION Finite_State_Events__ (
+   db_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+PRAGMA restrict_references(Finite_State_Events__, WNDS, TRUST);
+
+PROCEDURE Enumerate_Events__ (
+   db_events_ OUT VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE BASE METHODS -----------------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2);
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT VARCHAR2,
+   action_     IN     VARCHAR2);
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT VARCHAR2,
+   attr_       IN OUT VARCHAR2,
+   action_     IN     VARCHAR2);
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2);
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC BASE METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER );
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC TRANSLATION METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Language_Refreshed;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Action__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT VARCHAR2,
+   attr_       IN OUT VARCHAR2,
+   action_     IN     VARCHAR2);
+
+PROCEDURE Obsolete__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT VARCHAR2,
+   attr_       IN OUT VARCHAR2,
+   action_     IN     VARCHAR2);
+
+PROCEDURE Reopen__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT VARCHAR2,
+   attr_       IN OUT VARCHAR2,
+   action_     IN     VARCHAR2);
+
+
+PROCEDURE Write_Notes__ (
+   objversion_ IN OUT VARCHAR2,
+   rowid_      IN ROWID,
+   lob_loc_    IN CLOB );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PROTECTED METHODS --------------------------
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Description (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN VARCHAR2;
+PRAGMA restrict_references(Get_Description, WNDS);
+
+FUNCTION Get_Created_By (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN VARCHAR2;
+PRAGMA restrict_references(Get_Created_By, WNDS);
+
+FUNCTION Get_Created_Date (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN DATE;
+PRAGMA restrict_references(Get_Created_Date, WNDS);
+
+FUNCTION Get_Profile_Id (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN VARCHAR2;
+PRAGMA restrict_references(Get_Profile_Id, WNDS);
+
+FUNCTION Get_Notes (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN CLOB;
+PRAGMA restrict_references(Get_Notes, WNDS);
+
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER ) RETURN Public_Rec;
+PRAGMA restrict_references(Get, WNDS);
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Init;
+PRAGMA restrict_references(Init, WNDS, TRUST);
+
+END &PKG;
+/
+SHOW ERROR
+
+UNDEFINE MODULE
+UNDEFINE LU
+UNDEFINE PKG
+-----------------------------------------------------------------------------

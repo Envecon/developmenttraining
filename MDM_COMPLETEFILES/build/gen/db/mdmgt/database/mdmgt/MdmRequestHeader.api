@@ -1,0 +1,345 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHeader
+--  Type:         EntityWithState
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 PRE-PROCESSING -----------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Request_Header_API context
+
+BEGIN
+   Installation_SYS.Create_Context('MdmRequestHeader_CTX', 'DOMAIN_SYS', NULL, 'GLOBALLY', TRUE);
+END;
+/
+
+PROMPT Creating Mdm_Request_Header_API specification
+
+CREATE OR REPLACE PACKAGE Mdm_Request_Header_API IS
+
+module_  CONSTANT VARCHAR2(25) := 'MDMGT';
+lu_name_ CONSTANT VARCHAR2(25) := 'MdmRequestHeader';
+lu_type_ CONSTANT VARCHAR2(25) := 'EntityWithState';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Public_Rec IS RECORD
+  (template_id                    MDM_REQUEST_HEADER_TAB.template_id%TYPE,
+   revision                       MDM_REQUEST_HEADER_TAB.revision%TYPE,
+   request_no                     MDM_REQUEST_HEADER_TAB.request_no%TYPE,
+   "rowid"                        rowid,
+   rowversion                     MDM_REQUEST_HEADER_TAB.rowversion%TYPE,
+   rowkey                         MDM_REQUEST_HEADER_TAB.rowkey%TYPE,
+   rowstate                       MDM_REQUEST_HEADER_TAB.rowstate%TYPE,
+   description                    MDM_REQUEST_HEADER_TAB.description%TYPE,
+   requested_by                   MDM_REQUEST_HEADER_TAB.requested_by%TYPE,
+   requested_date                 MDM_REQUEST_HEADER_TAB.requested_date%TYPE,
+   approval_required              MDM_REQUEST_HEADER_TAB.approval_required%TYPE,
+   approval_rejected              MDM_REQUEST_HEADER_TAB.approval_rejected%TYPE);
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+-- Get_Key_By_Rowkey
+--   Returns a table record with only keys (other attributes are NULL) based on a rowkey.
+--
+-- Exist
+--   Checks if given pointer (e.g. primary key) to an instance of this
+--   logical unit exists. If not an exception will be raised.
+--
+-- Exists
+--   Same check as Exist, but returns a BOOLEAN value instead of exception.
+--
+-- Get_Description
+--   Fetches the Description attribute for a record.
+--
+-- Get_Requested_By
+--   Fetches the RequestedBy attribute for a record.
+--
+-- Get_Requested_Date
+--   Fetches the RequestedDate attribute for a record.
+--
+-- Get_Approval_Required
+--   Fetches the ApprovalRequired attribute for a record.
+--
+-- Get_Approval_Rejected
+--   Fetches the ApprovalRejected attribute for a record.
+--
+-- Get
+--   Fetches a record containing the public attributes.
+--
+-- Get_Objkey
+--   Fetches the objkey attribute for a record.
+--
+-- Lock__
+--   Client-support to lock a specific instance of the logical unit.
+--
+-- New__
+--   Client-support interface to create LU instances.
+--   action_ = 'PREPARE'
+--   Default values and handle of information to client.
+--   The default values are set in procedure Prepare_Insert___.
+--   action_ = 'CHECK'
+--   Check all attributes before creating new object and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___.
+--   action_ = 'DO'
+--   Creation of new instances of the logical unit and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___
+--   before calling procedure Insert___.
+--
+-- Modify__
+--   Client-support interface to modify attributes for LU instances.
+--   action_ = 'CHECK'
+--   Check all attributes before modifying an existing object and
+--   handle of information to client. The attribute list is unpacked,
+--   checked and prepared(defaults) in procedures Unpack___ and Check_Update___.
+--   action_ = 'DO'
+--   Modification of an existing instance of the logical unit. The
+--   procedure unpacks the attributes, checks all values before
+--   procedure Update___ is called.
+--
+-- Remove__
+--   Client-support interface to remove LU instances.
+--   action_ = 'CHECK'
+--   Check whether a specific LU-instance may be removed or not.
+--   The procedure fetches the complete record by calling procedure
+--   Get_Object_By_Id___. Then the check is made by calling procedure
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Get_Key_By_Rowkey)
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_request_header_tab%ROWTYPE;
+
+--@PoReadOnly(Exist)
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER );
+
+--@PoReadOnly(Exists)
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN BOOLEAN;
+
+--@PoReadOnly(Get_Description)
+FUNCTION Get_Description (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Requested_By)
+FUNCTION Get_Requested_By (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Requested_Date)
+FUNCTION Get_Requested_Date (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN DATE;
+
+--@PoReadOnly(Get_Approval_Required)
+FUNCTION Get_Approval_Required (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Approval_Rejected)
+FUNCTION Get_Approval_Rejected (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get)
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN Public_Rec;
+
+--@PoReadOnly(Get_Objkey)
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Lock__)
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 );
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- FINITE STATE MACHINE -----------------------------------
+-----------------------------------------------------------------------------
+-- Finite_State_Init_
+--   Runs the initial start event for a basedOn child entity.
+--
+-- Finite_State_Decode__
+--   Returns the client equivalent for any database representation of
+--   a state name = objstate.
+--
+-- Finite_State_Encode__
+--   Returns the database equivalent for any client representation of
+--   a state name = state.
+--
+-- Enumerate_States__
+--   Returns a list of all possible finite states in client terminology.
+--
+-- Enumerate_States_Db__
+--   Returns a list of all possible finite states in database terminology.
+--
+-- Finite_State_Events__
+--   Returns a list of allowed events for a given state
+--   NOTE! Regardless of conditions if not otherwize encoded
+--
+-- Enumerate_Events__
+--   Returns a list of all possible events.
+--
+-- Approve__
+--   Executes the Approve event logic as defined in the state machine.
+--
+-- Partial_Transfered__
+--   Executes the Partial Transfered event logic as defined in the state machine.
+--
+-- Partially_Approved__
+--   Executes the PartiallyApproved event logic as defined in the state machine.
+--
+-- Release__
+--   Executes the Release event logic as defined in the state machine.
+--
+-- Transfer__
+--   Executes the Transfer event logic as defined in the state machine.
+-----------------------------------------------------------------------------
+
+PROCEDURE Finite_State_Init_ (
+   rec_  IN OUT NOCOPY mdm_request_header_tab%ROWTYPE,
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+--@PoReadOnly(Finite_State_Decode__)
+FUNCTION Finite_State_Decode__ (
+   db_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Finite_State_Encode__)
+FUNCTION Finite_State_Encode__ (
+   client_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Enumerate_States__)
+PROCEDURE Enumerate_States__ (
+   client_values_ OUT VARCHAR2 );
+
+--@PoReadOnly(Enumerate_States_Db__)
+PROCEDURE Enumerate_States_Db__ (
+   db_values_ OUT VARCHAR2 );
+
+--@PoReadOnly(Finite_State_Events__)
+FUNCTION Finite_State_Events__ (
+   db_state_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Enumerate_Events__)
+PROCEDURE Enumerate_Events__ (
+   db_events_ OUT VARCHAR2 );
+
+PROCEDURE Approve__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Partial_Transfered__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Partially_Approved__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Release__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Transfer__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+-- Cc_Approval_Process__
+-----------------------------------------------------------------------------
+
+PROCEDURE Cc_Approval_Process__ (
+      new_access_person_ OUT VARCHAR2,
+      new_access_group_  OUT VARCHAR2,
+      lu_name_           IN VARCHAR2,
+      newrec_     IN OUT NOCOPY mdm_request_header_tab%ROWTYPE);
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Language_Refreshed
+--   Framework method that updates translations to a new language.
+--
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Language_Refreshed)
+PROCEDURE Language_Refreshed;
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Mdm_Request_Header_API;
+/
+SHOW ERROR
+
+

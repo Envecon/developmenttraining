@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogicalUnits version="1.0" module="MDMGT" type="LU" layer="Cust">
+   <LogicalUnit name="MdmMethodList">
+      <Text><![CDATA[Mdm Method List]]></Text>
+      <Message ID="MdmMethodList.ILLMETHFUNC">
+         <Text><![CDATA[Method :P1 is a function. Only procedures allowed]]></Text>
+      </Message>
+      <Message ID="MdmMethodList.ILLARGTYPE">
+         <Text><![CDATA[Argument :P1 has illegal type. Only datatype DATE VARCHAR2 NUMBER allowed]]></Text>
+      </Message>
+      <Message ID="MdmMethodList.NOTINLOOP">
+         <Text><![CDATA[Procedure :P1  must be started inside loop]]></Text>
+      </Message>
+      <Message ID="MdmMethodList.NOTOUTLOOP">
+         <Text><![CDATA[Procedure :P1  cannot be started inside loop]]></Text>
+      </Message>
+      <Message ID="MdmMethodList.NOVIEW">
+         <Text><![CDATA[Specify view_name only inside loop]]></Text>
+      </Message>
+      <Message ID="MdmMethodList.MAKEOTHER">
+         <Text><![CDATA[Error making attribute and references - :P1]]></Text>
+      </Message>
+      <View ID="MdmMethodList.MDM_METHOD_LIST">
+         <Text><![CDATA[Mdm Method List]]></Text>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.EXECUTE_SEQ">
+            <Text><![CDATA[Execute Seq]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.VIEW_NAME">
+            <Text><![CDATA[View Name]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.METHOD_NAME">
+            <Text><![CDATA[Method Name]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.ON_NEW">
+            <Text><![CDATA[New]]></Text>
+         </Column>
+         <Column ID="MdmMethodList.MDM_METHOD_LIST.ON_MODIFY">
+            <Text><![CDATA[Modify]]></Text>
+         </Column>
+      </View>
+   </LogicalUnit>
+</LogicalUnits>

@@ -1,0 +1,289 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmMethodList
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Method_List_API specification
+
+CREATE OR REPLACE PACKAGE Mdm_Method_List_API IS
+
+module_  CONSTANT VARCHAR2(25) := 'MDMGT';
+lu_name_ CONSTANT VARCHAR2(25) := 'MdmMethodList';
+lu_type_ CONSTANT VARCHAR2(25) := 'Entity';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Public_Rec IS RECORD
+  (template_id                    MDM_METHOD_LIST_TAB.template_id%TYPE,
+   revision                       MDM_METHOD_LIST_TAB.revision%TYPE,
+   execute_seq                    MDM_METHOD_LIST_TAB.execute_seq%TYPE,
+   "rowid"                        rowid,
+   rowversion                     MDM_METHOD_LIST_TAB.rowversion%TYPE,
+   rowkey                         MDM_METHOD_LIST_TAB.rowkey%TYPE,
+   view_name                      MDM_METHOD_LIST_TAB.view_name%TYPE,
+   method_name                    MDM_METHOD_LIST_TAB.method_name%TYPE,
+   on_new                         MDM_METHOD_LIST_TAB.on_new%TYPE,
+   on_modify                      MDM_METHOD_LIST_TAB.on_modify%TYPE);
+
+TYPE number_tabtype IS
+   TABLE OF NUMBER
+   INDEX BY BINARY_INTEGER;
+
+TYPE attr_tabtype IS
+   TABLE OF VARCHAR2(32000)
+   INDEX BY BINARY_INTEGER;
+
+TYPE varchar_tabtype IS
+   TABLE OF VARCHAR2(2000)
+   INDEX BY BINARY_INTEGER;
+
+TYPE integer_tabtype IS
+   TABLE OF INTEGER
+   INDEX BY BINARY_INTEGER;
+
+TYPE date_tabtype IS
+   TABLE OF DATE
+   INDEX BY BINARY_INTEGER;
+
+TYPE boolean_tabtype IS
+   TABLE OF BOOLEAN
+   INDEX BY BINARY_INTEGER;
+
+TYPE dynamic_record IS RECORD(
+   method           varchar_tabtype,
+   execute_seq      number_tabtype,
+   error_count      number_tabtype,
+   incomplete_count number_tabtype,
+   commit_count     number_tabtype,
+   last_row         number_tabtype,
+   view_name        varchar_tabtype,
+   orig_view_name   varchar_tabtype,
+   attr             attr_tabtype,
+   arg_attr         attr_tabtype,
+   return_attr      attr_tabtype,
+   column_name      varchar_tabtype,
+   column_value     varchar_tabtype,
+   on_new_master    varchar_tabtype,
+   on_first_row     varchar_tabtype,
+   method_mode      varchar_tabtype,
+   reference        varchar_tabtype,
+   repl_key         varchar_tabtype,
+   upd_cur          integer_tabtype,
+   h_cur            integer_tabtype);
+
+TYPE reference_record IS RECORD(
+   column_name_       varchar_tabtype,
+   data_type_         varchar_tabtype,
+   description_       varchar_tabtype,
+   prepare_value_     varchar_tabtype,
+   length_            number_tabtype,
+   decimal_length_    number_tabtype,
+   attr_seq_          number_tabtype,
+   flags_             varchar_tabtype,
+   source_column_     varchar_tabtype,
+   reference_         varchar_tabtype,
+   db_client_values_  varchar_tabtype,
+   db_values_         varchar_tabtype,
+   client_values_     varchar_tabtype,
+   lov_view_          varchar_tabtype,
+   lu_                varchar_tabtype);
+
+msg_sep_          CONSTANT VARCHAR2(2) := chr(13)||chr(10);
+
+replace_fieldsep_ CONSTANT VARCHAR2(2) := '<^';
+
+replace_recsep_   CONSTANT VARCHAR2(2) := '^>';
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+-- Get_Key_By_Rowkey
+--   Returns a table record with only keys (other attributes are NULL) based on a rowkey.
+--
+-- Exist
+--   Checks if given pointer (e.g. primary key) to an instance of this
+--   logical unit exists. If not an exception will be raised.
+--
+-- Exists
+--   Same check as Exist, but returns a BOOLEAN value instead of exception.
+--
+-- Get_View_Name
+--   Fetches the ViewName attribute for a record.
+--
+-- Get_Method_Name
+--   Fetches the MethodName attribute for a record.
+--
+-- Get_On_New
+--   Fetches the OnNew attribute for a record.
+--
+-- Get_On_Modify
+--   Fetches the OnModify attribute for a record.
+--
+-- Get
+--   Fetches a record containing the public attributes.
+--
+-- Get_Objkey
+--   Fetches the objkey attribute for a record.
+--
+-- Lock__
+--   Client-support to lock a specific instance of the logical unit.
+--
+-- New__
+--   Client-support interface to create LU instances.
+--   action_ = 'PREPARE'
+--   Default values and handle of information to client.
+--   The default values are set in procedure Prepare_Insert___.
+--   action_ = 'CHECK'
+--   Check all attributes before creating new object and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___.
+--   action_ = 'DO'
+--   Creation of new instances of the logical unit and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___
+--   before calling procedure Insert___.
+--
+-- Modify__
+--   Client-support interface to modify attributes for LU instances.
+--   action_ = 'CHECK'
+--   Check all attributes before modifying an existing object and
+--   handle of information to client. The attribute list is unpacked,
+--   checked and prepared(defaults) in procedures Unpack___ and Check_Update___.
+--   action_ = 'DO'
+--   Modification of an existing instance of the logical unit. The
+--   procedure unpacks the attributes, checks all values before
+--   procedure Update___ is called.
+--
+-- Remove__
+--   Client-support interface to remove LU instances.
+--   action_ = 'CHECK'
+--   Check whether a specific LU-instance may be removed or not.
+--   The procedure fetches the complete record by calling procedure
+--   Get_Object_By_Id___. Then the check is made by calling procedure
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Get_Key_By_Rowkey)
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE;
+
+--@PoReadOnly(Exist)
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER );
+
+--@PoReadOnly(Exists)
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN BOOLEAN;
+
+--@PoReadOnly(Get_View_Name)
+FUNCTION Get_View_Name (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Method_Name)
+FUNCTION Get_Method_Name (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_On_New)
+FUNCTION Get_On_New (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_On_Modify)
+FUNCTION Get_On_Modify (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get)
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN Public_Rec;
+
+--@PoReadOnly(Get_Objkey)
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Lock__)
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 );
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+-- C_Make_Source_Map
+--
+-- Find_Method_Name
+-----------------------------------------------------------------------------
+
+PROCEDURE C_Make_Source_Map (
+   attr_          IN OUT NOCOPY VARCHAR2,
+   reference_     IN OUT NOCOPY VARCHAR2,
+   view_name_     IN OUT NOCOPY VARCHAR2,
+  template_id_  IN     VARCHAR2,
+  revision_       IN         NUMBER,
+   in_method_     IN     VARCHAR2,
+   execute_seq_   IN     NUMBER );
+
+FUNCTION Find_Method_Name (
+   view_name_ IN VARCHAR2,
+   method_name_ IN VARCHAR2) RETURN VARCHAR2;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Mdm_Method_List_API;
+/
+SHOW ERROR
+
+

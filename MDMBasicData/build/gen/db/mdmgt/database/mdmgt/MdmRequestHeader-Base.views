@@ -1,0 +1,78 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHeader
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Template_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(30)/UPPERCASE'
+   Prompt     = 'Template Id';
+COLUMN Revision IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Revision'
+   Ref        = 'MdmBasicDataHeader(template_id)';
+COLUMN Request_No IS
+   Flags      = 'KMI--'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Request No';
+COLUMN Description IS
+   Flags      = 'AMIU-'
+   Datatype   = 'STRING(50)'
+   Prompt     = 'Description';
+COLUMN Requested_By IS
+   Flags      = 'AMI--'
+   Datatype   = 'STRING(10)'
+   Prompt     = 'Requested By';
+COLUMN Requested_Date IS
+   Flags      = 'AMI--'
+   Datatype   = 'DATE/DATE'
+   Prompt     = 'Requested Date';
+COLUMN Approval_Required IS
+   Flags      = 'A-IU-'
+   Datatype   = 'BOOLEAN'
+   Prompt     = 'Approval Required';
+COLUMN Approval_Rejected IS
+   Flags      = 'A-IU-'
+   Datatype   = 'BOOLEAN'
+   Prompt     = 'Approval Rejected';
+COLUMN State IS
+   Flags      = 'A---L'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'State';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Mdm_Request_Header IS
+   Prompt     = 'Mdm Request Header'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       request_no                     request_no,
+       description                    description,
+       requested_by                   requested_by,
+       requested_date                 requested_date,
+       approval_required              approval_required,
+       approval_rejected              approval_rejected,
+       rowstate                       objstate,
+       Mdm_Request_Header_API.Finite_State_Events__(rowstate)                     objevents,
+       Mdm_Request_Header_API.Finite_State_Decode__(rowstate)                         state,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_request_header_tab;

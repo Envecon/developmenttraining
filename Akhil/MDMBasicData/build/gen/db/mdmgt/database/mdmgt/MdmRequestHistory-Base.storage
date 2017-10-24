@@ -1,0 +1,42 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHistory
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE mdm_request_history_tab IS (
+   template_id                    VARCHAR2(30)   NOT NULL,
+   revision                       NUMBER         NOT NULL,
+   request_no                     NUMBER         NOT NULL,
+   seq_no                         NUMBER         NOT NULL,
+   mod_date                       DATE           NULL,
+   mod_by                         VARCHAR2(20)   NULL,
+   history_status                 VARCHAR2(20)   NULL,
+   info                           VARCHAR2(100)  NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY mdm_request_history_pk IS mdm_request_history_tab (
+   template_id,
+   revision,
+   request_no,
+   seq_no);
+
+
+UNIQUE CONSTRAINT mdm_request_history_rk IS mdm_request_history_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

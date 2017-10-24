@@ -1,0 +1,2364 @@
+CREATE OR REPLACE PACKAGE BODY Site_API IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Indicator_Rec IS RECORD
+  (contract                       BOOLEAN := FALSE,
+   company                        BOOLEAN := FALSE,
+   delivery_address               BOOLEAN := FALSE,
+   dist_calendar_id               BOOLEAN := FALSE,
+   manuf_calendar_id              BOOLEAN := FALSE,
+   offset                         BOOLEAN := FALSE);
+
+micro_cache_id_    VARCHAR2(4000);
+
+micro_cache_value_ Public_Rec;
+
+micro_cache_time_  NUMBER := 0;
+
+micro_cache_user_  VARCHAR2(30);
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Invalidate_Cache___;
+
+PROCEDURE Update_Cache___ (
+   contract_ IN VARCHAR2 );
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   contract_ IN VARCHAR2,
+   methodname_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   contract_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ site_tab%ROWTYPE );
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ site_tab%ROWTYPE );
+
+PROCEDURE Raise_Record_Locked___ (
+   contract_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Removed___ (
+   contract_ IN VARCHAR2 );
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys___ (
+   contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Keys___ (
+   contract_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE;
+
+FUNCTION Check_Exist___ (
+   contract_ IN VARCHAR2 ) RETURN BOOLEAN;
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   contract_ IN VARCHAR2 );
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 );
+
+FUNCTION Pack___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2;
+
+FUNCTION Pack___ (
+   rec_ IN site_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2;
+
+FUNCTION Pack_Table___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2;
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec );
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN site_tab%ROWTYPE,
+   newrec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     site_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE );
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE );
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     site_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     SITE_TAB%ROWTYPE,
+   newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN BOOLEAN DEFAULT FALSE );
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN site_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN SITE_TAB%ROWTYPE );
+
+PROCEDURE Delete___ (
+   remrec_ IN site_tab%ROWTYPE );
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE Get_Currency_Converted___ (
+   to_contract_curr_amount_   OUT NUMBER,
+   from_contract_             IN  VARCHAR2,
+   to_contract_               IN  VARCHAR2,
+   from_contract_curr_amount_ IN  NUMBER,
+   make_currency_rounding_    IN  BOOLEAN );
+
+PROCEDURE Check_Country_Code___ (
+   newrec_ IN SITE_TAB%ROWTYPE );
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      rowkey_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+   IS
+      rec_ site_tab%ROWTYPE;
+   BEGIN
+      SELECT contract
+         INTO  rec_.contract
+         FROM  site_tab
+         WHERE rowkey = rowkey_;
+      RETURN rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(rec_.contract, 'Get_Key_By_Rowkey');
+   END Base;
+
+BEGIN
+   RETURN Base(rowkey_);
+END Get_Key_By_Rowkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Exist (
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      IF (NOT Check_Exist___(contract_)) THEN
+         Raise_Record_Not_Exist___(contract_);
+      END IF;
+   END Base;
+
+BEGIN
+   Base(contract_);
+END Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Exists (
+   contract_ IN VARCHAR2 ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN BOOLEAN
+   IS
+   BEGIN
+      RETURN Check_Exist___(contract_);
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Exists;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Company (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.company;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Company;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Delivery_Address (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.delivery_address;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Delivery_Address;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Dist_Calendar_Id (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.dist_calendar_id;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Dist_Calendar_Id;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Manuf_Calendar_Id (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.manuf_calendar_id;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Manuf_Calendar_Id;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Offset (
+   contract_ IN VARCHAR2 ) RETURN NUMBER
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN NUMBER
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.offset;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Offset;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get (
+   contract_ IN VARCHAR2 ) RETURN Public_Rec
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN Public_Rec
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Objkey (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (contract_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      Update_Cache___(contract_);
+      RETURN micro_cache_value_.rowkey;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Objkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2 )
+   IS
+      dummy_ site_tab%ROWTYPE;
+   BEGIN
+      dummy_ := Lock_By_Id___(objid_, objversion_);
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   Base(info_, objid_, objversion_);
+END Lock__;
+
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      newrec_   site_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'PREPARE') THEN
+         Prepare_Insert___(attr_);
+      ELSIF (action_ = 'CHECK') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+         Insert___(objid_, objversion_, newrec_, attr_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'New__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END New__;
+
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      oldrec_   site_tab%ROWTYPE;
+      newrec_   site_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         oldrec_ := Get_Object_By_Id___(objid_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         oldrec_ := Lock_By_Id___(objid_, objversion_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+         Update___(objid_, oldrec_, newrec_, attr_, objversion_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Modify__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END Modify__;
+
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2,
+      action_     IN  VARCHAR2 )
+   IS
+      remrec_ site_tab%ROWTYPE;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         remrec_ := Get_Object_By_Id___(objid_);
+         Check_Delete___(remrec_);
+      ELSIF (action_ = 'DO') THEN
+         remrec_ := Lock_By_Id___(objid_, objversion_);
+         Check_Delete___(remrec_);
+         Delete___(objid_, remrec_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Remove__');
+   Base(info_, objid_, objversion_, action_);
+END Remove__;
+
+
+PROCEDURE Invalidate_Cache___
+IS
+   
+   PROCEDURE Base
+   IS
+      null_value_ Public_Rec;
+   BEGIN
+      micro_cache_id_ := NULL;
+      micro_cache_value_ := null_value_;
+      micro_cache_time_  := 0;
+   END Base;
+
+BEGIN
+   Base;
+END Invalidate_Cache___;
+
+
+PROCEDURE Update_Cache___ (
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2 )
+   IS
+      req_id_     VARCHAR2(1000) := contract_;
+      null_value_ Public_Rec;
+      time_       NUMBER;
+      expired_    BOOLEAN;
+   BEGIN
+      time_    := Database_SYS.Get_Time_Offset;
+      expired_ := ((time_ - micro_cache_time_) > 100);
+      IF (expired_ OR (micro_cache_user_ IS NULL) OR (micro_cache_user_ != Fnd_Session_API.Get_Fnd_User)) THEN
+         Invalidate_Cache___;
+         micro_cache_user_ := Fnd_Session_API.Get_Fnd_User;
+      END IF;
+      IF (expired_ OR (micro_cache_id_ IS NULL) OR (micro_cache_id_ != req_id_)) THEN
+         SELECT contract,
+                rowid, rowversion, rowkey,
+                company, 
+                delivery_address, 
+                dist_calendar_id, 
+                manuf_calendar_id, 
+                offset
+         INTO  micro_cache_value_
+         FROM  site_tab
+         WHERE contract = contract_;
+         micro_cache_id_ := req_id_;
+         micro_cache_time_ := time_;
+      END IF;
+   EXCEPTION
+      WHEN no_data_found THEN
+         micro_cache_value_ := null_value_;
+         micro_cache_id_    := NULL;
+         micro_cache_time_  := time_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(contract_, 'Update_Cache___');
+   END Base;
+
+BEGIN
+   Base(contract_);
+END Update_Cache___;
+
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   contract_ IN VARCHAR2,
+   methodname_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2,
+      methodname_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Too_Many_Rows(Site_API.lu_name_, NULL, methodname_);
+   END Base;
+
+BEGIN
+   Base(contract_, methodname_);
+END Raise_Too_Many_Rows___;
+
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ site_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Exist(Site_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Exist___;
+
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      name_ IN VARCHAR2,
+      value_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Item_Format(Site_API.lu_name_, name_, value_);
+   END Base;
+
+BEGIN
+   Base(name_, value_);
+END Raise_Item_Format___;
+
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ site_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Modified(Site_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Modified___;
+
+
+PROCEDURE Raise_Record_Locked___ (
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Record_Locked(Site_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(contract_);
+END Raise_Record_Locked___;
+
+
+PROCEDURE Raise_Record_Removed___ (
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Record_Removed(Site_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(contract_);
+END Raise_Record_Removed___;
+
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_      IN VARCHAR2,
+      objversion_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        site_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      SELECT *
+         INTO  rec_
+         FROM  site_tab
+         WHERE rowid = objid_
+         AND    to_char(rowversion,'YYYYMMDDHH24MISS') = objversion_
+         FOR UPDATE NOWAIT;
+      RETURN rec_;
+   EXCEPTION
+      WHEN row_locked THEN
+         Error_SYS.Record_Locked(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, 'Lock_By_Id___');
+      WHEN no_data_found THEN
+         BEGIN
+            SELECT 1
+               INTO  dummy_
+               FROM  site_tab
+               WHERE rowid = objid_;
+            Raise_Record_Modified___(rec_);
+         EXCEPTION
+            WHEN no_data_found THEN
+               Error_SYS.Record_Removed(lu_name_);
+            WHEN too_many_rows THEN
+               Raise_Too_Many_Rows___(NULL, 'Lock_By_Id___');
+         END;
+   END Base;
+
+BEGIN
+   RETURN Base(objid_, objversion_);
+END Lock_By_Id___;
+
+
+FUNCTION Lock_By_Keys___ (
+   contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        site_tab%ROWTYPE;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  site_tab
+            WHERE contract = contract_
+            FOR UPDATE;
+         RETURN rec_;
+      EXCEPTION
+         WHEN no_data_found THEN
+            Raise_Record_Removed___(contract_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(contract_, 'Lock_By_Keys___');
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Lock_By_Keys___;
+
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2) RETURN site_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        site_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  site_tab
+            WHERE contract = contract_
+            FOR UPDATE NOWAIT;
+         RETURN rec_;
+      EXCEPTION
+         WHEN row_locked THEN
+            Error_SYS.Record_Locked(lu_name_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(contract_, 'Lock_By_Keys___');
+         WHEN no_data_found THEN
+            BEGIN
+               SELECT 1
+                  INTO  dummy_
+                  FROM  site_tab
+                  WHERE contract = contract_;
+               Raise_Record_Modified___(rec_);
+            EXCEPTION
+               WHEN no_data_found THEN
+                  Raise_Record_Removed___(contract_);
+               WHEN too_many_rows THEN
+                  Raise_Too_Many_Rows___(contract_, 'Lock_By_Keys___');
+            END;
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Lock_By_Keys_Nowait___;
+
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+   IS
+      lu_rec_ site_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  site_tab
+         WHERE rowid = objid_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         Error_SYS.Record_Removed(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, 'Get_Object_By_Id___');
+   END Base;
+
+BEGIN
+   RETURN Base(objid_);
+END Get_Object_By_Id___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Object_By_Keys___ (
+   contract_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN site_tab%ROWTYPE
+   IS
+      lu_rec_ site_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  site_tab
+         WHERE contract = contract_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN lu_rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(contract_, 'Get_Object_By_Keys___');
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Get_Object_By_Keys___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Check_Exist___ (
+   contract_ IN VARCHAR2 ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      contract_ IN VARCHAR2 ) RETURN BOOLEAN
+   IS
+      dummy_ NUMBER;
+   BEGIN
+      SELECT 1
+         INTO  dummy_
+         FROM  site_tab
+         WHERE contract = contract_;
+      RETURN TRUE;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN FALSE;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(contract_, 'Check_Exist___');
+   END Base;
+
+BEGIN
+   RETURN Base(contract_);
+END Check_Exist___;
+
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      SELECT to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objversion_
+         FROM  site_tab
+         WHERE rowid = objid_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, 'Get_Version_By_Id___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_);
+END Get_Version_By_Id___;
+
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      SELECT rowid, to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objid_, objversion_
+         FROM  site_tab
+         WHERE contract = contract_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objid_      := NULL;
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(contract_, 'Get_Id_Version_By_Keys___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_, contract_);
+END Get_Id_Version_By_Keys___;
+
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      newrec_   IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_   IN OUT NOCOPY Indicator_Rec,
+      attr_     IN OUT NOCOPY VARCHAR2 )
+   IS
+      ptr_   NUMBER;
+      name_  VARCHAR2(30);
+      value_ VARCHAR2(32000);
+      msg_   VARCHAR2(32000);
+   BEGIN
+      Reset_Indicator_Rec___(indrec_);
+      Client_SYS.Clear_Attr(msg_);
+      ptr_ := NULL;
+      WHILE (Client_SYS.Get_Next_From_Attr(attr_, ptr_, name_, value_)) LOOP
+         CASE name_
+         WHEN ('CONTRACT') THEN
+            newrec_.contract := value_;
+            indrec_.contract := TRUE;
+         WHEN ('COMPANY') THEN
+            newrec_.company := value_;
+            indrec_.company := TRUE;
+         WHEN ('DELIVERY_ADDRESS') THEN
+            newrec_.delivery_address := value_;
+            indrec_.delivery_address := TRUE;
+         WHEN ('DIST_CALENDAR_ID') THEN
+            newrec_.dist_calendar_id := value_;
+            indrec_.dist_calendar_id := TRUE;
+         WHEN ('MANUF_CALENDAR_ID') THEN
+            newrec_.manuf_calendar_id := value_;
+            indrec_.manuf_calendar_id := TRUE;
+         WHEN ('OFFSET') THEN
+            newrec_.offset := Client_SYS.Attr_Value_To_Number(value_);
+            indrec_.offset := TRUE;
+         ELSE
+            Client_SYS.Add_To_Attr(name_, value_, msg_);
+         END CASE;
+      END LOOP;
+      attr_ := msg_;
+   EXCEPTION
+      WHEN value_error THEN
+         Raise_Item_Format___(name_, value_);
+   END Base;
+
+BEGIN
+   Base(newrec_, indrec_, attr_);
+END Unpack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (rec_.contract IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('CONTRACT', rec_.contract, attr_);
+      END IF;
+      IF (rec_.company IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('COMPANY', rec_.company, attr_);
+      END IF;
+      IF (rec_.delivery_address IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('DELIVERY_ADDRESS', rec_.delivery_address, attr_);
+      END IF;
+      IF (rec_.dist_calendar_id IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('DIST_CALENDAR_ID', rec_.dist_calendar_id, attr_);
+      END IF;
+      IF (rec_.manuf_calendar_id IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('MANUF_CALENDAR_ID', rec_.manuf_calendar_id, attr_);
+      END IF;
+      IF (rec_.offset IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('OFFSET', rec_.offset, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN site_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN site_tab%ROWTYPE,
+      indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (indrec_.contract) THEN
+         Client_SYS.Add_To_Attr('CONTRACT', rec_.contract, attr_);
+      END IF;
+      IF (indrec_.company) THEN
+         Client_SYS.Add_To_Attr('COMPANY', rec_.company, attr_);
+      END IF;
+      IF (indrec_.delivery_address) THEN
+         Client_SYS.Add_To_Attr('DELIVERY_ADDRESS', rec_.delivery_address, attr_);
+      END IF;
+      IF (indrec_.dist_calendar_id) THEN
+         Client_SYS.Add_To_Attr('DIST_CALENDAR_ID', rec_.dist_calendar_id, attr_);
+      END IF;
+      IF (indrec_.manuf_calendar_id) THEN
+         Client_SYS.Add_To_Attr('MANUF_CALENDAR_ID', rec_.manuf_calendar_id, attr_);
+      END IF;
+      IF (indrec_.offset) THEN
+         Client_SYS.Add_To_Attr('OFFSET', rec_.offset, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_, indrec_);
+END Pack___;
+
+
+FUNCTION Pack_Table___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN site_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      Client_SYS.Add_To_Attr('CONTRACT', rec_.contract, attr_);
+      Client_SYS.Add_To_Attr('COMPANY', rec_.company, attr_);
+      Client_SYS.Add_To_Attr('DELIVERY_ADDRESS', rec_.delivery_address, attr_);
+      Client_SYS.Add_To_Attr('DIST_CALENDAR_ID', rec_.dist_calendar_id, attr_);
+      Client_SYS.Add_To_Attr('MANUF_CALENDAR_ID', rec_.manuf_calendar_id, attr_);
+      Client_SYS.Add_To_Attr('OFFSET', rec_.offset, attr_);
+      Client_SYS.Add_To_Attr('ROWKEY', rec_.rowkey, attr_);
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack_Table___;
+
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec )
+IS
+   
+   PROCEDURE Base (
+      indrec_ IN OUT NOCOPY Indicator_Rec )
+   IS
+      empty_indrec_ Indicator_Rec;
+   BEGIN
+      indrec_ := empty_indrec_;
+   END Base;
+
+BEGIN
+   Base(indrec_);
+END Reset_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      rec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.contract := rec_.contract IS NOT NULL;
+      indrec_.company := rec_.company IS NOT NULL;
+      indrec_.delivery_address := rec_.delivery_address IS NOT NULL;
+      indrec_.dist_calendar_id := rec_.dist_calendar_id IS NOT NULL;
+      indrec_.manuf_calendar_id := rec_.manuf_calendar_id IS NOT NULL;
+      indrec_.offset := rec_.offset IS NOT NULL;
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Get_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN site_tab%ROWTYPE,
+   newrec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      oldrec_ IN site_tab%ROWTYPE,
+      newrec_ IN site_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.contract := Validate_SYS.Is_Changed(oldrec_.contract, newrec_.contract);
+      indrec_.company := Validate_SYS.Is_Changed(oldrec_.company, newrec_.company);
+      indrec_.delivery_address := Validate_SYS.Is_Changed(oldrec_.delivery_address, newrec_.delivery_address);
+      indrec_.dist_calendar_id := Validate_SYS.Is_Changed(oldrec_.dist_calendar_id, newrec_.dist_calendar_id);
+      indrec_.manuf_calendar_id := Validate_SYS.Is_Changed(oldrec_.manuf_calendar_id, newrec_.manuf_calendar_id);
+      indrec_.offset := Validate_SYS.Is_Changed(oldrec_.offset, newrec_.offset);
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(oldrec_, newrec_);
+END Get_Indicator_Rec___;
+
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     site_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     site_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      IF (newrec_.contract IS NOT NULL)
+      AND (indrec_.contract)
+      AND (Validate_SYS.Is_Changed(oldrec_.contract, newrec_.contract)) THEN
+         Company_Site_API.Exist(newrec_.contract);
+      END IF;
+      IF (newrec_.company IS NOT NULL)
+      AND (indrec_.company)
+      AND (Validate_SYS.Is_Changed(oldrec_.company, newrec_.company)) THEN
+         Company_Finance_API.Exist(newrec_.company);
+      END IF;
+      IF (newrec_.company IS NOT NULL AND newrec_.delivery_address IS NOT NULL)
+      AND (indrec_.company OR indrec_.delivery_address)
+      AND (Validate_SYS.Is_Changed(oldrec_.company, newrec_.company)
+        OR Validate_SYS.Is_Changed(oldrec_.delivery_address, newrec_.delivery_address)) THEN
+         Company_Address_API.Exist(newrec_.company, newrec_.delivery_address);
+      END IF;
+      IF (newrec_.dist_calendar_id IS NOT NULL)
+      AND (indrec_.dist_calendar_id)
+      AND (Validate_SYS.Is_Changed(oldrec_.dist_calendar_id, newrec_.dist_calendar_id)) THEN
+         Work_Time_Calendar_API.Exist(newrec_.dist_calendar_id);
+      END IF;
+      IF (newrec_.manuf_calendar_id IS NOT NULL)
+      AND (indrec_.manuf_calendar_id)
+      AND (Validate_SYS.Is_Changed(oldrec_.manuf_calendar_id, newrec_.manuf_calendar_id)) THEN
+         Work_Time_Calendar_API.Exist(newrec_.manuf_calendar_id);
+      END IF;
+      Error_SYS.Check_Not_Null(lu_name_, 'CONTRACT', newrec_.contract);
+      Error_SYS.Check_Not_Null(lu_name_, 'COMPANY', newrec_.company);
+      Error_SYS.Check_Not_Null(lu_name_, 'DIST_CALENDAR_ID', newrec_.dist_calendar_id);
+      Error_SYS.Check_Not_Null(lu_name_, 'MANUF_CALENDAR_ID', newrec_.manuf_calendar_id);
+      Error_SYS.Check_Not_Null(lu_name_, 'OFFSET', newrec_.offset);
+   END Base;
+
+BEGIN
+   Base(oldrec_, newrec_, indrec_, attr_);
+END Check_Common___;
+
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE )
+   IS
+      attr_    VARCHAR2(32000);
+      indrec_  Indicator_Rec;
+   BEGIN
+      Prepare_Insert___(attr_);
+      Unpack___(newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END Prepare_New___;
+
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE )
+   IS
+      objid_         VARCHAR2(20);
+      objversion_    VARCHAR2(100);
+      attr_          VARCHAR2(32000);
+      indrec_        Indicator_Rec;
+      emptyrec_      site_tab%ROWTYPE;
+   BEGIN
+      indrec_ := Get_Indicator_Rec___(emptyrec_, newrec_);
+      Check_Insert___(newrec_, indrec_, attr_);
+      Insert___(objid_, objversion_, newrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END New___;
+
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      newrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      objid_      VARCHAR2(20);
+      objversion_ VARCHAR2(100);
+      attr_       VARCHAR2(32000);
+      indrec_     Indicator_rec;
+      oldrec_     site_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(newrec_.contract);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(newrec_.contract);
+      END IF;
+      indrec_ := Get_Indicator_Rec___(oldrec_, newrec_);
+      Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      Update___(objid_, oldrec_, newrec_, attr_, objversion_, TRUE);
+   END Base;
+
+BEGIN
+   Base(newrec_, lock_mode_wait_);
+END Modify___;
+
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN site_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.contract||'^';
+      Reference_SYS.Check_Restricted_Delete(lu_name_, key_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Check_Delete___;
+
+
+PROCEDURE Delete___ (
+   remrec_ IN site_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN site_tab%ROWTYPE )
+   IS
+   BEGIN
+      Delete___(NULL, remrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Delete___;
+
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      remrec_         IN OUT NOCOPY site_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      oldrec_     site_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(remrec_.contract);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(remrec_.contract);
+      END IF;
+      Check_Delete___(oldrec_);
+      Delete___(NULL, oldrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_, lock_mode_wait_);
+END Remove___;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Description (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      RETURN Company_Site_API.Get_Description(contract_);
+   END Core;
+
+BEGIN
+   RETURN Core(contract_);
+END Get_Description;
+
+
+PROCEDURE Get_Control_Type_Value_Desc (
+   description_ OUT VARCHAR2,
+   company_     IN  VARCHAR2,
+   value_       IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Core (
+      description_ OUT VARCHAR2,
+      company_     IN  VARCHAR2,
+      value_       IN  VARCHAR2 )
+   IS
+   BEGIN
+     description_ := Get_Description(value_);
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Get_Control_Type_Value_Desc');
+   Core(description_, company_, value_);
+END Get_Control_Type_Value_Desc;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Site_Date (
+   contract_ IN VARCHAR2 ) RETURN DATE
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN DATE
+   IS
+   BEGIN
+      RETURN SYSDATE + (Get_Offset(contract_) / 24);
+   END Core;
+
+BEGIN
+   RETURN Core(contract_);
+END Get_Site_Date;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Min_Offset RETURN NUMBER
+IS
+   
+   FUNCTION Core RETURN NUMBER
+   IS
+     temp_ SITE_TAB.offset%TYPE;
+      CURSOR get_attr IS
+         SELECT MIN(offset)
+         FROM SITE_TAB;
+   BEGIN
+      OPEN get_attr;
+      FETCH get_attr INTO temp_ ;
+      CLOSE get_attr;
+      RETURN temp_;
+   END Core;
+
+BEGIN
+   RETURN Core;
+END Get_Min_Offset;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Min_Offset_By_Company (
+   company_ IN VARCHAR2) RETURN NUMBER
+IS
+   
+   FUNCTION Core (
+      company_ IN VARCHAR2) RETURN NUMBER
+   IS
+     temp_ SITE_TAB.offset%TYPE;
+      CURSOR get_attr IS
+         SELECT MIN(offset)
+         FROM   SITE_TAB
+         WHERE  company = company_;
+   BEGIN
+      OPEN get_attr;
+      FETCH get_attr INTO temp_ ;
+      CLOSE get_attr;
+      RETURN temp_;
+   END Core;
+
+BEGIN
+   RETURN Core(company_);
+END Get_Min_Offset_By_Company;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Max_Offset RETURN NUMBER
+IS
+   
+   FUNCTION Core RETURN NUMBER
+   IS
+      temp_ SITE_TAB.offset%TYPE;
+      CURSOR get_attr IS
+         SELECT MAX(offset)
+         FROM SITE_TAB;
+   BEGIN
+     OPEN get_attr;
+     FETCH get_attr INTO temp_ ;
+     CLOSE get_attr;
+     RETURN temp_;
+   END Core;
+
+BEGIN
+   RETURN Core;
+END Get_Max_Offset;
+
+
+PROCEDURE Get_Del_Addr_By_Company (
+   count_                 OUT NUMBER,
+   delivery_address_info_ OUT SITE_ADDRESS_INFO_TYPE,
+   company_               IN VARCHAR2 )
+IS
+   
+   PROCEDURE Core (
+      count_                 OUT NUMBER,
+      delivery_address_info_ OUT SITE_ADDRESS_INFO_TYPE,
+      company_               IN VARCHAR2 )
+   IS
+      index_no_      NUMBER:=-1;
+      address_array_ SITE_ADDRESS_INFO_TYPE;
+   
+      CURSOR get_address IS
+         SELECT contract,delivery_address
+         FROM SITE_TAB
+         WHERE company = company_;
+   BEGIN
+      FOR i IN get_address LOOP
+         IF (index_no_ = -1) THEN
+            index_no_ :=0;
+         END IF;
+         address_array_(index_no_).contract := i.contract;
+         address_array_(index_no_).delivery_address := i.delivery_address;
+         index_no_ := index_no_ + 1;
+      END LOOP;
+      count_ :=index_no_-1;
+      delivery_address_info_ := address_array_;
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Get_Del_Addr_By_Company');
+   Core(count_, delivery_address_info_, company_);
+END Get_Del_Addr_By_Company;
+
+
+FUNCTION Get_Packed_Customer_Data (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+      site_rec_        Public_Rec;
+      del_addr_rec_    Company_Address_API.Public_Rec;
+      doc_addr_rec_    Company_Address_API.Public_Rec;
+      del_addr_name_   VARCHAR2(2000);
+      doc_addr_name_   VARCHAR2(2000);
+      customer_no_     Customer_Info_Public.customer_id%TYPE;
+      msg_             VARCHAR2(32000);
+      doc_addr_        site_tab.delivery_address%TYPE;
+      extended_search_ VARCHAR2(5) := 'FALSE';   
+   BEGIN
+      site_rec_ := Get(contract_);
+   
+      $IF (Component_Discom_SYS.INSTALLED) $THEN
+         doc_addr_ := Site_Discom_Info_API.Get_Document_Address_Id(contract_, extended_search_);               
+      $END
+      
+      $IF (Component_Invent_SYS.INSTALLED) $THEN
+         IF (site_rec_.delivery_address IS NOT NULL OR doc_addr_ IS NOT NULL) THEN
+            del_addr_name_ := Company_Address_Deliv_Info_API.Get_Address_Name(site_rec_.company, site_rec_.delivery_address);
+            doc_addr_name_ := Company_Address_Deliv_Info_API.Get_Address_Name(site_rec_.company, doc_addr_);            
+         END IF;
+      $END
+   
+      del_addr_rec_ := Company_Address_API.Get(site_rec_.company, site_rec_.delivery_address);
+   
+      doc_addr_rec_ := Company_Address_API.Get(site_rec_.company, doc_addr_);
+   
+      IF (Party_Identity_Series_API.Get_Next_Value(Party_Type_API.Decode('CUSTOMER')) IS NOT NULL) THEN
+         LOOP
+            Party_Identity_Series_API.Get_Next_Identity(customer_no_, 'CUSTOMER');
+            EXIT WHEN Customer_Info_API.Check_Exist(customer_no_) = 'FALSE';
+         END LOOP;
+      END IF;
+   
+      msg_ := Message_SYS.Construct('SITE');
+      Message_SYS.Add_Attribute(msg_, 'NEW_CUSTOMER_ID',      customer_no_);
+      Message_SYS.Add_Attribute(msg_, 'DEL_ADDR_NO',          site_rec_.delivery_address);
+      Message_SYS.Add_Attribute(msg_, 'DEL_NAME',             del_addr_name_);
+      Message_SYS.Add_Attribute(msg_, 'DEL_NAME',             del_addr_name_);
+      Message_SYS.Add_Attribute(msg_, 'DEL_ADDRESS1',         del_addr_rec_.address1);
+      Message_SYS.Add_Attribute(msg_, 'DEL_ADDRESS2',         del_addr_rec_.address2);
+      Message_SYS.Add_Attribute(msg_, 'DEL_ZIP_CODE',         del_addr_rec_.zip_code);
+      Message_SYS.Add_Attribute(msg_, 'DEL_CITY',             del_addr_rec_.city);
+      Message_SYS.Add_Attribute(msg_, 'DEL_STATE',            del_addr_rec_.state);
+      Message_SYS.Add_Attribute(msg_, 'DEL_COUNTY',           del_addr_rec_.county);
+      Message_SYS.Add_Attribute(msg_, 'DEL_COUNTRY',          Iso_Country_API.Decode(del_addr_rec_.country));
+      Message_SYS.Add_Attribute(msg_, 'DEL_EAN_LOCATION',     del_addr_rec_.ean_location);
+      Message_SYS.Add_Attribute(msg_, 'DOC_ADDR_NO',          doc_addr_);
+      Message_SYS.Add_Attribute(msg_, 'DOC_NAME',             doc_addr_name_);
+      Message_SYS.Add_Attribute(msg_, 'DOC_ADDRESS1',         doc_addr_rec_.address1);
+      Message_SYS.Add_Attribute(msg_, 'DOC_ADDRESS2',         doc_addr_rec_.address2);
+      Message_SYS.Add_Attribute(msg_, 'DOC_ZIP_CODE',         doc_addr_rec_.zip_code);
+      Message_SYS.Add_Attribute(msg_, 'DOC_CITY',             doc_addr_rec_.city);
+      Message_SYS.Add_Attribute(msg_, 'DOC_STATE',            doc_addr_rec_.state);
+      Message_SYS.Add_Attribute(msg_, 'DOC_COUNTY',           doc_addr_rec_.county);
+      Message_SYS.Add_Attribute(msg_, 'DOC_COUNTRY',          Iso_Country_API.Decode(doc_addr_rec_.country));
+      Message_SYS.Add_Attribute(msg_, 'DOC_EAN_LOCATION',     doc_addr_rec_.ean_location);
+      Message_SYS.Add_Attribute(msg_, 'ACQUISITION_SITE',     contract_);
+      Message_SYS.Add_Attribute(msg_, 'IS_INTERNAL_CUSTOMER', 'TRUE');
+      RETURN msg_;
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Get_Packed_Customer_Data');
+   RETURN Core(contract_);
+END Get_Packed_Customer_Data;
+
+
+PROCEDURE Fetch_Int_Supplier_Info (
+   del_addr1_    OUT VARCHAR2,
+   del_addr2_    OUT VARCHAR2,
+   del_zip_code_ OUT VARCHAR2,
+   del_city_     OUT VARCHAR2,
+   del_state_    OUT VARCHAR2,
+   del_county_   OUT VARCHAR2,
+   del_country_  OUT VARCHAR2,
+   contract_     IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Core (
+      del_addr1_    OUT VARCHAR2,
+      del_addr2_    OUT VARCHAR2,
+      del_zip_code_ OUT VARCHAR2,
+      del_city_     OUT VARCHAR2,
+      del_state_    OUT VARCHAR2,
+      del_county_   OUT VARCHAR2,
+      del_country_  OUT VARCHAR2,
+      contract_     IN  VARCHAR2 )
+   IS
+      site_rec_ Public_Rec;
+      addr_rec_ Company_Address_API.Public_Rec;
+   BEGIN
+      site_rec_ := Get(contract_);
+      addr_rec_ := Company_Address_API.Get(site_rec_.company, site_rec_.delivery_address);
+   
+      del_addr1_    := addr_rec_.address1;
+      del_addr2_    := addr_rec_.address2;
+      del_zip_code_ := addr_rec_.zip_code;
+      del_city_     := addr_rec_.city;
+      del_state_    := addr_rec_.state;
+      del_county_   := addr_rec_.county;
+      del_country_  := Iso_Country_API.Decode(addr_rec_.country);
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Fetch_Int_Supplier_Info');
+   Core(del_addr1_, del_addr2_, del_zip_code_, del_city_, del_state_, del_county_, del_country_, contract_);
+END Fetch_Int_Supplier_Info;
+
+
+FUNCTION Get_Currency_Converted_Amount (
+   from_contract_             IN VARCHAR2,
+   to_contract_               IN VARCHAR2,
+   from_contract_curr_amount_ IN NUMBER ) RETURN NUMBER
+IS
+   
+   FUNCTION Core (
+      from_contract_             IN VARCHAR2,
+      to_contract_               IN VARCHAR2,
+      from_contract_curr_amount_ IN NUMBER ) RETURN NUMBER
+   IS
+      to_contract_curr_amount_ NUMBER;
+   BEGIN
+      -- The above General_SYS.Init is added instead of PRAGMA. Do not remove the Init
+   
+      Get_Currency_Converted___(to_contract_curr_amount_,
+                                from_contract_,
+                                to_contract_,
+                                from_contract_curr_amount_,
+                                TRUE);
+      RETURN to_contract_curr_amount_;
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Get_Currency_Converted_Amount');
+   RETURN Core(from_contract_, to_contract_, from_contract_curr_amount_);
+END Get_Currency_Converted_Amount;
+
+
+FUNCTION Get_Currency_Converted_Cost (
+   from_contract_           IN VARCHAR2,
+   to_contract_             IN VARCHAR2,
+   from_contract_curr_cost_ IN NUMBER ) RETURN NUMBER
+IS
+   
+   FUNCTION Core (
+      from_contract_           IN VARCHAR2,
+      to_contract_             IN VARCHAR2,
+      from_contract_curr_cost_ IN NUMBER ) RETURN NUMBER
+   IS
+      to_contract_curr_cost_ NUMBER;
+   BEGIN
+      -- The above General_SYS.Init is added instead of PRAGMA. Do not remove the Init
+   
+      Get_Currency_Converted___(to_contract_curr_cost_,
+                                from_contract_,
+                                to_contract_,
+                                from_contract_curr_cost_,
+                                FALSE);
+      RETURN to_contract_curr_cost_;
+   END Core;
+
+BEGIN
+   General_SYS.Init_Method(Site_API.lu_name_, 'Site_API', 'Get_Currency_Converted_Cost');
+   RETURN Core(from_contract_, to_contract_, from_contract_curr_cost_);
+END Get_Currency_Converted_Cost;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Check_Exist (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      IF (Check_Exist___(contract_) = TRUE) THEN
+         RETURN 'TRUE';
+      ELSE
+         RETURN 'FALSE';
+      END IF;
+   END Core;
+
+BEGIN
+   RETURN Core(contract_);
+END Check_Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Default_Language_Db (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+   BEGIN
+      RETURN Company_API.Get_Default_Language_Db(Get_Company(contract_));
+   END Core;
+
+BEGIN
+   RETURN Core(contract_);
+END Get_Default_Language_Db;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Company_Address_Name (
+   contract_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+      contract_ IN VARCHAR2 ) RETURN VARCHAR2
+   IS
+      doc_addr_id_      VARCHAR2(50);
+      company_name_     VARCHAR2(100);
+      company_          SITE_TAB.company%TYPE;
+      addr_name_        VARCHAR2(100);
+   BEGIN
+      $IF Component_Discom_SYS.INSTALLED $THEN
+         doc_addr_id_ := Site_Discom_Info_API.Get_Document_Address_Id(contract_, 'TRUE');
+      $END
+      company_ := Get_Company(contract_);
+      $IF Component_Invent_SYS.INSTALLED $THEN
+         addr_name_ := Company_Address_Deliv_Info_API.Get_Address_Name(company_, doc_addr_id_);
+      $END
+      company_name_ := NVL(addr_name_, Company_API.Get_Name(company_));
+      RETURN company_name_;
+   END Core;
+
+BEGIN
+   RETURN Core(contract_);
+END Get_Company_Address_Name;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Is_Company_Site_Available (
+	company_ IN VARCHAR2,
+   site_    IN VARCHAR2) RETURN VARCHAR2
+IS
+   
+   FUNCTION Core (
+   	company_ IN VARCHAR2,
+      site_    IN VARCHAR2) RETURN VARCHAR2
+   IS
+      CURSOR get_company_sites IS
+         SELECT 1 FROM site_tab 
+         WHERE company=company_ AND contract=site_;
+   
+      dummy_ NUMBER;
+      
+   BEGIN
+   	OPEN get_company_sites;
+      FETCH get_company_sites INTO dummy_;
+      IF get_company_sites%NOTFOUND THEN
+         CLOSE get_company_sites;
+         RETURN 'FALSE';
+      ELSE
+         CLOSE get_company_sites;
+         RETURN 'TRUE';
+      END IF;
+   END Core;
+
+BEGIN
+   RETURN Core(company_, site_);
+END Is_Company_Site_Available;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   contract_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Record_Not_Exist(Site_API.lu_name_);
+   END Base;
+
+   PROCEDURE Core (
+      contract_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Record_Not_Exist(lu_name_, p1_ => contract_);
+      Base(contract_);
+   END Core;
+
+BEGIN
+   Core(contract_);
+END Raise_Record_Not_Exist___;
+
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+   END Base;
+
+   PROCEDURE Core (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Base(attr_);
+      Client_SYS.Add_To_Attr('OFFSET', 0, attr_);
+   END Core;
+
+BEGIN
+   Core(attr_);
+END Prepare_Insert___;
+
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      oldrec_ site_tab%ROWTYPE;
+   BEGIN
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+   PROCEDURE Core (
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      name_                    VARCHAR2(30);
+      value_                   VARCHAR2(4000);
+      delivery_address_exists_ VARCHAR2(5);
+   BEGIN
+      
+      IF (newrec_.contract = '*') THEN
+         Error_SYS.Record_General(lu_name_,'NOSTARSIGN: Site ID cannot be * sign');
+      END IF;
+         
+      IF (indrec_.contract) THEN 
+         IF (instr(newrec_.contract, '%') > 0) THEN
+            Error_SYS.Record_General(lu_name_, 'NOPERCENTSIGN: Site ID cannot contain % sign.');
+         END IF;
+      END IF;
+      
+      IF (Client_SYS.Item_Exist('DESCRIPTION', attr_)) THEN 
+         Error_SYS.Item_Insert(lu_name_, 'DESCRIPTION');
+      END IF;
+    
+      Base(newrec_, indrec_, attr_);
+   
+      Error_SYS.Check_Valid_Key_String('CONTRACT', newrec_.contract);
+   
+      -- Note: Check Delivery Address
+      IF (newrec_.delivery_address IS NOT NULL) THEN
+         -- Note: Checks whether the address is of type DELIVERY
+         delivery_address_exists_ := Company_Address_Type_API.Check_Exist(newrec_.company,
+                                                                          newrec_.delivery_address,
+                                                                          Address_Type_Code_API.Decode('DELIVERY'));
+         IF (delivery_address_exists_ = 'FALSE') THEN
+            Error_SYS.Record_General(lu_name_, 'DELTYPENOTEXISTIN: Address ID :P1 in company :P2 is not a delivery address.', newrec_.delivery_address, newrec_.company );
+         END IF;
+      END IF;
+   
+      IF newrec_.offset>24 OR newrec_.offset<-24 THEN
+         Error_SYS.Record_General(lu_name_, 'OFFOFFSET: Time offset must be between -24 and 24 hours.');
+      END IF;
+   EXCEPTION
+      WHEN value_error THEN
+         Error_SYS.Item_Format(lu_name_, name_, value_);
+   END Core;
+
+BEGIN
+   Core(newrec_, indrec_, attr_);
+END Check_Insert___;
+
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY site_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      newrec_.rowkey := sys_guid();
+      Client_SYS.Add_To_Attr('OBJKEY', newrec_.rowkey, attr_);
+      newrec_.contract := upper(newrec_.contract);
+      newrec_.company := upper(newrec_.company);
+      newrec_.delivery_address := upper(newrec_.delivery_address);
+      newrec_.dist_calendar_id := upper(newrec_.dist_calendar_id);
+      newrec_.manuf_calendar_id := upper(newrec_.manuf_calendar_id);
+      INSERT
+         INTO site_tab
+         VALUES newrec_
+         RETURNING rowid INTO objid_;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'SITE_RK') THEN
+               Error_SYS.Rowkey_Exist(lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+   PROCEDURE Core (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Base(objid_, objversion_, newrec_, attr_);
+   
+      IF (newrec_.delivery_address IS NOT NULL) THEN
+         Check_Country_Code___(newrec_);
+      END IF;
+      -- create default invent info for a new site.
+      $IF (Component_Invent_SYS.INSTALLED) $THEN
+         Site_Invent_Info_API.New(newrec_.contract);               
+      $END
+   
+      -- create default discom info for a new site.
+      $IF (Component_Discom_SYS.INSTALLED) $THEN
+         Site_Discom_Info_API.New(newrec_.contract);      
+      $END
+   
+      -- create default mfgstd info for a new site.
+      $IF (Component_Mfgstd_SYS.INSTALLED) $THEN
+         Site_Mfgstd_Info_API.New(newrec_.contract);       
+      $END
+   
+      -- create default mscom info for a new site.
+      $IF (Component_Mscom_SYS.INSTALLED) $THEN
+         Site_Mscom_Info_API.New(newrec_.contract);              
+      $END
+   
+      -- create default cost sets for a new site.
+      $IF (Component_Cost_SYS.INSTALLED) $THEN
+         Cost_Set_API.Create_Default(newrec_.contract); 
+      $END
+   
+      -- create default warehouse task types in warehouse task type setup.
+      $IF (Component_Invent_SYS.INSTALLED) $THEN
+         Warehouse_Task_Type_Setup_API.New_Site(newrec_.contract);
+      $END
+   
+      -- create Kanban defaults for a new Site in Kanban Setup.
+      $IF (Component_Kanban_SYS.INSTALLED) $THEN
+         Kanban_Setup_API.New_Site(newrec_.contract);
+      $END
+   
+      -- create default rental info for a new site.
+      $IF (Component_Rental_SYS.INSTALLED) $THEN
+         Site_Rental_Info_API.New(newrec_.contract);
+      $ELSE
+         NULL;
+      $END
+   
+      Work_Time_Calendar_API.Add_Info_On_Pending(newrec_.dist_calendar_id);
+   
+      IF (newrec_.dist_calendar_id != newrec_.manuf_calendar_id) THEN
+         Work_Time_Calendar_API.Add_Info_On_Pending(newrec_.manuf_calendar_id);
+      END IF;
+   
+      SELECT rowid
+         INTO  objid_
+         FROM  SITE_TAB
+         WHERE contract = newrec_.contract;
+   
+      $IF (Component_Quaman_SYS.INSTALLED) $THEN
+         Qman_Mandatory_Site_API.New(newrec_.contract);     
+      $END
+   
+      User_Default_API.New(Fnd_Session_API.Get_Fnd_User);
+      User_Allowed_Site_API.New(Fnd_Session_API.Get_Fnd_User, newrec_.contract);
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         Error_SYS.Record_Exist(lu_name_);
+   END Core;
+
+BEGIN
+   Core(objid_, objversion_, newrec_, attr_);
+END Insert___;
+
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     site_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     site_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Validate_SYS.Item_Update(lu_name_, 'CONTRACT', indrec_.contract);
+      Validate_SYS.Item_Update(lu_name_, 'COMPANY', indrec_.company);
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+   PROCEDURE Core (
+      oldrec_ IN     site_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY site_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      name_                     VARCHAR2(30);
+      value_                    VARCHAR2(4000);
+      delivery_address_exists_  VARCHAR2(5);
+      char_null_                VARCHAR2(12) := 'VARCHAR2NULL';
+   BEGIN
+   
+      IF (Client_SYS.Item_Exist('DESCRIPTION', attr_)) THEN 
+         Error_SYS.Item_Insert(lu_name_, 'DESCRIPTION');
+      END IF;
+      
+      Base(oldrec_, newrec_, indrec_, attr_);
+   
+      User_Allowed_Site_API.Exist(Fnd_Session_API.Get_Fnd_User,newrec_.contract);
+   
+      IF (newrec_.offset>24) OR (newrec_.offset<-24) THEN
+         Error_SYS.Record_General(lu_name_, 'OFFOFFSET: Time offset must be between -24 and 24 hours.');
+      END IF;
+      
+      IF ((NVL(newrec_.delivery_address, char_null_) != NVL(oldrec_.delivery_address, char_null_))
+           AND newrec_.delivery_address IS NOT NULL) THEN
+         -- Note: Checks whether the address is of type DELIVERY
+         delivery_address_exists_ := Company_Address_Type_API.Check_Exist(newrec_.company,
+                                                                          newrec_.delivery_address,
+                                                                          Address_Type_Code_API.Decode('DELIVERY'));
+         IF (delivery_address_exists_ = 'FALSE') THEN
+            Error_SYS.Record_General(lu_name_, 'DELTYPENOTEXISTUP: Address ID :P1 in company :P2 is not a delivery address.', newrec_.delivery_address, newrec_.company );
+         END IF;
+      END IF;
+   EXCEPTION
+      WHEN value_error THEN
+         Error_SYS.Item_Format(lu_name_, name_, value_);
+   END Core;
+
+BEGIN
+   Core(oldrec_, newrec_, indrec_, attr_);
+END Check_Update___;
+
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     SITE_TAB%ROWTYPE,
+   newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN BOOLEAN DEFAULT FALSE )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      oldrec_     IN     site_tab%ROWTYPE,
+      newrec_     IN OUT NOCOPY site_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      by_keys_    IN     BOOLEAN DEFAULT FALSE )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      newrec_.contract := upper(newrec_.contract);
+      newrec_.company := upper(newrec_.company);
+      newrec_.delivery_address := upper(newrec_.delivery_address);
+      newrec_.dist_calendar_id := upper(newrec_.dist_calendar_id);
+      newrec_.manuf_calendar_id := upper(newrec_.manuf_calendar_id);
+      IF by_keys_ THEN
+         UPDATE site_tab
+            SET ROW = newrec_
+            WHERE contract = newrec_.contract;
+      ELSE
+         UPDATE site_tab
+            SET ROW = newrec_
+            WHERE rowid = objid_;
+      END IF;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+      Invalidate_Cache___;
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'SITE_RK') THEN
+               Error_SYS.Rowkey_Exist(Site_API.lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+   PROCEDURE Core (
+      objid_      IN     VARCHAR2,
+      oldrec_     IN     SITE_TAB%ROWTYPE,
+      newrec_     IN OUT NOCOPY SITE_TAB%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      by_keys_    IN BOOLEAN DEFAULT FALSE )
+   IS
+   BEGIN
+      Base(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
+      
+      IF ((NVL(newrec_.delivery_address, Database_SYS.string_null_) != NVL(oldrec_.delivery_address, Database_SYS.string_null_))
+           AND newrec_.delivery_address IS NOT NULL) THEN
+         Check_Country_Code___(newrec_);
+      END IF;
+      -- Tell the calendar dependent LU's that the calendar id has been switched to another one
+      IF (newrec_.dist_calendar_id != oldrec_.dist_calendar_id) THEN
+         IF (Work_Time_Calendar_API.Get_Max_Work_Day(oldrec_.dist_calendar_id) > Work_Time_Calendar_API.Get_Max_Work_Day(newrec_.dist_calendar_id)) THEN
+             IF (Work_Time_Calendar_API.Get_Min_Work_Day(oldrec_.dist_calendar_id) < Work_Time_Calendar_API.Get_Min_Work_Day(newrec_.dist_calendar_id))THEN
+                Client_SYS.Add_Info(lu_name_, 'CAL_START_END_DIF: The specified time period in calendar :P1 is shorter than that of calendar :P2. This may affect outstanding orders.', newrec_.dist_calendar_id, oldrec_.dist_calendar_id);
+             ELSE
+                Client_SYS.Add_Info(lu_name_, 'CAL_EARLIER: The end date for calendar :P1 is earlier than for calendar :P2. This may affect outstanding orders.', newrec_.dist_calendar_id, oldrec_.dist_calendar_id); 
+             END IF;
+         ELSE
+            IF (Work_Time_Calendar_API.Get_Min_Work_Day(oldrec_.dist_calendar_id) < Work_Time_Calendar_API.Get_Min_Work_Day(newrec_.dist_calendar_id)) THEN
+               Client_SYS.Add_Info(lu_name_, 'CAL_LATER: The start date for calendar :P1 is later than for calendar :P2. This may affect outstanding orders.', newrec_.dist_calendar_id, oldrec_.dist_calendar_id);    
+            END IF;
+         END IF;
+         Work_Time_Calendar_API.Calendar_Switched(newrec_.dist_calendar_id, newrec_.contract);
+      END IF;
+   
+      IF ((newrec_.manuf_calendar_id != oldrec_.manuf_calendar_id)
+        AND ((newrec_.dist_calendar_id = oldrec_.dist_calendar_id)                -- only skip if made
+               OR (newrec_.dist_calendar_id != newrec_.manuf_calendar_id))) THEN  -- for dist.cal
+           IF (Work_Time_Calendar_API.Get_Max_Work_Day(oldrec_.manuf_calendar_id) > Work_Time_Calendar_API.Get_Max_Work_Day(newrec_.manuf_calendar_id)) THEN
+             IF (Work_Time_Calendar_API.Get_Min_Work_Day(oldrec_.manuf_calendar_id) < Work_Time_Calendar_API.Get_Min_Work_Day(newrec_.manuf_calendar_id)) THEN
+                Client_SYS.Add_Info(lu_name_, 'CAL_START_END_DIF: The specified time period in calendar :P1 is shorter than that of calendar :P2. This may affect outstanding orders.', newrec_.manuf_calendar_id, oldrec_.manuf_calendar_id);
+             ELSE
+                Client_SYS.Add_Info(lu_name_, 'CAL_EARLIER: The end date for calendar :P1 is earlier than for calendar :P2. This may affect outstanding orders.', newrec_.manuf_calendar_id, oldrec_.manuf_calendar_id); 
+             END IF;
+         ELSE
+            IF (Work_Time_Calendar_API.Get_Min_Work_Day(oldrec_.manuf_calendar_id) < Work_Time_Calendar_API.Get_Min_Work_Day(newrec_.manuf_calendar_id)) THEN
+               Client_SYS.Add_Info(lu_name_, 'CAL_LATER: The start date for calendar :P1 is later than for calendar :P2. This may affect outstanding orders.', newrec_.manuf_calendar_id, oldrec_.manuf_calendar_id);    
+            END IF;
+         END IF;
+         Work_Time_Calendar_API.Calendar_Switched(newrec_.manuf_calendar_id, newrec_.contract);
+      END IF;
+   
+      IF (oldrec_.dist_calendar_id != newrec_.dist_calendar_id) THEN
+         Work_Time_Calendar_API.Add_Info_On_Pending(newrec_.dist_calendar_id);
+      END IF;
+   
+      IF (oldrec_.manuf_calendar_id != newrec_.manuf_calendar_id) THEN
+         IF NOT((newrec_.manuf_calendar_id = newrec_.dist_calendar_id) AND (newrec_.dist_calendar_id != oldrec_.dist_calendar_id)) THEN
+            Work_Time_Calendar_API.Add_Info_On_Pending(newrec_.manuf_calendar_id);
+         END IF;
+      END IF;
+      
+      $IF (Component_Cbs_SYS.INSTALLED) $THEN
+         IF (oldrec_.offset != newrec_.offset) THEN
+            DECLARE
+               check_contract_ BOOLEAN;
+            BEGIN
+               check_contract_ := Scheduling_Site_Config_API.Check_Contract(newrec_.contract);
+               IF (check_contract_) THEN
+                  Scheduling_Int_API.Modify_Site(newrec_.contract,
+                                                 newrec_.dist_calendar_id,
+                                                 oldrec_.dist_calendar_id,
+                                                 newrec_.offset,
+                                                 oldrec_.offset);
+               END IF;
+            END;
+         END IF;
+      $END
+      Invalidate_Cache___;
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         Error_SYS.Record_Exist(lu_name_);
+   END Core;
+
+BEGIN
+   Core(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
+END Update___;
+
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN SITE_TAB%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      objid_  IN VARCHAR2,
+      remrec_ IN site_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.contract||'^';
+      Reference_SYS.Do_Cascade_Delete(lu_name_, key_);
+      IF (objid_ IS NOT NULL) THEN
+         DELETE
+            FROM  site_tab
+            WHERE rowid = objid_;
+      ELSE
+         DELETE
+            FROM  site_tab
+            WHERE contract = remrec_.contract;
+      END IF;
+      Invalidate_Cache___;
+   END Base;
+
+   PROCEDURE Core (
+      objid_  IN VARCHAR2,
+      remrec_ IN SITE_TAB%ROWTYPE )
+   IS
+   BEGIN
+      Base(objid_, remrec_);
+   
+      $IF (Component_Quaman_SYS.INSTALLED) $THEN
+         Qman_Mandatory_Site_API.Remove(remrec_.contract);      
+      $END
+   END Core;
+
+BEGIN
+   Core(objid_, remrec_);
+END Delete___;
+
+
+PROCEDURE Get_Currency_Converted___ (
+   to_contract_curr_amount_   OUT NUMBER,
+   from_contract_             IN  VARCHAR2,
+   to_contract_               IN  VARCHAR2,
+   from_contract_curr_amount_ IN  NUMBER,
+   make_currency_rounding_    IN  BOOLEAN )
+IS
+   
+   PROCEDURE Core (
+      to_contract_curr_amount_   OUT NUMBER,
+      from_contract_             IN  VARCHAR2,
+      to_contract_               IN  VARCHAR2,
+      from_contract_curr_amount_ IN  NUMBER,
+      make_currency_rounding_    IN  BOOLEAN )
+   IS
+      from_company_       SITE_TAB.company%TYPE;
+      to_company_         SITE_TAB.company%TYPE;
+      from_currency_code_ VARCHAR2(3);
+      to_currency_code_   VARCHAR2(3);
+      from_currency_type_ VARCHAR2(10);
+      from_conv_factor_   NUMBER;
+      from_currency_rate_ NUMBER;
+      currency_rounding_  NUMBER;
+   BEGIN
+   
+      to_contract_curr_amount_ := from_contract_curr_amount_;
+   
+      IF (from_contract_ != to_contract_) THEN
+         from_company_ := Get_Company(from_contract_);
+         to_company_   := Get_Company(to_contract_);
+   
+         IF (from_company_ != to_company_) THEN
+            from_currency_code_ := Company_Finance_API.Get_Currency_Code(from_company_);
+            to_currency_code_   := Company_Finance_API.Get_Currency_Code(to_company_);
+   
+            IF (from_currency_code_ != to_currency_code_) THEN
+               Currency_Code_API.Exist(to_company_, from_currency_code_);
+               Currency_Rate_API.Get_Currency_Rate_Defaults(from_currency_type_,
+                                                            from_conv_factor_,
+                                                            from_currency_rate_,
+                                                            to_company_,
+                                                            from_currency_code_,
+                                                            Get_Site_Date(to_contract_));
+               to_contract_curr_amount_ := to_contract_curr_amount_ * from_currency_rate_/from_conv_factor_;
+   
+               IF (make_currency_rounding_) THEN
+                  currency_rounding_       := Currency_Code_API.Get_Currency_Rounding(to_company_, to_currency_code_);
+                  to_contract_curr_amount_ := ROUND(to_contract_curr_amount_, currency_rounding_);
+               END IF;
+            END IF;
+         END IF;
+      END IF;
+   END Core;
+
+BEGIN
+   Core(to_contract_curr_amount_, from_contract_, to_contract_, from_contract_curr_amount_, make_currency_rounding_);
+END Get_Currency_Converted___;
+
+
+PROCEDURE Check_Country_Code___ (
+   newrec_ IN SITE_TAB%ROWTYPE )
+IS
+   
+   PROCEDURE Core (
+      newrec_ IN SITE_TAB%ROWTYPE )
+   IS
+      site_country_code_       VARCHAR2(2);
+      deliv_addr_country_code_ VARCHAR2(2);
+   BEGIN
+      site_country_code_       := Company_Site_API.Get_Country_Db(newrec_.contract);
+      deliv_addr_country_code_ := Company_Address_API.Get_Country_Db(newrec_.company, newrec_.delivery_address);
+   
+      IF (site_country_code_ != deliv_addr_country_code_) THEN
+         Client_SYS.Add_Info(lu_name_, 'DIFFCOUNTRYINADDR: The delivery address country :P1 is not the same as the site country :P2.', 
+                               Iso_Country_API.Get_Description(deliv_addr_country_code_), Iso_Country_API.Get_Description(site_country_code_));
+      END IF;
+   END Core;
+
+BEGIN
+   Core(newrec_);
+END Check_Country_Code___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+   
+   PROCEDURE Base
+   IS
+   BEGIN
+      NULL;
+   END Base;
+
+BEGIN
+   Base;
+END Init;
+
+BEGIN
+   Init;
+END Site_API;

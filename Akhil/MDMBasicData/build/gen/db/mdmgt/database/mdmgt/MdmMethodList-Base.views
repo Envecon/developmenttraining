@@ -1,0 +1,66 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmMethodList
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Template_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(30)/UPPERCASE'
+   Prompt     = 'Template Id';
+COLUMN Revision IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Revision'
+   Ref        = 'MdmBasicDataHeader(template_id)';
+COLUMN Execute_Seq IS
+   Flags      = 'KMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Execute Seq';
+COLUMN View_Name IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'View Name';
+COLUMN Method_Name IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'Method Name';
+COLUMN On_New IS
+   Flags      = 'AMIU-'
+   Datatype   = 'BOOLEAN'
+   Prompt     = 'New';
+COLUMN On_Modify IS
+   Flags      = 'AMIU-'
+   Datatype   = 'BOOLEAN'
+   Prompt     = 'Modify';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Mdm_Method_List IS
+   Prompt     = 'Mdm Method List'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       execute_seq                    execute_seq,
+       view_name                      view_name,
+       method_name                    method_name,
+       on_new                         on_new,
+       on_modify                      on_modify,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_method_list_tab;

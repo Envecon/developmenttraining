@@ -1,0 +1,963 @@
+CREATE OR REPLACE PACKAGE BODY CLIENT_SYS IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Max_Current_Info___ (
+   current_info_max_length_  IN VARCHAR2 ) RETURN VARCHAR2;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Clear_Attr (
+   attr_ OUT VARCHAR2 )
+IS
+BEGIN
+   attr_ := NULL;
+END Clear_Attr;
+
+
+PROCEDURE Add_To_Attr (
+   name_  IN     VARCHAR2,
+   value_ IN     VARCHAR2,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   attr_ := attr_||name_||field_separator_||value_||record_separator_;
+END Add_To_Attr;
+
+
+PROCEDURE Add_To_Attr (
+   name_  IN     VARCHAR2,
+   value_ IN     NUMBER,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Add_To_Attr(name_, to_char(value_), attr_);
+END Add_To_Attr;
+
+
+PROCEDURE Add_To_Attr(
+   name_  IN     VARCHAR2,
+   value_ IN     DATE,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Add_To_Attr(name_, to_char(value_, date_format_), attr_);
+END Add_To_Attr;
+
+
+PROCEDURE Add_To_Attr(
+   name_  IN     VARCHAR2,
+   value_ IN     TIMESTAMP,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Add_To_Attr(name_, to_char(value_, timestamp_format_), attr_);
+END Add_To_Attr;
+
+
+FUNCTION Remove_Attr (
+   name_  IN VARCHAR2,
+   attr_  IN VARCHAR2 ) RETURN VARCHAR2 
+IS
+   index1_ NUMBER;
+   index2_ NUMBER;
+BEGIN
+   index1_ := instr(record_separator_||attr_, record_separator_||name_||field_separator_);
+   IF (index1_ > 0) THEN
+      index2_ := instr(record_separator_||attr_, record_separator_, index1_ + 1, 1);
+      RETURN(REPLACE(attr_, substr(attr_, index1_-1, index2_ - index1_), NULL));
+   END IF;
+   RETURN(attr_);
+END Remove_Attr;
+
+
+PROCEDURE Set_Item_Value (
+   name_  IN     VARCHAR2,
+   value_ IN     VARCHAR2,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+   index1_ NUMBER;
+   index2_ NUMBER;
+BEGIN
+   index1_ := instr(record_separator_||attr_, record_separator_||name_||field_separator_);
+   IF (index1_ > 0) THEN
+      index2_ := instr(record_separator_||attr_, record_separator_, index1_ + 1, 1);
+      IF index1_ = 1 THEN
+         attr_ := name_||field_separator_||value_||record_separator_|| substr(attr_, index2_, LENGTH(attr_) - index2_ +1 );
+      ELSE
+         attr_ := REPLACE(attr_, substr(attr_, index1_-1, index2_ - index1_), record_separator_||name_||field_separator_||value_);
+      END IF;
+   ELSE
+      Add_To_Attr(name_, value_, attr_);
+   END IF;
+END Set_Item_Value;
+
+
+PROCEDURE Set_Item_Value (
+   name_  IN     VARCHAR2,
+   value_ IN     NUMBER,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Set_Item_Value(name_, to_char(value_), attr_);
+END Set_Item_Value;
+
+
+PROCEDURE Set_Item_Value (
+   name_  IN     VARCHAR2,
+   value_ IN     DATE,
+   attr_  IN OUT NOCOPY VARCHAR2 )
+IS
+BEGIN
+   Set_Item_Value(name_, to_char(value_, date_format_), attr_);
+END Set_Item_Value;
+
+
+FUNCTION Get_Next_From_Attr (
+   attr_  IN     VARCHAR2,
+   ptr_   IN OUT NOCOPY NUMBER,
+   name_  IN OUT NOCOPY VARCHAR2,
+   value_ IN OUT NOCOPY VARCHAR2 ) RETURN BOOLEAN
+IS
+   from_  NUMBER;
+   to_    NUMBER;
+   index_ NUMBER;
+BEGIN
+   from_ := nvl(ptr_, 1);
+   to_   := instr(attr_, record_separator_, from_);
+   IF (to_ > 0) THEN
+      index_ := instr(attr_, field_separator_, from_);
+      name_  := substr(attr_, from_, index_-from_);
+      value_ := substr(attr_, index_+1, to_-index_-1);
+      ptr_   := to_+1;
+      RETURN(TRUE);
+   ELSE
+      RETURN(FALSE);
+   END IF;
+END Get_Next_From_Attr;
+
+
+FUNCTION Attr_Value_To_Date (
+   value_ IN VARCHAR2 ) RETURN DATE
+IS
+BEGIN
+   RETURN(to_date(value_, date_format_));
+END Attr_Value_To_Date;
+
+
+FUNCTION Attr_Value_To_Timestamp (
+   value_ IN VARCHAR2 ) RETURN TIMESTAMP
+IS
+BEGIN
+   RETURN(to_timestamp(value_, timestamp_format_));
+END Attr_Value_To_Timestamp;
+
+
+FUNCTION Attr_Value_To_Number (
+   value_ IN VARCHAR2 ) RETURN NUMBER
+IS
+BEGIN
+   RETURN(to_number(value_));
+END Attr_Value_To_Number;
+
+
+FUNCTION Cut_Item_Value (
+   name_ IN     VARCHAR2,
+   attr_ IN OUT NOCOPY VARCHAR2 ) RETURN VARCHAR2
+IS
+   value_   VARCHAR2(32000);
+BEGIN
+   value_ := Get_Item_Value(name_, attr_);
+   attr_ := Remove_Attr(name_, attr_);
+   RETURN(value_);
+END Cut_Item_Value;
+
+
+FUNCTION Get_Item_Value (
+   name_ IN VARCHAR2,
+   attr_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   from_ NUMBER;
+   len_  NUMBER;
+   to_   NUMBER;
+BEGIN
+   len_ := length(name_);
+   from_ := instr(record_separator_ || attr_, record_separator_ || name_ || field_separator_);
+   IF (from_ > 0) THEN
+      to_ := instr(attr_, record_separator_, from_ + 1);
+      IF (to_ > 0) THEN
+         RETURN (substr(attr_, from_ + len_ + 1, to_ - from_ - len_ - 1));
+      END IF;
+   END IF;
+   RETURN (NULL);
+END Get_Item_Value;
+
+
+FUNCTION Get_Item_Value_To_Date (
+   name_      IN VARCHAR2,
+   attr_      IN VARCHAR2,
+   lu_name_   IN VARCHAR2,
+   method_    IN VARCHAR2 DEFAULT NULL) RETURN DATE   
+IS
+   value_     VARCHAR2(32000);
+BEGIN  
+   value_ := Get_Item_Value(name_, attr_);
+   RETURN(to_date(value_, date_format_));
+EXCEPTION
+   WHEN value_error THEN
+      IF (method_ IS NULL) THEN
+         Error_SYS.Item_Format(lu_name_, name_, value_);
+      ELSE
+         Error_SYS.Item_Format(lu_name_, name_, value_, 'Value error in method :P1 for attribute :P2.', method_, name_);
+      END IF;
+END Get_Item_Value_To_Date;
+
+
+FUNCTION Get_Item_Value_To_Timestamp (
+   name_      IN VARCHAR2,
+   attr_      IN VARCHAR2,
+   lu_name_   IN VARCHAR2,
+   method_    IN VARCHAR2 DEFAULT NULL) RETURN TIMESTAMP   
+IS
+   value_     VARCHAR2(32000);
+BEGIN  
+   value_ := Get_Item_Value(name_, attr_);
+   RETURN(to_date(value_, timestamp_format_));
+EXCEPTION
+   WHEN value_error THEN
+      IF (method_ IS NULL) THEN
+         Error_SYS.Item_Format(lu_name_, name_, value_);
+      ELSE
+         Error_SYS.Item_Format(lu_name_, name_, value_, 'Value error in method :P1 for attribute :P2.', method_, name_);
+      END IF;
+END Get_Item_Value_To_Timestamp;
+
+
+FUNCTION Get_Item_Value_To_Number (
+   name_      IN VARCHAR2,
+   attr_      IN VARCHAR2,
+   lu_name_   IN VARCHAR2,
+   method_    IN VARCHAR2 DEFAULT NULL) RETURN NUMBER
+IS
+   value_     VARCHAR2(32000);
+BEGIN  
+   value_ := Get_Item_Value(name_, attr_);
+   RETURN(to_number(value_));
+EXCEPTION
+   WHEN value_error THEN
+      IF (method_ IS NULL) THEN
+         Error_SYS.Item_Format(lu_name_, name_, value_);
+      ELSE
+         Error_SYS.Item_Format(lu_name_, name_, value_, 'Value error in method :P1 for attribute :P2.', method_, name_);
+      END IF;
+END Get_Item_Value_To_Number;
+
+
+FUNCTION Item_Exist (
+   name_ IN VARCHAR2,
+   attr_ IN VARCHAR2 ) RETURN BOOLEAN
+IS
+   from_ NUMBER;
+   len_  NUMBER;
+BEGIN
+   len_ := length(name_);
+   from_ := instr(record_separator_ || attr_, record_separator_ || name_ || field_separator_);
+   IF (from_ > 0) THEN
+      RETURN TRUE;
+   ELSE
+      RETURN FALSE;
+   END IF;
+END Item_Exist;
+
+
+PROCEDURE Attr_To_Dbms_Output (
+   attr_ IN VARCHAR2 )
+IS
+   ptr_     NUMBER;
+   name_    VARCHAR2(30);
+   value_   VARCHAR2(32767);
+   len_     NUMBER;
+BEGIN
+   ptr_ := NULL;
+   WHILE Get_Next_From_Attr(attr_, ptr_, name_, value_) LOOP
+      len_ := length(name_)+3+length(value_);
+      IF (len_ > 255) THEN
+         Log_SYS.Fnd_Trace_(Log_SYS.trace_, name_||'='||
+            substr(value_,1,250-length(name_))||' ...');
+      ELSE
+         Log_SYS.Fnd_Trace_(Log_SYS.trace_, name_||'='||value_);
+      END IF;
+   END LOOP;
+END Attr_To_Dbms_Output;
+
+
+PROCEDURE Get_Key_Reference (
+   key_ref_ OUT VARCHAR2,
+   lu_name_ IN VARCHAR2,
+   objid_ IN VARCHAR2 DEFAULT NULL )
+IS
+   c1_           NUMBER;
+   ignore_       NUMBER;
+   stmt_         VARCHAR2(2000);
+   view_         VARCHAR2(30);
+   temp_key_ref_ VARCHAR2(32000);
+   sql_column_   VARCHAR2(2000);
+   --
+   -- Cursor to fetch key dictionary information
+   --
+   CURSOR get_key_info IS
+      SELECT column_name, column_datatype, enumeration
+      FROM   dictionary_sys_view_column_tab
+      WHERE  view_name = view_
+      AND    type_flag IN ('P', 'K')
+      ORDER BY column_name;
+
+BEGIN
+   key_ref_ := NULL;
+   view_    := Dictionary_SYS.Get_Base_View(lu_name_);
+   -- By now we should be having a valid view name
+   IF ( view_ IS NOT NULL ) THEN
+      --
+      -- View found, fetch the keys!
+      --
+      sql_column_ := '''';
+      FOR keyrec IN get_key_info LOOP
+         temp_key_ref_ := temp_key_ref_||keyrec.column_name||'='||text_separator_;
+         IF keyrec.column_datatype NOT LIKE 'DATE%' THEN
+            IF (keyrec.enumeration IS NOT NULL) THEN 
+               sql_column_ := sql_column_||keyrec.column_name||'_DB=''||'||keyrec.column_name||'_DB||''^';
+            ELSE 
+               sql_column_ := sql_column_||keyrec.column_name||'=''||'||keyrec.column_name||'||''^';
+            END IF;
+         ELSE
+            sql_column_   := sql_column_||keyrec.column_name||'=''||to_char('||keyrec.column_name||','''||date_format_||''')||''^';
+         END IF;
+      END LOOP;
+      key_ref_ := temp_key_ref_;
+      temp_key_ref_ := NULL;
+      IF (objid_ IS NOT NULL) THEN
+         --
+         -- Fetch instance key information by using dynamic SQL
+         -- Return a text separated list of values
+               --
+         BEGIN
+            Assert_SYS.Assert_Is_View(view_);
+            stmt_ := 'SELECT '||sql_column_||''' FROM '||view_||' WHERE OBJID = :objid';
+            c1_ := dbms_sql.open_cursor;
+            --@ApproveDynamicStatement(2006-01-05,utgulk)
+            dbms_sql.parse(c1_, stmt_, dbms_sql.native);
+            dbms_sql.bind_variable(c1_,':objid',objid_);
+            dbms_sql.define_column(c1_, 1, temp_key_ref_, 20000);
+            ignore_ := dbms_sql.execute(c1_);
+            IF (dbms_sql.fetch_rows(c1_) > 0) THEN
+               dbms_sql.column_value(c1_, 1, temp_key_ref_);
+            END IF;
+            dbms_sql.close_cursor(c1_);
+         EXCEPTION
+            WHEN OTHERS THEN
+               IF (dbms_sql.is_open(c1_)) THEN
+                  dbms_sql.close_cursor(c1_);
+               END IF;
+               NULL;
+         END;
+         IF (temp_key_ref_ IS NOT NULL) THEN
+            key_ref_ := temp_key_ref_;
+         END IF;
+      END IF;
+      -- Convert client values to database values
+      --key_ref_ := Object_Connection_SYS.Replace_Client_Values ( lu_name_, key_ref_ );
+   END IF;
+END Get_Key_Reference;
+
+
+FUNCTION Get_Key_Reference (
+   lu_name_ IN VARCHAR2,
+   key1_    IN VARCHAR2,
+   value1_  IN VARCHAR2,
+   key2_    IN VARCHAR2 DEFAULT NULL,
+   value2_  IN VARCHAR2 DEFAULT NULL,
+   key3_    IN VARCHAR2 DEFAULT NULL,
+   value3_  IN VARCHAR2 DEFAULT NULL,
+   key4_    IN VARCHAR2 DEFAULT NULL,
+   value4_  IN VARCHAR2 DEFAULT NULL,
+   key5_    IN VARCHAR2 DEFAULT NULL,
+   value5_  IN VARCHAR2 DEFAULT NULL,
+   key6_    IN VARCHAR2 DEFAULT NULL,
+   value6_  IN VARCHAR2 DEFAULT NULL,
+   key7_    IN VARCHAR2 DEFAULT NULL,
+   value7_  IN VARCHAR2 DEFAULT NULL,
+   key8_    IN VARCHAR2 DEFAULT NULL,
+   value8_  IN VARCHAR2 DEFAULT NULL,
+   key9_    IN VARCHAR2 DEFAULT NULL,
+   value9_  IN VARCHAR2 DEFAULT NULL,
+   key10_   IN VARCHAR2 DEFAULT NULL,
+   value10_ IN VARCHAR2 DEFAULT NULL,
+   key11_   IN VARCHAR2 DEFAULT NULL,
+   value11_ IN VARCHAR2 DEFAULT NULL,
+   key12_   IN VARCHAR2 DEFAULT NULL,
+   value12_ IN VARCHAR2 DEFAULT NULL,
+   key13_   IN VARCHAR2 DEFAULT NULL,
+   value13_ IN VARCHAR2 DEFAULT NULL,
+   key14_   IN VARCHAR2 DEFAULT NULL,
+   value14_ IN VARCHAR2 DEFAULT NULL,
+   key15_   IN VARCHAR2 DEFAULT NULL,
+   value15_ IN VARCHAR2 DEFAULT NULL ) RETURN VARCHAR2
+IS
+   TYPE keytab_type IS TABLE OF VARCHAR2(2000) INDEX BY BINARY_INTEGER;
+   keytab_    keytab_type;
+   valtab_    keytab_type;
+   temp_      VARCHAR2(2000);
+   count_     NUMBER;
+   temp_key_ref_ VARCHAR2(32000);
+BEGIN
+   --
+   -- Fill parameter values into the table structure
+   --
+   count_ := 1;
+   keytab_(count_) := key1_;
+   valtab_(count_) := value1_;
+   IF (key2_ IS NOT NULL) THEN
+      count_ := 2;
+      keytab_(count_) := key2_;
+      valtab_(count_) := value2_;
+   END IF;
+   IF (key3_ IS NOT NULL) THEN
+      count_ := 3;
+      keytab_(count_) := key3_;
+      valtab_(count_) := value3_;
+   END IF;
+   IF (key4_ IS NOT NULL) THEN
+      count_ := 4;
+      keytab_(count_) := key4_;
+      valtab_(count_) := value4_;
+   END IF;
+   IF (key5_ IS NOT NULL) THEN
+      count_ := 5;
+      keytab_(count_) := key5_;
+      valtab_(count_) := value5_;
+   END IF;
+   IF (key6_ IS NOT NULL) THEN
+      count_ := 6;
+      keytab_(count_) := key6_;
+      valtab_(count_) := value6_;
+   END IF;
+   IF (key7_ IS NOT NULL) THEN
+      count_ := 7;
+      keytab_(count_) := key7_;
+      valtab_(count_) := value7_;
+   END IF;
+   IF (key8_ IS NOT NULL) THEN
+      count_ := 8;
+      keytab_(count_) := key8_;
+      valtab_(count_) := value8_;
+   END IF;
+   IF (key9_ IS NOT NULL) THEN
+      count_ := 9;
+      keytab_(count_) := key9_;
+      valtab_(count_) := value9_;
+   END IF;
+   IF (key10_ IS NOT NULL) THEN
+      count_ := 10;
+      keytab_(count_) := key10_;
+      valtab_(count_) := value10_;
+   END IF;
+   IF (key11_ IS NOT NULL) THEN
+      count_ := 11;
+      keytab_(count_) := key11_;
+      valtab_(count_) := value11_;
+   END IF;
+   IF (key12_ IS NOT NULL) THEN
+      count_ := 12;
+      keytab_(count_) := key12_;
+      valtab_(count_) := value12_;
+   END IF;
+   IF (key13_ IS NOT NULL) THEN
+      count_ := 13;
+      keytab_(count_) := key13_;
+      valtab_(count_) := value13_;
+   END IF;
+   IF (key14_ IS NOT NULL) THEN
+      count_ := 14;
+      keytab_(count_) := key14_;
+      valtab_(count_) := value14_;
+   END IF;
+   IF (key15_ IS NOT NULL) THEN
+      count_ := 15;
+      keytab_(count_) := key15_;
+      valtab_(count_) := value15_;
+   END IF;
+   --
+   -- Sort by using 'bubble sort' algorithm
+   --
+   FOR n IN 1..count_-1 LOOP
+      FOR m IN REVERSE n+1..count_ LOOP
+         IF (keytab_(m) < keytab_(m-1)) THEN
+            temp_ := keytab_(m);
+            keytab_(m) := keytab_(m-1);
+            keytab_(m-1) := temp_;
+            temp_ := valtab_(m);
+            valtab_(m) := valtab_(m-1);
+            valtab_(m-1) := temp_;
+         END IF;
+      END LOOP;
+   END LOOP;
+   --
+   -- Create the sorted key reference list
+   --
+   temp_key_ref_ := NULL;
+   FOR n IN 1..count_ LOOP
+      temp_key_ref_ := temp_key_ref_||keytab_(n)||'='||valtab_(n)||text_separator_;
+   END LOOP;
+   RETURN(temp_key_ref_);
+END Get_Key_Reference;
+
+
+FUNCTION Get_Key_Reference_From_Objkey (
+   lu_name_ IN VARCHAR2,
+   objkey_  IN VARCHAR2 DEFAULT NULL ) RETURN VARCHAR2
+IS
+   c1_           NUMBER;
+   ignore_       NUMBER;
+   stmt_         VARCHAR2(2000);
+   view_         VARCHAR2(30);
+   temp_key_ref_ VARCHAR2(32000);
+   sql_column_   VARCHAR2(2000);
+   --
+   -- Cursor to fetch key dictionary information
+   --
+   CURSOR get_key_info IS
+      SELECT column_name, column_datatype, enumeration
+      FROM   dictionary_sys_view_column_tab
+      WHERE  view_name = view_
+      AND    type_flag IN ('P', 'K')
+      ORDER BY column_name;
+   key_ref_ VARCHAR2(32000);
+   objkey_col_ VARCHAR2(30);
+BEGIN
+   key_ref_ := NULL;
+   view_    := Dictionary_SYS.Get_Base_View(lu_name_);
+   objkey_col_ := NVL(Dictionary_SYS.Get_Objkey_Info(lu_name_), 'OBJKEY');
+   -- By now we should be having a valid view name
+   IF ( view_ IS NOT NULL ) THEN
+      --
+      -- View found, fetch the keys!
+      --
+      sql_column_ := '''';
+      FOR keyrec IN get_key_info LOOP
+         temp_key_ref_ := temp_key_ref_||keyrec.column_name||'='||text_separator_;
+         IF keyrec.column_datatype NOT LIKE 'DATE%' THEN
+            IF (keyrec.enumeration IS NOT NULL) THEN 
+               sql_column_ := sql_column_||keyrec.column_name||'_DB=''||'||keyrec.column_name||'_DB||''^';
+            ELSE 
+               sql_column_ := sql_column_||keyrec.column_name||'=''||'||keyrec.column_name||'||''^';
+            END IF;
+         ELSE
+            sql_column_   := sql_column_||keyrec.column_name||'=''||to_char('||keyrec.column_name||','''||date_format_||''')||''^';
+         END IF;
+      END LOOP;
+      key_ref_ := temp_key_ref_;
+      temp_key_ref_ := NULL;
+      IF (objkey_ IS NOT NULL) THEN
+         --
+         -- Fetch instance key information by using dynamic SQL
+         -- Return a text separated list of values
+               --
+         BEGIN
+            Assert_SYS.Assert_Is_View(view_);
+            stmt_ := 'SELECT '||sql_column_||''' FROM '||view_||' WHERE '||objkey_col_||' = :objkey';
+            c1_ := dbms_sql.open_cursor;
+            --@ApproveDynamicStatement(2006-01-05,utgulk)
+            dbms_sql.parse(c1_, stmt_, dbms_sql.native);
+            dbms_sql.bind_variable(c1_,':objkey',objkey_);
+            dbms_sql.define_column(c1_, 1, temp_key_ref_, 20000);
+            ignore_ := dbms_sql.execute(c1_);
+            IF (dbms_sql.fetch_rows(c1_) > 0) THEN
+               dbms_sql.column_value(c1_, 1, temp_key_ref_);
+            END IF;
+            dbms_sql.close_cursor(c1_);
+         EXCEPTION
+            WHEN OTHERS THEN
+               IF (dbms_sql.is_open(c1_)) THEN
+                  dbms_sql.close_cursor(c1_);
+               END IF;
+               NULL;
+         END;
+         IF (temp_key_ref_ IS NOT NULL) THEN
+            key_ref_ := temp_key_ref_;
+         END IF;
+      END IF;
+      -- Convert client values to database values
+      --key_ref_ := Object_Connection_SYS.Replace_Client_Values ( lu_name_, key_ref_ );
+   END IF;
+   RETURN key_ref_;
+END Get_Key_Reference_From_Objkey;
+
+
+PROCEDURE Add_To_Key_Reference (
+   key_ref_ IN OUT NOCOPY VARCHAR2,
+   name_    IN     VARCHAR2,
+   value_   IN     VARCHAR2 )
+IS
+BEGIN
+   key_ref_ := key_ref_||name_||'='||value_||text_separator_;
+END Add_To_Key_Reference;
+
+
+PROCEDURE Add_To_Key_Reference (
+   key_ref_ IN OUT NOCOPY VARCHAR2,
+   name_    IN     VARCHAR2,
+   value_   IN     NUMBER )
+IS
+BEGIN
+   Add_To_Key_Reference(key_ref_, name_, to_char(value_));
+END Add_To_Key_Reference;
+
+
+PROCEDURE Add_To_Key_Reference (
+   key_ref_ IN OUT NOCOPY VARCHAR2,
+   name_    IN     VARCHAR2,
+   value_   IN     DATE )
+IS
+BEGIN
+   Add_To_Key_Reference(key_ref_, name_, to_char(value_, date_format_));
+END Add_To_Key_Reference;
+
+
+PROCEDURE Add_To_Key_Reference (
+   key_ref_ IN OUT NOCOPY VARCHAR2,
+   name_    IN     VARCHAR2,
+   value_   IN     TIMESTAMP )
+IS
+BEGIN
+   Add_To_Key_Reference(key_ref_, name_, to_timestamp(value_, timestamp_format_));
+END Add_To_Key_Reference;
+
+
+FUNCTION Get_Key_Reference_Value (
+   key_ref_ IN VARCHAR2,
+   name_    IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   first_pos_  NUMBER;
+   second_pos_ NUMBER;
+BEGIN
+   first_pos_  := instr(text_separator_||key_ref_, text_separator_||name_||'=') + length(name_) + 1;
+   second_pos_ := instr(text_separator_||key_ref_, text_separator_, first_pos_ + 1);
+   IF (first_pos_ = length(name_) + 1) THEN
+      -- Not found
+      RETURN(NULL);
+   ELSE
+      RETURN(substr(key_ref_, first_pos_, second_pos_ - first_pos_ - 1));
+   END IF;
+END Get_Key_Reference_Value;
+
+
+FUNCTION Get_Key_Reference_Value (
+   key_ref_ IN VARCHAR2,
+   index_   IN NUMBER ) RETURN VARCHAR2
+IS
+   keyval_     VARCHAR2(2000);
+   first_pos_  NUMBER;
+   second_pos_ NUMBER;
+BEGIN
+   IF (index_ = 1) THEN
+      keyval_ := substr(key_ref_, instr(key_ref_, '=') + 1,
+                        instr(key_ref_, text_separator_, index_) - instr(key_ref_, '=') - 1);
+   ELSE
+      first_pos_  := instr(key_ref_, '=', 1, index_) + 1;
+      second_pos_ := instr(key_ref_, text_separator_, 1, index_ );
+      keyval_     := substr(key_ref_, first_pos_, second_pos_ - first_pos_);
+   END IF;
+   RETURN(keyval_);
+END Get_Key_Reference_Value;
+
+
+PROCEDURE Clear_Info
+IS
+BEGIN
+   Fnd_Context_SYS.Set_Value('CLIENT_SYS.current_info_', '');
+END Clear_Info;
+
+
+PROCEDURE Add_Info (
+   lu_name_ IN VARCHAR2,
+   text_    IN VARCHAR2,
+   p1_      IN VARCHAR2 DEFAULT NULL,
+   p2_      IN VARCHAR2 DEFAULT NULL,
+   p3_      IN VARCHAR2 DEFAULT NULL )
+IS
+   line_ VARCHAR2(2048);
+   err_msg_  VARCHAR2(2000);
+BEGIN
+   line_ := Language_SYS.Translate_Msg_(lu_name_, text_);
+   line_ := ltrim(substr(line_, instr(line_, ':') + 1));
+   line_ := replace(line_,':P1',p1_);
+   line_ := replace(line_,':P2',p2_);
+   line_ := replace(line_,':P3',p3_);
+
+   Fnd_Context_SYS.Set_Value('CLIENT_SYS.current_info_', Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')||'INFO'||field_separator_||line_||record_separator_);
+
+EXCEPTION
+   WHEN OTHERS THEN
+      err_msg_ := SUBSTR(SQLERRM, 1, 100);
+      IF (lengthb(Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')) + lengthb('INFO'||field_separator_||line_||record_separator_)) > 32767
+         OR (length(Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')) + length('INFO'||field_separator_||line_||record_separator_)) > 32000 THEN
+            err_msg_:='Client_Sys.Add_Info : Info '''|| line_ ||''' can not be added. String size exceeds maximum size allowed. '|| err_msg_;
+      END IF;
+      Trace_SYS.Message(err_msg_);
+END Add_Info;
+
+
+PROCEDURE Add_Warning (
+   lu_name_ IN VARCHAR2,
+   text_    IN VARCHAR2,
+   p1_      IN VARCHAR2 DEFAULT NULL,
+   p2_      IN VARCHAR2 DEFAULT NULL,
+   p3_      IN VARCHAR2 DEFAULT NULL )
+IS
+   line_ VARCHAR2(2048);
+   err_msg_ VARCHAR2(3000);
+BEGIN
+   line_ := Language_SYS.Translate_Msg_(lu_name_, text_);
+   line_ := ltrim(substr(line_, instr(line_, ':') + 1));
+   line_ := replace(line_,':P1',p1_);
+   line_ := replace(line_,':P2',p2_);
+   line_ := replace(line_,':P3',p3_);
+   
+   Fnd_Context_SYS.Set_Value('CLIENT_SYS.current_info_', Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')||'WARNING'||field_separator_||line_||record_separator_);
+
+EXCEPTION
+   WHEN OTHERS THEN
+      err_msg_ := SUBSTR(SQLERRM, 1, 100);
+      IF (lengthb(Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')) + lengthb('WARNING'||field_separator_||line_||record_separator_)) > 32767
+         OR (length(Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_')) + length('WARNING'||field_separator_||line_||record_separator_)) > 32000 THEN
+            err_msg_:='Client_Sys.Add_Warning : Warning '''|| line_ ||''' can not be added. String size exceeds maximum size allowed. '|| err_msg_;
+      END IF;
+      Trace_SYS.Message(err_msg_);
+END Add_Warning;
+
+
+FUNCTION Get_All_Info (
+   max_length_  IN NUMBER ) RETURN VARCHAR2
+IS
+   info_ VARCHAR2(32000);
+BEGIN
+   info_ := Get_Max_Current_Info___(max_length_);
+   Clear_Info ;
+   RETURN(info_);
+END Get_All_Info;
+
+
+FUNCTION Get_All_Info RETURN VARCHAR2
+IS
+   info_ VARCHAR2(2000);
+BEGIN
+   info_ := Get_Max_Current_Info___(2000);
+   Clear_Info ;
+   RETURN(info_);
+END Get_All_Info;
+
+
+PROCEDURE Get_Trace(
+   text_ IN OUT NOCOPY CLOB ) 
+IS
+   category_arr_  dbms_utility.lname_array;
+BEGIN
+   Log_SYS.Get_Trace(text_, category_arr_);
+END Get_Trace;
+
+
+PROCEDURE Get_Separator_Info (
+   text_sep_   OUT VARCHAR2,
+   field_sep_  OUT VARCHAR2,
+   record_sep_ OUT VARCHAR2,
+   group_sep_  OUT VARCHAR2,
+   file_sep_   OUT VARCHAR2 )
+IS
+BEGIN
+   text_sep_   := text_separator_;
+   field_sep_  := field_separator_;
+   record_sep_ := record_separator_;
+   group_sep_  := group_separator_;
+   file_sep_   := file_separator_;
+END Get_Separator_Info;
+
+
+FUNCTION Append_Info (
+   previous_info_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+BEGIN
+   RETURN(Get_All_Info(32000) || previous_info_);
+EXCEPTION
+   WHEN value_error THEN
+      Error_SYS.Appl_General(service_, 'APPEND: Info message is too long.');
+END Append_Info;
+
+
+PROCEDURE Merge_Info (
+   previous_info_ IN VARCHAR2 ) 
+IS
+BEGIN
+   Fnd_Context_SYS.Set_Value('CLIENT_SYS.current_info_', previous_info_||Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_'));
+EXCEPTION
+   WHEN value_error THEN
+      Error_SYS.Appl_General(service_, 'MERGE: Info message is too long.');
+END Merge_Info;
+
+
+FUNCTION Sleep (
+   seconds_ IN VARCHAR2 ) RETURN NUMBER
+IS
+BEGIN
+   Dbms_Lock.Sleep(seconds_);
+   RETURN(seconds_);
+END Sleep;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_System_Info__ RETURN CLOB
+IS
+   msg_                    CLOB         := Message_SYS.Construct('CLIENT_INFO');
+   local_date_format_   CONSTANT VARCHAR2(10) := 'YYYY-MM-DD';
+   
+   FUNCTION Get_Installed_Components___ RETURN VARCHAR2
+   IS
+      CURSOR get_installed IS 
+         SELECT DISTINCT module, 'TRUE' installed 
+         FROM module_tab 
+         WHERE Nvl(version, '*') != '*' AND version != '?'
+         UNION 
+         SELECT DISTINCT dependent_module, 'FALSE' installed 
+         FROM module_dependency_tab t 
+         WHERE NOT EXISTS (
+            SELECT 1 FROM module_tab m 
+            WHERE m.module = t.dependent_module 
+            AND Nvl(version, '*') NOT IN ('*','?'))
+         AND EXISTS (
+            SELECT 1 FROM module_tab m 
+            WHERE m.module = t.module
+            AND version NOT IN ('*','?'))
+            ORDER BY 1;
+      installed_  VARCHAR2(32000);
+   BEGIN
+      FOR rec IN get_installed LOOP
+         installed_ := installed_ || rec.module || Client_SYS.field_separator_ || rec.installed || Client_SYS.record_separator_;
+      END LOOP;
+      RETURN(installed_);
+   END Get_Installed_Components___;
+
+   FUNCTION Get_Csvs___ RETURN VARCHAR2
+   IS
+      CURSOR get_csv IS 
+         SELECT t.name, 
+                CASE t.implementation_type
+                WHEN Implementation_Type_API.DB_CLIENT 
+                   THEN Fnd_Boolean_API.DB_TRUE
+                WHEN Implementation_Type_API.DB_SERVER 
+                   THEN Fnd_Boolean_API.DB_FALSE
+                ELSE
+                   'ERROR'
+                END  is_client,
+                transient,
+                fnd_data_type
+         FROM context_substitution_var_tab t
+         ORDER BY 1;
+
+      csvs_  VARCHAR2(32000);
+   BEGIN
+      FOR rec IN get_csv LOOP
+         csvs_ := csvs_ || rec.name || Client_SYS.field_separator_ || rec.is_client|| Client_SYS.field_separator_ || rec.transient || Client_SYS.field_separator_ || rec.fnd_data_type || Client_SYS.record_separator_;
+      END LOOP;
+      RETURN(csvs_);
+   END Get_Csvs___;
+
+   FUNCTION Get_Fnd_Settings___ RETURN VARCHAR2
+   IS
+      CURSOR get_settings IS 
+         SELECT t.parameter, t.value
+         FROM fnd_setting_tab t
+         ORDER BY 1;
+
+      settings_  VARCHAR2(32000);
+   BEGIN
+      FOR rec IN get_settings LOOP
+         settings_ := settings_ || rec.parameter || Client_SYS.field_separator_ || rec.value || Client_SYS.record_separator_;
+      END LOOP;
+      RETURN(settings_);
+   END Get_Fnd_Settings___;
+
+   FUNCTION Get_User_Globals___ RETURN VARCHAR2
+   IS
+      fnd_user_   VARCHAR2(30) := Fnd_Session_API.Get_Fnd_User;
+
+      CURSOR get_globals IS
+         SELECT entry_code, default_value
+         FROM  user_profile_sys_tab
+         WHERE user_name = fnd_user_;
+
+      globals_  VARCHAR2(32000);
+   BEGIN
+      FOR rec IN get_globals LOOP
+         globals_ := globals_ || rec.entry_code || Client_SYS.field_separator_ || User_Global_API.Decode(rec.entry_code) || Client_SYS.field_separator_ || rec.default_value || Client_SYS.field_separator_ || User_Profile_SYS.Get_Value_List__(rec.entry_code, fnd_user_) || Client_SYS.record_separator_;
+      END LOOP;
+      RETURN(globals_);
+   END Get_User_Globals___;
+
+BEGIN
+   Message_SYS.Add_Attribute(msg_, 'SEPARATORS', Client_SYS.field_separator_||Client_SYS.record_separator_);
+   Message_SYS.Add_Attribute(msg_, 'DATE_FORMAT', local_date_format_);
+   Message_SYS.Add_Attribute(msg_, 'FIRST_CALENDAR_DATE', To_Char(Database_SYS.Get_First_Calendar_Date, local_date_format_));
+   Message_SYS.Add_Attribute(msg_, 'LAST_CALENDAR_DATE', To_Char(Database_SYS.Get_Last_Calendar_Date, local_date_format_));
+   Message_SYS.Add_Attribute(msg_, 'LANGUAGE', Fnd_Session_API.Get_Language);
+   Message_SYS.Add_Attribute(msg_, 'CONTEXT_SUBSTITUTION_VARIABLES', Get_Csvs___);
+   Message_SYS.Add_Attribute(msg_, 'FND_SETTINGS', Get_Fnd_Settings___);
+   Message_SYS.Add_Attribute(msg_, 'USER_GLOBALS', Get_User_Globals___);
+   Message_SYS.Add_Attribute(msg_, 'SYSTEM_COMPONENTS', Get_Installed_Components___);
+   RETURN(msg_);
+END Get_System_Info__;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Max_Current_Info___ (
+   current_info_max_length_  IN VARCHAR2 ) RETURN VARCHAR2
+IS
+   string_  VARCHAR2(32767) := Substr(Fnd_Context_SYS.Find_Value('CLIENT_SYS.current_info_'), 1, current_info_max_length_);
+BEGIN
+   string_ := Substr(string_, 1, Instr(string_, record_separator_, -1));
+   RETURN(string_);
+END Get_Max_Current_Info___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+   
+   PROCEDURE Base
+   IS
+   BEGIN
+      NULL;
+   END Base;
+
+BEGIN
+   Base;
+END Init;
+
+BEGIN
+   Init;
+END CLIENT_SYS;

@@ -1,0 +1,71 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHistory
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Template_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(30)/UPPERCASE'
+   Prompt     = 'Template Id';
+COLUMN Revision IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Revision';
+COLUMN Request_No IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Request No'
+   Ref        = 'MdmRequestHeader(template_id,revision)';
+COLUMN Seq_No IS
+   Flags      = 'K----'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Seq No';
+COLUMN Mod_Date IS
+   Flags      = 'A----'
+   Datatype   = 'DATE/DATE'
+   Prompt     = 'Modified Date';
+COLUMN Mod_By IS
+   Flags      = 'A----'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Modified By';
+COLUMN History_Status IS
+   Flags      = 'A----'
+   Datatype   = 'STRING(20)'
+   Prompt     = 'Status';
+COLUMN Info IS
+   Flags      = 'A----'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'Info';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Mdm_Request_History IS
+   Prompt     = 'Mdm Request History'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       request_no                     request_no,
+       seq_no                         seq_no,
+       mod_date                       mod_date,
+       mod_by                         mod_by,
+       history_status                 history_status,
+       info                           info,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_request_history_tab;

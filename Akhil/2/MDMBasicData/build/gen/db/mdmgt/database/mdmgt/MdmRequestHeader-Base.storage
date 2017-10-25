@@ -1,0 +1,42 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHeader
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE mdm_request_header_tab IS (
+   template_id                    VARCHAR2(30)   NOT NULL,
+   revision                       NUMBER         NOT NULL,
+   request_no                     NUMBER         NOT NULL,
+   description                    VARCHAR2(50)   NOT NULL,
+   requested_by                   VARCHAR2(10)   NOT NULL,
+   requested_date                 DATE           NOT NULL,
+   approval_required              VARCHAR2(5)    NULL,
+   approval_rejected              VARCHAR2(5)    NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL,
+   rowstate                       VARCHAR2(20)   NOT NULL);
+
+
+PRIMARY KEY mdm_request_header_pk IS mdm_request_header_tab (
+   template_id,
+   revision,
+   request_no);
+
+
+UNIQUE CONSTRAINT mdm_request_header_rk IS mdm_request_header_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

@@ -1,0 +1,2462 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmMethodList
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating MDM_METHOD_LIST view
+
+CREATE OR REPLACE VIEW MDM_METHOD_LIST AS
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       execute_seq                    execute_seq,
+       view_name                      view_name,
+       method_name                    method_name,
+       on_new                         on_new,
+       on_modify                      on_modify,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_method_list_tab
+WITH   READ ONLY;
+
+COMMENT ON TABLE MDM_METHOD_LIST
+   IS 'LU=MdmMethodList^PROMPT=Mdm Method List^MODULE=MDMGT^';
+
+COMMENT ON COLUMN MDM_METHOD_LIST.template_id
+   IS 'FLAGS=PMI-L^DATATYPE=STRING(30)/UPPERCASE^PROMPT=Template Id^';
+COMMENT ON COLUMN MDM_METHOD_LIST.revision
+   IS 'FLAGS=PMI-L^DATATYPE=NUMBER^PROMPT=Revision^REF=MdmBasicDataHeader(template_id)^';
+COMMENT ON COLUMN MDM_METHOD_LIST.execute_seq
+   IS 'FLAGS=KMI-L^DATATYPE=NUMBER^PROMPT=Execute Seq^';
+COMMENT ON COLUMN MDM_METHOD_LIST.view_name
+   IS 'FLAGS=A-IUL^DATATYPE=STRING(100)^PROMPT=View Name^';
+COMMENT ON COLUMN MDM_METHOD_LIST.method_name
+   IS 'FLAGS=A-IU-^DATATYPE=STRING(100)^PROMPT=Method Name^';
+COMMENT ON COLUMN MDM_METHOD_LIST.on_new
+   IS 'FLAGS=AMIU-^DATATYPE=BOOLEAN^PROMPT=New^';
+COMMENT ON COLUMN MDM_METHOD_LIST.on_modify
+   IS 'FLAGS=AMIU-^DATATYPE=BOOLEAN^PROMPT=Modify^';
+
+
+-----------------------------------------------------------------------------
+-------------------- API PACKAGE IMPLEMENTATION -----------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Method_List_API implementation
+
+CREATE OR REPLACE PACKAGE BODY Mdm_Method_List_API IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Indicator_Rec IS RECORD
+  (template_id                    BOOLEAN := FALSE,
+   revision                       BOOLEAN := FALSE,
+   execute_seq                    BOOLEAN := FALSE,
+   view_name                      BOOLEAN := FALSE,
+   method_name                    BOOLEAN := FALSE,
+   on_new                         BOOLEAN := FALSE,
+   on_modify                      BOOLEAN := FALSE);
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER,
+   methodname_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER );
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Raise_Record_Locked___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER );
+
+PROCEDURE Raise_Record_Removed___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER );
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN mdm_method_list_tab%ROWTYPE;
+
+FUNCTION Check_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN BOOLEAN;
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER );
+
+PROCEDURE Unpack___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+FUNCTION Pack___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2;
+
+FUNCTION Pack___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2;
+
+FUNCTION Pack_Table___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2;
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec );
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN mdm_method_list_tab%ROWTYPE,
+   newrec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Insert___ (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     mdm_method_list_tab%ROWTYPE,
+   newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE );
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   remrec_ IN mdm_method_list_tab%ROWTYPE );
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE C_Get_Arguments___ (
+   count_       IN OUT NOCOPY NUMBER,
+   ref_rec_     IN OUT NOCOPY reference_record,
+   attr_seq_    IN OUT NOCOPY NUMBER,
+   method_name_ IN     VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      rowkey_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      rec_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      SELECT template_id, revision, execute_seq
+         INTO  rec_.template_id, rec_.revision, rec_.execute_seq
+         FROM  mdm_method_list_tab
+         WHERE rowkey = rowkey_;
+      RETURN rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(rec_.template_id, rec_.revision, rec_.execute_seq, 'Get_Key_By_Rowkey');
+   END Base;
+
+BEGIN
+   RETURN Base(rowkey_);
+END Get_Key_By_Rowkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER )
+   IS
+   BEGIN
+      IF (NOT Check_Exist___(template_id_, revision_, execute_seq_)) THEN
+         Raise_Record_Not_Exist___(template_id_, revision_, execute_seq_);
+      END IF;
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, execute_seq_);
+END Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN BOOLEAN
+   IS
+   BEGIN
+      RETURN Check_Exist___(template_id_, revision_, execute_seq_);
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Exists;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_View_Name (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_method_list_tab.view_name%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT view_name
+         INTO  temp_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_View_Name');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_View_Name;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Method_Name (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_method_list_tab.method_name%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT method_name
+         INTO  temp_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_Method_Name');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_Method_Name;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_On_New (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_method_list_tab.on_new%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT on_new
+         INTO  temp_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_On_New');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_On_New;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_On_Modify (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_method_list_tab.on_modify%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT on_modify
+         INTO  temp_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_On_Modify');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_On_Modify;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN Public_Rec
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN Public_Rec
+   IS
+      temp_ Public_Rec;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT template_id, revision, execute_seq,
+             rowid, rowversion, rowkey,
+             view_name, 
+             method_name, 
+             on_new, 
+             on_modify
+         INTO  temp_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      rowkey_ mdm_method_list_tab.rowkey%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR execute_seq_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT rowkey
+         INTO  rowkey_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN rowkey_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_Objkey');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_Objkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2 )
+   IS
+      dummy_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      dummy_ := Lock_By_Id___(objid_, objversion_);
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   Base(info_, objid_, objversion_);
+END Lock__;
+
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      newrec_   mdm_method_list_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'PREPARE') THEN
+         Prepare_Insert___(attr_);
+      ELSIF (action_ = 'CHECK') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+         Insert___(objid_, objversion_, newrec_, attr_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Method_List_API.lu_name_, 'Mdm_Method_List_API', 'New__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END New__;
+
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      oldrec_   mdm_method_list_tab%ROWTYPE;
+      newrec_   mdm_method_list_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         oldrec_ := Get_Object_By_Id___(objid_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         oldrec_ := Lock_By_Id___(objid_, objversion_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+         Update___(objid_, oldrec_, newrec_, attr_, objversion_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Method_List_API.lu_name_, 'Mdm_Method_List_API', 'Modify__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END Modify__;
+
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2,
+      action_     IN  VARCHAR2 )
+   IS
+      remrec_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         remrec_ := Get_Object_By_Id___(objid_);
+         Check_Delete___(remrec_);
+      ELSIF (action_ = 'DO') THEN
+         remrec_ := Lock_By_Id___(objid_, objversion_);
+         Check_Delete___(remrec_);
+         Delete___(objid_, remrec_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Method_List_API.lu_name_, 'Mdm_Method_List_API', 'Remove__');
+   Base(info_, objid_, objversion_, action_);
+END Remove__;
+
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER,
+   methodname_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER,
+      methodname_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Too_Many_Rows(Mdm_Method_List_API.lu_name_, NULL, methodname_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, execute_seq_, methodname_);
+END Raise_Too_Many_Rows___;
+
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Not_Exist(Mdm_Method_List_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, execute_seq_);
+END Raise_Record_Not_Exist___;
+
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ mdm_method_list_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Exist(Mdm_Method_List_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Exist___;
+
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      name_ IN VARCHAR2,
+      value_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Item_Format(Mdm_Method_List_API.lu_name_, name_, value_);
+   END Base;
+
+BEGIN
+   Base(name_, value_);
+END Raise_Item_Format___;
+
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ mdm_method_list_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Modified(Mdm_Method_List_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Modified___;
+
+
+PROCEDURE Raise_Record_Locked___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Locked(Mdm_Method_List_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, execute_seq_);
+END Raise_Record_Locked___;
+
+
+PROCEDURE Raise_Record_Removed___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Removed(Mdm_Method_List_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, execute_seq_);
+END Raise_Record_Removed___;
+
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_      IN VARCHAR2,
+      objversion_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_method_list_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      SELECT *
+         INTO  rec_
+         FROM  mdm_method_list_tab
+         WHERE rowid = objid_
+         AND    to_char(rowversion,'YYYYMMDDHH24MISS') = objversion_
+         FOR UPDATE NOWAIT;
+      RETURN rec_;
+   EXCEPTION
+      WHEN row_locked THEN
+         Error_SYS.Record_Locked(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Lock_By_Id___');
+      WHEN no_data_found THEN
+         BEGIN
+            SELECT 1
+               INTO  dummy_
+               FROM  mdm_method_list_tab
+               WHERE rowid = objid_;
+            Raise_Record_Modified___(rec_);
+         EXCEPTION
+            WHEN no_data_found THEN
+               Error_SYS.Record_Removed(lu_name_);
+            WHEN too_many_rows THEN
+               Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Lock_By_Id___');
+         END;
+   END Base;
+
+BEGIN
+   RETURN Base(objid_, objversion_);
+END Lock_By_Id___;
+
+
+FUNCTION Lock_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  mdm_method_list_tab
+            WHERE template_id = template_id_
+            AND   revision = revision_
+            AND   execute_seq = execute_seq_
+            FOR UPDATE;
+         RETURN rec_;
+      EXCEPTION
+         WHEN no_data_found THEN
+            Raise_Record_Removed___(template_id_, revision_, execute_seq_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Lock_By_Keys___');
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Lock_By_Keys___;
+
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_method_list_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  mdm_method_list_tab
+            WHERE template_id = template_id_
+            AND   revision = revision_
+            AND   execute_seq = execute_seq_
+            FOR UPDATE NOWAIT;
+         RETURN rec_;
+      EXCEPTION
+         WHEN row_locked THEN
+            Error_SYS.Record_Locked(lu_name_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Lock_By_Keys___');
+         WHEN no_data_found THEN
+            BEGIN
+               SELECT 1
+                  INTO  dummy_
+                  FROM  mdm_method_list_tab
+                  WHERE template_id = template_id_
+                  AND   revision = revision_
+                  AND   execute_seq = execute_seq_;
+               Raise_Record_Modified___(rec_);
+            EXCEPTION
+               WHEN no_data_found THEN
+                  Raise_Record_Removed___(template_id_, revision_, execute_seq_);
+               WHEN too_many_rows THEN
+                  Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Lock_By_Keys___');
+            END;
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Lock_By_Keys_Nowait___;
+
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_ IN VARCHAR2 ) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      lu_rec_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  mdm_method_list_tab
+         WHERE rowid = objid_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         Error_SYS.Record_Removed(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Get_Object_By_Id___');
+   END Base;
+
+BEGIN
+   RETURN Base(objid_);
+END Get_Object_By_Id___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Object_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN mdm_method_list_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN mdm_method_list_tab%ROWTYPE
+   IS
+      lu_rec_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN lu_rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_Object_By_Keys___');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Get_Object_By_Keys___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Check_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER ) RETURN BOOLEAN
+   IS
+      dummy_ NUMBER;
+   BEGIN
+      SELECT 1
+         INTO  dummy_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+      RETURN TRUE;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN FALSE;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Check_Exist___');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, execute_seq_);
+END Check_Exist___;
+
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      SELECT to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objversion_
+         FROM  mdm_method_list_tab
+         WHERE rowid = objid_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, 'Get_Version_By_Id___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_);
+END Get_Version_By_Id___;
+
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   execute_seq_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      execute_seq_ IN NUMBER )
+   IS
+   BEGIN
+      SELECT rowid, to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objid_, objversion_
+         FROM  mdm_method_list_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   execute_seq = execute_seq_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objid_      := NULL;
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, execute_seq_, 'Get_Id_Version_By_Keys___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_, template_id_, revision_, execute_seq_);
+END Get_Id_Version_By_Keys___;
+
+
+FUNCTION Pack___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (rec_.template_id IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      END IF;
+      IF (rec_.revision IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      END IF;
+      IF (rec_.execute_seq IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('EXECUTE_SEQ', rec_.execute_seq, attr_);
+      END IF;
+      IF (rec_.view_name IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('VIEW_NAME', rec_.view_name, attr_);
+      END IF;
+      IF (rec_.method_name IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('METHOD_NAME', rec_.method_name, attr_);
+      END IF;
+      IF (rec_.on_new IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('ON_NEW', rec_.on_new, attr_);
+      END IF;
+      IF (rec_.on_modify IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('ON_MODIFY', rec_.on_modify, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_method_list_tab%ROWTYPE,
+      indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (indrec_.template_id) THEN
+         Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      END IF;
+      IF (indrec_.revision) THEN
+         Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      END IF;
+      IF (indrec_.execute_seq) THEN
+         Client_SYS.Add_To_Attr('EXECUTE_SEQ', rec_.execute_seq, attr_);
+      END IF;
+      IF (indrec_.view_name) THEN
+         Client_SYS.Add_To_Attr('VIEW_NAME', rec_.view_name, attr_);
+      END IF;
+      IF (indrec_.method_name) THEN
+         Client_SYS.Add_To_Attr('METHOD_NAME', rec_.method_name, attr_);
+      END IF;
+      IF (indrec_.on_new) THEN
+         Client_SYS.Add_To_Attr('ON_NEW', rec_.on_new, attr_);
+      END IF;
+      IF (indrec_.on_modify) THEN
+         Client_SYS.Add_To_Attr('ON_MODIFY', rec_.on_modify, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_, indrec_);
+END Pack___;
+
+
+FUNCTION Pack_Table___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      Client_SYS.Add_To_Attr('EXECUTE_SEQ', rec_.execute_seq, attr_);
+      Client_SYS.Add_To_Attr('VIEW_NAME', rec_.view_name, attr_);
+      Client_SYS.Add_To_Attr('METHOD_NAME', rec_.method_name, attr_);
+      Client_SYS.Add_To_Attr('ON_NEW', rec_.on_new, attr_);
+      Client_SYS.Add_To_Attr('ON_MODIFY', rec_.on_modify, attr_);
+      Client_SYS.Add_To_Attr('ROWKEY', rec_.rowkey, attr_);
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack_Table___;
+
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec )
+IS
+   
+   PROCEDURE Base (
+      indrec_ IN OUT NOCOPY Indicator_Rec )
+   IS
+      empty_indrec_ Indicator_Rec;
+   BEGIN
+      indrec_ := empty_indrec_;
+   END Base;
+
+BEGIN
+   Base(indrec_);
+END Reset_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.template_id := rec_.template_id IS NOT NULL;
+      indrec_.revision := rec_.revision IS NOT NULL;
+      indrec_.execute_seq := rec_.execute_seq IS NOT NULL;
+      indrec_.view_name := rec_.view_name IS NOT NULL;
+      indrec_.method_name := rec_.method_name IS NOT NULL;
+      indrec_.on_new := rec_.on_new IS NOT NULL;
+      indrec_.on_modify := rec_.on_modify IS NOT NULL;
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Get_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN mdm_method_list_tab%ROWTYPE,
+   newrec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      oldrec_ IN mdm_method_list_tab%ROWTYPE,
+      newrec_ IN mdm_method_list_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.template_id := Validate_SYS.Is_Changed(oldrec_.template_id, newrec_.template_id);
+      indrec_.revision := Validate_SYS.Is_Changed(oldrec_.revision, newrec_.revision);
+      indrec_.execute_seq := Validate_SYS.Is_Changed(oldrec_.execute_seq, newrec_.execute_seq);
+      indrec_.view_name := Validate_SYS.Is_Changed(oldrec_.view_name, newrec_.view_name);
+      indrec_.method_name := Validate_SYS.Is_Changed(oldrec_.method_name, newrec_.method_name);
+      indrec_.on_new := Validate_SYS.Is_Changed(oldrec_.on_new, newrec_.on_new);
+      indrec_.on_modify := Validate_SYS.Is_Changed(oldrec_.on_modify, newrec_.on_modify);
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(oldrec_, newrec_);
+END Get_Indicator_Rec___;
+
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      oldrec_ mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_, indrec_, attr_);
+END Check_Insert___;
+
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE )
+   IS
+      attr_    VARCHAR2(32000);
+      indrec_  Indicator_Rec;
+   BEGIN
+      Prepare_Insert___(attr_);
+      Unpack___(newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END Prepare_New___;
+
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE )
+   IS
+      objid_         VARCHAR2(20);
+      objversion_    VARCHAR2(100);
+      attr_          VARCHAR2(32000);
+      indrec_        Indicator_Rec;
+      emptyrec_      mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      indrec_ := Get_Indicator_Rec___(emptyrec_, newrec_);
+      Check_Insert___(newrec_, indrec_, attr_);
+      Insert___(objid_, objversion_, newrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END New___;
+
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Validate_SYS.Item_Update(lu_name_, 'TEMPLATE_ID', indrec_.template_id);
+      Validate_SYS.Item_Update(lu_name_, 'REVISION', indrec_.revision);
+      Validate_SYS.Item_Update(lu_name_, 'EXECUTE_SEQ', indrec_.execute_seq);
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(oldrec_, newrec_, indrec_, attr_);
+END Check_Update___;
+
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     mdm_method_list_tab%ROWTYPE,
+   newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      oldrec_     IN     mdm_method_list_tab%ROWTYPE,
+      newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      by_keys_    IN     BOOLEAN DEFAULT FALSE )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      IF by_keys_ THEN
+         UPDATE mdm_method_list_tab
+            SET ROW = newrec_
+            WHERE template_id = newrec_.template_id
+            AND   revision = newrec_.revision
+            AND   execute_seq = newrec_.execute_seq;
+      ELSE
+         UPDATE mdm_method_list_tab
+            SET ROW = newrec_
+            WHERE rowid = objid_;
+      END IF;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'MDM_METHOD_LIST_RK') THEN
+               Error_SYS.Rowkey_Exist(Mdm_Method_List_API.lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+BEGIN
+   Base(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
+END Update___;
+
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      newrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      objid_      VARCHAR2(20);
+      objversion_ VARCHAR2(100);
+      attr_       VARCHAR2(32000);
+      indrec_     Indicator_rec;
+      oldrec_     mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(newrec_.template_id, newrec_.revision, newrec_.execute_seq);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(newrec_.template_id, newrec_.revision, newrec_.execute_seq);
+      END IF;
+      indrec_ := Get_Indicator_Rec___(oldrec_, newrec_);
+      Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      Update___(objid_, oldrec_, newrec_, attr_, objversion_, TRUE);
+   END Base;
+
+BEGIN
+   Base(newrec_, lock_mode_wait_);
+END Modify___;
+
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN mdm_method_list_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.template_id||'^'||remrec_.revision||'^'||remrec_.execute_seq||'^';
+      Reference_SYS.Check_Restricted_Delete(lu_name_, key_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Check_Delete___;
+
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      objid_  IN VARCHAR2,
+      remrec_ IN mdm_method_list_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.template_id||'^'||remrec_.revision||'^'||remrec_.execute_seq||'^';
+      Reference_SYS.Do_Cascade_Delete(lu_name_, key_);
+      IF (objid_ IS NOT NULL) THEN
+         DELETE
+            FROM  mdm_method_list_tab
+            WHERE rowid = objid_;
+      ELSE
+         DELETE
+            FROM  mdm_method_list_tab
+            WHERE template_id = remrec_.template_id
+            AND   revision = remrec_.revision
+            AND   execute_seq = remrec_.execute_seq;
+      END IF;
+   END Base;
+
+BEGIN
+   Base(objid_, remrec_);
+END Delete___;
+
+
+PROCEDURE Delete___ (
+   remrec_ IN mdm_method_list_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN mdm_method_list_tab%ROWTYPE )
+   IS
+   BEGIN
+      Delete___(NULL, remrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Delete___;
+
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      remrec_         IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      oldrec_     mdm_method_list_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(remrec_.template_id, remrec_.revision, remrec_.execute_seq);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(remrec_.template_id, remrec_.revision, remrec_.execute_seq);
+      END IF;
+      Check_Delete___(oldrec_);
+      Delete___(NULL, oldrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_, lock_mode_wait_);
+END Remove___;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE C_Make_Source_Map (
+   attr_          IN OUT NOCOPY VARCHAR2,
+   reference_     IN OUT NOCOPY VARCHAR2,
+   view_name_     IN OUT NOCOPY VARCHAR2,
+  template_id_  IN     VARCHAR2,
+  revision_       IN         NUMBER,
+   in_method_     IN     VARCHAR2,
+   execute_seq_   IN     NUMBER )
+IS
+   
+   PROCEDURE Cust (
+      attr_          IN OUT NOCOPY VARCHAR2,
+      reference_     IN OUT NOCOPY VARCHAR2,
+      view_name_     IN OUT NOCOPY VARCHAR2,
+     template_id_  IN     VARCHAR2,
+     revision_       IN         NUMBER,
+      in_method_     IN     VARCHAR2,
+      execute_seq_   IN     NUMBER )
+      IS
+         source_owner_  VARCHAR2(100) := 'IFSAPP';
+         prepare_attr_  VARCHAR2(2000);
+         prepare_value_ VARCHAR2(2000);
+         fixed_value_   VARCHAR2(2000);
+         info_          VARCHAR2(2000);
+         objid_         VARCHAR2(2000);
+         objversion_    VARCHAR2(2000);
+         prep_action_   VARCHAR2(10) := 'PREPARE';
+         action_db_     VARCHAR2(10);
+         --
+         mode_          VARCHAR2(20);
+         stmt_          VARCHAR2(2000);
+         h_cur_         INTEGER;
+         dummy_         NUMBER;
+         flags_         VARCHAR2(10);
+         ref_           VARCHAR2(2000);
+         lookup_ref_    VARCHAR2(2000);
+         lu_prompt_     VARCHAR2(2000);
+         lov_view_      VARCHAR2(2000);
+         ref_prompt_    VARCHAR2(2000);
+         orig_view_     MDM_METHOD_LIST.view_name%TYPE := view_name_;
+         method_name_   MDM_METHOD_LIST.method_name%TYPE := in_method_;
+         source_name_   MDM_METHOD_LIST.view_name%TYPE;
+         description_   VARCHAR2(100);
+         alias_name_    VARCHAR2(100);
+         count_         NUMBER := 0;
+         length_        NUMBER;
+         attr_seq_      NUMBER;
+         max_attr_seq_  NUMBER;
+         max_pos_       NUMBER;
+         column_name_   MDM_SOURCE_MAP.column_name%TYPE;
+         add_objid_     BOOLEAN;
+         create_det_    BOOLEAN;
+         rule_string_   VARCHAR2(2000);
+         default_value_ VARCHAR2(2000);
+         note_text_     VARCHAR2(2000);
+         source_column_ VARCHAR2(2000);
+         --
+         prefix_option_      VARCHAR2(20) := '1';
+         date_format_        VARCHAR2(30) := Client_SYS.Date_Format_;
+         --
+         not_inside_loop_    EXCEPTION;
+         not_outside_loop_   EXCEPTION;
+         no_view_allowed_    EXCEPTION;
+         no_package_         EXCEPTION;
+         -- Db/Client variables
+         iid_lu_             VARCHAR2(2000);
+         prefixed_column_    VARCHAR2(2000);
+         db_client_values_   VARCHAR2(2000);
+         db_values_          VARCHAR2(2000);
+         client_values_      VARCHAR2(2000);
+         on_new_             VARCHAR2(5);
+         on_modify_          VARCHAR2(5);
+         err_msg_            VARCHAR2(250);
+         --
+         is_replication_     BOOLEAN := FALSE;
+         old_column_name_    MDM_SOURCE_MAP.column_name%TYPE;
+         old_flags_          VARCHAR2(10);
+         --
+         column_list_        VARCHAR2(32000);
+         pos_                NUMBER;
+         pos2_               NUMBER;
+         objid_source_       VARCHAR2(10);
+         test_               NUMBER := 0;
+         --
+         ref_rec_            reference_record;
+         --
+         procedure_name_     VARCHAR2(100);
+         --
+         CURSOR get_source_columns IS
+            SELECT c.column_name source_column
+            FROM all_tab_columns c
+            WHERE c.table_name = source_name_
+            AND c.owner = source_owner_
+            ORDER BY column_id;
+         --
+         CURSOR get_columns IS
+       SELECT a.column_name column_name, a.data_type data_type,
+                   to_number(decode(a.data_type, 'NUMBER', nvl(a.data_precision, 20), a.data_length)) length,
+                   to_number(nvl(a.data_scale, 0)) data_scale, to_number(a.column_id * 10) attr_seq, b.comments,
+                   '' description
+            FROM all_col_comments B, USER_TAB_COLUMNS a
+            WHERE a.TABLE_NAME = view_name_
+            AND a.TABLE_NAME  = b.table_name
+            AND a.column_name = b.column_name
+            AND b.owner = nvl('',b.owner)
+            AND b.comments IS NOT NULL
+            AND a.column_name <> 'TEXT_ID$'         
+            AND ((nvl(substr(Dictionary_SYS.Comment_Value_('FLAGS', b.comments), 1, 4),'A---') != 'A---')
+                 or ( a.column_name like '%_DB' and substr(a.TABLE_NAME,1,7) != 'INTFACE')
+                 or ( a.column_name like '%_DB') )
+            ORDER BY 5;
+            
+         CURSOR get_max_values IS
+            SELECT nvl(max(1), 0) pos, nvl(max(1), 0) attr_seq
+            FROM DUAL;
+      
+         CURSOR check_package IS
+            SELECT 1 FROM user_objects
+            WHERE object_name = upper(method_name_)
+            AND object_type = 'PACKAGE';
+         --
+      BEGIN
+         Trace_Sys.Message('1');
+   dbms_output.put_line('1');
+         action_db_ := '2';
+         create_det_ := TRUE;
+         add_objid_  := FALSE;
+         is_replication_ := TRUE;
+         reference_ := NULL;
+         Client_SYS.Clear_Attr(attr_);
+         alias_name_ := NULL;
+         IF ( instr(ltrim(rtrim(source_name_)),' ') != 0 ) THEN
+            alias_name_ := ltrim(rtrim(substr(source_name_,instr(source_name_,' ')+1,length(source_name_))))||'.';
+            source_name_ := substr(source_name_,1,instr(source_name_,' ')-1);
+         END IF;
+          Trace_Sys.Message('2');
+   dbms_output.put_line('2');
+         IF ( instr(source_name_, '.') != 0 ) THEN
+            -- Source_name is prefixed with owner; separate owner and source
+            source_owner_ := substr(source_name_, 1, instr(source_name_, '.')-1);
+            source_name_    :=  substr(source_name_, instr(source_name_, '.')+1);
+         ELSIF ( (source_name_ IS NOT NULL ) AND ( source_owner_ IS NULL ) ) THEN
+            source_owner_ := Fnd_Session_API.Get_App_Owner;
+         END IF;
+         Trace_Sys.Message('3');
+      dbms_output.put_line('3');
+         IF ( instr(upper(method_name_), '.') != 0 ) THEN
+            mode_ := 'OTHER';
+         ELSIF ( instr(upper(method_name_), '.') = 0 ) THEN
+            IF ( action_db_ IN ('1','3' ) ) THEN
+               RAISE not_inside_loop_;
+            END IF;
+              Trace_Sys.Message('4');
+      dbms_output.put_line('4');
+            mode_ := 'INSERT';
+            stmt_ := 'Begin ' || method_name_ || '.New__(:info,:objid,:objversion,:attr,:action); End;';
+            h_cur_ := DBMS_SQL.Open_Cursor;
+            -- Get prepare attr
+            BEGIN
+               OPEN check_package;
+               FETCH check_package INTO test_;
+               IF check_package%NOTFOUND THEN
+                  CLOSE check_package;
+                  RAISE no_package_;
+               ELSE
+                  CLOSE check_package;
+               END IF;
+                 Trace_Sys.Message('5');
+      dbms_output.put_line('5');
+               --@ApproveDynamicStatement(2009-11-27,nabalk)
+               DBMS_SQL.Parse(h_cur_, stmt_, DBMS_SQL.native);
+               DBMS_SQL.bind_variable(h_cur_, 'info', info_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'objid', objid_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'objversion', objversion_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'attr', prepare_attr_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'action', prep_action_, 2000);
+               dummy_ := DBMS_SQL.Execute(h_cur_);
+               DBMS_SQL.variable_value(h_cur_, 'attr', prepare_attr_);
+               DBMS_SQL.Close_Cursor(h_cur_);
+                 Trace_Sys.Message('6');
+      dbms_output.put_line('6');
+            EXCEPTION
+               WHEN no_package_ THEN
+                  DBMS_SQL.Close_Cursor(h_cur_);
+                  Trace_SYS.Message('NO PKG ERROR : Package '||method_name_||' not found');
+               WHEN OTHERS THEN
+                  DBMS_SQL.Close_Cursor(h_cur_);
+                  Trace_SYS.Message('PREPARE ERROR :'|| SQLERRM);
+            END;
+         ELSIF ( instr(upper(method_name_), 'NEW__') != 0 ) THEN
+            IF ( action_db_ IN ('1','3' ) ) THEN
+               RAISE not_inside_loop_;
+            END IF;
+              Trace_Sys.Message('7');
+      dbms_output.put_line('7');
+            mode_ := 'INSERT';
+            stmt_ := 'Begin ' || method_name_ || '.New__(:info,:objid,:objversion,:attr,:action); End;';
+            h_cur_ := DBMS_SQL.Open_Cursor;
+            -- Get prepare attr
+            BEGIN
+               --@ApproveDynamicStatement(2011-05-19,jhmase)
+               DBMS_SQL.Parse(h_cur_, stmt_, DBMS_SQL.native);
+               DBMS_SQL.bind_variable(h_cur_, 'info', info_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'objid', objid_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'objversion', objversion_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'attr', prepare_attr_, 2000);
+               DBMS_SQL.bind_variable(h_cur_, 'action', prep_action_, 2000);
+               dummy_ := DBMS_SQL.Execute(h_cur_);
+               DBMS_SQL.variable_value(h_cur_, 'attr', prepare_attr_);
+               DBMS_SQL.Close_Cursor(h_cur_);
+                 Trace_Sys.Message('8');
+      dbms_output.put_line('8');
+            EXCEPTION
+               WHEN OTHERS THEN
+                  DBMS_SQL.Close_Cursor(h_cur_);
+                  Trace_SYS.Message('PREPARE ERROR :'|| SQLERRM);
+            END;
+         ELSIF ( instr(upper(method_name_), 'MODIFY__') != 0 ) THEN
+            IF ( action_db_ IN ('1','3' ) ) THEN
+               RAISE not_inside_loop_;
+            END IF;
+              Trace_Sys.Message('9');
+      dbms_output.put_line('9');
+            mode_ := 'INSERT';  
+         END IF;
+         IF ( ( mode_ = 'OTHER' AND action_db_ IN ('1','3' )) AND view_name_ IS NOT NULL  ) THEN
+            RAISE no_view_allowed_;
+         END IF;
+         --
+           Trace_Sys.Message('10');
+      dbms_output.put_line('10');
+         -- Save maxvalues. To be used in INSERT below
+         OPEN  get_max_values;
+         FETCH get_max_values INTO max_pos_, max_attr_seq_;
+         CLOSE get_max_values;
+         --
+         Trace_SYS.Field('Make attr and ref MODE ',mode_);
+         -- Find columns from source
+         column_list_ := ';';
+         FOR srec_ IN get_source_columns LOOP
+            Trace_Sys.Message('11');
+      dbms_output.put_line('11');
+            column_list_ := column_list_||srec_.source_column||';';
+         END LOOP;
+           Trace_Sys.Message('12');
+      dbms_output.put_line('12');
+         FOR rec_ IN get_columns LOOP
+             Trace_Sys.Message('13');
+      dbms_output.put_line('13');
+            -- Check if there is a match on source column
+            pos_ := instr(column_list_,';'||rec_.column_name||';');
+            IF (pos_ != 0 ) THEN
+               pos2_ :=  Instr(column_list_, ';', pos_+1,1);
+               source_column_ := substr(column_list_,pos_+1,pos2_-pos_-1);
+            ELSE
+               source_column_ := NULL;
+            END IF;
+             Trace_Sys.Message('14');
+      dbms_output.put_line('14');
+            -- Clear LOOP variables
+            count_            := count_ + 1;
+            ref_              := NULL;
+            lookup_ref_       := NULL;
+            iid_lu_           := NULL;
+            db_client_values_ := NULL;
+            db_values_        := NULL;
+            client_values_    := NULL;
+            lu_prompt_        := NULL;
+            lov_view_         := NULL;
+            flags_            := NULL;
+            --
+            -- Get flags and format them, make attr_string
+            flags_ := substr(Dictionary_SYS.Comment_Value_('FLAGS', rec_.comments), 1, 4);
+            IF ( substr(flags_, 1, 1) IN ('P', 'K') ) THEN
+               flags_ := substr(flags_, 1, 1);
+            ELSE
+               flags_ := replace(substr(flags_, 2, 3), '-', '');
+            END IF;
+             Trace_Sys.Message('15');
+      dbms_output.put_line('15');
+            IF ( mode_ = 'INSERT' ) THEN
+               -- Get LU name for reference
+               ref_ := Dictionary_SYS.Comment_Value_('REF', rec_.comments);
+               
+               IF ref_ IS NULL THEN
+                  ref_ := Dictionary_SYS.Comment_Value_('ENUMERATION', rec_.comments);
+               END IF;
+                Trace_Sys.Message('16');
+      dbms_output.put_line('16');
+               IF ( ref_ IS NOT NULL ) THEN
+                  -- Remove parentheses and slashes ( f.ex. '/CASCADE')
+                  -- to extract LU-name only
+                  IF ( instr(ref_, '(') != 0 ) THEN
+                     lookup_ref_ := substr(ref_, 1, instr(ref_, '(')-1);
+                  ELSE
+                     lookup_ref_ := ref_;
+                  END IF;
+                   Trace_Sys.Message('17');
+      dbms_output.put_line('17');
+                  IF ( instr(lookup_ref_, '/') != 0 ) THEN
+                     lookup_ref_ := substr(lookup_ref_, 1, instr(lookup_ref_, '/')-1);
+                  END IF;
+                  lov_view_ := dictionary_SYS.Get_Base_View(lookup_ref_);
+                  IF ( lov_view_ IS NOT NULL ) THEN
+                     lu_prompt_ := nvl(Language_SYS.Translate_Lu_Prompt_(lookup_ref_), lookup_ref_);
+                  END IF;
+               END IF;
+                Trace_Sys.Message('18');
+      dbms_output.put_line('18');
+               -- Get this items value from PREPARE
+               prepare_value_ := Client_SYS.Get_Item_Value(rec_.column_name, prepare_attr_);
+               --
+               -- Check if this is an IID LU
+               BEGIN
+                  iid_lu_ := dictionary_SYS.clientnametodbname_(lookup_ref_);
+               EXCEPTION
+                  WHEN OTHERS THEN
+                     iid_lu_ := NULL;
+               END;
+                Trace_Sys.Message('19');
+      dbms_output.put_line('19');
+               IF ( iid_lu_ IS NOT NULL ) THEN
+                  -- Get Db/Client-values for this LU
+                  prefixed_column_ := view_name_||'.'||rec_.column_name;
+                  MDM_SOURCE_MAP_API.C_Enum_Db_Client_Values(
+                     info_,
+                     db_client_values_,
+                     db_values_,
+                     client_values_,
+                     prefixed_column_,
+                     iid_lu_,
+                     lookup_ref_);
+                      Trace_Sys.Message('20');
+      dbms_output.put_line('20');
+               ELSIF ( rec_.column_name like '%_DB' ) THEN
+                  -- Get Db/Client-values also for DB-columns
+                  prefixed_column_ := view_name_||'.'||substr(rec_.column_name,1,length(rec_.column_name)-3);
+                  MDM_SOURCE_MAP_API.C_Enum_Db_Client_Values(
+                     info_,
+                     db_client_values_,
+                     db_values_,
+                     client_values_,
+                     prefixed_column_);
+                  IF ( rec_.column_name = old_column_name_||'_DB' ) THEN
+                     -- Inherit flags from Client-column
+                     flags_ := old_flags_;
+                  ELSE
+                     flags_:= '-';
+                  END IF;
+                   Trace_Sys.Message('21');
+      dbms_output.put_line('21');
+               END IF;
+            END IF;
+            ref_rec_.column_name_(count_)      := rec_.column_name;
+            ref_rec_.data_type_(count_)        := rec_.data_type;
+            ref_rec_.description_(count_)      := MDM_SOURCE_MAP_API.C_Get_Column_Desc(view_name_, rec_.column_name);
+            attr_seq_                          := rec_.attr_seq;
+            ref_rec_.prepare_value_(count_)    := nvl(prepare_value_, 'NULLVALUE');
+            ref_rec_.flags_(count_)            := flags_;
+            ref_rec_.reference_(count_)        := lookup_ref_;
+            ref_rec_.lu_(count_)               := lu_prompt_;
+            ref_rec_.lov_view_(count_)         := lov_view_;
+            ref_rec_.length_(count_)           := rec_.length;
+            ref_rec_.decimal_length_(count_)   := rec_.data_scale;
+            ref_rec_.source_column_(count_)    := source_column_;
+            ref_rec_.db_client_values_(count_) := db_client_values_;
+            ref_rec_.db_values_(count_)        := db_values_;
+            ref_rec_.client_values_(count_)    := client_values_;
+            ref_rec_.attr_seq_(count_)         := attr_seq_;
+            --
+            old_column_name_ := rec_.column_name;
+            old_flags_ := flags_;
+         END LOOP;
+         --
+         IF ( mode_ = 'OTHER' ) THEN
+          C_Get_Arguments___( count_, ref_rec_, attr_seq_, in_method_ );
+           Trace_Sys.Message('22');
+      dbms_output.put_line('22');
+         END IF;
+         --
+         -- Concatenate view name with execution sequence to make unique prefix
+         IF ( prefix_option_ = '2' and mode_ != 'OTHER' ) THEN
+            view_name_ := view_name_||to_char(execute_seq_);
+             Trace_Sys.Message('23');
+      dbms_output.put_line('23');
+         END IF;
+         --
+         -- Clear table Intface_Method_List_Attrib_Tab just in case
+        /* DELETE
+         FROM Intface_Method_List_Attrib_Tab
+         WHERE intface_name = template_id_
+         AND   execute_seq =  execute_seq_;*/
+         --
+         FOR i IN 1..count_ LOOP
+             Trace_Sys.Message('24');
+      dbms_output.put_line('24');
+            IF ( create_det_ ) THEN
+               Trace_Sys.Message('2222222222');
+      dbms_output.put_line('222222');
+               length_ := ref_rec_.length_(i);
+               IF ( ref_rec_.data_type_(i) = 'DATE' ) THEN
+                  length_ := length(date_format_) ;
+               END IF;
+                Trace_Sys.Message('25');
+      dbms_output.put_line('25');
+               IF ( ref_rec_.flags_(i) IN ( 'P', 'K')  ) THEN
+                  column_name_ := ref_rec_.column_name_(i);
+               ELSIF ( ref_rec_.flags_(i) = 'ARG') THEN
+                  column_name_ := 'METHOD'||to_char(execute_seq_)|| '.' || ref_rec_.column_name_(i);
+               ELSIF ( prefix_option_ = '3' ) THEN
+                  column_name_ := ref_rec_.column_name_(i);
+               ELSE
+                  column_name_ := view_name_ || '.' || ref_rec_.column_name_(i);
+               END IF;
+                Trace_Sys.Message('26');
+      dbms_output.put_line('26');
+               Trace_SYS.Message('COLUMN_NAME :' || column_name_);
+               IF (ref_rec_.prepare_value_(i) = 'NULLVALUE' ) THEN
+                  default_value_ := NULL;
+                  note_text_ := NULL;
+               ELSIF ( ref_rec_.data_type_(i) = 'DATE' ) THEN
+                  IF ( trunc(to_date(ref_rec_.prepare_value_(i),date_format_)) = trunc(sysdate)  ) THEN
+                     default_value_ := 'sysdate';
+                     note_text_ := Language_SYS.Translate_Constant(lu_name_, ' DATEVAL : Default value sysdate from PREPARE  ', Fnd_Session_API.Get_Language );
+                  ELSE
+                     note_text_ := Language_SYS.Translate_Constant(lu_name_, ' PREPVAL : Default value :P1 from PREPARE  ', Fnd_Session_API.Get_Language, '''' || ref_rec_.prepare_value_(i) || '''' );
+                     default_value_ := 'to_date('||'''' || ref_rec_.prepare_value_(i) || ''''||','||''''||date_format_||''''||')';
+                  END IF;
+                   Trace_Sys.Message('27');
+      dbms_output.put_line('27');
+               ELSE
+                  default_value_ := '''' || ref_rec_.prepare_value_(i) || '''';
+                  note_text_ := Language_SYS.Translate_Constant(lu_name_, ' PREPVAL : Default value :P1 from PREPARE  ', Fnd_Session_API.Get_Language, '''' || default_value_ || '''' );
+               END IF;
+               --
+               IF ( ref_rec_.source_column_(i) IS NOT NULL ) THEN
+                  source_column_ := alias_name_||ref_rec_.source_column_(i);
+               ELSE
+                  source_column_ := NULL;
+               END IF;
+               IF ( ref_rec_.flags_(i) = 'ARG' AND ref_rec_.description_(i) like 'OUT%' ) THEN
+                  -- Do not insert rows for OUT-variables in source-mapping
+                  NULL;
+               ELSE
+                   Trace_Sys.Message('28');
+      dbms_output.put_line('28');
+                  BEGIN
+                      Trace_Sys.Message('29');
+      dbms_output.put_line('29');
+                     INSERT INTO MDM_SOURCE_MAP_Tab(template_id ,Revision,Column_Name,Data_Type,Length,
+                     description ,Flags,Default_Value,Note_Text,Db_Client_Values,Rowversion)
+                     VALUES(template_id_,Revision_, column_name_ , ref_rec_.data_type_(i),  length_,
+                         ref_rec_.description_(i), ref_rec_.flags_(i), 
+                        default_value_, note_text_,
+                        decode(instr(column_name_,'_DB'),
+                           '0',ref_rec_.client_values_(i),
+                                ref_rec_.db_client_values_(i)),sysdate);
+                     IF procedure_name_ = 'EXCEL_MIGRATION' THEN
+                        Basic_Data_Translation_API.Insert_Basic_Data_Translation('FNDMIG', 'IntfaceDetail',
+                                                                     template_id_||'^'||column_name_||'^'||'DESCRIPTION',
+                                                                     NULL, ref_rec_.description_(i));
+                        Basic_Data_Translation_API.Insert_Basic_Data_Translation('FNDMIG', 'IntfaceDetail',
+                                                                     template_id_||'^'||column_name_||'^'||'NOTE_TEXT',
+                                                                     NULL, note_text_);
+                     END IF;
+                  EXCEPTION
+                     WHEN OTHERS THEN
+                     MDM_SOURCE_MAP_API.C_Trace_Long_Msg('NOINSERT :' || SQLERRM);
+                  END;
+               END IF;
+            END IF;
+            --
+            IF ( add_objid_ ) THEN
+               BEGIN
+                  -- Check if OBJID exists
+                  MDM_SOURCE_MAP_API.Exist(template_id_,revision_, 'OBJID');
+                  -- Do nothing if column exists
+               EXCEPTION
+                  WHEN OTHERS THEN
+                     BEGIN
+                        IF ( is_replication_ ) THEN
+                           objid_source_ := 'OBJID';
+                        ELSE
+                           objid_source_ := 'ROWID';
+                        END IF;
+                         Trace_Sys.Message('30');
+      dbms_output.put_line('30');
+                        -- Insert one row for OBJID. POS and ATTR_SEQ is set to
+                        -- 99999 to make OBJID appear at bottom of list.
+                        INSERT INTO MDM_SOURCE_MAP_Tab(TEMPLATE_ID,REVISION,COLUMN_NAME,Data_Type,
+                        Length,Description,Rowversion)                   
+                        VALUES(template_id_,revision_ ,'OBJID' , 'VARCHAR2',  20,
+                          'Objid' ,  sysdate);
+                     EXCEPTION
+                        WHEN OTHERS THEN
+                          MDM_SOURCE_MAP_API.C_Trace_Long_Msg('NOINSERT :' || SQLERRM);
+                     END;
+               END;
+            END IF;
+            --
+            fixed_value_ := NULL;
+            IF ( ref_rec_.flags_(i) = 'ARG' ) THEN
+               -- Set default on-line for f.ex. Intface_Header_API.Start_Job
+               IF ( ref_rec_.column_name_(i) = 'EXEC_PLAN_' ) THEN
+                  fixed_value_ := 'ONLINE';
+               END IF;
+                Trace_Sys.Message('31');
+      dbms_output.put_line('31');
+               description_ := ref_rec_.data_type_(i)||' '||ref_rec_.description_(i);
+            ELSE
+               description_ := ref_rec_.description_(i);
+            END IF;
+      
+            on_new_ := 'FALSE';
+            on_modify_ := 'FALSE';
+            IF ( mode_ != 'OTHER' ) THEN
+               -- Check OnNew/OnModify according to job-type and flags
+               IF ref_rec_.flags_(i) IN ('P','K') OR ref_rec_.flags_(i) like '%I%' THEN
+                  on_new_ := 'TRUE';
+               END IF;
+               IF ref_rec_.flags_(i) IN ('P','K') THEN
+                  on_modify_ := 'FALSE';
+               ELSIF ref_rec_.flags_(i) like '%U%' THEN
+                  on_modify_ := 'TRUE';
+               ELSIF ref_rec_.column_name_(i) like '%DB' THEN
+                  on_new_ := 'TRUE';
+                  on_modify_ := 'TRUE';
+               END IF;
+               IF ( instr(upper(method_name_), 'MODIFY__') != 0 ) THEN
+                  on_new_ := 'FALSE';
+               ELSIF ( instr(upper(method_name_), 'NEW__') != 0 ) THEN
+                  on_modify_ := 'FALSE';
+               END IF;
+                Trace_Sys.Message('32');
+      dbms_output.put_line('32');
+               -- Do not use DB-columns for replication_jobs
+               IF ( is_replication_ AND ref_rec_.flags_(i) = '-' ) THEN
+                  on_modify_ := 'FALSE';
+                  on_new_ := 'FALSE';
+               END IF;
+            ELSIF (ref_rec_.flags_(i) IN ('P','K')) THEN
+               ref_rec_.flags_(i) := 'IU';
+            END IF;
+             Trace_Sys.Message('33');
+      dbms_output.put_line('33');
+            db_client_values_ := ref_rec_.db_client_values_(i);
+            IF ( ref_rec_.column_name_(i) LIKE '%DB' ) THEN
+               ref_prompt_ := NULL;
+               db_client_values_ := NULL;
+            ELSIF ( ref_rec_.lu_(i) IS NOT NULL ) THEN
+               ref_prompt_ := ref_rec_.reference_(i)||' - '||ref_rec_.lu_(i);
+            ELSE
+               ref_prompt_ := ref_rec_.reference_(i);
+           END IF;
+          /*   INSERT INTO Intface_Method_List_Attrib_Tab (
+               INTFACE_NAME,EXECUTE_SEQ,COLUMN_SEQUENCE, COLUMN_NAME,
+               FLAGS,ON_NEW,ON_MODIFY,FIXED_VALUE,
+               LU_REFERENCE,
+               IID_VALUES, DESCRIPTION, ROWVERSION)
+            VALUES (template_id_,execute_seq_,ref_rec_.attr_seq_(i),ref_rec_.column_name_(i),
+               ref_rec_.flags_(i), on_new_, on_modify_, fixed_value_,
+               ref_prompt_,
+               db_client_values_, description_, SYSDATE);*/
+         END LOOP;
+         --
+         attr_ := NULL;      -- Do not return this value
+         reference_ := NULL; -- Do not return this value
+      EXCEPTION
+         WHEN not_inside_loop_ THEN
+            Error_SYS.Record_General(lu_name_, 'NOTINLOOP: Procedure :P1  must be started inside loop', method_name_);
+         WHEN not_outside_loop_ THEN
+            Error_SYS.Record_General(lu_name_, 'NOTOUTLOOP: Procedure :P1  cannot be started inside loop', method_name_);
+         WHEN no_view_allowed_ THEN
+            Error_SYS.Record_General(lu_name_, 'NOVIEW: Specify view_name only inside loop');
+         WHEN OTHERS THEN
+            err_msg_ := substr(SQLERRM,1,250);
+            Trace_SYS.Field('OTHERS ',err_msg_);
+            err_msg_ :=REGEXP_REPLACE(err_msg_,'ORA-[[:digit:]]{5}: ','');
+            Error_SYS.Record_General(lu_name_, 'MAKEOTHER: Error making attribute and references - :P1  ', err_msg_);
+      END Cust;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Method_List_API.lu_name_, 'Mdm_Method_List_API', 'C_Make_Source_Map');
+   Cust(attr_, reference_, view_name_, template_id_, revision_, in_method_, execute_seq_);
+END C_Make_Source_Map;
+
+
+FUNCTION Find_Method_Name (
+   view_name_ IN VARCHAR2,
+   method_name_ IN VARCHAR2) RETURN VARCHAR2
+IS
+   
+   FUNCTION Cust (
+      view_name_ IN VARCHAR2,
+      method_name_ IN VARCHAR2) RETURN VARCHAR2
+   IS
+      package_name_ VARCHAR2(100);
+   BEGIN
+      IF(method_name_ IS NULL) THEN 
+      package_name_ := view_name_||'_API';
+      ELSE 
+         package_name_ := method_name_;
+      END IF;
+      IF Database_SYS.Method_Exist(package_name_, 'NEW__') THEN
+         RETURN package_name_;
+      ELSE   
+         RETURN NULL;
+      END IF;
+   END Cust;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Method_List_API.lu_name_, 'Mdm_Method_List_API', 'Find_Method_Name');
+   RETURN Cust(view_name_, method_name_);
+END Find_Method_Name;
+
+
+PROCEDURE Unpack___ (
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+
+   --The code for layer Base is overtaken
+   
+   PROCEDURE Cust (
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      ptr_   NUMBER;
+      name_  VARCHAR2(30);
+      value_ VARCHAR2(32000);
+      msg_   VARCHAR2(32000);
+   BEGIN
+      Reset_Indicator_Rec___(indrec_);
+      Client_SYS.Clear_Attr(msg_);
+      ptr_ := NULL;
+      WHILE (Client_SYS.Get_Next_From_Attr(attr_, ptr_, name_, value_)) LOOP
+         CASE name_
+            WHEN ('TEMPLATE_ID') THEN
+               newrec_.template_id := value_;
+               indrec_.template_id := TRUE;
+            WHEN ('REVISION') THEN
+               newrec_.revision := Client_SYS.Attr_Value_To_Number(value_);
+               indrec_.revision := TRUE;
+            WHEN ('EXECUTE_SEQ') THEN
+               newrec_.execute_seq := Client_SYS.Attr_Value_To_Number(value_);
+               indrec_.execute_seq := TRUE;
+            WHEN ('VIEW_NAME') THEN
+               newrec_.view_name := value_;
+               indrec_.view_name := TRUE;
+            WHEN ('METHOD_NAME') THEN
+              newrec_.method_name := value_;
+              indrec_.method_name := TRUE;
+            WHEN ('ON_NEW') THEN
+               IF (value_ IS NULL OR value_ = 'TRUE' OR value_ = 'FALSE') THEN
+                  newrec_.on_new := value_;
+               ELSE
+                  RAISE value_error;
+               END IF;
+               indrec_.on_new := TRUE;
+            WHEN ('ON_MODIFY') THEN
+               IF (value_ IS NULL OR value_ = 'TRUE' OR value_ = 'FALSE') THEN
+                  newrec_.on_modify := value_;
+               ELSE
+                  RAISE value_error;
+               END IF;
+               indrec_.on_modify := TRUE;
+            ELSE
+               Client_SYS.Add_To_Attr(name_, value_, msg_);
+            END CASE;
+      END LOOP;
+       newrec_.method_name := Find_Method_Name(newrec_.view_name,newrec_.method_name);
+      attr_ := msg_;
+   EXCEPTION
+      WHEN value_error THEN
+         Raise_Item_Format___(name_, value_);
+   END Cust;
+
+BEGIN
+   Cust(newrec_, indrec_, attr_);
+END Unpack___;
+
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      IF (newrec_.template_id IS NOT NULL AND newrec_.revision IS NOT NULL)
+      AND (indrec_.template_id OR indrec_.revision)
+      AND (Validate_SYS.Is_Changed(oldrec_.template_id, newrec_.template_id)
+        OR Validate_SYS.Is_Changed(oldrec_.revision, newrec_.revision)) THEN
+         Mdm_Basic_Data_Header_API.Exist(newrec_.template_id, newrec_.revision);
+      END IF;
+      Error_SYS.Check_Not_Null(lu_name_, 'TEMPLATE_ID', newrec_.template_id);
+      Error_SYS.Check_Not_Null(lu_name_, 'REVISION', newrec_.revision);
+      Error_SYS.Check_Not_Null(lu_name_, 'EXECUTE_SEQ', newrec_.execute_seq);
+      Error_SYS.Check_Not_Null(lu_name_, 'ON_NEW', newrec_.on_new);
+      Error_SYS.Check_Not_Null(lu_name_, 'ON_MODIFY', newrec_.on_modify);
+   END Base;
+
+   PROCEDURE Cust (
+      oldrec_ IN     mdm_method_list_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      temp_count_view_ NUMBER;
+      CURSOR get_count_view IS
+      SELECT 1
+      FROM INTFACE_VIEWS
+      WHERE VIEW_NAME = newrec_.view_name;
+   BEGIN
+      OPEN get_count_view;
+      FETCH get_count_view INTO temp_count_view_;
+      CLOSE get_count_view;
+      
+      IF(temp_count_view_ = 1) THEN
+      Base(oldrec_, newrec_, indrec_, attr_);
+      ELSE
+            Error_SYS.Record_General(lu_name_,': View Does Not Exist.');
+   END IF;
+      --Add post-processing code here
+   END Cust;
+
+BEGIN
+   Cust(oldrec_, newrec_, indrec_, attr_);
+END Check_Common___;
+
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+   END Base;
+
+   PROCEDURE Cust (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN  
+      Base(attr_);
+      Client_SYS.Add_To_Attr('ON_NEW', 'FALSE', attr_);
+      Client_SYS.Add_To_Attr('ON_MODIFY', 'FALSE', attr_);
+   END Cust;
+
+BEGIN
+   Cust(attr_);
+END Prepare_Insert___;
+
+
+PROCEDURE Insert___ (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      newrec_.rowkey := sys_guid();
+      Client_SYS.Add_To_Attr('OBJKEY', newrec_.rowkey, attr_);
+      INSERT
+         INTO mdm_method_list_tab
+         VALUES newrec_
+         RETURNING rowid INTO objid_;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'MDM_METHOD_LIST_RK') THEN
+               Error_SYS.Rowkey_Exist(lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+   PROCEDURE Cust (
+         objid_      OUT    VARCHAR2,
+         objversion_ OUT    VARCHAR2,
+         newrec_     IN OUT NOCOPY mdm_method_list_tab%ROWTYPE,
+         attr_       IN OUT NOCOPY VARCHAR2 )
+      IS
+         reference_      varchar2(20);
+      BEGIN
+         --Add pre-processing code here
+         Base(objid_, objversion_, newrec_, attr_);
+         --Add post-processing code here
+         C_Make_Source_Map(attr_ ,reference_,newrec_.view_name,newrec_.Template_Id,
+                        newrec_.Revision,newrec_.Method_Name,
+                        newrec_.Execute_Seq);
+      END Cust;
+
+BEGIN
+   Cust(objid_, objversion_, newrec_, attr_);
+END Insert___;
+
+
+PROCEDURE C_Get_Arguments___ (
+   count_       IN OUT NOCOPY NUMBER,
+   ref_rec_     IN OUT NOCOPY reference_record,
+   attr_seq_    IN OUT NOCOPY NUMBER,
+   method_name_ IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Cust (
+      count_       IN OUT NOCOPY NUMBER,
+      ref_rec_     IN OUT NOCOPY reference_record,
+      attr_seq_    IN OUT NOCOPY NUMBER,
+      method_name_ IN     VARCHAR2 )
+   IS
+         h_default_       VARCHAR2(20); 
+         dummy_           DBMS_DESCRIBE.NUMBER_TABLE; 
+         overload_        DBMS_DESCRIBE.NUMBER_TABLE; 
+         position_        DBMS_DESCRIBE.NUMBER_TABLE; 
+         argument_name_   DBMS_DESCRIBE.VARCHAR2_TABLE; 
+         data_n_type_     DBMS_DESCRIBE.NUMBER_TABLE; 
+         def_value_       DBMS_DESCRIBE.NUMBER_TABLE; 
+         in_out_          DBMS_DESCRIBE.NUMBER_TABLE;
+         --
+         data_type_       VARCHAR2(10);
+         direction_       VARCHAR2(10);
+         length_          NUMBER;
+         arg_name_        VARCHAR2(100);
+         --
+         illegal_method_     EXCEPTION;
+         illegal_arg_type_   EXCEPTION;
+      BEGIN 
+         DBMS_DESCRIBE.DESCRIBE_PROCEDURE(UPPER(method_name_),
+            null, null, overload_, position_, dummy_, 
+            argument_name_, data_n_type_, def_value_, in_out_, dummy_, dummy_, dummy_, dummy_, dummy_); 
+         FOR i IN 1..argument_name_.count LOOP 
+            h_default_ := NULL;  
+            length_ := 22;
+            arg_name_ := argument_name_(i);
+            IF ( overload_(i) < 2) THEN -- IF overloaded, only display first alternative
+               IF (def_value_(i) = 1) THEN 
+                  h_default_ := 'DEFAULT'; 
+               END IF; 
+               IF ( data_n_type_(i) = 1 ) THEN 
+                  data_type_ := 'VARCHAR2';
+                  length_    := 32000;
+               ELSIF ( data_n_type_(i) = 2 ) THEN 
+                  data_type_ := 'NUMBER';
+               ELSIF ( data_n_type_(i) = 12 ) THEN 
+                  data_type_ := 'DATE';
+               ELSIF ( data_n_type_(i) = 0 ) THEN 
+                  RETURN;
+               ELSE 
+                  RAISE illegal_arg_type_;
+               END IF; 
+      --         IF ( position(i) = 0 ) THEN 
+      --           RAISE illegal_method_;
+      --         END IF;
+               IF ( in_out_(i) = 0 ) THEN
+                  direction_ := 'IN';
+               ELSIF ( in_out_(i) = 1 ) THEN
+                  direction_ := 'OUT';
+               ELSIF ( in_out_(i) = 2 ) THEN
+                  direction_ := 'IN OUT';
+               END IF;
+               IF ( argument_name_(i) IS NULL AND direction_ = 'OUT' ) THEN
+                  -- This is a function
+                  arg_name_ := 'FUNCTION_RESULT';
+               END IF;
+               count_ := count_ + 1;
+               attr_seq_ := nvl(attr_seq_,0) + 10;
+               ref_rec_.column_name_(count_)      := arg_name_;
+               ref_rec_.data_type_(count_)        := data_type_;
+               ref_rec_.description_(count_)      := direction_||' '||h_default_;
+               ref_rec_.attr_seq_(count_)         := attr_seq_;
+               ref_rec_.prepare_value_(count_)    := 'NULLVALUE';
+               ref_rec_.flags_(count_)            := 'ARG';
+               ref_rec_.reference_(count_)        := NULL;
+               ref_rec_.lu_(count_)               := NULL;
+               ref_rec_.lov_view_(count_)         := NULL;
+               ref_rec_.length_(count_)           := length_;
+               ref_rec_.decimal_length_(count_)   := 0;
+               ref_rec_.source_column_(count_)    := NULL;
+               ref_rec_.db_client_values_(count_) := NULL;
+               ref_rec_.db_values_(count_)        := NULL;
+               ref_rec_.client_values_(count_)    := NULL;
+            END IF; 
+         END LOOP; 
+      EXCEPTION
+         WHEN illegal_method_ THEN
+            Error_SYS.Record_General(lu_name_, 'ILLMETHFUNC: Method :P1 is a function. Only procedures allowed', method_name_);
+         WHEN illegal_arg_type_ THEN
+            Error_SYS.Record_General(lu_name_, 'ILLARGTYPE: Argument :P1 has illegal type. Only datatype DATE VARCHAR2 NUMBER allowed', arg_name_ );
+   END Cust;
+
+BEGIN
+   Cust(count_, ref_rec_, attr_seq_, method_name_);
+END C_Get_Arguments___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+   
+   PROCEDURE Base
+   IS
+   BEGIN
+      NULL;
+   END Base;
+
+BEGIN
+   Base;
+END Init;
+
+BEGIN
+   Init;
+END Mdm_Method_List_API;
+/
+SHOW ERROR

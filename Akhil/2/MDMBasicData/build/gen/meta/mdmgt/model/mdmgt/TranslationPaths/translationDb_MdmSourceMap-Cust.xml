@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogicalUnits version="1.0" module="MDMGT" type="LU" layer="Cust">
+   <LogicalUnit name="MdmSourceMap">
+      <Text><![CDATA[Mdm Source Map]]></Text>
+      <View ID="MdmSourceMap.MDM_SOURCE_MAP">
+         <Text><![CDATA[Mdm Source Map]]></Text>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.COLUMN_NAME">
+            <Text><![CDATA[Column Name]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.DATA_TYPE">
+            <Text><![CDATA[Data Type]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.LENGTH">
+            <Text><![CDATA[Length]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.DEFAULT_VALUE">
+            <Text><![CDATA[Default Value]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.FLAGS">
+            <Text><![CDATA[Flags]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.NOTE_TEXT">
+            <Text><![CDATA[Note Text]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.DB_CLIENT_VALUES">
+            <Text><![CDATA[Db Client Values]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_SOURCE_MAP.MANDATORY">
+            <Text><![CDATA[Mandatory]]></Text>
+         </Column>
+      </View>
+      <View ID="MdmSourceMap.MDM_GENERAL">
+         <Text><![CDATA[Mdm General]]></Text>
+         <Column ID="MdmSourceMap.MDM_GENERAL.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.COLUMN_NAME">
+            <Text><![CDATA[Column Name]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.DATA_TYPE">
+            <Text><![CDATA[Data Type]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.LENGTH">
+            <Text><![CDATA[Length]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.DEFAULT_VALUE">
+            <Text><![CDATA[Default Value]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.FLAGS">
+            <Text><![CDATA[Flags]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.NOTE_TEXT">
+            <Text><![CDATA[Note Text]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.DB_CLIENT_VALUES">
+            <Text><![CDATA[Db Client Values]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.MANDATORY">
+            <Text><![CDATA[Mandatory]]></Text>
+         </Column>
+         <Column ID="MdmSourceMap.MDM_GENERAL.REQUEST_NO">
+            <Text><![CDATA[Request No]]></Text>
+         </Column>
+      </View>
+   </LogicalUnit>
+</LogicalUnits>

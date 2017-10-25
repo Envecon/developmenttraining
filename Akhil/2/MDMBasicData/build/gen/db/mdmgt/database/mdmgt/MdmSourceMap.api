@@ -1,0 +1,325 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmSourceMap
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Source_Map_API specification
+
+CREATE OR REPLACE PACKAGE Mdm_Source_Map_API IS
+
+module_  CONSTANT VARCHAR2(25) := 'MDMGT';
+lu_name_ CONSTANT VARCHAR2(25) := 'MdmSourceMap';
+lu_type_ CONSTANT VARCHAR2(25) := 'Entity';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Public_Rec IS RECORD
+  (template_id                    MDM_SOURCE_MAP_TAB.template_id%TYPE,
+   revision                       MDM_SOURCE_MAP_TAB.revision%TYPE,
+   column_name                    MDM_SOURCE_MAP_TAB.column_name%TYPE,
+   "rowid"                        rowid,
+   rowversion                     MDM_SOURCE_MAP_TAB.rowversion%TYPE,
+   rowkey                         MDM_SOURCE_MAP_TAB.rowkey%TYPE,
+   description                    MDM_SOURCE_MAP_TAB.description%TYPE,
+   data_type                      MDM_SOURCE_MAP_TAB.data_type%TYPE,
+   length                         MDM_SOURCE_MAP_TAB.length%TYPE,
+   default_value                  MDM_SOURCE_MAP_TAB.default_value%TYPE,
+   flags                          MDM_SOURCE_MAP_TAB.flags%TYPE,
+   note_text                      MDM_SOURCE_MAP_TAB.note_text%TYPE,
+   db_client_values               MDM_SOURCE_MAP_TAB.db_client_values%TYPE,
+   mandatory                      MDM_SOURCE_MAP_TAB.mandatory%TYPE);
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+-- Get_Key_By_Rowkey
+--   Returns a table record with only keys (other attributes are NULL) based on a rowkey.
+--
+-- Exist
+--   Checks if given pointer (e.g. primary key) to an instance of this
+--   logical unit exists. If not an exception will be raised.
+--
+-- Exists
+--   Same check as Exist, but returns a BOOLEAN value instead of exception.
+--
+-- Get_Description
+--   Fetches the Description attribute for a record.
+--
+-- Get_Data_Type
+--   Fetches the DataType attribute for a record.
+--
+-- Get_Length
+--   Fetches the Length attribute for a record.
+--
+-- Get_Default_Value
+--   Fetches the DefaultValue attribute for a record.
+--
+-- Get_Flags
+--   Fetches the Flags attribute for a record.
+--
+-- Get_Note_Text
+--   Fetches the NoteText attribute for a record.
+--
+-- Get_Db_Client_Values
+--   Fetches the DbClientValues attribute for a record.
+--
+-- Get_Mandatory
+--   Fetches the Mandatory attribute for a record.
+--
+-- Get
+--   Fetches a record containing the public attributes.
+--
+-- Get_Objkey
+--   Fetches the objkey attribute for a record.
+--
+-- Lock__
+--   Client-support to lock a specific instance of the logical unit.
+--
+-- New__
+--   Client-support interface to create LU instances.
+--   action_ = 'PREPARE'
+--   Default values and handle of information to client.
+--   The default values are set in procedure Prepare_Insert___.
+--   action_ = 'CHECK'
+--   Check all attributes before creating new object and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___.
+--   action_ = 'DO'
+--   Creation of new instances of the logical unit and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___
+--   before calling procedure Insert___.
+--
+-- Modify__
+--   Client-support interface to modify attributes for LU instances.
+--   action_ = 'CHECK'
+--   Check all attributes before modifying an existing object and
+--   handle of information to client. The attribute list is unpacked,
+--   checked and prepared(defaults) in procedures Unpack___ and Check_Update___.
+--   action_ = 'DO'
+--   Modification of an existing instance of the logical unit. The
+--   procedure unpacks the attributes, checks all values before
+--   procedure Update___ is called.
+--
+-- Remove__
+--   Client-support interface to remove LU instances.
+--   action_ = 'CHECK'
+--   Check whether a specific LU-instance may be removed or not.
+--   The procedure fetches the complete record by calling procedure
+--   Get_Object_By_Id___. Then the check is made by calling procedure
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Get_Key_By_Rowkey)
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_source_map_tab%ROWTYPE;
+
+--@PoReadOnly(Exist)
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 );
+
+--@PoReadOnly(Exists)
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN BOOLEAN;
+
+--@PoReadOnly(Get_Description)
+FUNCTION Get_Description (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Data_Type)
+FUNCTION Get_Data_Type (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Length)
+FUNCTION Get_Length (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN NUMBER;
+
+--@PoReadOnly(Get_Default_Value)
+FUNCTION Get_Default_Value (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Flags)
+FUNCTION Get_Flags (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Note_Text)
+FUNCTION Get_Note_Text (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Db_Client_Values)
+FUNCTION Get_Db_Client_Values (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Mandatory)
+FUNCTION Get_Mandatory (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get)
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN Public_Rec;
+
+--@PoReadOnly(Get_Objkey)
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+--@PoReadOnly(Lock__)
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 );
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+-- C_Trace_Long_Msg
+--
+-- C_Enum_Db_Client_Values
+--
+-- C_Get_Column_Desc
+-----------------------------------------------------------------------------
+
+PROCEDURE C_Trace_Long_Msg (
+      msg_ IN VARCHAR2 );
+
+PROCEDURE C_Enum_Db_Client_Values (
+      info_             IN OUT NOCOPY VARCHAR2,
+      db_client_values_ IN OUT NOCOPY VARCHAR2,
+      db_values_        IN OUT NOCOPY VARCHAR2,
+      client_values_    IN OUT NOCOPY VARCHAR2,
+      prefixed_column_  IN     VARCHAR2,
+      in_lu_db_name_    IN     VARCHAR2 DEFAULT NULL,
+      in_reference_     IN     VARCHAR2 DEFAULT NULL );
+
+FUNCTION C_Get_Column_Desc(
+   view_name_   IN VARCHAR2,
+   column_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Mdm_Source_Map_API;
+/
+SHOW ERROR
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+-----------------------------------------------------------------------------
+
+PROMPT Creating MDM_GENERAL view
+
+CREATE OR REPLACE VIEW MDM_GENERAL AS
+SELECT
+       s.template_id                    template_id,
+       s.revision                       revision,
+       r.request_no                      request_no,
+       s.column_name                    column_name,
+       s.description                    description,
+       s.data_type                      data_type,
+       s.length                         length,
+       s.default_value                  default_value,
+       s.flags                          flags,
+       s.note_text                      note_text,
+       s.db_client_values               db_client_values,
+       s.mandatory                      mandatory,
+       s.rowkey                         objkey,
+       to_char(s.rowversion,'YYYYMMDDHH24MISS') objversion,
+       s.rowid                          objid
+FROM   mdm_source_map_tab s,mdm_request_header_tab r
+where (s.default_value is not null
+or s.mandatory = 'TRUE')
+AND s.template_id=r.template_id
+AND s.revision=r.revision
+WITH   READ ONLY
+;
+
+COMMENT ON TABLE MDM_GENERAL
+   IS 'LU=MdmSourceMap^PROMPT=Mdm General^MODULE=MDMGT^';
+
+COMMENT ON COLUMN MDM_GENERAL.template_id
+   IS 'FLAGS=PMI-L^DATATYPE=STRING(30)/UPPERCASE^PROMPT=Template Id^';
+COMMENT ON COLUMN MDM_GENERAL.revision
+   IS 'FLAGS=PMI-L^DATATYPE=NUMBER^PROMPT=Revision^REF=MdmBasicDataHeader(template_id)/NOCHECK^';
+COMMENT ON COLUMN MDM_GENERAL.column_name
+   IS 'FLAGS=KMI-L^DATATYPE=STRING(2000)/UPPERCASE^PROMPT=Column Name^';
+COMMENT ON COLUMN MDM_GENERAL.description
+   IS 'FLAGS=A-IUL^DATATYPE=STRING(100)^PROMPT=Description^';
+COMMENT ON COLUMN MDM_GENERAL.data_type
+   IS 'FLAGS=AMIU-^DATATYPE=STRING(10)/UPPERCASE^PROMPT=Data Type^';
+COMMENT ON COLUMN MDM_GENERAL.length
+   IS 'FLAGS=AMIU-^DATATYPE=NUMBER^PROMPT=Length^';
+COMMENT ON COLUMN MDM_GENERAL.default_value
+   IS 'FLAGS=A-IU-^DATATYPE=STRING(2000)^PROMPT=Default Value^';
+COMMENT ON COLUMN MDM_GENERAL.flags
+   IS 'FLAGS=A-I--^DATATYPE=STRING(10)/UPPERCASE^PROMPT=Flags^';
+COMMENT ON COLUMN MDM_GENERAL.note_text
+   IS 'FLAGS=A-IU-^DATATYPE=STRING(2000)^PROMPT=Note Text^';
+COMMENT ON COLUMN MDM_GENERAL.db_client_values
+   IS 'FLAGS=A-I--^DATATYPE=STRING(2000)^PROMPT=Db Client Values^';
+COMMENT ON COLUMN MDM_GENERAL.mandatory
+   IS 'FLAGS=A--U-^DATATYPE=BOOLEAN^PROMPT=Mandatory^';
+COMMENT ON COLUMN MDM_GENERAL.request_no
+   IS 'PROMPT=Request No^';
+
+
+

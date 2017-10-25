@@ -1,0 +1,1089 @@
+CREATE OR REPLACE PACKAGE BODY ERROR_SYS IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+separator_ CONSTANT VARCHAR2(1) := chr(8);
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Space_Validation___ (
+   value_ IN VARCHAR2) RETURN VARCHAR2;
+
+PROCEDURE Raise_Application_Error___ (
+   error_no_   IN VARCHAR2,
+   error_text_ IN VARCHAR2 );
+
+FUNCTION Nls_Msg___ (
+   lu_name_   IN VARCHAR2,
+   err_text_  IN VARCHAR2,
+   p1_        IN VARCHAR2 DEFAULT NULL,
+   p2_        IN VARCHAR2 DEFAULT NULL,
+   p3_        IN VARCHAR2 DEFAULT NULL,
+   lang_code_ IN VARCHAR2 DEFAULT NULL ) RETURN VARCHAR2;
+
+FUNCTION Nls_Item_Prompt___ (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2 ) RETURN VARCHAR2;
+
+FUNCTION Nls_Lu_Prompt___ (
+   lu_name_ IN VARCHAR2 ) RETURN VARCHAR2;
+
+FUNCTION Get_Key_Reg_Exp___(
+   client_string_ IN VARCHAR2) RETURN VARCHAR2;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE System_General (
+   err_text_ IN VARCHAR2,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := err_text_;
+   text_ := replace(text_, ':P1', p1_);
+   text_ := replace(text_, ':P2', p2_);
+   text_ := replace(text_, ':P3', p3_);
+   Raise_Application_Error___(-20100, service_||'.'||text_);
+END System_General;
+
+
+PROCEDURE Appl_General (
+   lu_name_   IN VARCHAR2,
+   err_text_  IN VARCHAR2,
+   p1_        IN VARCHAR2 DEFAULT NULL,
+   p2_        IN VARCHAR2 DEFAULT NULL,
+   p3_        IN VARCHAR2 DEFAULT NULL,
+   lang_code_ IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_, lang_code_);
+   Raise_Application_Error___(-20105, lu_name_||'.'||text_);
+END Appl_General;
+
+
+PROCEDURE Record_General (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   Raise_Application_Error___(-20110, lu_name_||'.'||text_);
+END Record_General;
+
+
+PROCEDURE Fnd_Record_Not_Exist (
+   lu_name_       IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_RECORD_NOT_EXIST: The [:P1] does not exist.', Fnd_Session_API.Get_Language, lu_name_);
+   temp_ VARCHAR2(100);
+BEGIN
+   temp_ := Nls_Lu_Prompt___(lu_name_);
+   text_ := replace(text_, ':LU', temp_);
+   Raise_Application_Error___(-20112, text_);
+END Fnd_Record_Not_Exist;
+
+
+PROCEDURE Record_Not_Exist (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'NOTEXIST: The :LU ":P1" does not exist.', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'NOTEXIST2: The :LU object does not exist.');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20111, lu_name_||'.'||text_);
+END Record_Not_Exist;
+
+
+PROCEDURE Record_Exist (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'EXIST: The :LU ":P1" already exists.', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'EXIST2: The :LU object already exists.');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20112, lu_name_||'.'||text_);
+END Record_Exist;
+
+
+PROCEDURE Fnd_Record_Exist (
+   lu_name_       IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_RECORD_EXIST: The [:P1] already exist.', Fnd_Session_API.Get_Language, Nls_Lu_Prompt___(lu_name_));
+BEGIN
+   Raise_Application_Error___(-20112, text_);
+END Fnd_Record_Exist;
+
+
+PROCEDURE Rowkey_Exist (
+   lu_name_  IN VARCHAR2,
+   rowkey_   IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := Nls_Msg___(service_, 'ROWKEY_EXIST: The rowkey [:P2] for ":P1" already exists.', lu_name_, rowkey_);
+   Raise_Application_Error___(-20112, lu_name_||'.'||text_);
+END Rowkey_Exist;
+
+
+PROCEDURE Fnd_Rowkey_Exist (
+   lu_name_       IN VARCHAR2,
+   rowkey_        IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_ROWKEY_EXIST: The rowkey [:P2] for LU ":P1" already exists.', Fnd_Session_API.Get_Language, Nls_Lu_Prompt___(lu_name_), rowkey_);
+BEGIN
+   Raise_Application_Error___(-20112, text_);
+END Fnd_Rowkey_Exist;
+
+
+PROCEDURE Record_Locked (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'LOCKED: The :LU ":P1" is locked by another user.', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'LOCKED2: The :LU object is locked by another user.');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20113, lu_name_||'.'||text_);
+END Record_Locked;
+
+
+PROCEDURE Fnd_Record_Locked (
+   lu_name_       IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_LOCKED: The update could not be performed since the record in LU [:P1] currently is locked. Retry the operation.', Fnd_Session_API.Get_Language, Nls_Lu_Prompt___(lu_name_));
+BEGIN
+   Raise_Application_Error___(-20113, text_);
+END Fnd_Record_Locked;
+
+
+PROCEDURE Record_Modified (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'MODIFIED: The :LU ":P1" has been modified by another user. Please refresh the object and reenter your changes.', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'MODIFIED2: The :LU object has been modified by another user. Please refresh the object and reenter your changes.');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20114, lu_name_||'.'||text_);
+END Record_Modified;
+
+
+PROCEDURE Fnd_Record_Modified (
+   lu_name_       IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_MODIFIED: The record in LU [:P1] has already been changed. Refresh the page to see updated information.:P3', Fnd_Session_API.Get_Language, Nls_Lu_Prompt___(lu_name_));
+BEGIN
+   Raise_Application_Error___(-20113, text_);
+END Fnd_Record_Modified;
+
+
+PROCEDURE Record_Removed (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'REMOVED: The :LU ":P1" has been removed by another user.', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'REMOVED2: The :LU object has been removed by another user.');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20115, lu_name_||'.'||text_);
+END Record_Removed;
+
+
+PROCEDURE Fnd_Record_Removed (
+   lu_name_       IN VARCHAR2,
+   label_         IN VARCHAR2,
+   value_         IN VARCHAR2,
+   parent_key_msg_ IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'The [:P1] ":P2" has already been removed by another user.:P3', Fnd_Session_API.Get_Language, label_, value_, separator_ || parent_key_msg_);
+   temp_ VARCHAR2(100);
+BEGIN
+   temp_ := Nls_Lu_Prompt___(lu_name_);
+   text_ := replace(text_, ':LU', temp_);
+   Raise_Application_Error___(-20113, text_);
+END Fnd_Record_Removed;
+
+
+PROCEDURE Record_Constraint (
+   lu_name_  IN VARCHAR2,
+   info_     IN VARCHAR2,
+   count_    IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'CONSTRAINT: The :LU ":P1" is used by :COUNT rows in another object (:INFO).', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'CONSTRAINT2: The :LU object is used by :COUNT rows in another object (:INFO).');
+      END IF;
+      temp_ := Nvl(Nls_Lu_Prompt___(lu_name_), lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+      text_ := replace(text_, ':INFO', info_);
+      text_ := replace(text_, ':COUNT', count_);
+   END IF;
+   Raise_Application_Error___(-20116, lu_name_||'.'||text_);
+END Record_Constraint;
+
+
+PROCEDURE Too_Many_Rows (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      text_ := Nls_Msg___(service_, 'TOO_MANY_ROWS: The method ":P1" in :LU returns more than one row.', p1_);
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20117, lu_name_||'.'||text_);
+END Too_Many_Rows;
+
+
+PROCEDURE Fnd_Too_Many_Rows (
+   lu_name_       IN VARCHAR2,
+   method_name_   IN VARCHAR2,
+   formatted_key_ IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'FND_TOO_MANY_ROWS: The method ":P1" in :LU with key ":P2" returns more than one row.', Fnd_Session_API.Get_Language, method_name_, formatted_key_);
+   temp_ VARCHAR2(100);
+BEGIN
+   temp_ := Nls_Lu_Prompt___(lu_name_);
+   text_ := replace(text_, ':LU', temp_);
+   Raise_Application_Error___(-20117, text_);
+END Fnd_Too_Many_Rows;
+
+
+PROCEDURE Item_General (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   err_text_ IN VARCHAR2,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   text_ := replace(text_, ':NAME', item_);
+   Raise_Application_Error___(-20120, lu_name_||'.'||text_);
+END Item_General;
+
+
+PROCEDURE Item_Insert (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      text_ := Nls_Msg___(service_, 'INSERT: Field [:NAME] in :LU may not be specified for new objects.');
+      text_ := replace(text_, ':NAME', item_);
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20121, lu_name_||'.'||text_);
+END Item_Insert;
+
+
+PROCEDURE Item_Update (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      text_ := Nls_Msg___(service_, 'UPDATE: Field [:NAME] in :LU may not be modified.');
+      text_ := replace(text_, ':NAME', item_);
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20122, lu_name_||'.'||text_);
+END Item_Update;
+
+
+PROCEDURE Item_Update_If_Null (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      text_ := Nls_Msg___(service_, 'UPDATEIFNULL: Field [:NAME] in :LU may not be modified.');
+      text_ := replace(text_, ':NAME', item_);
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+   END IF;
+   Raise_Application_Error___(-20123, lu_name_||'.'||text_);
+END Item_Update_If_Null;
+
+
+PROCEDURE Item_Format (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   value_    IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF (item_ IS NULL) THEN
+         text_ := Nls_Msg___(service_, 'FORMAT: Assignment of an invalid value or value type has occurred in :LU.');
+         text_ := replace(text_, ':LU', lu_name_);
+      ELSE
+         -- Include the value if is reasonably short...
+         IF length(value_) < 81 THEN
+            text_ := Nls_Msg___(service_, 'FORMAT2: Field [:NAME] in :LU has an invalid value format. The value is: ":VALUE".');
+            text_ := replace(text_, ':VALUE', value_);
+         ELSE
+            text_ := Nls_Msg___(service_, 'FORMAT3: Field [:NAME] in :LU has an invalid value format.');
+         END IF;
+         text_ := replace(text_, ':NAME', item_);
+         temp_ := Nls_Lu_Prompt___(lu_name_);
+         text_ := replace(text_, ':LU', temp_);
+      END IF;
+   END IF;
+   Raise_Application_Error___(-20124, lu_name_||'.'||text_);
+END Item_Format;
+
+
+PROCEDURE Fnd_Item_Format (
+   lu_name_       IN VARCHAR2,
+   label_         IN VARCHAR2,
+   value_         IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000) := Language_SYS.Translate_Constant(lu_name_, 'The value ":P2" has incorrect format for [:P1] in :LU.', Fnd_Session_API.Get_Language, label_, value_);
+   temp_ VARCHAR2(100);
+BEGIN
+   temp_ := Nls_Lu_Prompt___(lu_name_);
+   text_ := replace(text_, ':LU', temp_);
+   Raise_Application_Error___(-20113, text_);
+END Fnd_Item_Format;
+
+
+PROCEDURE Item_Not_Exist (
+   lu_name_  IN VARCHAR2,
+   item_     IN VARCHAR2,
+   value_    IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF value_ IS NULL THEN
+         text_ := Nls_Msg___(service_, 'ITEMNOTEXIST: Field [:NAME] is not a part of :LU.');
+      ELSE
+         text_ := Nls_Msg___(service_, 'ITEMNOTEXIST2: Field [:NAME] with value ":VALUE" is not a part of :LU.');
+         text_ := replace(text_, ':VALUE', value_);
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+      text_ := replace(text_, ':NAME', item_);
+   END IF;
+   Raise_Application_Error___(-20125, lu_name_||'.'||text_);
+END Item_Not_Exist;
+
+
+PROCEDURE Component_Not_Exist (
+   module_  IN VARCHAR2 )
+IS
+   text_ VARCHAR2(4000);
+BEGIN
+   text_ := Nls_Msg___(service_, 'COMPONENT_NOT_EXIST: Component [:P1] is not installed.', module_);
+   Raise_Application_Error___(-20141, text_);
+END Component_Not_Exist;
+
+
+PROCEDURE Check_Not_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN VARCHAR2 )
+IS
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (value_ IS NULL) THEN
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      Error_SYS.Item_Format(service_, NULL, NULL, 'NULLVALUE: Field [:P1] is mandatory for :P2 and requires a value.', item_, temp_);
+   END IF;
+END Check_Not_Null;
+
+
+PROCEDURE Check_Not_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN NUMBER )
+IS
+BEGIN
+   Check_Not_Null(lu_name_, item_, to_char(value_));
+END Check_Not_Null;
+
+
+PROCEDURE Check_Not_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN DATE )
+IS
+BEGIN
+   Check_Not_Null(lu_name_, item_, to_char(value_));
+END Check_Not_Null;
+
+
+PROCEDURE Check_Not_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN TIMESTAMP )
+IS
+BEGIN
+   Check_Not_Null(lu_name_, item_, to_char(value_));
+END Check_Not_Null;
+
+
+PROCEDURE Check_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN VARCHAR2 )
+IS
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (value_ IS NOT NULL) THEN
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      Error_SYS.Item_Format(service_, NULL, NULL, 'NOTNULLVALUE: Field [:P1] is a system generated value  for :P2 and can''t be set to value :P3.', item_, temp_, value_);
+   END IF;
+END Check_Null;
+
+
+PROCEDURE Check_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN NUMBER )
+IS
+BEGIN
+   Check_Null(lu_name_, item_, to_char(value_));
+END Check_Null;
+
+
+PROCEDURE Check_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN DATE )
+IS
+BEGIN
+   Check_Null(lu_name_, item_, to_char(value_));
+END Check_Null;
+
+
+PROCEDURE Check_Null (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2,
+   value_   IN TIMESTAMP )
+IS
+BEGIN
+   Check_Null(lu_name_, item_, to_char(value_));
+END Check_Null;
+
+
+PROCEDURE Check_No_Update (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN VARCHAR2,
+   old_value_ IN VARCHAR2 )
+IS
+BEGIN
+   IF (( old_value_ IS NULL) AND ( new_value_ IS NOT NULL))
+      OR (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+      OR ( new_value_ != old_value_) THEN
+         Item_Update(lu_name_, item_);
+   END IF;
+END Check_No_Update;
+
+
+PROCEDURE Check_No_Update (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN NUMBER,
+   old_value_ IN NUMBER )
+IS
+BEGIN
+   IF (( old_value_ IS NULL) AND ( new_value_ IS NOT NULL))
+      OR (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+      OR ( new_value_ != old_value_) THEN
+         Item_Update(lu_name_, item_);
+   END IF;
+END Check_No_Update;
+
+
+PROCEDURE Check_No_Update (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN DATE,
+   old_value_ IN DATE )
+IS
+BEGIN
+   IF (( old_value_ IS NULL) AND ( new_value_ IS NOT NULL))
+      OR (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+      OR ( new_value_ != old_value_) THEN
+         Item_Update(lu_name_, item_);
+   END IF;
+END Check_No_Update;
+
+
+PROCEDURE Check_No_Update (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN TIMESTAMP,
+   old_value_ IN TIMESTAMP )
+IS
+BEGIN
+   IF (( old_value_ IS NULL) AND ( new_value_ IS NOT NULL))
+      OR (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+      OR ( new_value_ != old_value_) THEN
+         Item_Update(lu_name_, item_);
+   END IF;
+END Check_No_Update;
+
+
+PROCEDURE Check_Update_If_Null (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN VARCHAR2,
+   old_value_ IN VARCHAR2 )
+IS
+BEGIN
+   IF (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+   OR ( new_value_ != old_value_) THEN
+      Item_Update_If_Null(lu_name_, item_);
+   END IF;
+END Check_Update_If_Null;
+
+
+PROCEDURE Check_Update_If_Null (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN NUMBER,
+   old_value_ IN NUMBER )
+IS
+BEGIN
+   IF (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+   OR ( new_value_ != old_value_) THEN
+      Item_Update_If_Null(lu_name_, item_);
+   END IF;
+END Check_Update_If_Null;
+
+
+PROCEDURE Check_Update_If_Null (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN DATE,
+   old_value_ IN DATE )
+IS
+BEGIN
+   IF (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+   OR ( new_value_ != old_value_) THEN
+      Item_Update_If_Null(lu_name_, item_);
+   END IF;
+END Check_Update_If_Null;
+
+
+PROCEDURE Check_Update_If_Null (
+   lu_name_   IN VARCHAR2,
+   item_      IN VARCHAR2,
+   new_value_ IN TIMESTAMP,
+   old_value_ IN TIMESTAMP )
+IS
+BEGIN
+   IF (( new_value_ IS NULL) AND ( old_value_ IS NOT NULL))
+   OR ( new_value_ != old_value_) THEN
+      Item_Update_If_Null(lu_name_, item_);
+   END IF;
+END Check_Update_If_Null;
+
+
+PROCEDURE Check_Valid_Key_String (
+   key_name_   IN VARCHAR2,
+   key_value_  IN VARCHAR2 )
+IS
+   -- NOTE!!! Client_SYS.Text_Separator must not be the first character in the pattern
+   --         since caret means negation in Regular Expression.
+   --
+   -- Client_SYS constants can not be used in Key attributes,
+   -- this leads to errors in Client_SYS methods.
+   --
+   separator_pattern_  CONSTANT VARCHAR2(10) :=  '['||
+                                       Client_SYS.field_separator_||
+                                       Client_SYS.record_separator_||
+                                       Client_SYS.group_separator_||
+                                       Client_SYS.file_separator_||
+                                       Client_SYS.text_separator_||
+                                       ']';
+
+   -- Hndle the user supplies keys
+   validate_key_string_ VARCHAR2(32000);
+   reg_exp_ VARCHAR2(32000);
+
+   char_     VARCHAR2(2) := NULL;
+   location_ VARCHAR2(5);
+BEGIN
+   validate_key_string_ := Fnd_Setting_Api.Get_Value('KEY_STRING_VALIDATE');
+   IF validate_key_string_ != '*' THEN
+      reg_exp_ := Get_Key_Reg_Exp___(validate_key_string_);
+      char_ := regexp_substr(key_value_, reg_exp_);
+      IF char_ IS NOT NULL THEN
+         Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDKEYVALUE2: Character [:P1] is not allowed as key value [:P2].', char_, key_name_);
+      END IF;
+   END IF;
+
+   char_ := regexp_substr(key_value_, separator_pattern_);
+   IF char_ IS NOT NULL THEN
+         Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDKEYVALUE: Illegal character in key value [:P1].', key_name_);
+   END IF;
+   location_ := Get_Space_Validation___(key_value_);
+   IF location_ = 'RIGHT' THEN
+      Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDKEYVALUE3: Trailing spaces are not allowed in key value [:P1].', key_name_);
+   ELSIF location_ = 'LEFT' THEN
+      Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDKEYVALUE4: Leading spaces are not allowed in key value [:P1].', key_name_);
+   END IF;
+END Check_Valid_Key_String;
+
+
+PROCEDURE Check_Valid_Identifier (
+   name_  IN VARCHAR2,
+   value_ IN VARCHAR2)
+IS
+   separator_pattern_ CONSTANT VARCHAR2(10) := '['||
+                                          Client_SYS.field_separator_||
+                                          Client_SYS.record_separator_||
+                                          Client_SYS.group_separator_||
+                                          Client_SYS.file_separator_||
+                                          ']';
+
+   char_pattern_ CONSTANT VARCHAR2(20) := '[^[:alnum:]_]';
+
+   start_char_pattern_ CONSTANT VARCHAR2(20) := '^[[:digit:]_]';
+
+   char_ VARCHAR2(2);
+BEGIN
+   char_ := regexp_substr(value_, separator_pattern_);
+   IF char_ IS NOT NULL THEN
+      Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDIDENTIFIER1: Illegal character in value [:P1].', name_);
+   ELSE
+      char_ := regexp_substr(value_, char_pattern_);
+      IF char_ IS NOT NULL THEN
+         Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDIDENTIFIER2: Character [:P1] is not allowed in value [:P2].', char_, name_);
+      ELSE
+         char_ := regexp_substr(value_, start_char_pattern_);
+         IF char_ IS NOT NULL THEN
+            Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDIDENTIFIER3: Character [:P1] is not allowed at the begining in value [:P2].', char_, name_);
+         END IF;
+      END IF;
+   END IF;
+END Check_Valid_Identifier;
+
+
+PROCEDURE Trim_Space_Validation (
+   value_ IN VARCHAR2)
+IS
+   location_ VARCHAR2(5);
+BEGIN
+   location_ := Get_Space_Validation___(value_);
+   IF location_ = 'LEFT' THEN
+      Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDLEFTSPACE: Leading spaces are not allowed in value [:P1].', value_);
+   ELSIF location_ = 'RIGHT' THEN
+      Error_SYS.Item_Format(service_, NULL, NULL, 'INVALIDRIGTSPACE: Trailing spaces are not allowed in value [:P1].', value_);
+   END IF;
+END Trim_Space_Validation;
+
+
+PROCEDURE State_General (
+   lu_name_  IN VARCHAR2,
+   err_text_ IN VARCHAR2,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   Raise_Application_Error___(-20130, lu_name_||'.'||text_);
+END State_General;
+
+
+PROCEDURE State_Not_Exist (
+   lu_name_  IN VARCHAR2,
+   state_    IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      text_ := Nls_Msg___(service_, 'NOTEVENT: State ":STATE" is not valid for :LU.');
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+      text_ := replace(text_, ':STATE', state_);
+   END IF;
+   Raise_Application_Error___(-20131, lu_name_||'.'||text_);
+END State_Not_Exist;
+
+
+PROCEDURE State_Event_Not_Handled (
+   lu_name_  IN VARCHAR2,
+   event_    IN VARCHAR2,
+   state_    IN VARCHAR2,
+   err_text_ IN VARCHAR2 DEFAULT NULL,
+   p1_       IN VARCHAR2 DEFAULT NULL,
+   p2_       IN VARCHAR2 DEFAULT NULL,
+   p3_       IN VARCHAR2 DEFAULT NULL )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   IF (err_text_ IS NOT NULL) THEN
+      text_ := Nls_Msg___(lu_name_, err_text_, p1_, p2_, p3_);
+   ELSE
+      IF p1_ IS NOT NULL THEN
+         text_ := Nls_Msg___(service_, 'NOTHANDLED: The operation ":EVENT" is not allowed for :LU ":P1" which is in state ":STATE".', p1_);
+      ELSE
+         text_ := Nls_Msg___(service_, 'NOTHANDLED2: The operation ":EVENT" is not allowed for :LU objects in state ":STATE".');
+      END IF;
+      temp_ := Nls_Lu_Prompt___(lu_name_);
+      text_ := replace(text_, ':LU', temp_);
+      text_ := replace(text_, ':EVENT', event_);
+      text_ := replace(text_, ':STATE', state_);
+   END IF;
+   Raise_Application_Error___(-20132, lu_name_||'.'||text_);
+END State_Event_Not_Handled;
+
+
+FUNCTION Is_Foundation_Error (
+   oracle_no_ IN NUMBER ) RETURN BOOLEAN
+IS
+BEGIN
+   RETURN oracle_no_ BETWEEN -20199 AND -20100;
+END Is_Foundation_Error;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PROTECTED METHODS --------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Appl_Access_ (
+   lu_name_ IN VARCHAR2,
+   package_ IN VARCHAR2,
+   method_  IN VARCHAR2 )
+IS
+   text_ VARCHAR2(2000);
+   temp_ VARCHAR2(100);
+BEGIN
+   text_ := Nls_Msg___(service_, 'NOACCESS: You do not have privileges to use the ":METHOD" operation for ":LU".');
+   temp_ := Nls_Lu_Prompt___(lu_name_);
+   text_ := replace(text_, ':LU', temp_);
+   text_ := replace(text_, ':METHOD', package_||'.'||method_);
+   Raise_Application_Error___(-20106, lu_name_||'.'||text_);
+END Appl_Access_;
+
+
+PROCEDURE Security_Checkpoint_ (
+   msg_ IN VARCHAR2 )
+IS
+   tmp_msg_ VARCHAR2(32000) := msg_;
+BEGIN
+   Message_SYS.Set_Attribute(tmp_msg_, 'TOKEN', Message_SYS.Find_Attribute(msg_, 'TOKEN', ''));
+   Raise_Application_Error___(-20140, Client_SYS.record_separator_ || tmp_msg_ || Client_SYS.record_separator_);
+END Security_Checkpoint_;
+
+
+PROCEDURE Compile_Error_ (
+   lu_name_ IN VARCHAR2 )
+IS
+   text_ VARCHAR2(4000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, 'COMPILE_ERROR: Error during compilation of LU [:P1].', lu_name_);
+   Raise_Application_Error___(-20150, text_);
+END Compile_Error_;
+
+
+PROCEDURE Compile_Error_ (
+   lu_name_ IN VARCHAR2,
+   details_ IN VARCHAR2)
+IS
+   text_ VARCHAR2(4000);
+BEGIN
+   text_ := Nls_Msg___(lu_name_, 'COMPILE_ERROR2: Error during compilation of LU [:P1].' || chr(13) || chr(10) || chr(13) || chr(10) || 'Error details: :P2', lu_name_, details_);
+   Raise_Application_Error___(-20150, text_);
+END Compile_Error_;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Space_Validation___ (
+   value_ IN VARCHAR2) RETURN VARCHAR2
+IS
+BEGIN
+   IF LENGTH(value_) != LENGTH(LTRIM(value_)) THEN
+      RETURN 'LEFT';
+   END IF;
+   IF LENGTH(value_) != LENGTH(RTRIM(value_)) THEN
+      RETURN 'RIGHT';
+   END IF;
+   RETURN NULL;
+END Get_Space_Validation___;
+
+
+PROCEDURE Raise_Application_Error___ (
+   error_no_   IN VARCHAR2,
+   error_text_ IN VARCHAR2 )
+IS
+   call_stack_ VARCHAR2(32000);
+   FUNCTION Format_Call_Stack___ RETURN VARCHAR2 
+   IS
+      stack_ VARCHAR2(32000);
+      depth_ PLS_INTEGER := Utl_Call_Stack.Dynamic_Depth();
+   BEGIN
+      FOR i_ IN REVERSE 1 .. depth_ LOOP
+         stack_ := stack_ || UTL_Call_Stack.Concatenate_Subprogram(UTL_Call_Stack.Subprogram(i_)) || ' at line ' || To_Char(UTL_Call_Stack.Unit_Line(i_)) || chr(10);
+      END LOOP;
+      RETURN stack_;
+   END Format_Call_Stack___;
+BEGIN
+   BEGIN
+      call_stack_ := Format_Call_Stack___;
+      -- Send the error stack 
+      Fnd_Context_SYS.Set_Value('EXCEPTION', Fnd_Boolean_API.DB_TRUE);
+      -- Conditional compilation for Oracle12c
+      Fnd_Context_SYS.Set_Value('ERROR_CALL_STACK', call_stack_);
+      Log_SYS.Stack_Trace_(Log_SYS.Debug_, call_stack_);
+   EXCEPTION
+      WHEN OTHERS THEN 
+         Fnd_Context_SYS.Set_Value('ERROR_CALL_STACK', Dbms_Utility.Format_Error_Backtrace);
+         RAISE; 
+   END;
+   Raise_Application_Error(error_no_, error_text_);
+END Raise_Application_Error___;
+
+
+FUNCTION Nls_Msg___ (
+   lu_name_   IN VARCHAR2,
+   err_text_  IN VARCHAR2,
+   p1_        IN VARCHAR2 DEFAULT NULL,
+   p2_        IN VARCHAR2 DEFAULT NULL,
+   p3_        IN VARCHAR2 DEFAULT NULL,
+   lang_code_ IN VARCHAR2 DEFAULT NULL ) RETURN VARCHAR2
+IS
+   temp_ VARCHAR2(32000);
+BEGIN
+   temp_ := Language_SYS.Translate_Msg_(lu_name_, err_text_, lang_code_);
+   temp_ := replace(temp_, ':P1', p1_);
+   temp_ := replace(temp_, ':P2', p2_);
+   temp_ := replace(temp_, ':P3', p3_);
+   -- Clear obsolete client info before the error is raised
+   Client_SYS.Clear_Info;
+   RETURN(substr(temp_,1,1950));
+END Nls_Msg___;
+
+
+FUNCTION Nls_Item_Prompt___ (
+   lu_name_ IN VARCHAR2,
+   item_    IN VARCHAR2 ) RETURN VARCHAR2
+IS
+BEGIN
+   RETURN Language_SYS.Translate_Item_Prompt_(lu_name_, item_);
+END Nls_Item_Prompt___;
+
+
+FUNCTION Nls_Lu_Prompt___ (
+   lu_name_ IN VARCHAR2 ) RETURN VARCHAR2
+IS
+BEGIN
+   RETURN Language_SYS.Translate_Lu_Prompt_(lu_name_);
+END Nls_Lu_Prompt___;
+
+
+FUNCTION Get_Key_Reg_Exp___(
+   client_string_ IN VARCHAR2) RETURN VARCHAR2
+IS
+   reg_exp_reserved_list_ VARCHAR2(4) := '([)]';
+   length_                NUMBER := length(client_string_);
+   temp_char_             VARCHAR2(1);
+   pos_                   NUMBER := 1;
+   normal_chars_          VARCHAR2(32000);
+   special_chars_         VARCHAR2(32000);
+
+
+BEGIN
+   WHILE pos_ <= length_ LOOP
+      temp_char_ := SUBSTR(client_string_, pos_, 1);
+       IF INSTR(reg_exp_reserved_list_,temp_char_) > 0 THEN
+         special_chars_ := special_chars_ || '\' ||temp_char_ ||'|';
+      ELSE
+         normal_chars_ := normal_chars_ || temp_char_;
+      END IF;
+      pos_ := pos_ + 1;
+   END LOOP;
+
+   -- Create the regular expression
+   IF special_chars_ IS NOT NULL  THEN
+      length_ := length(special_chars_);
+      special_chars_ := '(('||SUBSTR(special_chars_,1, length_-1)||')';
+      normal_chars_ := '|['||normal_chars_||'])';
+   ELSE
+      normal_chars_ := '(['||normal_chars_||'])';
+   END IF;
+   RETURN  (special_chars_||normal_chars_);
+END Get_Key_Reg_Exp___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+   
+   PROCEDURE Base
+   IS
+   BEGIN
+      NULL;
+   END Base;
+
+BEGIN
+   Base;
+END Init;
+
+BEGIN
+   Init;
+END ERROR_SYS;

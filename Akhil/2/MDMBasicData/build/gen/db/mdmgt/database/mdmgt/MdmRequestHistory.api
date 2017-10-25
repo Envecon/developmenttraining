@@ -1,0 +1,223 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmRequestHistory
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+PROMPT Creating Mdm_Request_History_API specification
+
+CREATE OR REPLACE PACKAGE Mdm_Request_History_API IS
+
+module_  CONSTANT VARCHAR2(25) := 'MDMGT';
+lu_name_ CONSTANT VARCHAR2(25) := 'MdmRequestHistory';
+lu_type_ CONSTANT VARCHAR2(25) := 'Entity';
+
+-----------------------------------------------------------------------------
+-------------------- PUBLIC DECLARATIONS ------------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Public_Rec IS RECORD
+  (template_id                    MDM_REQUEST_HISTORY_TAB.template_id%TYPE,
+   revision                       MDM_REQUEST_HISTORY_TAB.revision%TYPE,
+   request_no                     MDM_REQUEST_HISTORY_TAB.request_no%TYPE,
+   seq_no                         MDM_REQUEST_HISTORY_TAB.seq_no%TYPE,
+   "rowid"                        rowid,
+   rowversion                     MDM_REQUEST_HISTORY_TAB.rowversion%TYPE,
+   rowkey                         MDM_REQUEST_HISTORY_TAB.rowkey%TYPE,
+   mod_date                       MDM_REQUEST_HISTORY_TAB.mod_date%TYPE,
+   mod_by                         MDM_REQUEST_HISTORY_TAB.mod_by%TYPE,
+   history_status                 MDM_REQUEST_HISTORY_TAB.history_status%TYPE,
+   info                           MDM_REQUEST_HISTORY_TAB.info%TYPE);
+
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+-- Get_Key_By_Rowkey
+--   Returns a table record with only keys (other attributes are NULL) based on a rowkey.
+--
+-- Exist
+--   Checks if given pointer (e.g. primary key) to an instance of this
+--   logical unit exists. If not an exception will be raised.
+--
+-- Exists
+--   Same check as Exist, but returns a BOOLEAN value instead of exception.
+--
+-- Get_Mod_Date
+--   Fetches the ModDate attribute for a record.
+--
+-- Get_Mod_By
+--   Fetches the ModBy attribute for a record.
+--
+-- Get_History_Status
+--   Fetches the HistoryStatus attribute for a record.
+--
+-- Get_Info
+--   Fetches the Info attribute for a record.
+--
+-- Get
+--   Fetches a record containing the public attributes.
+--
+-- Get_Objkey
+--   Fetches the objkey attribute for a record.
+--
+-- Lock__
+--   Client-support to lock a specific instance of the logical unit.
+--
+-- New__
+--   Client-support interface to create LU instances.
+--   action_ = 'PREPARE'
+--   Default values and handle of information to client.
+--   The default values are set in procedure Prepare_Insert___.
+--   action_ = 'CHECK'
+--   Check all attributes before creating new object and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___.
+--   action_ = 'DO'
+--   Creation of new instances of the logical unit and handle of
+--   information to client. The attribute list is unpacked, checked
+--   and prepared (defaults) in procedures Unpack___ and Check_Insert___
+--   before calling procedure Insert___.
+--
+-- Modify__
+--   Client-support interface to modify attributes for LU instances.
+--   action_ = 'CHECK'
+--   Check all attributes before modifying an existing object and
+--   handle of information to client. The attribute list is unpacked,
+--   checked and prepared(defaults) in procedures Unpack___ and Check_Update___.
+--   action_ = 'DO'
+--   Modification of an existing instance of the logical unit. The
+--   procedure unpacks the attributes, checks all values before
+--   procedure Update___ is called.
+--
+-- Remove__
+--   Client-support interface to remove LU instances.
+--   action_ = 'CHECK'
+--   Check whether a specific LU-instance may be removed or not.
+--   The procedure fetches the complete record by calling procedure
+--   Get_Object_By_Id___. Then the check is made by calling procedure
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Get_Key_By_Rowkey)
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE;
+
+--@PoReadOnly(Exist)
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER );
+
+--@PoReadOnly(Exists)
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN BOOLEAN;
+
+--@PoReadOnly(Get_Mod_Date)
+FUNCTION Get_Mod_Date (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN DATE;
+
+--@PoReadOnly(Get_Mod_By)
+FUNCTION Get_Mod_By (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_History_Status)
+FUNCTION Get_History_Status (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get_Info)
+FUNCTION Get_Info (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Get)
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN Public_Rec;
+
+--@PoReadOnly(Get_Objkey)
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2;
+
+--@PoReadOnly(Lock__)
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 );
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 );
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 );
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+-- Add_Mdm_Req_history_Entry
+--
+-- Remove_Mdm_Req_history_Record
+-----------------------------------------------------------------------------
+
+PROCEDURE Add_Mdm_Req_history_Entry (
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Remove_Mdm_Req_history_Record (
+   template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE);
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+-- Init
+--   Framework method that initializes this package.
+-----------------------------------------------------------------------------
+
+--@PoReadOnly(Init)
+PROCEDURE Init;
+
+END Mdm_Request_History_API;
+/
+SHOW ERROR
+
+

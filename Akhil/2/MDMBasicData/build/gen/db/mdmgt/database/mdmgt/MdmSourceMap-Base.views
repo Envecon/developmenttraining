@@ -1,0 +1,86 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmSourceMap
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- COMMON COLUMN DEFINITIONS ------------------------------
+
+COLUMN Template_Id IS
+   Flags      = 'PMI-L'
+   Datatype   = 'STRING(30)/UPPERCASE'
+   Prompt     = 'Template Id';
+COLUMN Revision IS
+   Flags      = 'PMI-L'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Revision'
+   Ref        = 'MdmBasicDataHeader(template_id)';
+COLUMN Column_Name IS
+   Flags      = 'KMI-L'
+   Datatype   = 'STRING(2000)/UPPERCASE'
+   Prompt     = 'Column Name';
+COLUMN Description IS
+   Flags      = 'A-IUL'
+   Datatype   = 'STRING(100)'
+   Prompt     = 'Description';
+COLUMN Data_Type IS
+   Flags      = 'AMIU-'
+   Datatype   = 'STRING(10)/UPPERCASE'
+   Prompt     = 'Data Type';
+COLUMN Length IS
+   Flags      = 'AMIU-'
+   Datatype   = 'NUMBER'
+   Prompt     = 'Length';
+COLUMN Default_Value IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Default Value';
+COLUMN Flags IS
+   Flags      = 'A-I--'
+   Datatype   = 'STRING(10)/UPPERCASE'
+   Prompt     = 'Flags';
+COLUMN Note_Text IS
+   Flags      = 'A-IU-'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Note Text';
+COLUMN Db_Client_Values IS
+   Flags      = 'A-I--'
+   Datatype   = 'STRING(2000)'
+   Prompt     = 'Db Client Values';
+COLUMN Mandatory IS
+   Flags      = 'A--U-'
+   Datatype   = 'BOOLEAN'
+   Prompt     = 'Mandatory';
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+
+VIEW Mdm_Source_Map IS
+   Prompt     = 'Mdm Source Map'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       column_name                    column_name,
+       description                    description,
+       data_type                      data_type,
+       length                         length,
+       default_value                  default_value,
+       flags                          flags,
+       note_text                      note_text,
+       db_client_values               db_client_values,
+       mandatory                      mandatory,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_source_map_tab;

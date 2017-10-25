@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogicalUnits version="1.0" module="MDMGT" type="LU" layer="Cust">
+   <LogicalUnit name="MdmRequestHistory">
+      <Text><![CDATA[Mdm Request History]]></Text>
+      <View ID="MdmRequestHistory.MDM_REQUEST_HISTORY">
+         <Text><![CDATA[Mdm Request History]]></Text>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.REQUEST_NO">
+            <Text><![CDATA[Request No]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.SEQ_NO">
+            <Text><![CDATA[Seq No]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.MOD_DATE">
+            <Text><![CDATA[Modified Date]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.MOD_BY">
+            <Text><![CDATA[Modified By]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.HISTORY_STATUS">
+            <Text><![CDATA[Status]]></Text>
+         </Column>
+         <Column ID="MdmRequestHistory.MDM_REQUEST_HISTORY.INFO">
+            <Text><![CDATA[Info]]></Text>
+         </Column>
+      </View>
+   </LogicalUnit>
+</LogicalUnits>

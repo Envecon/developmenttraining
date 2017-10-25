@@ -1,0 +1,40 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmMethodList
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio 10.82.731.20170505
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+layer Base;
+
+-------------------- TABLE DEFINITIONS --------------------------------------
+
+TABLE mdm_method_list_tab IS (
+   template_id                    VARCHAR2(30)   NOT NULL,
+   revision                       NUMBER         NOT NULL,
+   execute_seq                    NUMBER         NOT NULL,
+   view_name                      VARCHAR2(100)  NULL,
+   method_name                    VARCHAR2(100)  NULL,
+   on_new                         VARCHAR2(5)    NOT NULL,
+   on_modify                      VARCHAR2(5)    NOT NULL,
+   rowversion                     DATE           NOT NULL,
+   rowkey                         VARCHAR2(50)   DEFAULT sys_guid() NOT NULL);
+
+
+PRIMARY KEY mdm_method_list_pk IS mdm_method_list_tab (
+   template_id,
+   revision,
+   execute_seq);
+
+
+UNIQUE CONSTRAINT mdm_method_list_rk IS mdm_method_list_tab (
+   rowkey);
+
+-------------------- OTHER DEFINITIONS --------------------------------------
+

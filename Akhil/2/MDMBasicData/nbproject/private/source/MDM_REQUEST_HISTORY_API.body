@@ -1,0 +1,1872 @@
+CREATE OR REPLACE PACKAGE BODY Mdm_Request_History_API IS
+
+-----------------------------------------------------------------------------
+-------------------- PRIVATE DECLARATIONS -----------------------------------
+-----------------------------------------------------------------------------
+
+TYPE Indicator_Rec IS RECORD
+  (template_id                    BOOLEAN := FALSE,
+   revision                       BOOLEAN := FALSE,
+   request_no                     BOOLEAN := FALSE,
+   seq_no                         BOOLEAN := FALSE,
+   mod_date                       BOOLEAN := FALSE,
+   mod_by                         BOOLEAN := FALSE,
+   history_status                 BOOLEAN := FALSE,
+   info                           BOOLEAN := FALSE);
+
+
+-----------------------------------------------------------------------------
+-------------------- IMPLEMENTATION METHOD DECLARATIONS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER,
+   methodname_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER );
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 );
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Raise_Record_Locked___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER );
+
+PROCEDURE Raise_Record_Removed___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER );
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE;
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE;
+
+FUNCTION Get_Object_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN mdm_request_history_tab%ROWTYPE;
+
+FUNCTION Check_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN BOOLEAN;
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER );
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 );
+
+FUNCTION Pack___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2;
+
+FUNCTION Pack___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2;
+
+FUNCTION Pack_Table___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2;
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec );
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN mdm_request_history_tab%ROWTYPE,
+   newrec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec;
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 );
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE );
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Delete___ (
+   remrec_ IN mdm_request_history_tab%ROWTYPE );
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE );
+
+FUNCTION Get_Date___(
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE)  RETURN DATE;
+
+FUNCTION Generate_Seq_No___(
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE )  RETURN NUMBER;
+
+FUNCTION Get_Status___ (
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE )  RETURN VARCHAR2;
+
+-----------------------------------------------------------------------------
+-------------------- BASE METHODS -------------------------------------------
+-----------------------------------------------------------------------------
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Key_By_Rowkey (
+   rowkey_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      rowkey_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      rec_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      SELECT template_id, revision, request_no, seq_no
+         INTO  rec_.template_id, rec_.revision, rec_.request_no, rec_.seq_no
+         FROM  mdm_request_history_tab
+         WHERE rowkey = rowkey_;
+      RETURN rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(rec_.template_id, rec_.revision, rec_.request_no, rec_.seq_no, 'Get_Key_By_Rowkey');
+   END Base;
+
+BEGIN
+   RETURN Base(rowkey_);
+END Get_Key_By_Rowkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Exist (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER )
+   IS
+   BEGIN
+      IF (NOT Check_Exist___(template_id_, revision_, request_no_, seq_no_)) THEN
+         Raise_Record_Not_Exist___(template_id_, revision_, request_no_, seq_no_);
+      END IF;
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, request_no_, seq_no_);
+END Exist;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Exists (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN BOOLEAN
+   IS
+   BEGIN
+      RETURN Check_Exist___(template_id_, revision_, request_no_, seq_no_);
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Exists;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Mod_Date (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN DATE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN DATE
+   IS
+      temp_ mdm_request_history_tab.mod_date%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT mod_date
+         INTO  temp_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Mod_Date');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_Mod_Date;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Mod_By (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_request_history_tab.mod_by%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT mod_by
+         INTO  temp_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Mod_By');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_Mod_By;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_History_Status (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_request_history_tab.history_status%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT history_status
+         INTO  temp_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_History_Status');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_History_Status;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Info (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      temp_ mdm_request_history_tab.info%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT info
+         INTO  temp_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Info');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_Info;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN Public_Rec
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN Public_Rec
+   IS
+      temp_ Public_Rec;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT template_id, revision, request_no, seq_no,
+             rowid, rowversion, rowkey,
+             mod_date, 
+             mod_by, 
+             history_status, 
+             info
+         INTO  temp_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN temp_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Objkey (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN VARCHAR2
+   IS
+      rowkey_ mdm_request_history_tab.rowkey%TYPE;
+   BEGIN
+      IF (template_id_ IS NULL OR revision_ IS NULL OR request_no_ IS NULL OR seq_no_ IS NULL) THEN
+         RETURN NULL;
+      END IF;
+      SELECT rowkey
+         INTO  rowkey_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN rowkey_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Objkey');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_Objkey;
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Lock__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2 )
+   IS
+      dummy_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      dummy_ := Lock_By_Id___(objid_, objversion_);
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   Base(info_, objid_, objversion_);
+END Lock__;
+
+
+PROCEDURE New__ (
+   info_       OUT    VARCHAR2,
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      newrec_   mdm_request_history_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'PREPARE') THEN
+         Prepare_Insert___(attr_);
+      ELSIF (action_ = 'CHECK') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Insert___(newrec_, indrec_, attr_);
+         Insert___(objid_, objversion_, newrec_, attr_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Request_History_API.lu_name_, 'Mdm_Request_History_API', 'New__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END New__;
+
+
+PROCEDURE Modify__ (
+   info_       OUT    VARCHAR2,
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   action_     IN     VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT    VARCHAR2,
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      action_     IN     VARCHAR2 )
+   IS
+      oldrec_   mdm_request_history_tab%ROWTYPE;
+      newrec_   mdm_request_history_tab%ROWTYPE;
+      indrec_   Indicator_Rec;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         oldrec_ := Get_Object_By_Id___(objid_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      ELSIF (action_ = 'DO') THEN
+         oldrec_ := Lock_By_Id___(objid_, objversion_);
+         newrec_ := oldrec_;
+         Unpack___(newrec_, indrec_, attr_);
+         Check_Update___(oldrec_, newrec_, indrec_, attr_);
+         Update___(objid_, oldrec_, newrec_, attr_, objversion_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Request_History_API.lu_name_, 'Mdm_Request_History_API', 'Modify__');
+   Base(info_, objid_, objversion_, attr_, action_);
+END Modify__;
+
+
+PROCEDURE Remove__ (
+   info_       OUT VARCHAR2,
+   objid_      IN  VARCHAR2,
+   objversion_ IN  VARCHAR2,
+   action_     IN  VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      info_       OUT VARCHAR2,
+      objid_      IN  VARCHAR2,
+      objversion_ IN  VARCHAR2,
+      action_     IN  VARCHAR2 )
+   IS
+      remrec_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      IF (action_ = 'CHECK') THEN
+         remrec_ := Get_Object_By_Id___(objid_);
+         Check_Delete___(remrec_);
+      ELSIF (action_ = 'DO') THEN
+         remrec_ := Lock_By_Id___(objid_, objversion_);
+         Check_Delete___(remrec_);
+         Delete___(objid_, remrec_);
+      END IF;
+      info_ := Client_SYS.Get_All_Info;
+   END Base;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Request_History_API.lu_name_, 'Mdm_Request_History_API', 'Remove__');
+   Base(info_, objid_, objversion_, action_);
+END Remove__;
+
+
+PROCEDURE Raise_Too_Many_Rows___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER,
+   methodname_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER,
+      methodname_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Too_Many_Rows(Mdm_Request_History_API.lu_name_, NULL, methodname_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, request_no_, seq_no_, methodname_);
+END Raise_Too_Many_Rows___;
+
+
+PROCEDURE Raise_Record_Not_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Not_Exist(Mdm_Request_History_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, request_no_, seq_no_);
+END Raise_Record_Not_Exist___;
+
+
+PROCEDURE Raise_Record_Exist___ (
+   rec_ mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ mdm_request_history_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Exist(Mdm_Request_History_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Exist___;
+
+
+PROCEDURE Raise_Item_Format___ (
+   name_ IN VARCHAR2,
+   value_ IN VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      name_ IN VARCHAR2,
+      value_ IN VARCHAR2 )
+   IS
+   BEGIN
+      Error_SYS.Item_Format(Mdm_Request_History_API.lu_name_, name_, value_);
+   END Base;
+
+BEGIN
+   Base(name_, value_);
+END Raise_Item_Format___;
+
+
+PROCEDURE Raise_Record_Modified___ (
+   rec_ mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      rec_ mdm_request_history_tab%ROWTYPE )
+   IS
+   BEGIN
+      Error_SYS.Record_Modified(Mdm_Request_History_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(rec_);
+END Raise_Record_Modified___;
+
+
+PROCEDURE Raise_Record_Locked___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Locked(Mdm_Request_History_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, request_no_, seq_no_);
+END Raise_Record_Locked___;
+
+
+PROCEDURE Raise_Record_Removed___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER )
+   IS
+   BEGIN
+      Error_SYS.Record_Removed(Mdm_Request_History_API.lu_name_);
+   END Base;
+
+BEGIN
+   Base(template_id_, revision_, request_no_, seq_no_);
+END Raise_Record_Removed___;
+
+
+FUNCTION Lock_By_Id___ (
+   objid_      IN VARCHAR2,
+   objversion_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_      IN VARCHAR2,
+      objversion_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_request_history_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      SELECT *
+         INTO  rec_
+         FROM  mdm_request_history_tab
+         WHERE rowid = objid_
+         AND    to_char(rowversion,'YYYYMMDDHH24MISS') = objversion_
+         FOR UPDATE NOWAIT;
+      RETURN rec_;
+   EXCEPTION
+      WHEN row_locked THEN
+         Error_SYS.Record_Locked(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, NULL, 'Lock_By_Id___');
+      WHEN no_data_found THEN
+         BEGIN
+            SELECT 1
+               INTO  dummy_
+               FROM  mdm_request_history_tab
+               WHERE rowid = objid_;
+            Raise_Record_Modified___(rec_);
+         EXCEPTION
+            WHEN no_data_found THEN
+               Error_SYS.Record_Removed(lu_name_);
+            WHEN too_many_rows THEN
+               Raise_Too_Many_Rows___(NULL, NULL, NULL, NULL, 'Lock_By_Id___');
+         END;
+   END Base;
+
+BEGIN
+   RETURN Base(objid_, objversion_);
+END Lock_By_Id___;
+
+
+FUNCTION Lock_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  mdm_request_history_tab
+            WHERE template_id = template_id_
+            AND   revision = revision_
+            AND   request_no = request_no_
+            AND   seq_no = seq_no_
+            FOR UPDATE;
+         RETURN rec_;
+      EXCEPTION
+         WHEN no_data_found THEN
+            Raise_Record_Removed___(template_id_, revision_, request_no_, seq_no_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Lock_By_Keys___');
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Lock_By_Keys___;
+
+
+FUNCTION Lock_By_Keys_Nowait___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      row_locked  EXCEPTION;
+      PRAGMA      EXCEPTION_INIT(row_locked, -0054);
+      rec_        mdm_request_history_tab%ROWTYPE;
+      dummy_      NUMBER;
+   BEGIN
+      BEGIN
+         SELECT *
+            INTO  rec_
+            FROM  mdm_request_history_tab
+            WHERE template_id = template_id_
+            AND   revision = revision_
+            AND   request_no = request_no_
+            AND   seq_no = seq_no_
+            FOR UPDATE NOWAIT;
+         RETURN rec_;
+      EXCEPTION
+         WHEN row_locked THEN
+            Error_SYS.Record_Locked(lu_name_);
+         WHEN too_many_rows THEN
+            Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Lock_By_Keys___');
+         WHEN no_data_found THEN
+            BEGIN
+               SELECT 1
+                  INTO  dummy_
+                  FROM  mdm_request_history_tab
+                  WHERE template_id = template_id_
+                  AND   revision = revision_
+                  AND   request_no = request_no_
+                  AND   seq_no = seq_no_;
+               Raise_Record_Modified___(rec_);
+            EXCEPTION
+               WHEN no_data_found THEN
+                  Raise_Record_Removed___(template_id_, revision_, request_no_, seq_no_);
+               WHEN too_many_rows THEN
+                  Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Lock_By_Keys___');
+            END;
+      END;
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Lock_By_Keys_Nowait___;
+
+
+FUNCTION Get_Object_By_Id___ (
+   objid_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      objid_ IN VARCHAR2 ) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      lu_rec_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  mdm_request_history_tab
+         WHERE rowid = objid_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         Error_SYS.Record_Removed(lu_name_);
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, NULL, 'Get_Object_By_Id___');
+   END Base;
+
+BEGIN
+   RETURN Base(objid_);
+END Get_Object_By_Id___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Get_Object_By_Keys___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN mdm_request_history_tab%ROWTYPE
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN mdm_request_history_tab%ROWTYPE
+   IS
+      lu_rec_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      SELECT *
+         INTO  lu_rec_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN lu_rec_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN lu_rec_;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Object_By_Keys___');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Get_Object_By_Keys___;
+
+
+--@IgnoreMissingSysinit
+FUNCTION Check_Exist___ (
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER ) RETURN BOOLEAN
+IS
+   
+   FUNCTION Base (
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER ) RETURN BOOLEAN
+   IS
+      dummy_ NUMBER;
+   BEGIN
+      SELECT 1
+         INTO  dummy_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+      RETURN TRUE;
+   EXCEPTION
+      WHEN no_data_found THEN
+         RETURN FALSE;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Check_Exist___');
+   END Base;
+
+BEGIN
+   RETURN Base(template_id_, revision_, request_no_, seq_no_);
+END Check_Exist___;
+
+
+PROCEDURE Get_Version_By_Id___ (
+   objid_      IN     VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      SELECT to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objversion_
+         FROM  mdm_request_history_tab
+         WHERE rowid = objid_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(NULL, NULL, NULL, NULL, 'Get_Version_By_Id___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_);
+END Get_Version_By_Id___;
+
+
+PROCEDURE Get_Id_Version_By_Keys___ (
+   objid_      IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   template_id_ IN VARCHAR2,
+   revision_ IN NUMBER,
+   request_no_ IN NUMBER,
+   seq_no_ IN NUMBER )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      template_id_ IN VARCHAR2,
+      revision_ IN NUMBER,
+      request_no_ IN NUMBER,
+      seq_no_ IN NUMBER )
+   IS
+   BEGIN
+      SELECT rowid, to_char(rowversion,'YYYYMMDDHH24MISS')
+         INTO  objid_, objversion_
+         FROM  mdm_request_history_tab
+         WHERE template_id = template_id_
+         AND   revision = revision_
+         AND   request_no = request_no_
+         AND   seq_no = seq_no_;
+   EXCEPTION
+      WHEN no_data_found THEN
+         objid_      := NULL;
+         objversion_ := NULL;
+      WHEN too_many_rows THEN
+         Raise_Too_Many_Rows___(template_id_, revision_, request_no_, seq_no_, 'Get_Id_Version_By_Keys___');
+   END Base;
+
+BEGIN
+   Base(objid_, objversion_, template_id_, revision_, request_no_, seq_no_);
+END Get_Id_Version_By_Keys___;
+
+
+PROCEDURE Unpack___ (
+   newrec_   IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_   IN OUT NOCOPY Indicator_Rec,
+   attr_     IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      newrec_   IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      indrec_   IN OUT NOCOPY Indicator_Rec,
+      attr_     IN OUT NOCOPY VARCHAR2 )
+   IS
+      ptr_   NUMBER;
+      name_  VARCHAR2(30);
+      value_ VARCHAR2(32000);
+      msg_   VARCHAR2(32000);
+   BEGIN
+      Reset_Indicator_Rec___(indrec_);
+      Client_SYS.Clear_Attr(msg_);
+      ptr_ := NULL;
+      WHILE (Client_SYS.Get_Next_From_Attr(attr_, ptr_, name_, value_)) LOOP
+         CASE name_
+         WHEN ('TEMPLATE_ID') THEN
+            newrec_.template_id := value_;
+            indrec_.template_id := TRUE;
+         WHEN ('REVISION') THEN
+            newrec_.revision := Client_SYS.Attr_Value_To_Number(value_);
+            indrec_.revision := TRUE;
+         WHEN ('REQUEST_NO') THEN
+            newrec_.request_no := Client_SYS.Attr_Value_To_Number(value_);
+            indrec_.request_no := TRUE;
+         WHEN ('SEQ_NO') THEN
+            newrec_.seq_no := Client_SYS.Attr_Value_To_Number(value_);
+            indrec_.seq_no := TRUE;
+         WHEN ('MOD_DATE') THEN
+            newrec_.mod_date := Client_SYS.Attr_Value_To_Date(value_);
+            indrec_.mod_date := TRUE;
+         WHEN ('MOD_BY') THEN
+            newrec_.mod_by := value_;
+            indrec_.mod_by := TRUE;
+         WHEN ('HISTORY_STATUS') THEN
+            newrec_.history_status := value_;
+            indrec_.history_status := TRUE;
+         WHEN ('INFO') THEN
+            newrec_.info := value_;
+            indrec_.info := TRUE;
+         ELSE
+            Client_SYS.Add_To_Attr(name_, value_, msg_);
+         END CASE;
+      END LOOP;
+      attr_ := msg_;
+   EXCEPTION
+      WHEN value_error THEN
+         Raise_Item_Format___(name_, value_);
+   END Base;
+
+BEGIN
+   Base(newrec_, indrec_, attr_);
+END Unpack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (rec_.template_id IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      END IF;
+      IF (rec_.revision IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      END IF;
+      IF (rec_.request_no IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('REQUEST_NO', rec_.request_no, attr_);
+      END IF;
+      IF (rec_.seq_no IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('SEQ_NO', rec_.seq_no, attr_);
+      END IF;
+      IF (rec_.mod_date IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('MOD_DATE', rec_.mod_date, attr_);
+      END IF;
+      IF (rec_.mod_by IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('MOD_BY', rec_.mod_by, attr_);
+      END IF;
+      IF (rec_.history_status IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('HISTORY_STATUS', rec_.history_status, attr_);
+      END IF;
+      IF (rec_.info IS NOT NULL) THEN
+         Client_SYS.Add_To_Attr('INFO', rec_.info, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack___;
+
+
+FUNCTION Pack___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE,
+   indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_request_history_tab%ROWTYPE,
+      indrec_ IN Indicator_Rec ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      IF (indrec_.template_id) THEN
+         Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      END IF;
+      IF (indrec_.revision) THEN
+         Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      END IF;
+      IF (indrec_.request_no) THEN
+         Client_SYS.Add_To_Attr('REQUEST_NO', rec_.request_no, attr_);
+      END IF;
+      IF (indrec_.seq_no) THEN
+         Client_SYS.Add_To_Attr('SEQ_NO', rec_.seq_no, attr_);
+      END IF;
+      IF (indrec_.mod_date) THEN
+         Client_SYS.Add_To_Attr('MOD_DATE', rec_.mod_date, attr_);
+      END IF;
+      IF (indrec_.mod_by) THEN
+         Client_SYS.Add_To_Attr('MOD_BY', rec_.mod_by, attr_);
+      END IF;
+      IF (indrec_.history_status) THEN
+         Client_SYS.Add_To_Attr('HISTORY_STATUS', rec_.history_status, attr_);
+      END IF;
+      IF (indrec_.info) THEN
+         Client_SYS.Add_To_Attr('INFO', rec_.info, attr_);
+      END IF;
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_, indrec_);
+END Pack___;
+
+
+FUNCTION Pack_Table___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN VARCHAR2
+   IS
+      attr_ VARCHAR2(32000);
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+      Client_SYS.Add_To_Attr('TEMPLATE_ID', rec_.template_id, attr_);
+      Client_SYS.Add_To_Attr('REVISION', rec_.revision, attr_);
+      Client_SYS.Add_To_Attr('REQUEST_NO', rec_.request_no, attr_);
+      Client_SYS.Add_To_Attr('SEQ_NO', rec_.seq_no, attr_);
+      Client_SYS.Add_To_Attr('MOD_DATE', rec_.mod_date, attr_);
+      Client_SYS.Add_To_Attr('MOD_BY', rec_.mod_by, attr_);
+      Client_SYS.Add_To_Attr('HISTORY_STATUS', rec_.history_status, attr_);
+      Client_SYS.Add_To_Attr('INFO', rec_.info, attr_);
+      Client_SYS.Add_To_Attr('ROWKEY', rec_.rowkey, attr_);
+      RETURN attr_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Pack_Table___;
+
+
+PROCEDURE Reset_Indicator_Rec___ (
+   indrec_ IN OUT NOCOPY Indicator_Rec )
+IS
+   
+   PROCEDURE Base (
+      indrec_ IN OUT NOCOPY Indicator_Rec )
+   IS
+      empty_indrec_ Indicator_Rec;
+   BEGIN
+      indrec_ := empty_indrec_;
+   END Base;
+
+BEGIN
+   Base(indrec_);
+END Reset_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      rec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.template_id := rec_.template_id IS NOT NULL;
+      indrec_.revision := rec_.revision IS NOT NULL;
+      indrec_.request_no := rec_.request_no IS NOT NULL;
+      indrec_.seq_no := rec_.seq_no IS NOT NULL;
+      indrec_.mod_date := rec_.mod_date IS NOT NULL;
+      indrec_.mod_by := rec_.mod_by IS NOT NULL;
+      indrec_.history_status := rec_.history_status IS NOT NULL;
+      indrec_.info := rec_.info IS NOT NULL;
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(rec_);
+END Get_Indicator_Rec___;
+
+
+FUNCTION Get_Indicator_Rec___ (
+   oldrec_ IN mdm_request_history_tab%ROWTYPE,
+   newrec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec
+IS
+   
+   FUNCTION Base (
+      oldrec_ IN mdm_request_history_tab%ROWTYPE,
+      newrec_ IN mdm_request_history_tab%ROWTYPE ) RETURN Indicator_Rec
+   IS
+      indrec_ Indicator_Rec;
+   BEGIN
+      indrec_.template_id := Validate_SYS.Is_Changed(oldrec_.template_id, newrec_.template_id);
+      indrec_.revision := Validate_SYS.Is_Changed(oldrec_.revision, newrec_.revision);
+      indrec_.request_no := Validate_SYS.Is_Changed(oldrec_.request_no, newrec_.request_no);
+      indrec_.seq_no := Validate_SYS.Is_Changed(oldrec_.seq_no, newrec_.seq_no);
+      indrec_.mod_date := Validate_SYS.Is_Changed(oldrec_.mod_date, newrec_.mod_date);
+      indrec_.mod_by := Validate_SYS.Is_Changed(oldrec_.mod_by, newrec_.mod_by);
+      indrec_.history_status := Validate_SYS.Is_Changed(oldrec_.history_status, newrec_.history_status);
+      indrec_.info := Validate_SYS.Is_Changed(oldrec_.info, newrec_.info);
+      RETURN indrec_;
+   END Base;
+
+BEGIN
+   RETURN Base(oldrec_, newrec_);
+END Get_Indicator_Rec___;
+
+
+PROCEDURE Check_Common___ (
+   oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      IF (newrec_.template_id IS NOT NULL AND newrec_.revision IS NOT NULL AND newrec_.request_no IS NOT NULL)
+      AND (indrec_.template_id OR indrec_.revision OR indrec_.request_no)
+      AND (Validate_SYS.Is_Changed(oldrec_.template_id, newrec_.template_id)
+        OR Validate_SYS.Is_Changed(oldrec_.revision, newrec_.revision)
+        OR Validate_SYS.Is_Changed(oldrec_.request_no, newrec_.request_no)) THEN
+         Mdm_Request_Header_API.Exist(newrec_.template_id, newrec_.revision, newrec_.request_no);
+      END IF;
+      Error_SYS.Check_Not_Null(lu_name_, 'TEMPLATE_ID', newrec_.template_id);
+      Error_SYS.Check_Not_Null(lu_name_, 'REVISION', newrec_.revision);
+      Error_SYS.Check_Not_Null(lu_name_, 'REQUEST_NO', newrec_.request_no);
+   END Base;
+
+BEGIN
+   Base(oldrec_, newrec_, indrec_, attr_);
+END Check_Common___;
+
+
+PROCEDURE Prepare_Insert___ (
+   attr_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Client_SYS.Clear_Attr(attr_);
+   END Base;
+
+BEGIN
+   Base(attr_);
+END Prepare_Insert___;
+
+
+PROCEDURE Check_Insert___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+      oldrec_ mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      Validate_SYS.Item_Insert(lu_name_, 'SEQ_NO', indrec_.seq_no);
+      Validate_SYS.Item_Insert(lu_name_, 'MOD_DATE', indrec_.mod_date);
+      Validate_SYS.Item_Insert(lu_name_, 'MOD_BY', indrec_.mod_by);
+      Validate_SYS.Item_Insert(lu_name_, 'HISTORY_STATUS', indrec_.history_status);
+      Validate_SYS.Item_Insert(lu_name_, 'INFO', indrec_.info);
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_, indrec_, attr_);
+END Check_Insert___;
+
+
+PROCEDURE Prepare_New___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE )
+   IS
+      attr_    VARCHAR2(32000);
+      indrec_  Indicator_Rec;
+   BEGIN
+      Prepare_Insert___(attr_);
+      Unpack___(newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END Prepare_New___;
+
+
+PROCEDURE New___ (
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE )
+   IS
+      objid_         VARCHAR2(20);
+      objversion_    VARCHAR2(100);
+      attr_          VARCHAR2(32000);
+      indrec_        Indicator_Rec;
+      emptyrec_      mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      indrec_ := Get_Indicator_Rec___(emptyrec_, newrec_);
+      Check_Insert___(newrec_, indrec_, attr_);
+      Insert___(objid_, objversion_, newrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(newrec_);
+END New___;
+
+
+PROCEDURE Check_Update___ (
+   oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+   newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   indrec_ IN OUT NOCOPY Indicator_Rec,
+   attr_   IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      oldrec_ IN     mdm_request_history_tab%ROWTYPE,
+      newrec_ IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      indrec_ IN OUT NOCOPY Indicator_Rec,
+      attr_   IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      Validate_SYS.Item_Update(lu_name_, 'TEMPLATE_ID', indrec_.template_id);
+      Validate_SYS.Item_Update(lu_name_, 'REVISION', indrec_.revision);
+      Validate_SYS.Item_Update(lu_name_, 'REQUEST_NO', indrec_.request_no);
+      Validate_SYS.Item_Update(lu_name_, 'SEQ_NO', indrec_.seq_no);
+      Validate_SYS.Item_Update(lu_name_, 'MOD_DATE', indrec_.mod_date);
+      Validate_SYS.Item_Update(lu_name_, 'MOD_BY', indrec_.mod_by);
+      Validate_SYS.Item_Update(lu_name_, 'HISTORY_STATUS', indrec_.history_status);
+      Validate_SYS.Item_Update(lu_name_, 'INFO', indrec_.info);
+      Check_Common___(oldrec_, newrec_, indrec_, attr_);
+   END Base;
+
+BEGIN
+   Base(oldrec_, newrec_, indrec_, attr_);
+END Check_Update___;
+
+
+PROCEDURE Modify___ (
+   newrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      newrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      objid_      VARCHAR2(20);
+      objversion_ VARCHAR2(100);
+      attr_       VARCHAR2(32000);
+      indrec_     Indicator_rec;
+      oldrec_     mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(newrec_.template_id, newrec_.revision, newrec_.request_no, newrec_.seq_no);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(newrec_.template_id, newrec_.revision, newrec_.request_no, newrec_.seq_no);
+      END IF;
+      indrec_ := Get_Indicator_Rec___(oldrec_, newrec_);
+      Check_Update___(oldrec_, newrec_, indrec_, attr_);
+      Update___(objid_, oldrec_, newrec_, attr_, objversion_, TRUE);
+   END Base;
+
+BEGIN
+   Base(newrec_, lock_mode_wait_);
+END Modify___;
+
+
+PROCEDURE Check_Delete___ (
+   remrec_ IN mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN mdm_request_history_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.template_id||'^'||remrec_.revision||'^'||remrec_.request_no||'^'||remrec_.seq_no||'^';
+      Reference_SYS.Check_Restricted_Delete(lu_name_, key_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Check_Delete___;
+
+
+PROCEDURE Delete___ (
+   objid_  IN VARCHAR2,
+   remrec_ IN mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      objid_  IN VARCHAR2,
+      remrec_ IN mdm_request_history_tab%ROWTYPE )
+   IS
+      key_ VARCHAR2(2000);
+   BEGIN
+      key_ := remrec_.template_id||'^'||remrec_.revision||'^'||remrec_.request_no||'^'||remrec_.seq_no||'^';
+      Reference_SYS.Do_Cascade_Delete(lu_name_, key_);
+      IF (objid_ IS NOT NULL) THEN
+         DELETE
+            FROM  mdm_request_history_tab
+            WHERE rowid = objid_;
+      ELSE
+         DELETE
+            FROM  mdm_request_history_tab
+            WHERE template_id = remrec_.template_id
+            AND   revision = remrec_.revision
+            AND   request_no = remrec_.request_no
+            AND   seq_no = remrec_.seq_no;
+      END IF;
+   END Base;
+
+BEGIN
+   Base(objid_, remrec_);
+END Delete___;
+
+
+PROCEDURE Delete___ (
+   remrec_ IN mdm_request_history_tab%ROWTYPE )
+IS
+   
+   PROCEDURE Base (
+      remrec_ IN mdm_request_history_tab%ROWTYPE )
+   IS
+   BEGIN
+      Delete___(NULL, remrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_);
+END Delete___;
+
+
+PROCEDURE Remove___ (
+   remrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+   lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+IS
+   
+   PROCEDURE Base (
+      remrec_         IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      lock_mode_wait_ IN     BOOLEAN DEFAULT TRUE )
+   IS
+      oldrec_     mdm_request_history_tab%ROWTYPE;
+   BEGIN
+      IF (lock_mode_wait_) THEN
+         oldrec_ := Lock_By_Keys___(remrec_.template_id, remrec_.revision, remrec_.request_no, remrec_.seq_no);
+      ELSE
+         oldrec_ := Lock_By_Keys_Nowait___(remrec_.template_id, remrec_.revision, remrec_.request_no, remrec_.seq_no);
+      END IF;
+      Check_Delete___(oldrec_);
+      Delete___(NULL, oldrec_);
+   END Base;
+
+BEGIN
+   Base(remrec_, lock_mode_wait_);
+END Remove___;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PUBLIC METHODS -----------------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Add_Mdm_Req_history_Entry (
+   attr_ IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Cust (
+      attr_ IN OUT NOCOPY VARCHAR2 )
+   IS
+      info_          VARCHAR2(2000);
+      objid_         VARCHAR2(20);
+      objversion_    VARCHAR2(2000);
+   BEGIN
+      New__ (info_, objid_, objversion_, attr_, 'DO');
+   END Cust;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Request_History_API.lu_name_, 'Mdm_Request_History_API', 'Add_Mdm_Req_history_Entry');
+   Cust(attr_);
+END Add_Mdm_Req_history_Entry;
+
+
+PROCEDURE Remove_Mdm_Req_history_Record (
+   template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE)
+IS
+   
+   PROCEDURE Cust (
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+         revision_  mdm_request_history_tab.revision%TYPE)
+   IS 
+   BEGIN
+      DELETE 
+         FROM mdm_request_history_tab
+         WHERE template_id = template_id_ AND 
+         revision = revision_  ;
+   END Cust;
+
+BEGIN
+   General_SYS.Init_Method(Mdm_Request_History_API.lu_name_, 'Mdm_Request_History_API', 'Remove_Mdm_Req_history_Record');
+   Cust(template_id_, revision_);
+END Remove_Mdm_Req_history_Record;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC IMPLEMENTATION METHODS ---------------------
+-----------------------------------------------------------------------------
+
+PROCEDURE Insert___ (
+   objid_      OUT    VARCHAR2,
+   objversion_ OUT    VARCHAR2,
+   newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2 )
+IS
+   
+   PROCEDURE Base (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      newrec_.rowkey := sys_guid();
+      Client_SYS.Add_To_Attr('OBJKEY', newrec_.rowkey, attr_);
+      INSERT
+         INTO mdm_request_history_tab
+         VALUES newrec_
+         RETURNING rowid INTO objid_;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'MDM_REQUEST_HISTORY_RK') THEN
+               Error_SYS.Rowkey_Exist(lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+   PROCEDURE Cust (
+      objid_      OUT    VARCHAR2,
+      objversion_ OUT    VARCHAR2,
+      newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2 )
+   IS
+   BEGIN
+      newrec_.seq_no := Generate_Seq_No___(newrec_.template_id , newrec_.revision);
+      newrec_.mod_by := Fnd_Session_API.Get_Fnd_User();   
+      newrec_.mod_date := Get_Date___(newrec_.template_id , newrec_.revision);
+      --newrec_.history_status := Get_Status___(newrec_.template_id , newrec_.revision);
+      Base(objid_, objversion_, newrec_, attr_);
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         Error_SYS.Record_Exist(lu_name_);
+   END Cust;
+
+BEGIN
+   Cust(objid_, objversion_, newrec_, attr_);
+END Insert___;
+
+
+PROCEDURE Update___ (
+   objid_      IN     VARCHAR2,
+   oldrec_     IN     MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+   attr_       IN OUT NOCOPY VARCHAR2,
+   objversion_ IN OUT NOCOPY VARCHAR2,
+   by_keys_    IN     BOOLEAN DEFAULT FALSE )
+IS
+   
+   PROCEDURE Base (
+      objid_      IN     VARCHAR2,
+      oldrec_     IN     mdm_request_history_tab%ROWTYPE,
+      newrec_     IN OUT NOCOPY mdm_request_history_tab%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      by_keys_    IN     BOOLEAN DEFAULT FALSE )
+   IS
+   BEGIN
+      newrec_.rowversion := sysdate;
+      IF by_keys_ THEN
+         UPDATE mdm_request_history_tab
+            SET ROW = newrec_
+            WHERE template_id = newrec_.template_id
+            AND   revision = newrec_.revision
+            AND   request_no = newrec_.request_no
+            AND   seq_no = newrec_.seq_no;
+      ELSE
+         UPDATE mdm_request_history_tab
+            SET ROW = newrec_
+            WHERE rowid = objid_;
+      END IF;
+      objversion_ := to_char(newrec_.rowversion,'YYYYMMDDHH24MISS');
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         DECLARE
+            constraint_ VARCHAR2(4000) := Utility_SYS.Between_Str(Utility_SYS.Between_Str(sqlerrm, '(', ')'), '.', ')', 'FALSE');
+         BEGIN
+            IF (constraint_ = 'MDM_REQUEST_HISTORY_RK') THEN
+               Error_SYS.Rowkey_Exist(Mdm_Request_History_API.lu_name_, newrec_.rowkey);
+            ELSE
+               Raise_Record_Exist___(newrec_);
+            END IF;
+         END;
+   END Base;
+
+   PROCEDURE Cust (
+      objid_      IN     VARCHAR2,
+      oldrec_     IN     MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+      newrec_     IN OUT NOCOPY MDM_REQUEST_HISTORY_TAB%ROWTYPE,
+      attr_       IN OUT NOCOPY VARCHAR2,
+      objversion_ IN OUT NOCOPY VARCHAR2,
+      by_keys_    IN     BOOLEAN DEFAULT FALSE )
+   IS
+   BEGIN
+      newrec_.mod_date := Get_Date___(newrec_.template_id , newrec_.revision);
+      newrec_.mod_by := Fnd_Session_API.Get_Fnd_User(); 
+      --newrec_.history_status := Get_Status___(newrec_.template_id , newrec_.revision);
+      Base(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
+   EXCEPTION
+      WHEN dup_val_on_index THEN
+         Error_SYS.Record_Exist(lu_name_);
+   END Cust;
+
+BEGIN
+   Cust(objid_, oldrec_, newrec_, attr_, objversion_, by_keys_);
+END Update___;
+
+-----------------------------------------------------------------------------
+-------------------- LU SPECIFIC PROTECTED METHODS --------------------------
+-----------------------------------------------------------------------------
+
+FUNCTION Get_Date___(
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE)  RETURN DATE
+IS
+   
+   FUNCTION Cust(
+         template_id_     mdm_request_history_tab.template_id%TYPE,
+         revision_  mdm_request_history_tab.revision%TYPE)  RETURN DATE
+   IS 
+      temp_date_ DATE;
+      CURSOR get_temp_date IS
+      SELECT Requested_Date
+      FROM Mdm_Request_Header_tab
+      WHERE  template_id = template_id_  AND revision = revision_;
+      BEGIN
+      OPEN get_temp_date;
+      FETCH get_temp_date INTO temp_date_;
+      CLOSE get_temp_date;   
+      RETURN temp_date_;
+   END Cust;
+
+BEGIN
+   RETURN Cust(template_id_, revision_);
+END Get_Date___;
+
+
+FUNCTION Generate_Seq_No___(
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE )  RETURN NUMBER
+IS
+   
+   FUNCTION Cust(
+         template_id_     mdm_request_history_tab.template_id%TYPE,
+         revision_  mdm_request_history_tab.revision%TYPE )  RETURN NUMBER
+   IS 
+      temp_    NUMBER;
+      CURSOR get_seqno IS
+         SELECT NVL(max(SEQ_NO),0)
+         FROM mdm_request_history_tab
+         WHERE  template_id = template_id_  AND revision = revision_;  
+   BEGIN
+      OPEN get_seqno;
+      FETCH get_seqno INTO temp_;
+      CLOSE get_seqno;   
+      RETURN temp_+1;
+   END Cust;
+
+BEGIN
+   RETURN Cust(template_id_, revision_);
+END Generate_Seq_No___;
+
+
+FUNCTION Get_Status___ (
+      template_id_     mdm_request_history_tab.template_id%TYPE,
+      revision_  mdm_request_history_tab.revision%TYPE )  RETURN VARCHAR2
+IS
+   
+   FUNCTION Cust (
+         template_id_     mdm_request_history_tab.template_id%TYPE,
+         revision_  mdm_request_history_tab.revision%TYPE )  RETURN VARCHAR2
+   IS 
+      temp_status_ VARCHAR2(50);
+      CURSOR get_status IS
+         SELECT State
+         FROM mdm_request_header
+         WHERE  template_id = template_id_  AND revision = revision_;  
+   BEGIN
+      OPEN get_status;
+      FETCH get_status INTO temp_status_;
+      CLOSE get_status;   
+      RETURN temp_status_;
+   END Cust;
+
+BEGIN
+   RETURN Cust(template_id_, revision_);
+END Get_Status___;
+
+-----------------------------------------------------------------------------
+-------------------- FOUNDATION1 METHODS ------------------------------------
+-----------------------------------------------------------------------------
+
+
+--@IgnoreMissingSysinit
+PROCEDURE Init
+IS
+   
+   PROCEDURE Base
+   IS
+   BEGIN
+      NULL;
+   END Base;
+
+BEGIN
+   Base;
+END Init;
+
+BEGIN
+   Init;
+END Mdm_Request_History_API;

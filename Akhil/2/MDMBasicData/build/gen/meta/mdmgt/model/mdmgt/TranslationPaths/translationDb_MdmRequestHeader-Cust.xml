@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LogicalUnits version="1.0" module="MDMGT" type="LU" layer="Cust">
+   <LogicalUnit name="MdmRequestHeader">
+      <Text><![CDATA[Mdm Request Header]]></Text>
+      <View ID="MdmRequestHeader.MDM_REQUEST_HEADER">
+         <Text><![CDATA[Mdm Request Header]]></Text>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.TEMPLATE_ID">
+            <Text><![CDATA[Template Id]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.REVISION">
+            <Text><![CDATA[Revision]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.REQUEST_NO">
+            <Text><![CDATA[Request No]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.DESCRIPTION">
+            <Text><![CDATA[Description]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.REQUESTED_BY">
+            <Text><![CDATA[Requested By]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.REQUESTED_DATE">
+            <Text><![CDATA[Requested Date]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.APPROVAL_REQUIRED">
+            <Text><![CDATA[Approval Required]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.APPROVAL_REJECTED">
+            <Text><![CDATA[Approval Rejected]]></Text>
+         </Column>
+         <Column ID="MdmRequestHeader.MDM_REQUEST_HEADER.STATE">
+            <Text><![CDATA[State]]></Text>
+         </Column>
+      </View>
+      <State ID="New">
+         <Position>1</Position>
+         <Text><![CDATA[New]]></Text>
+      </State>
+      <State ID="Partially Approved">
+         <Position>2</Position>
+         <Text><![CDATA[Partially Approved]]></Text>
+      </State>
+      <State ID="Cancelled">
+         <Position>3</Position>
+         <Text><![CDATA[Cancelled]]></Text>
+      </State>
+      <State ID="Released">
+         <Position>4</Position>
+         <Text><![CDATA[Released]]></Text>
+      </State>
+      <State ID="PartiallyTransfered">
+         <Position>5</Position>
+         <Text><![CDATA[PartiallyTransfered]]></Text>
+      </State>
+      <State ID="Transfered">
+         <Position>6</Position>
+         <Text><![CDATA[Transfered]]></Text>
+      </State>
+      <State ID="Completed">
+         <Position>7</Position>
+         <Text><![CDATA[Completed]]></Text>
+      </State>
+   </LogicalUnit>
+</LogicalUnits>

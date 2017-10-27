@@ -380,44 +380,6 @@ BEGIN
    RETURN temp_;
 END Get_Objid;
 
-@Override
-PROCEDURE Reopen__ (
-   info_       OUT    VARCHAR2,
-   objid_      IN     VARCHAR2,
-   objversion_ IN OUT VARCHAR2,
-   attr_       IN OUT VARCHAR2,
-   action_     IN     VARCHAR2 )
-IS   
-      rec_ mdm_basic_data_header_tab%ROWTYPE;
-      v_template_id_       VARCHAR2(200);
-      v_revision_          NUMBER;
-      v_count_      NUMBER;
-      CURSOR c1 
-   IS
-      select template_id,revision from mdm_basic_data_header v
-where v.objid = objid_
-and v.objversion = objversion_;
-CURSOR c2(template_id_ VARCHAR2, revision_ NUMBER )
-IS
-select count(*) from mdm_request_header c
-where c.template_id = template_id_
-and c.revision = revision_;
-BEGIN
-   --Add pre-processing code here
-   super(info_, objid_, objversion_, attr_, action_);
-   --Add post-processing code here
-   IF (action_ = 'CHECK') THEN
-         OPEN c1;
-         FETCH c1 INTO v_template_id_,v_revision_;
-         CLOSE c1;
-         OPEN c2(v_template_id_,v_revision_);
-         FETCH c2 INTO v_count_;
-         CLOSE c2;
-         IF v_count_ = 0 THEN 
-            Error_SYS.Record_General(lu_name_,'CREATED: You Can''t Reopen this Template id and Revision. Because of Request is Created.');
-         END IF;
-    END IF;
-END Reopen__;
 
 -------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
 

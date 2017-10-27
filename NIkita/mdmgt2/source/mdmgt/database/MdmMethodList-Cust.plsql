@@ -175,7 +175,6 @@ BEGIN
    
    IF(temp_count_view_ = 1) THEN
    super(oldrec_, newrec_, indrec_, attr_);
- 
    ELSE
          Error_SYS.Record_General(lu_name_,': View Does Not Exist.');
 END IF;
@@ -350,13 +349,6 @@ PROCEDURE C_Make_Source_Map (
       ref_rec_            reference_record;
       --
       procedure_name_     VARCHAR2(100);
-      
-      mandatory_ VARCHAR2(5);
-      no_of_views_ NUMBER;
-      check_no_of_views NUMBER;
-      check_view_name VARCHAR2(2000);
-      c_objid_ VARCHAR2(200);
-      c_objversion_ VARCHAR2(200);
       --
       CURSOR get_source_columns IS
          SELECT c.column_name source_column
@@ -390,18 +382,7 @@ PROCEDURE C_Make_Source_Map (
          SELECT 1 FROM user_objects
          WHERE object_name = upper(method_name_)
          AND object_type = 'PACKAGE';
-         
-      CURSOR check_coloumn_source(template_id_ IN VARCHAR2,Revision_ IN VARCHAR2,Column_Name_ IN VARCHAR2) IS
-       SELECT no_of_views,view_name FROM MDM_SOURCE_MAP
-       WHERE template_id = template_id_
-       AND revision = Revision_
-       AND column_name = column_name_;
-     
-      CURSOR get_objid_objversion(template_id_ IN VARCHAR2,Revision_ IN VARCHAR2) IS
-       SELECT objid,objversion,VIEW_NAME FROM MDM_SOURCE_MAP
-       WHERE template_id = template_id_
-       AND revision = Revision_;
-     --
+      --
    BEGIN
       Trace_Sys.Message('1');
 dbms_output.put_line('1');
@@ -728,46 +709,16 @@ dbms_output.put_line('2');
                 Trace_Sys.Message('28');
    dbms_output.put_line('28');
                BEGIN
-                  IF(INSTR(ref_rec_.flags_(i),'K') != 0 OR INSTR(ref_rec_.flags_(i),'M') != 0) THEN 
-                  mandatory_ := 'TRUE';
-                  ELSE 
-                   mandatory_ := 'FALSE'; 
-                  END IF;
-                  
-                  no_of_views_ := 1;
-                  OPEN check_coloumn_source(template_id_,Revision_, column_name_);
-                  FETCH check_coloumn_source INTO check_no_of_views, check_view_name;
-                  CLOSE check_coloumn_source;
-                  
-                  
-                  OPEN get_objid_objversion(template_id_,Revision_);
-                  FETCH get_objid_objversion INTO c_objid_, c_objversion_,check_view_name;
-                  CLOSE get_objid_objversion;
-                  
---                  IF(check_no_of_views >= 1) THEN 
---             --     no_of_views_ :=  check_no_of_views +1;
---                   Client_SYS.Clear_Attr(check_view_name);
---                  client_sys.Add_To_Attr('VIEW_NAME',view_name_,check_view_name);
---                 ELSE 
---                  --  no_of_views_ := 1;
---                     Client_SYS.Clear_Attr(check_view_name);
---                    Client_SYS.Add_To_Attr('VIEW_NAME',view_name_,check_view_name);
---                 END IF;   
-                  
-                   no_of_views_ := 1;
-                 
-                     
-                  
                    Trace_Sys.Message('29');
    dbms_output.put_line('29');
                   INSERT INTO MDM_SOURCE_MAP_Tab(template_id ,Revision,Column_Name,Data_Type,Length,
-                  description ,Flags,Default_Value,Note_Text,Db_Client_Values,MANDATORY,no_of_views,view_name,Rowversion)
+                  description ,Flags,Default_Value,Note_Text,Db_Client_Values,Rowversion)
                   VALUES(template_id_,Revision_, column_name_ , ref_rec_.data_type_(i),  length_,
                       ref_rec_.description_(i), ref_rec_.flags_(i), 
                      default_value_, note_text_,
                      decode(instr(column_name_,'_DB'),
                         '0',ref_rec_.client_values_(i),
-                             ref_rec_.db_client_values_(i)),mandatory_,no_of_views_,view_name_,sysdate);
+                             ref_rec_.db_client_values_(i)),sysdate);
                   IF procedure_name_ = 'EXCEL_MIGRATION' THEN
                      Basic_Data_Translation_API.Insert_Basic_Data_Translation('FNDMIG', 'IntfaceDetail',
                                                                   template_id_||'^'||column_name_||'^'||'DESCRIPTION',
@@ -778,15 +729,6 @@ dbms_output.put_line('2');
                   END IF;
                EXCEPTION
                   WHEN OTHERS THEN
-                    no_of_views_ :=  check_no_of_views +1;
-                  client_sys.Add_To_Attr('NO_OF_VIEWS',no_of_views_,attr_); 
-                  
-                  client_sys.Add_To_Attr('VIEW_NAME',check_view_name||','||view_name_,attr_);
-                   mdm_source_map_api.modify__(info_ ,
-                              objid_ => c_objid_,
-                              objversion_ => c_objversion_,
-                              attr_ => attr_,
-                              action_ => 'DO');
                   MDM_SOURCE_MAP_API.C_Trace_Long_Msg('NOINSERT :' || SQLERRM);
                END;
             END IF;
@@ -935,66 +877,6 @@ BEGIN
       RETURN NULL;
    END IF;
 END Find_Method_Name;
-
-@Override
-PROCEDURE Remove__ (
-   info_       OUT VARCHAR2,
-   objid_      IN  VARCHAR2,
-   objversion_ IN  VARCHAR2,
-   action_     IN  VARCHAR2 )
-IS
-CURSOR c1 IS 
- SELECT view_name,template_id,revision FROM MDM_METHOD_LIST
- WHERE objid = objid_
- AND objversion = objversion_;
- 
- CURSOR c2(view_name_ IN VARCHAR2,template_id_ IN VARCHAR2,revision_ IN NUMBER) IS
- SELECT objid, objversion, COLUMN_NAME FROM MDM_SOURCE_MAP
- WHERE view_name like '%'||view_name_||'%'
- AND no_of_views = '1'
- AND TEMPLATE_ID = template_id_
- AND revision = revision_;
- 
-CURSOR c3(view_name_ IN VARCHAR2,template_id_ IN VARCHAR2,revision_ IN NUMBER) IS
- SELECT objid, objversion, NO_OF_VIEWS FROM MDM_SOURCE_MAP
- WHERE view_name like '%'||view_name_||'%'
- AND no_of_views > '1'
- AND TEMPLATE_ID = template_id_
- AND revision = revision_;
-  
- view_name_ VARCHAR2(100); 
- template_id_  VARCHAR2(100); 
- revision_  NUMBER;
- number_of_views_ NUMBER;
- attr_ VARCHAR2(2000);
- COLUMN_NAME_ VARCHAR2(2000);
-BEGIN
-
-OPEN c1;
-FETCH c1 INTO view_name_,template_id_,revision_;
-CLOSE c1;
-   --Add pre-processing code here
-   super(info_, objid_, objversion_, action_);
-   --Add post-processing code here
-  
-   FOR rec_  IN c2(view_name_,template_id_,revision_) LOOP
-      COLUMN_NAME_ := rec_.COLUMN_NAME;
-     mdm_source_map_api.remove__(info_,rec_.objid,rec_.objversion,'CHECK');  
-     mdm_source_map_api.remove__(info_,rec_.objid,rec_.objversion,'DO'); 
-   END LOOP;
-   
-   FOR rec_  IN c3(view_name_,template_id_,revision_) LOOP
-     number_of_views_ :=  rec_.no_of_views -1;
-   client_sys.Add_To_Attr('NO_OF_VIEWS',number_of_views_,attr_);
-  mdm_source_map_api.modify__(info_,rec_.objid,rec_.objversion,attr_,'DO');
-   
-      
-   END LOOP;
-   
-   
-END Remove__;
-
-
 
 
 

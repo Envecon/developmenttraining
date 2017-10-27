@@ -237,97 +237,46 @@ IS
    END C_Get_Column_Desc;
 
 
-  @Override
+   @Override
    PROCEDURE Check_Common___ (
       oldrec_ IN     mdm_source_map_tab%ROWTYPE,
       newrec_ IN OUT mdm_source_map_tab%ROWTYPE,
       indrec_ IN OUT Indicator_Rec,
       attr_   IN OUT VARCHAR2 )
-   IS 
-     temp_count_view_ NUMBER;
+   IS temp_count_view_ NUMBER;
       column_name_ VARCHAR2(1000);
       source_name_ VARCHAR2(1000);
       temp_count_coloumn_ NUMBER;
-      temp_method_tab_count_ NUMBER;
-	
-    CURSOR get_count_view IS
+   CURSOR get_count_view IS
    SELECT 1
    FROM INTFACE_VIEWS
-   WHERE VIEW_NAME = column_name_;  
-  
+   WHERE VIEW_NAME = column_name_;
+   
    CURSOR Check_coloumn_view IS
    SELECT 1
       FROM user_col_comments
       WHERE table_name = column_name_
       AND column_name = source_name_;
-	  
-	CURSOR Check_method_list_view IS
-    SELECT 1
-    FROM mdm_method_list
-    WHERE view_name = column_name_;
-   
 BEGIN
   
    
---  IF ( instr(newrec_.COLUMN_NAME, '.') != 0 ) THEN
---         -- Source_name is prefixed with owner; separate owner and source
---         column_name_ := substr(newrec_.COLUMN_NAME, 1, instr(newrec_.COLUMN_NAME, '.')-1);/*source_owner_:=0*/
---         source_name_    :=  substr(newrec_.COLUMN_NAME, instr(newrec_.COLUMN_NAME, '.')+1);
---         
---     IF (newrec_.view_name = 0) THEN
---         Error_SYS.Record_General(lu_name_,':METHOD_LIST NAME DOES NOT EXIST');
---          ELSE 
---         OPEN Check_coloumn_view;
---         FETCH Check_coloumn_view INTO temp_count_coloumn_;
---         CLOSE Check_coloumn_view;
---         
---        IF (temp_count_coloumn_= 0) THEN 
---           Error_SYS.Record_General(lu_name_,':COLUMN_NAME DOES NOT EXIST');
---        END IF;
---        END IF;
---   ELSE
---         Error_SYS.Record_General(lu_name_,':Please put the view name');
---   END IF;
---
-
--- CHECK . IS EXIST OR NOT
- IF ( instr(newrec_.COLUMN_NAME, '.') != 0 ) THEN
+  IF ( instr(newrec_.COLUMN_NAME, '.') != 0 ) THEN
          -- Source_name is prefixed with owner; separate owner and source
-         -- ASSIGNED COLOUMN_NAME= VIEW NAME AND SOURCE_NAME = COLOUMN NAME
-      column_name_ := substr(newrec_.COLUMN_NAME, 1, instr(newrec_.COLUMN_NAME, '.')-1);/*source_owner_:=0*/
-       source_name_  :=  substr(newrec_.COLUMN_NAME, instr(newrec_.COLUMN_NAME, '.')+1);
-          
+         column_name_ := substr(newrec_.COLUMN_NAME, 1, instr(newrec_.COLUMN_NAME, '.')-1);/*source_owner_:=0*/
+         source_name_    :=  substr(newrec_.COLUMN_NAME, instr(newrec_.COLUMN_NAME, '.')+1);
           OPEN get_count_view;
           FETCH get_count_view INTO temp_count_view_;
            CLOSE get_count_view;
         
-   -- CHECK VIEW IS EXIST OR NOT IN DATABASE     
      IF(temp_count_view_ = 1) THEN
         OPEN Check_coloumn_view;
         FETCH Check_coloumn_view INTO temp_count_coloumn_;
         CLOSE Check_coloumn_view;
-        
-        IF(temp_count_coloumn_ = 1) THEN
-         OPEN Check_method_list_view;
-        FETCH Check_method_list_view INTO temp_method_tab_count_;
-        CLOSE Check_method_list_view;
-        IF(temp_method_tab_count_ = 1) THEN 
-        --CHECK COLOUMN IN VIEW IS EXIST OR NOT 
-           IF(temp_count_coloumn_ = 1) THEN 
-               IF(oldrec_.mandatory = 'TRUE') THEN 
-                   Error_SYS.Record_General(lu_name_,'Mandatory Field is not editable');
-                ELSE 
-                 super(oldrec_, newrec_, indrec_, attr_);
-               END IF;
-            ELSE 
+        IF(temp_count_coloumn_ = 1) THEN   
+           super(oldrec_, newrec_, indrec_, attr_);
+        ELSE 
            Error_SYS.Record_General(lu_name_,': Column name of given view Does Not Exist.'); 
         END IF;
-        
-     ELSE 
-         Error_SYS.Record_General(lu_name_,': View Does Not Exist in method list view'); 
-     END IF;
-     
-        
      ELSE 
         Error_SYS.Record_General(lu_name_,': View Does Not Exist.');
      END IF   ;
@@ -337,19 +286,11 @@ BEGIN
  
    ELSE
          Error_SYS.Record_General(lu_name_,':Please put the view name');
-   END IF;
-   
-  END IF;
-    
+END IF;
    END Check_Common___;
    
    
- 
    
- 
-   
-   
- 
    
 -------------------- LU SPECIFIC PRIVATE METHODS ----------------------------
 

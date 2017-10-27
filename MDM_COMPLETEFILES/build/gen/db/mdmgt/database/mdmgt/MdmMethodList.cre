@@ -24,9 +24,11 @@ DECLARE
    column_     Database_SYS.ColRec;
 BEGIN
    Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION', 'NUMBER', 'N');
    Database_SYS.Set_Table_Column(columns_, 'EXECUTE_SEQ', 'NUMBER', 'N');
    Database_SYS.Set_Table_Column(columns_, 'VIEW_NAME', 'VARCHAR2(100)', 'Y');
-   Database_SYS.Set_Table_Column(columns_, 'METHOD_NAME', 'VARCHAR2(100)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'METHOD_NAME', 'VARCHAR2(100)', 'Y');
    Database_SYS.Set_Table_Column(columns_, 'ON_NEW', 'VARCHAR2(5)', 'N');
    Database_SYS.Set_Table_Column(columns_, 'ON_MODIFY', 'VARCHAR2(5)', 'N');
    Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
@@ -46,6 +48,8 @@ DECLARE
    columns_    Database_SYS.ColumnTabType;
 BEGIN
    Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION');
    Database_SYS.Set_Table_Column(columns_, 'EXECUTE_SEQ');
    Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
 END;

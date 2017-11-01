@@ -8,7 +8,7 @@
             <DIAGRAM_NODE>
                <ID>b8a07280-adb8-11e7-3ff7-ff9994ff23f2</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
+               <MINIMIZED>1</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -29,14 +29,14 @@
                <SIZE>
                   <POINT>
                      <X>209</X>
-                     <Y>171</Y>
+                     <Y>24</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
                <ID>3f6431b0-adbb-11e7-3ff7-ff9994ff23f2</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
+               <MINIMIZED>1</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -57,14 +57,14 @@
                <SIZE>
                   <POINT>
                      <X>159</X>
-                     <Y>247</Y>
+                     <Y>24</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
                <ID>815e85a0-ae58-11e7-2a5d-fbd0814d61e6</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
+               <MINIMIZED>1</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -85,14 +85,14 @@
                <SIZE>
                   <POINT>
                      <X>198</X>
-                     <Y>190</Y>
+                     <Y>24</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
                <ID>90fb5e30-b0c8-11e7-244a-9f6cead437e4</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
+               <MINIMIZED>1</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -113,14 +113,14 @@
                <SIZE>
                   <POINT>
                      <X>157</X>
-                     <Y>171</Y>
+                     <Y>24</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
             <DIAGRAM_NODE>
                <ID>82c3ca70-b8aa-11e7-0d21-e524a2944a63</ID>
                <NODE_TYPE>ENTITY</NODE_TYPE>
-               <MINIMIZED>0</MINIMIZED>
+               <MINIMIZED>1</MINIMIZED>
                <IS_MERGED>0</IS_MERGED>
                <PROPERTIES>
                   <PROPERTY>
@@ -141,7 +141,7 @@
                <SIZE>
                   <POINT>
                      <X>181</X>
-                     <Y>190</Y>
+                     <Y>24</Y>
                   </POINT>
                </SIZE>
             </DIAGRAM_NODE>
@@ -169,6 +169,34 @@
                <SIZE>
                   <POINT>
                      <X>159</X>
+                     <Y>24</Y>
+                  </POINT>
+               </SIZE>
+            </DIAGRAM_NODE>
+            <DIAGRAM_NODE>
+               <ID>84e72900-bd73-11e7-067c-f122f2112c80</ID>
+               <NODE_TYPE>ENTITY</NODE_TYPE>
+               <MINIMIZED>1</MINIMIZED>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>EntityName</NAME>
+                     <VALUE>MdmApproval</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>ShowMethods</NAME>
+                     <VALUE>false</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <LOCATION>
+                  <POINT>
+                     <X>141</X>
+                     <Y>12</Y>
+                  </POINT>
+               </LOCATION>
+               <SIZE>
+                  <POINT>
+                     <X>144</X>
                      <Y>24</Y>
                   </POINT>
                </SIZE>
@@ -201,11 +229,11 @@
                <CONTROL_POINTS>
                   <POINT>
                      <X>667</X>
-                     <Y>171</Y>
+                     <Y>72</Y>
                   </POINT>
                   <POINT>
                      <X>587</X>
-                     <Y>162</Y>
+                     <Y>75</Y>
                   </POINT>
                </CONTROL_POINTS>
                <LABEL_LOCATION>
@@ -241,11 +269,11 @@
                <CONTROL_POINTS>
                   <POINT>
                      <X>247</X>
-                     <Y>168</Y>
+                     <Y>87</Y>
                   </POINT>
                   <POINT>
                      <X>378</X>
-                     <Y>159</Y>
+                     <Y>82</Y>
                   </POINT>
                </CONTROL_POINTS>
                <LABEL_LOCATION>
@@ -280,12 +308,12 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>716</X>
-                     <Y>401</Y>
+                     <X>783</X>
+                     <Y>400</Y>
                   </POINT>
                   <POINT>
-                     <X>562</X>
-                     <Y>237</Y>
+                     <X>493</X>
+                     <Y>90</Y>
                   </POINT>
                </CONTROL_POINTS>
                <LABEL_LOCATION>
@@ -320,12 +348,12 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>158</X>
+                     <X>161</X>
                      <Y>422</Y>
                   </POINT>
                   <POINT>
-                     <X>152</X>
-                     <Y>269</Y>
+                     <X>148</X>
+                     <Y>103</Y>
                   </POINT>
                </CONTROL_POINTS>
             </DIAGRAM_EDGE>
@@ -354,18 +382,58 @@
                </PROPERTIES>
                <CONTROL_POINTS>
                   <POINT>
-                     <X>392</X>
+                     <X>396</X>
                      <Y>363</Y>
                   </POINT>
                   <POINT>
-                     <X>247</X>
-                     <Y>251</Y>
+                     <X>159</X>
+                     <Y>103</Y>
                   </POINT>
                </CONTROL_POINTS>
                <LABEL_LOCATION>
                   <POINT>
                      <X>20</X>
                      <Y>-3</Y>
+                  </POINT>
+               </LABEL_LOCATION>
+            </DIAGRAM_EDGE>
+            <DIAGRAM_EDGE>
+               <EDGE_TYPE>ASSOCIATION</EDGE_TYPE>
+               <SOURCE_NODE_ID>84e72900-bd73-11e7-067c-f122f2112c80</SOURCE_NODE_ID>
+               <TARGET_NODE_ID>815e85a0-ae58-11e7-2a5d-fbd0814d61e6</TARGET_NODE_ID>
+               <IS_MERGED>0</IS_MERGED>
+               <PROPERTIES>
+                  <PROPERTY>
+                     <NAME>AssociationName</NAME>
+                     <VALUE>Approvals</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>AssociationTarget</NAME>
+                     <VALUE>MdmRequestHeader</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>AssociationParent</NAME>
+                     <VALUE>MdmApproval</VALUE>
+                  </PROPERTY>
+                  <PROPERTY>
+                     <NAME>IsParent</NAME>
+                     <VALUE>true</VALUE>
+                  </PROPERTY>
+               </PROPERTIES>
+               <CONTROL_POINTS>
+                  <POINT>
+                     <X>201</X>
+                     <Y>35</Y>
+                  </POINT>
+                  <POINT>
+                     <X>159</X>
+                     <Y>79</Y>
+                  </POINT>
+               </CONTROL_POINTS>
+               <LABEL_LOCATION>
+                  <POINT>
+                     <X>7</X>
+                     <Y>1</Y>
                   </POINT>
                </LABEL_LOCATION>
             </DIAGRAM_EDGE>

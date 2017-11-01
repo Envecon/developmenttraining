@@ -1,0 +1,286 @@
+-----------------------------------------------------------------------------
+--  Module : MDMGT
+--
+--  File   : 27102017DataSource.cdb
+--
+--  IFS Developer Studio Template Version 2.6
+--
+--  Date     Sign    History
+--  ------   ------  --------------------------------------------------
+--  171027   Administrator
+--  ------   ------  --------------------------------------------------
+-----------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmSourceMap
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'COLUMN_NAME', 'VARCHAR2(2000)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'EXEC_SEQ', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DESCRIPTION', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'DATA_TYPE', 'VARCHAR2(10)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'LENGTH', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'DEFAULT_VALUE', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'FLAGS', 'VARCHAR2(10)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'NOTE_TEXT', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'DB_CLIENT_VALUES', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'MANDATORY', 'VARCHAR2(5)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'NO_OF_VIEWS', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'VIEW_NAME', 'VARCHAR2(2000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_PK';
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION');
+   Database_SYS.Set_Table_Column(columns_, 'COLUMN_NAME');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_RK';
+   table_name_ VARCHAR2(30) := 'MDM_SOURCE_MAP_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmDataValues
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'MDM_DATA_VALUES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID', 'VARCHAR2(30)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'REQUEST_NO', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ID', 'VARCHAR2(20)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'LINE_NO', 'NUMBER', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ERROR', 'VARCHAR2(200)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'TRANSFERRED_BY', 'VARCHAR2(10)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'TRANSFERRED_DATE', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROW_STATUS', 'VARCHAR2(20)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S1', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S2', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S3', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S4', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S5', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S6', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S7', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S8', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S9', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S10', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S11', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S12', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S13', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S14', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S15', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S16', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S17', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S18', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S19', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S20', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S21', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S22', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S23', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S24', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S25', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S26', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S27', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S28', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S29', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S30', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S31', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S32', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S33', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S34', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S35', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S36', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S37', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S38', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S39', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S40', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S41', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S42', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S43', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S44', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S45', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S46', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S47', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S48', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S49', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S50', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S51', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S52', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S53', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S54', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S55', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S56', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S57', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S58', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S59', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S60', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S61', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S62', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S63', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S64', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S65', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S66', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S67', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S68', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S69', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S70', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S71', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S72', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S73', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S74', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S75', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S76', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S77', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S78', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S79', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S80', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S81', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S82', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S83', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S84', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S85', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S86', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S87', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S88', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S89', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S90', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S91', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S92', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S93', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S94', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S95', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S96', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S97', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S98', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S99', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S100', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N1', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N2', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N3', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N4', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N5', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N6', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N7', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N8', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N9', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'N10', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D1', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D2', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D3', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D4', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D5', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D6', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D7', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D8', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D9', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D10', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_DATA_VALUES_PK';
+   table_name_ VARCHAR2(30) := 'MDM_DATA_VALUES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'TEMPLATE_ID');
+   Database_SYS.Set_Table_Column(columns_, 'REVISION');
+   Database_SYS.Set_Table_Column(columns_, 'REQUEST_NO');
+   Database_SYS.Set_Table_Column(columns_, 'ID');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'MDM_DATA_VALUES_RK';
+   table_name_ VARCHAR2(30) := 'MDM_DATA_VALUES_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+
+SET SERVEROUTPUT OFF

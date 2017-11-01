@@ -1,0 +1,34 @@
+-----------------------------------------------------------------------------
+--
+--  Logical unit: MdmApproval
+--  Component:    MDMGT
+--
+--  IFS Developer Studio Template Version 3.0
+--
+--  Date    Sign    History
+--  ------  ------  ---------------------------------------------------------
+-----------------------------------------------------------------------------
+
+layer Cust;
+
+-------------------- PUBLIC VIEW DEFINITIONS --------------------------------
+
+VIEW Mdm_DlgApproval IS
+   Prompt     = 'Mdm Approval'
+SELECT
+       template_id                    template_id,
+       revision                       revision,
+       request_no                     request_no,
+       group_id                       group_id,
+       group_description              group_description,
+       approval_status                approval_status,
+       approver                       approver,
+       approver_name                  approver_name,
+       approval_date                  approval_date,
+       rowkey                         objkey,
+       to_char(rowversion,'YYYYMMDDHH24MISS') objversion,
+       rowid                          objid
+FROM   mdm_approval_tab;
+
+-------------------- PRIVATE VIEW DEFINITIONS -------------------------------
+

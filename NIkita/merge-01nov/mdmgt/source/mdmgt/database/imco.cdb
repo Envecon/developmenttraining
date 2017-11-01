@@ -1,0 +1,188 @@
+-----------------------------------------------------------------------------
+--  Module : MDMGT
+--
+--  File   : imco.cdb
+--
+--  IFS Developer Studio Template Version 2.6
+--
+--  Date     Sign    History
+--  ------   ------  --------------------------------------------------
+--  171027   Administrator
+--  ------   ------  --------------------------------------------------
+-----------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON
+-----------------------------------------------------------------------------
+--
+--  Logical unit: New
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'NEW_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ID', 'VARCHAR2(100)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'PROJECT_TITLE', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'CLIENT', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'LOCATION', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'DIVISION', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'CONTRACT_NO', 'VARCHAR2(1000)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'MONTH_YR', 'DATE', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'NEW_PK';
+   table_name_ VARCHAR2(30) := 'NEW_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ID');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'NEW_RK';
+   table_name_ VARCHAR2(30) := 'NEW_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+-----------------------------------------------------------------------------
+--
+--  Logical unit: Child
+--  Type:         Entity
+--  Component:    MDMGT
+--
+--  Template:     3.0
+--  Built by:     IFS Developer Studio
+--
+--  Purpose:      Database create script
+--
+--  NOTE! Do not edit!! This file is completely generated and will be
+--        overwritten next time the corresponding model is saved.
+-----------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------
+-------------------- TABLE DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   table_name_ VARCHAR2(30) := 'CHILD_TAB';
+   columns_    Database_SYS.ColumnTabType;
+   column_     Database_SYS.ColRec;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'AID', 'VARCHAR2(10)', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'SERIAL_NO', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'BADGE', 'NUMBER', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'NAME', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'POSITION', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'PROJECT_NO', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ALLOCATION_NO', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'S_L', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'A', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'L', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'REMARKS', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D1', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D2', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D3', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D4', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D5', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D6', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D7', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D8', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D9', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D10', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D11', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D12', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D13', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D14', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D15', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D16', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D17', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D18', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D19', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D20', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D21', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D22', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D23', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D24', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D25', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D26', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D27', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D28', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D29', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D30', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'D31', 'VARCHAR2(100)', 'Y');
+   Database_SYS.Set_Table_Column(columns_, 'ROWVERSION', 'DATE', 'N');
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY', 'VARCHAR2(50)', 'N', 'sys_guid()');
+   Database_SYS.Create_Or_Replace_Table(table_name_, columns_, '&IFSAPP_DATA', NULL, TRUE);
+END;
+/
+
+
+-----------------------------------------------------------------------------
+-------------------- INDEX DEFINITIONS --------------------------------------
+-----------------------------------------------------------------------------
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'CHILD_PK';
+   table_name_ VARCHAR2(30) := 'CHILD_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'AID');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'P', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+DECLARE
+   index_name_ VARCHAR2(30) := 'CHILD_RK';
+   table_name_ VARCHAR2(30) := 'CHILD_TAB';
+   columns_    Database_SYS.ColumnTabType;
+BEGIN
+   Database_SYS.Reset_Column_Table(columns_);
+   Database_SYS.Set_Table_Column(columns_, 'ROWKEY');
+   Database_SYS.Create_Constraint(table_name_, index_name_, columns_, 'U', '&IFSAPP_INDEX', NULL, TRUE, TRUE);
+END;
+/
+
+
+
+
+
+SET SERVEROUTPUT OFF

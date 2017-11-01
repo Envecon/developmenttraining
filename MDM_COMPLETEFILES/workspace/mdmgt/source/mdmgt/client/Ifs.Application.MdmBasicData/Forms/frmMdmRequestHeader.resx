@@ -119,13 +119,16 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_cTabManager.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 26</value>
+    <value>130, 41</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Name" xml:space="preserve">
     <value>_cTabManager</value>
   </data>
   <data name="&gt;&gt;_cTabManager.Type" xml:space="preserve">
     <value>Ifs.Fnd.ApplicationForms.cTabManager, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="picTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="picTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -135,7 +138,7 @@
     <value>624, 344</value>
   </data>
   <data name="picTab.TabSetup" xml:space="preserve">
-    <value>{Name=General;Label=General;Form=tbwGeneral}{Name=Data Values;Label=Data Values;Form=tbwDataValues}</value>
+    <value>{Name=General;Label=General;Form=tbwGeneral}{Name=History;Label=History;Form=tbwMdmRequestHistory}{Name=DataValues;Label=Data Values;Form=tbwDataValues}</value>
   </data>
   <data name="&gt;&gt;picTab.Name" xml:space="preserve">
     <value>picTab</value>

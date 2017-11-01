@@ -80,6 +80,7 @@ namespace Ifs.Application.MdmBasicData
             // picTab
             // 
             resources.ApplyResources(this.picTab, "picTab");
+            this.picTab.SelectedIndex = 2;
             // 
             // commandManager
             // 
@@ -87,6 +88,7 @@ namespace Ifs.Application.MdmBasicData
             this.commandManager.Commands.Add(this.cmdCompleted);
             this.commandManager.Commands.Add(this.cmdCancelled);
             this.commandManager.ContextMenus.Add(this.contextMenu);
+            this.commandManager.ImageList = null;
             // 
             // dfsDescription
             // 
@@ -142,7 +144,6 @@ namespace Ifs.Application.MdmBasicData
             this.dfdRequestedDate.NamedProperties.Put("FieldFlags", "295");
             this.dfdRequestedDate.NamedProperties.Put("LovReference", "");
             this.dfdRequestedDate.NamedProperties.Put("SqlColumn", "REQUESTED_DATE");
-            this.dfdRequestedDate.TextChanged += new System.EventHandler(this.dfdRequestedDate_TextChanged);
             // 
             // labelRequestedDate
             // 
@@ -259,7 +260,6 @@ namespace Ifs.Application.MdmBasicData
             this.dfnRequestNo.NamedProperties.Put("Format", "");
             this.dfnRequestNo.NamedProperties.Put("LovReference", "");
             this.dfnRequestNo.NamedProperties.Put("SqlColumn", "REQUEST_NO");
-            this.dfnRequestNo.TextChanged += new System.EventHandler(this.dfnRequestNo_TextChanged);
             // 
             // labelRequestNo
             // 
@@ -292,6 +292,7 @@ namespace Ifs.Application.MdmBasicData
             this.NamedProperties.Put("PackageName", "MDM_REQUEST_HEADER_API");
             this.NamedProperties.Put("SourceFlags", "4545");
             this.NamedProperties.Put("ViewName", "MDM_REQUEST_HEADER");
+            this.WindowActions += new PPJ.Runtime.Windows.WindowActionsEventHandler(this.frmMdmRequestHeader_WindowActions);
             this.Controls.SetChildIndex(this.picTab, 0);
             this.Controls.SetChildIndex(this.labelDescription, 0);
             this.Controls.SetChildIndex(this.dfsDescription, 0);
@@ -334,7 +335,7 @@ namespace Ifs.Application.MdmBasicData
 
         protected cDataField dfsDescription;
         protected cBackgroundText labelDescription;
-        protected cDataField dfsTemplateId;
+        public cDataField dfsTemplateId;
         protected cBackgroundText labelTemplateId;
         protected cDataField dfsRequestedBy;
         protected cBackgroundText labelRequestedBy;
@@ -342,7 +343,7 @@ namespace Ifs.Application.MdmBasicData
         protected cBackgroundText labelRequestedDate;
         protected cCheckBox cbApprovalRequired;
         protected cCheckBox cbApprovalRejected;
-        protected cDataField dfnRevision;
+        public cDataField dfnRevision;
         protected cBackgroundText labelRevision;
         protected cDataField dfsState;
         protected cBackgroundText labelState;

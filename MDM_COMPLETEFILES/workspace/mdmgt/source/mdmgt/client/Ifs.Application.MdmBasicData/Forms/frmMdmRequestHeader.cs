@@ -27,6 +27,8 @@ using Ifs.Fnd.ApplicationForms;
 using PPJ.Runtime;
 using PPJ.Runtime.Windows;
 using Ifs.Fnd.Windows.Forms;
+using PPJ.Runtime.Sql;
+
 namespace Ifs.Application.MdmBasicData
 {
 
@@ -36,7 +38,6 @@ namespace Ifs.Application.MdmBasicData
     public partial class frmMdmRequestHeader : cMasterDetailTabFormWindow
     {
         #region Member Variables
-
         #endregion
 
         #region Constructors/Destructors
@@ -64,31 +65,8 @@ namespace Ifs.Application.MdmBasicData
         {
             return ((frmMdmRequestHeader)SalWindow.FromHandle(handle, typeof(frmMdmRequestHeader)));
         }
-     
+
         #endregion
-
-
-
-
-        private void dfsRevision_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelRevision_Click(object sender, EventArgs e)
-        {
-        }
-
-
-        private void dfdRequestedDate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dfnRequestNo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         #region Properties
 
@@ -96,7 +74,6 @@ namespace Ifs.Application.MdmBasicData
 
         #region Methods
 
-      
         private void StateEnable()
         {
             dfnRequestNo.Enabled = true;
@@ -121,49 +98,32 @@ namespace Ifs.Application.MdmBasicData
             dfdRequestedDate.Enabled = false;
             cbApprovalRequired.Enabled = false;
             cbApprovalRejected.Enabled = false;
-            
         }
 
-
-        //public new SalNumber DataSourceSaveMarkCommitted()
-        //{
-        //    #region Local Variables
-        //    SalString sFormName = "";
-        //    #endregion
-
-        //    #region Actions
-        //    using (new SalContext(this))
-        //    {
-        //        ((cTableManager)this).DataSourceSaveMarkCommitted();
-        //        ((cTableManager)this).DataSourceRefresh(Ifs.Fnd.ApplicationForms.Const.METHOD_Execute);
-        //    }
-
-        //    return 0;
-        //    #endregion
-        //}
         #endregion
 
         #region  Overrides
 
-        //public override SalNumber vrtDataSourceSaveMarkCommitted()
-        //{
-        //    return this.DataSourceSaveMarkCommitted();
-        //}
         #endregion
 
         #region Window Actions
-       
+
+        private void frmMdmRequestHeader_WindowActions(object sender, WindowActionsEventArgs e)
+        {
+          
+        }
+
         #endregion
 
         #region Event Handlers
-            
+
         #endregion
 
         #region Menu Event Handlers
 
         private void cmdReleased_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
         {
-            this.DataRecordStateEvent(Const.METHOD_Execute, "Released");
+            this.DataRecordStateEvent(Const.METHOD_Execute, "Release");
 
         }
 
@@ -173,7 +133,7 @@ namespace Ifs.Application.MdmBasicData
             if (dfsState.Text == "New" || cbApprovalRequired.Text == "TRUE")
             {
                 ((FndCommand)sender).Enabled = true;
-                
+
             }
             else
             {
@@ -183,8 +143,8 @@ namespace Ifs.Application.MdmBasicData
 
         private void cmdCompleted_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
         {
-            this.DataRecordStateEvent(Const.METHOD_Execute, "Completed");
-           
+            this.DataRecordStateEvent(Const.METHOD_Execute, "Complete");
+
         }
 
         private void cmdCompleted_Inquire(object sender, Fnd.Windows.Forms.FndCommandInquireEventArgs e)
@@ -203,7 +163,7 @@ namespace Ifs.Application.MdmBasicData
         private void cmdCancelled_Execute(object sender, Fnd.Windows.Forms.FndCommandExecuteEventArgs e)
         {
             this.DataRecordStateEvent(Const.METHOD_Execute, "Cancelled");
-            
+
         }
 
         private void cmdCancelled_Inquire(object sender, Fnd.Windows.Forms.FndCommandInquireEventArgs e)
@@ -219,5 +179,15 @@ namespace Ifs.Application.MdmBasicData
             }
         }
         #endregion
+
+        #region Multiple Inheritance Late Bind Interface
+
+        public interface ColumnHeading
+        {
+            SalNumber ReturnResult();
+        }
+        #endregion
+
+
     }
 }

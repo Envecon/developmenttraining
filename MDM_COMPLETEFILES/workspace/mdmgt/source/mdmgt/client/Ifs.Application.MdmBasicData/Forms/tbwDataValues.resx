@@ -1,0 +1,2486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="commandManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="&gt;&gt;__colObjid.Name" xml:space="preserve">
+    <value>__colObjid</value>
+  </data>
+  <data name="&gt;&gt;__colObjid.Type" xml:space="preserve">
+    <value>PPJ.Runtime.Windows.SalTableColumn, PPJ.Runtime.4, Version=4.0.1046.0, Culture=neutral, PublicKeyToken=17bef35e11b84171</value>
+  </data>
+  <data name="&gt;&gt;__colObjid.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;__colObjid.ZOrder" xml:space="preserve">
+    <value>128</value>
+  </data>
+  <data name="&gt;&gt;__colObjversion.Name" xml:space="preserve">
+    <value>__colObjversion</value>
+  </data>
+  <data name="&gt;&gt;__colObjversion.Type" xml:space="preserve">
+    <value>PPJ.Runtime.Windows.SalTableColumn, PPJ.Runtime.4, Version=4.0.1046.0, Culture=neutral, PublicKeyToken=17bef35e11b84171</value>
+  </data>
+  <data name="&gt;&gt;__colObjversion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;__colObjversion.ZOrder" xml:space="preserve">
+    <value>130</value>
+  </data>
+  <data name="colsId.Title" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="colsId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsId.Name" xml:space="preserve">
+    <value>colsId</value>
+  </data>
+  <data name="&gt;&gt;colsId.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsId.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsId.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="colsS1.Title" xml:space="preserve">
+    <value>S1</value>
+  </data>
+  <data name="colsS1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS1.Name" xml:space="preserve">
+    <value>colsS1</value>
+  </data>
+  <data name="&gt;&gt;colsS1.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="colsS2.Title" xml:space="preserve">
+    <value>S2</value>
+  </data>
+  <data name="colsS2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS2.Name" xml:space="preserve">
+    <value>colsS2</value>
+  </data>
+  <data name="&gt;&gt;colsS2.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS2.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="colsS3.Title" xml:space="preserve">
+    <value>S3</value>
+  </data>
+  <data name="colsS3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS3.Name" xml:space="preserve">
+    <value>colsS3</value>
+  </data>
+  <data name="&gt;&gt;colsS3.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="colsS4.Title" xml:space="preserve">
+    <value>S4</value>
+  </data>
+  <data name="colsS4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS4.Name" xml:space="preserve">
+    <value>colsS4</value>
+  </data>
+  <data name="&gt;&gt;colsS4.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS4.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="colsS5.Title" xml:space="preserve">
+    <value>S5</value>
+  </data>
+  <data name="colsS5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS5.Name" xml:space="preserve">
+    <value>colsS5</value>
+  </data>
+  <data name="&gt;&gt;colsS5.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS5.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="colsS6.Title" xml:space="preserve">
+    <value>S6</value>
+  </data>
+  <data name="colsS6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS6.Name" xml:space="preserve">
+    <value>colsS6</value>
+  </data>
+  <data name="&gt;&gt;colsS6.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS6.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="colsS7.Title" xml:space="preserve">
+    <value>S7</value>
+  </data>
+  <data name="colsS7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS7.Name" xml:space="preserve">
+    <value>colsS7</value>
+  </data>
+  <data name="&gt;&gt;colsS7.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS7.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="colsS8.Title" xml:space="preserve">
+    <value>S8</value>
+  </data>
+  <data name="colsS8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS8.Name" xml:space="preserve">
+    <value>colsS8</value>
+  </data>
+  <data name="&gt;&gt;colsS8.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS8.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="colsS9.Title" xml:space="preserve">
+    <value>S9</value>
+  </data>
+  <data name="colsS9.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS9.Name" xml:space="preserve">
+    <value>colsS9</value>
+  </data>
+  <data name="&gt;&gt;colsS9.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS9.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS9.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="colsS10.Title" xml:space="preserve">
+    <value>S10</value>
+  </data>
+  <data name="colsS10.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="colsS10.Width" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;colsS10.Name" xml:space="preserve">
+    <value>colsS10</value>
+  </data>
+  <data name="&gt;&gt;colsS10.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS10.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="colsS11.Title" xml:space="preserve">
+    <value>S11</value>
+  </data>
+  <data name="colsS11.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS11.Name" xml:space="preserve">
+    <value>colsS11</value>
+  </data>
+  <data name="&gt;&gt;colsS11.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS11.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS11.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="colsS12.Title" xml:space="preserve">
+    <value>S12</value>
+  </data>
+  <data name="colsS12.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS12.Name" xml:space="preserve">
+    <value>colsS12</value>
+  </data>
+  <data name="&gt;&gt;colsS12.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS12.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS12.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="colsS13.Title" xml:space="preserve">
+    <value>S13</value>
+  </data>
+  <data name="colsS13.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS13.Name" xml:space="preserve">
+    <value>colsS13</value>
+  </data>
+  <data name="&gt;&gt;colsS13.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS13.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS13.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="colsS14.Title" xml:space="preserve">
+    <value>S14</value>
+  </data>
+  <data name="colsS14.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS14.Name" xml:space="preserve">
+    <value>colsS14</value>
+  </data>
+  <data name="&gt;&gt;colsS14.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS14.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS14.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="colsS15.Title" xml:space="preserve">
+    <value>S15</value>
+  </data>
+  <data name="colsS15.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS15.Name" xml:space="preserve">
+    <value>colsS15</value>
+  </data>
+  <data name="&gt;&gt;colsS15.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS15.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS15.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="colsS16.Title" xml:space="preserve">
+    <value>S16</value>
+  </data>
+  <data name="colsS16.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS16.Name" xml:space="preserve">
+    <value>colsS16</value>
+  </data>
+  <data name="&gt;&gt;colsS16.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS16.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS16.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="colsS17.Title" xml:space="preserve">
+    <value>S17</value>
+  </data>
+  <data name="colsS17.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS17.Name" xml:space="preserve">
+    <value>colsS17</value>
+  </data>
+  <data name="&gt;&gt;colsS17.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS17.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS17.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="colsS18.Title" xml:space="preserve">
+    <value>S18</value>
+  </data>
+  <data name="colsS18.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS18.Name" xml:space="preserve">
+    <value>colsS18</value>
+  </data>
+  <data name="&gt;&gt;colsS18.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS18.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS18.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="colsS19.Title" xml:space="preserve">
+    <value>S19</value>
+  </data>
+  <data name="colsS19.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS19.Name" xml:space="preserve">
+    <value>colsS19</value>
+  </data>
+  <data name="&gt;&gt;colsS19.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS19.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS19.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="colsS20.Title" xml:space="preserve">
+    <value>S20</value>
+  </data>
+  <data name="colsS20.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS20.Name" xml:space="preserve">
+    <value>colsS20</value>
+  </data>
+  <data name="&gt;&gt;colsS20.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS20.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS20.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="colsS21.Title" xml:space="preserve">
+    <value>S21</value>
+  </data>
+  <data name="colsS21.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS21.Name" xml:space="preserve">
+    <value>colsS21</value>
+  </data>
+  <data name="&gt;&gt;colsS21.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS21.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS21.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="colsS22.Title" xml:space="preserve">
+    <value>S22</value>
+  </data>
+  <data name="colsS22.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS22.Name" xml:space="preserve">
+    <value>colsS22</value>
+  </data>
+  <data name="&gt;&gt;colsS22.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS22.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS22.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="colsS23.Title" xml:space="preserve">
+    <value>S23</value>
+  </data>
+  <data name="colsS23.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS23.Name" xml:space="preserve">
+    <value>colsS23</value>
+  </data>
+  <data name="&gt;&gt;colsS23.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS23.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS23.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="colsS24.Title" xml:space="preserve">
+    <value>S24</value>
+  </data>
+  <data name="colsS24.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS24.Name" xml:space="preserve">
+    <value>colsS24</value>
+  </data>
+  <data name="&gt;&gt;colsS24.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS24.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS24.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="colsS25.Title" xml:space="preserve">
+    <value>S25</value>
+  </data>
+  <data name="colsS25.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS25.Name" xml:space="preserve">
+    <value>colsS25</value>
+  </data>
+  <data name="&gt;&gt;colsS25.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS25.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS25.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="colsS26.Title" xml:space="preserve">
+    <value>S26</value>
+  </data>
+  <data name="colsS26.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS26.Name" xml:space="preserve">
+    <value>colsS26</value>
+  </data>
+  <data name="&gt;&gt;colsS26.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS26.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS26.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="colsS27.Title" xml:space="preserve">
+    <value>S27</value>
+  </data>
+  <data name="colsS27.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS27.Name" xml:space="preserve">
+    <value>colsS27</value>
+  </data>
+  <data name="&gt;&gt;colsS27.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS27.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS27.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="colsS28.Title" xml:space="preserve">
+    <value>S28</value>
+  </data>
+  <data name="colsS28.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS28.Name" xml:space="preserve">
+    <value>colsS28</value>
+  </data>
+  <data name="&gt;&gt;colsS28.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS28.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS28.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="colsS29.Title" xml:space="preserve">
+    <value>S29</value>
+  </data>
+  <data name="colsS29.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS29.Name" xml:space="preserve">
+    <value>colsS29</value>
+  </data>
+  <data name="&gt;&gt;colsS29.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS29.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS29.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="colsS30.Title" xml:space="preserve">
+    <value>S30</value>
+  </data>
+  <data name="colsS30.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS30.Name" xml:space="preserve">
+    <value>colsS30</value>
+  </data>
+  <data name="&gt;&gt;colsS30.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS30.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS30.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="colsS31.Title" xml:space="preserve">
+    <value>S31</value>
+  </data>
+  <data name="colsS31.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS31.Name" xml:space="preserve">
+    <value>colsS31</value>
+  </data>
+  <data name="&gt;&gt;colsS31.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS31.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS31.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="colsS32.Title" xml:space="preserve">
+    <value>S32</value>
+  </data>
+  <data name="colsS32.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS32.Name" xml:space="preserve">
+    <value>colsS32</value>
+  </data>
+  <data name="&gt;&gt;colsS32.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS32.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS32.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="colsS33.Title" xml:space="preserve">
+    <value>S33</value>
+  </data>
+  <data name="colsS33.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS33.Name" xml:space="preserve">
+    <value>colsS33</value>
+  </data>
+  <data name="&gt;&gt;colsS33.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS33.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS33.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="colsS34.Title" xml:space="preserve">
+    <value>S34</value>
+  </data>
+  <data name="colsS34.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS34.Name" xml:space="preserve">
+    <value>colsS34</value>
+  </data>
+  <data name="&gt;&gt;colsS34.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS34.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS34.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="colsS35.Title" xml:space="preserve">
+    <value>S35</value>
+  </data>
+  <data name="colsS35.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS35.Name" xml:space="preserve">
+    <value>colsS35</value>
+  </data>
+  <data name="&gt;&gt;colsS35.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS35.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS35.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="colsS36.Title" xml:space="preserve">
+    <value>S36</value>
+  </data>
+  <data name="colsS36.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS36.Name" xml:space="preserve">
+    <value>colsS36</value>
+  </data>
+  <data name="&gt;&gt;colsS36.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS36.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS36.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="colsS37.Title" xml:space="preserve">
+    <value>S37</value>
+  </data>
+  <data name="colsS37.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS37.Name" xml:space="preserve">
+    <value>colsS37</value>
+  </data>
+  <data name="&gt;&gt;colsS37.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS37.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS37.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="colsS38.Title" xml:space="preserve">
+    <value>S38</value>
+  </data>
+  <data name="colsS38.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS38.Name" xml:space="preserve">
+    <value>colsS38</value>
+  </data>
+  <data name="&gt;&gt;colsS38.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS38.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS38.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="colsS39.Title" xml:space="preserve">
+    <value>S39</value>
+  </data>
+  <data name="colsS39.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS39.Name" xml:space="preserve">
+    <value>colsS39</value>
+  </data>
+  <data name="&gt;&gt;colsS39.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS39.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS39.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="colsS40.Title" xml:space="preserve">
+    <value>S40</value>
+  </data>
+  <data name="colsS40.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS40.Name" xml:space="preserve">
+    <value>colsS40</value>
+  </data>
+  <data name="&gt;&gt;colsS40.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS40.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS40.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="colsS41.Title" xml:space="preserve">
+    <value>S41</value>
+  </data>
+  <data name="colsS41.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS41.Name" xml:space="preserve">
+    <value>colsS41</value>
+  </data>
+  <data name="&gt;&gt;colsS41.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS41.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS41.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="colsS42.Title" xml:space="preserve">
+    <value>S42</value>
+  </data>
+  <data name="colsS42.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS42.Name" xml:space="preserve">
+    <value>colsS42</value>
+  </data>
+  <data name="&gt;&gt;colsS42.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS42.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS42.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="colsS43.Title" xml:space="preserve">
+    <value>S43</value>
+  </data>
+  <data name="colsS43.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS43.Name" xml:space="preserve">
+    <value>colsS43</value>
+  </data>
+  <data name="&gt;&gt;colsS43.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS43.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS43.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="colsS44.Title" xml:space="preserve">
+    <value>S44</value>
+  </data>
+  <data name="colsS44.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS44.Name" xml:space="preserve">
+    <value>colsS44</value>
+  </data>
+  <data name="&gt;&gt;colsS44.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS44.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS44.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="colsS45.Title" xml:space="preserve">
+    <value>S45</value>
+  </data>
+  <data name="colsS45.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS45.Name" xml:space="preserve">
+    <value>colsS45</value>
+  </data>
+  <data name="&gt;&gt;colsS45.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS45.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS45.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="colsS46.Title" xml:space="preserve">
+    <value>S46</value>
+  </data>
+  <data name="colsS46.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS46.Name" xml:space="preserve">
+    <value>colsS46</value>
+  </data>
+  <data name="&gt;&gt;colsS46.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS46.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS46.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="colsS47.Title" xml:space="preserve">
+    <value>S47</value>
+  </data>
+  <data name="colsS47.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS47.Name" xml:space="preserve">
+    <value>colsS47</value>
+  </data>
+  <data name="&gt;&gt;colsS47.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS47.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS47.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="colsS48.Title" xml:space="preserve">
+    <value>S48</value>
+  </data>
+  <data name="colsS48.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS48.Name" xml:space="preserve">
+    <value>colsS48</value>
+  </data>
+  <data name="&gt;&gt;colsS48.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS48.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS48.ZOrder" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="colsS49.Title" xml:space="preserve">
+    <value>S49</value>
+  </data>
+  <data name="colsS49.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS49.Name" xml:space="preserve">
+    <value>colsS49</value>
+  </data>
+  <data name="&gt;&gt;colsS49.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS49.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS49.ZOrder" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="colsS50.Title" xml:space="preserve">
+    <value>S50</value>
+  </data>
+  <data name="colsS50.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS50.Name" xml:space="preserve">
+    <value>colsS50</value>
+  </data>
+  <data name="&gt;&gt;colsS50.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS50.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS50.ZOrder" xml:space="preserve">
+    <value>51</value>
+  </data>
+  <data name="colsS51.Title" xml:space="preserve">
+    <value>S51</value>
+  </data>
+  <data name="colsS51.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS51.Name" xml:space="preserve">
+    <value>colsS51</value>
+  </data>
+  <data name="&gt;&gt;colsS51.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS51.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS51.ZOrder" xml:space="preserve">
+    <value>52</value>
+  </data>
+  <data name="colsS52.Title" xml:space="preserve">
+    <value>S52</value>
+  </data>
+  <data name="colsS52.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS52.Name" xml:space="preserve">
+    <value>colsS52</value>
+  </data>
+  <data name="&gt;&gt;colsS52.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS52.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS52.ZOrder" xml:space="preserve">
+    <value>53</value>
+  </data>
+  <data name="colsS53.Title" xml:space="preserve">
+    <value>S53</value>
+  </data>
+  <data name="colsS53.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS53.Name" xml:space="preserve">
+    <value>colsS53</value>
+  </data>
+  <data name="&gt;&gt;colsS53.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS53.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS53.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="colsS54.Title" xml:space="preserve">
+    <value>S54</value>
+  </data>
+  <data name="colsS54.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS54.Name" xml:space="preserve">
+    <value>colsS54</value>
+  </data>
+  <data name="&gt;&gt;colsS54.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS54.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS54.ZOrder" xml:space="preserve">
+    <value>55</value>
+  </data>
+  <data name="colsS55.Title" xml:space="preserve">
+    <value>S55</value>
+  </data>
+  <data name="colsS55.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS55.Name" xml:space="preserve">
+    <value>colsS55</value>
+  </data>
+  <data name="&gt;&gt;colsS55.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS55.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS55.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="colsS56.Title" xml:space="preserve">
+    <value>S56</value>
+  </data>
+  <data name="colsS56.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS56.Name" xml:space="preserve">
+    <value>colsS56</value>
+  </data>
+  <data name="&gt;&gt;colsS56.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS56.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS56.ZOrder" xml:space="preserve">
+    <value>57</value>
+  </data>
+  <data name="colsS57.Title" xml:space="preserve">
+    <value>S57</value>
+  </data>
+  <data name="colsS57.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS57.Name" xml:space="preserve">
+    <value>colsS57</value>
+  </data>
+  <data name="&gt;&gt;colsS57.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS57.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS57.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="colsS58.Title" xml:space="preserve">
+    <value>S58</value>
+  </data>
+  <data name="colsS58.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS58.Name" xml:space="preserve">
+    <value>colsS58</value>
+  </data>
+  <data name="&gt;&gt;colsS58.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS58.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS58.ZOrder" xml:space="preserve">
+    <value>59</value>
+  </data>
+  <data name="colsS59.Title" xml:space="preserve">
+    <value>S59</value>
+  </data>
+  <data name="colsS59.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS59.Name" xml:space="preserve">
+    <value>colsS59</value>
+  </data>
+  <data name="&gt;&gt;colsS59.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS59.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS59.ZOrder" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="colsS60.Title" xml:space="preserve">
+    <value>S60</value>
+  </data>
+  <data name="colsS60.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS60.Name" xml:space="preserve">
+    <value>colsS60</value>
+  </data>
+  <data name="&gt;&gt;colsS60.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS60.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS60.ZOrder" xml:space="preserve">
+    <value>61</value>
+  </data>
+  <data name="colsS61.Title" xml:space="preserve">
+    <value>S61</value>
+  </data>
+  <data name="colsS61.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS61.Name" xml:space="preserve">
+    <value>colsS61</value>
+  </data>
+  <data name="&gt;&gt;colsS61.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS61.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS61.ZOrder" xml:space="preserve">
+    <value>62</value>
+  </data>
+  <data name="colsS62.Title" xml:space="preserve">
+    <value>S62</value>
+  </data>
+  <data name="colsS62.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS62.Name" xml:space="preserve">
+    <value>colsS62</value>
+  </data>
+  <data name="&gt;&gt;colsS62.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS62.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS62.ZOrder" xml:space="preserve">
+    <value>63</value>
+  </data>
+  <data name="colsS63.Title" xml:space="preserve">
+    <value>S63</value>
+  </data>
+  <data name="colsS63.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS63.Name" xml:space="preserve">
+    <value>colsS63</value>
+  </data>
+  <data name="&gt;&gt;colsS63.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS63.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS63.ZOrder" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="colsS64.Title" xml:space="preserve">
+    <value>S64</value>
+  </data>
+  <data name="colsS64.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS64.Name" xml:space="preserve">
+    <value>colsS64</value>
+  </data>
+  <data name="&gt;&gt;colsS64.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS64.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS64.ZOrder" xml:space="preserve">
+    <value>65</value>
+  </data>
+  <data name="colsS65.Title" xml:space="preserve">
+    <value>S65</value>
+  </data>
+  <data name="colsS65.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS65.Name" xml:space="preserve">
+    <value>colsS65</value>
+  </data>
+  <data name="&gt;&gt;colsS65.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS65.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS65.ZOrder" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="colsS66.Title" xml:space="preserve">
+    <value>S66</value>
+  </data>
+  <data name="colsS66.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS66.Name" xml:space="preserve">
+    <value>colsS66</value>
+  </data>
+  <data name="&gt;&gt;colsS66.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS66.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS66.ZOrder" xml:space="preserve">
+    <value>67</value>
+  </data>
+  <data name="colsS67.Title" xml:space="preserve">
+    <value>S67</value>
+  </data>
+  <data name="colsS67.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS67.Name" xml:space="preserve">
+    <value>colsS67</value>
+  </data>
+  <data name="&gt;&gt;colsS67.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS67.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS67.ZOrder" xml:space="preserve">
+    <value>68</value>
+  </data>
+  <data name="colsS68.Title" xml:space="preserve">
+    <value>S68</value>
+  </data>
+  <data name="colsS68.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS68.Name" xml:space="preserve">
+    <value>colsS68</value>
+  </data>
+  <data name="&gt;&gt;colsS68.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS68.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS68.ZOrder" xml:space="preserve">
+    <value>69</value>
+  </data>
+  <data name="colsS69.Title" xml:space="preserve">
+    <value>S69</value>
+  </data>
+  <data name="colsS69.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS69.Name" xml:space="preserve">
+    <value>colsS69</value>
+  </data>
+  <data name="&gt;&gt;colsS69.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS69.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS69.ZOrder" xml:space="preserve">
+    <value>70</value>
+  </data>
+  <data name="colsS70.Title" xml:space="preserve">
+    <value>S70</value>
+  </data>
+  <data name="colsS70.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS70.Name" xml:space="preserve">
+    <value>colsS70</value>
+  </data>
+  <data name="&gt;&gt;colsS70.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS70.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS70.ZOrder" xml:space="preserve">
+    <value>71</value>
+  </data>
+  <data name="colsS71.Title" xml:space="preserve">
+    <value>S71</value>
+  </data>
+  <data name="colsS71.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS71.Name" xml:space="preserve">
+    <value>colsS71</value>
+  </data>
+  <data name="&gt;&gt;colsS71.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS71.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS71.ZOrder" xml:space="preserve">
+    <value>72</value>
+  </data>
+  <data name="colsS72.Title" xml:space="preserve">
+    <value>S72</value>
+  </data>
+  <data name="colsS72.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS72.Name" xml:space="preserve">
+    <value>colsS72</value>
+  </data>
+  <data name="&gt;&gt;colsS72.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS72.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS72.ZOrder" xml:space="preserve">
+    <value>73</value>
+  </data>
+  <data name="colsS73.Title" xml:space="preserve">
+    <value>S73</value>
+  </data>
+  <data name="colsS73.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS73.Name" xml:space="preserve">
+    <value>colsS73</value>
+  </data>
+  <data name="&gt;&gt;colsS73.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS73.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS73.ZOrder" xml:space="preserve">
+    <value>74</value>
+  </data>
+  <data name="colsS74.Title" xml:space="preserve">
+    <value>S74</value>
+  </data>
+  <data name="colsS74.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS74.Name" xml:space="preserve">
+    <value>colsS74</value>
+  </data>
+  <data name="&gt;&gt;colsS74.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS74.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS74.ZOrder" xml:space="preserve">
+    <value>75</value>
+  </data>
+  <data name="colsS75.Title" xml:space="preserve">
+    <value>S75</value>
+  </data>
+  <data name="colsS75.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS75.Name" xml:space="preserve">
+    <value>colsS75</value>
+  </data>
+  <data name="&gt;&gt;colsS75.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS75.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS75.ZOrder" xml:space="preserve">
+    <value>76</value>
+  </data>
+  <data name="colsS76.Title" xml:space="preserve">
+    <value>S76</value>
+  </data>
+  <data name="colsS76.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS76.Name" xml:space="preserve">
+    <value>colsS76</value>
+  </data>
+  <data name="&gt;&gt;colsS76.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS76.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS76.ZOrder" xml:space="preserve">
+    <value>77</value>
+  </data>
+  <data name="colsS77.Title" xml:space="preserve">
+    <value>S77</value>
+  </data>
+  <data name="colsS77.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS77.Name" xml:space="preserve">
+    <value>colsS77</value>
+  </data>
+  <data name="&gt;&gt;colsS77.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS77.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS77.ZOrder" xml:space="preserve">
+    <value>78</value>
+  </data>
+  <data name="colsS78.Title" xml:space="preserve">
+    <value>S78</value>
+  </data>
+  <data name="colsS78.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS78.Name" xml:space="preserve">
+    <value>colsS78</value>
+  </data>
+  <data name="&gt;&gt;colsS78.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS78.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS78.ZOrder" xml:space="preserve">
+    <value>79</value>
+  </data>
+  <data name="colsS79.Title" xml:space="preserve">
+    <value>S79</value>
+  </data>
+  <data name="colsS79.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS79.Name" xml:space="preserve">
+    <value>colsS79</value>
+  </data>
+  <data name="&gt;&gt;colsS79.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS79.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS79.ZOrder" xml:space="preserve">
+    <value>80</value>
+  </data>
+  <data name="colsS80.Title" xml:space="preserve">
+    <value>S80</value>
+  </data>
+  <data name="colsS80.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS80.Name" xml:space="preserve">
+    <value>colsS80</value>
+  </data>
+  <data name="&gt;&gt;colsS80.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS80.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS80.ZOrder" xml:space="preserve">
+    <value>81</value>
+  </data>
+  <data name="colsS81.Title" xml:space="preserve">
+    <value>S81</value>
+  </data>
+  <data name="colsS81.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS81.Name" xml:space="preserve">
+    <value>colsS81</value>
+  </data>
+  <data name="&gt;&gt;colsS81.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS81.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS81.ZOrder" xml:space="preserve">
+    <value>82</value>
+  </data>
+  <data name="colsS82.Title" xml:space="preserve">
+    <value>S82</value>
+  </data>
+  <data name="colsS82.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS82.Name" xml:space="preserve">
+    <value>colsS82</value>
+  </data>
+  <data name="&gt;&gt;colsS82.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS82.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS82.ZOrder" xml:space="preserve">
+    <value>83</value>
+  </data>
+  <data name="colsS83.Title" xml:space="preserve">
+    <value>S83</value>
+  </data>
+  <data name="colsS83.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS83.Name" xml:space="preserve">
+    <value>colsS83</value>
+  </data>
+  <data name="&gt;&gt;colsS83.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS83.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS83.ZOrder" xml:space="preserve">
+    <value>84</value>
+  </data>
+  <data name="colsS84.Title" xml:space="preserve">
+    <value>S84</value>
+  </data>
+  <data name="colsS84.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS84.Name" xml:space="preserve">
+    <value>colsS84</value>
+  </data>
+  <data name="&gt;&gt;colsS84.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS84.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS84.ZOrder" xml:space="preserve">
+    <value>85</value>
+  </data>
+  <data name="colsS85.Title" xml:space="preserve">
+    <value>S85</value>
+  </data>
+  <data name="colsS85.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS85.Name" xml:space="preserve">
+    <value>colsS85</value>
+  </data>
+  <data name="&gt;&gt;colsS85.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS85.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS85.ZOrder" xml:space="preserve">
+    <value>86</value>
+  </data>
+  <data name="colsS86.Title" xml:space="preserve">
+    <value>S86</value>
+  </data>
+  <data name="colsS86.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS86.Name" xml:space="preserve">
+    <value>colsS86</value>
+  </data>
+  <data name="&gt;&gt;colsS86.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS86.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS86.ZOrder" xml:space="preserve">
+    <value>87</value>
+  </data>
+  <data name="colsS87.Title" xml:space="preserve">
+    <value>S87</value>
+  </data>
+  <data name="colsS87.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS87.Name" xml:space="preserve">
+    <value>colsS87</value>
+  </data>
+  <data name="&gt;&gt;colsS87.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS87.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS87.ZOrder" xml:space="preserve">
+    <value>88</value>
+  </data>
+  <data name="colsS88.Title" xml:space="preserve">
+    <value>S88</value>
+  </data>
+  <data name="colsS88.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS88.Name" xml:space="preserve">
+    <value>colsS88</value>
+  </data>
+  <data name="&gt;&gt;colsS88.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS88.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS88.ZOrder" xml:space="preserve">
+    <value>89</value>
+  </data>
+  <data name="colsS89.Title" xml:space="preserve">
+    <value>S89</value>
+  </data>
+  <data name="colsS89.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS89.Name" xml:space="preserve">
+    <value>colsS89</value>
+  </data>
+  <data name="&gt;&gt;colsS89.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS89.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS89.ZOrder" xml:space="preserve">
+    <value>90</value>
+  </data>
+  <data name="colsS90.Title" xml:space="preserve">
+    <value>S90</value>
+  </data>
+  <data name="colsS90.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS90.Name" xml:space="preserve">
+    <value>colsS90</value>
+  </data>
+  <data name="&gt;&gt;colsS90.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS90.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS90.ZOrder" xml:space="preserve">
+    <value>91</value>
+  </data>
+  <data name="colsS91.Title" xml:space="preserve">
+    <value>S91</value>
+  </data>
+  <data name="colsS91.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS91.Name" xml:space="preserve">
+    <value>colsS91</value>
+  </data>
+  <data name="&gt;&gt;colsS91.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS91.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS91.ZOrder" xml:space="preserve">
+    <value>92</value>
+  </data>
+  <data name="colsS92.Title" xml:space="preserve">
+    <value>S92</value>
+  </data>
+  <data name="colsS92.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS92.Name" xml:space="preserve">
+    <value>colsS92</value>
+  </data>
+  <data name="&gt;&gt;colsS92.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS92.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS92.ZOrder" xml:space="preserve">
+    <value>93</value>
+  </data>
+  <data name="colsS93.Title" xml:space="preserve">
+    <value>S93</value>
+  </data>
+  <data name="colsS93.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS93.Name" xml:space="preserve">
+    <value>colsS93</value>
+  </data>
+  <data name="&gt;&gt;colsS93.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS93.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS93.ZOrder" xml:space="preserve">
+    <value>94</value>
+  </data>
+  <data name="colsS94.Title" xml:space="preserve">
+    <value>S94</value>
+  </data>
+  <data name="colsS94.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS94.Name" xml:space="preserve">
+    <value>colsS94</value>
+  </data>
+  <data name="&gt;&gt;colsS94.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS94.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS94.ZOrder" xml:space="preserve">
+    <value>95</value>
+  </data>
+  <data name="colsS95.Title" xml:space="preserve">
+    <value>S95</value>
+  </data>
+  <data name="colsS95.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS95.Name" xml:space="preserve">
+    <value>colsS95</value>
+  </data>
+  <data name="&gt;&gt;colsS95.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS95.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS95.ZOrder" xml:space="preserve">
+    <value>96</value>
+  </data>
+  <data name="colsS96.Title" xml:space="preserve">
+    <value>S96</value>
+  </data>
+  <data name="colsS96.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS96.Name" xml:space="preserve">
+    <value>colsS96</value>
+  </data>
+  <data name="&gt;&gt;colsS96.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS96.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS96.ZOrder" xml:space="preserve">
+    <value>97</value>
+  </data>
+  <data name="colsS97.Title" xml:space="preserve">
+    <value>S97</value>
+  </data>
+  <data name="colsS97.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS97.Name" xml:space="preserve">
+    <value>colsS97</value>
+  </data>
+  <data name="&gt;&gt;colsS97.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS97.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS97.ZOrder" xml:space="preserve">
+    <value>98</value>
+  </data>
+  <data name="colsS98.Title" xml:space="preserve">
+    <value>S98</value>
+  </data>
+  <data name="colsS98.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS98.Name" xml:space="preserve">
+    <value>colsS98</value>
+  </data>
+  <data name="&gt;&gt;colsS98.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS98.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS98.ZOrder" xml:space="preserve">
+    <value>99</value>
+  </data>
+  <data name="colsS99.Title" xml:space="preserve">
+    <value>S99</value>
+  </data>
+  <data name="colsS99.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS99.Name" xml:space="preserve">
+    <value>colsS99</value>
+  </data>
+  <data name="&gt;&gt;colsS99.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS99.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS99.ZOrder" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="colsS100.Title" xml:space="preserve">
+    <value>S100</value>
+  </data>
+  <data name="colsS100.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsS100.Name" xml:space="preserve">
+    <value>colsS100</value>
+  </data>
+  <data name="&gt;&gt;colsS100.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsS100.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsS100.ZOrder" xml:space="preserve">
+    <value>101</value>
+  </data>
+  <data name="coldD1.Title" xml:space="preserve">
+    <value>D1</value>
+  </data>
+  <data name="coldD1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD1.Name" xml:space="preserve">
+    <value>coldD1</value>
+  </data>
+  <data name="&gt;&gt;coldD1.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD1.ZOrder" xml:space="preserve">
+    <value>102</value>
+  </data>
+  <data name="coldD2.Title" xml:space="preserve">
+    <value>D2</value>
+  </data>
+  <data name="coldD2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD2.Name" xml:space="preserve">
+    <value>coldD2</value>
+  </data>
+  <data name="&gt;&gt;coldD2.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD2.ZOrder" xml:space="preserve">
+    <value>103</value>
+  </data>
+  <data name="coldD3.Title" xml:space="preserve">
+    <value>D3</value>
+  </data>
+  <data name="coldD3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD3.Name" xml:space="preserve">
+    <value>coldD3</value>
+  </data>
+  <data name="&gt;&gt;coldD3.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD3.ZOrder" xml:space="preserve">
+    <value>104</value>
+  </data>
+  <data name="coldD4.Title" xml:space="preserve">
+    <value>D4</value>
+  </data>
+  <data name="coldD4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD4.Name" xml:space="preserve">
+    <value>coldD4</value>
+  </data>
+  <data name="&gt;&gt;coldD4.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD4.ZOrder" xml:space="preserve">
+    <value>105</value>
+  </data>
+  <data name="coldD5.Title" xml:space="preserve">
+    <value>D5</value>
+  </data>
+  <data name="coldD5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD5.Name" xml:space="preserve">
+    <value>coldD5</value>
+  </data>
+  <data name="&gt;&gt;coldD5.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD5.ZOrder" xml:space="preserve">
+    <value>106</value>
+  </data>
+  <data name="coldD6.Title" xml:space="preserve">
+    <value>D6</value>
+  </data>
+  <data name="coldD6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD6.Name" xml:space="preserve">
+    <value>coldD6</value>
+  </data>
+  <data name="&gt;&gt;coldD6.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD6.ZOrder" xml:space="preserve">
+    <value>107</value>
+  </data>
+  <data name="coldD7.Title" xml:space="preserve">
+    <value>D7</value>
+  </data>
+  <data name="coldD7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD7.Name" xml:space="preserve">
+    <value>coldD7</value>
+  </data>
+  <data name="&gt;&gt;coldD7.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD7.ZOrder" xml:space="preserve">
+    <value>108</value>
+  </data>
+  <data name="coldD8.Title" xml:space="preserve">
+    <value>D8</value>
+  </data>
+  <data name="coldD8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD8.Name" xml:space="preserve">
+    <value>coldD8</value>
+  </data>
+  <data name="&gt;&gt;coldD8.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD8.ZOrder" xml:space="preserve">
+    <value>109</value>
+  </data>
+  <data name="coldD9.Title" xml:space="preserve">
+    <value>D9</value>
+  </data>
+  <data name="coldD9.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD9.Name" xml:space="preserve">
+    <value>coldD9</value>
+  </data>
+  <data name="&gt;&gt;coldD9.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD9.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD9.ZOrder" xml:space="preserve">
+    <value>110</value>
+  </data>
+  <data name="coldD10.Title" xml:space="preserve">
+    <value>D10</value>
+  </data>
+  <data name="coldD10.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldD10.Name" xml:space="preserve">
+    <value>coldD10</value>
+  </data>
+  <data name="&gt;&gt;coldD10.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldD10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldD10.ZOrder" xml:space="preserve">
+    <value>111</value>
+  </data>
+  <data name="colnN1.Title" xml:space="preserve">
+    <value>N1</value>
+  </data>
+  <data name="colnN1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN1.Name" xml:space="preserve">
+    <value>colnN1</value>
+  </data>
+  <data name="&gt;&gt;colnN1.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN1.ZOrder" xml:space="preserve">
+    <value>112</value>
+  </data>
+  <data name="colnN2.Title" xml:space="preserve">
+    <value>N2</value>
+  </data>
+  <data name="colnN2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN2.Name" xml:space="preserve">
+    <value>colnN2</value>
+  </data>
+  <data name="&gt;&gt;colnN2.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN2.ZOrder" xml:space="preserve">
+    <value>113</value>
+  </data>
+  <data name="colnN3.Title" xml:space="preserve">
+    <value>N3</value>
+  </data>
+  <data name="colnN3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN3.Name" xml:space="preserve">
+    <value>colnN3</value>
+  </data>
+  <data name="&gt;&gt;colnN3.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN3.ZOrder" xml:space="preserve">
+    <value>114</value>
+  </data>
+  <data name="colnN4.Title" xml:space="preserve">
+    <value>N4</value>
+  </data>
+  <data name="colnN4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN4.Name" xml:space="preserve">
+    <value>colnN4</value>
+  </data>
+  <data name="&gt;&gt;colnN4.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN4.ZOrder" xml:space="preserve">
+    <value>115</value>
+  </data>
+  <data name="colnN5.Title" xml:space="preserve">
+    <value>N5</value>
+  </data>
+  <data name="colnN5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN5.Name" xml:space="preserve">
+    <value>colnN5</value>
+  </data>
+  <data name="&gt;&gt;colnN5.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN5.ZOrder" xml:space="preserve">
+    <value>116</value>
+  </data>
+  <data name="colnN6.Title" xml:space="preserve">
+    <value>N6</value>
+  </data>
+  <data name="colnN6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN6.Name" xml:space="preserve">
+    <value>colnN6</value>
+  </data>
+  <data name="&gt;&gt;colnN6.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN6.ZOrder" xml:space="preserve">
+    <value>117</value>
+  </data>
+  <data name="colnN7.Title" xml:space="preserve">
+    <value>N7</value>
+  </data>
+  <data name="colnN7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN7.Name" xml:space="preserve">
+    <value>colnN7</value>
+  </data>
+  <data name="&gt;&gt;colnN7.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN7.ZOrder" xml:space="preserve">
+    <value>118</value>
+  </data>
+  <data name="colnN8.Title" xml:space="preserve">
+    <value>N8</value>
+  </data>
+  <data name="colnN8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN8.Name" xml:space="preserve">
+    <value>colnN8</value>
+  </data>
+  <data name="&gt;&gt;colnN8.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN8.ZOrder" xml:space="preserve">
+    <value>119</value>
+  </data>
+  <data name="colnN9.Title" xml:space="preserve">
+    <value>N9</value>
+  </data>
+  <data name="colnN9.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN9.Name" xml:space="preserve">
+    <value>colnN9</value>
+  </data>
+  <data name="&gt;&gt;colnN9.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN9.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN9.ZOrder" xml:space="preserve">
+    <value>120</value>
+  </data>
+  <data name="colnN10.Title" xml:space="preserve">
+    <value>N10</value>
+  </data>
+  <data name="colnN10.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnN10.Name" xml:space="preserve">
+    <value>colnN10</value>
+  </data>
+  <data name="&gt;&gt;colnN10.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnN10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnN10.ZOrder" xml:space="preserve">
+    <value>121</value>
+  </data>
+  <data name="colsRowStatus.Title" xml:space="preserve">
+    <value>Row Status</value>
+  </data>
+  <data name="colsRowStatus.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsRowStatus.Name" xml:space="preserve">
+    <value>colsRowStatus</value>
+  </data>
+  <data name="&gt;&gt;colsRowStatus.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cLookupColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsRowStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsRowStatus.ZOrder" xml:space="preserve">
+    <value>122</value>
+  </data>
+  <data name="colsTransferredBy.Title" xml:space="preserve">
+    <value>Transferred By</value>
+  </data>
+  <data name="colsTransferredBy.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsTransferredBy.Name" xml:space="preserve">
+    <value>colsTransferredBy</value>
+  </data>
+  <data name="&gt;&gt;colsTransferredBy.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsTransferredBy.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsTransferredBy.ZOrder" xml:space="preserve">
+    <value>123</value>
+  </data>
+  <data name="coldTransferredDate.Title" xml:space="preserve">
+    <value>Transferred Date</value>
+  </data>
+  <data name="coldTransferredDate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;coldTransferredDate.Name" xml:space="preserve">
+    <value>coldTransferredDate</value>
+  </data>
+  <data name="&gt;&gt;coldTransferredDate.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;coldTransferredDate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;coldTransferredDate.ZOrder" xml:space="preserve">
+    <value>124</value>
+  </data>
+  <data name="colsError.Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="colsError.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsError.Name" xml:space="preserve">
+    <value>colsError</value>
+  </data>
+  <data name="&gt;&gt;colsError.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsError.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsError.ZOrder" xml:space="preserve">
+    <value>125</value>
+  </data>
+  <data name="colsTemplateId.Title" xml:space="preserve">
+    <value>Template Id</value>
+  </data>
+  <data name="colsTemplateId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Name" xml:space="preserve">
+    <value>colsTemplateId</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colsTemplateId.ZOrder" xml:space="preserve">
+    <value>127</value>
+  </data>
+  <data name="colnRevision.Title" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="colnRevision.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Name" xml:space="preserve">
+    <value>colnRevision</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnRevision.ZOrder" xml:space="preserve">
+    <value>126</value>
+  </data>
+  <data name="colnRequestNo.Title" xml:space="preserve">
+    <value>Request No</value>
+  </data>
+  <data name="colnRequestNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;colnRequestNo.Name" xml:space="preserve">
+    <value>colnRequestNo</value>
+  </data>
+  <data name="&gt;&gt;colnRequestNo.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cColumn, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;colnRequestNo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colnRequestNo.ZOrder" xml:space="preserve">
+    <value>129</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>47</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>783, 344</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Data Values</value>
+  </data>
+  <data name="&gt;&gt;commandManager.Name" xml:space="preserve">
+    <value>commandManager</value>
+  </data>
+  <data name="&gt;&gt;commandManager.Type" xml:space="preserve">
+    <value>Ifs.Fnd.Windows.Forms.FndCommandManager, Ifs.Fnd.Windows.Forms.CommonControls, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;tsMenuItemPk.Name" xml:space="preserve">
+    <value>tsMenuItemPk</value>
+  </data>
+  <data name="&gt;&gt;tsMenuItemPk.Type" xml:space="preserve">
+    <value>Ifs.Fnd.Windows.Forms.FndToolStripMenuItem, Ifs.Fnd.Windows.Forms.CommonControls, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>tbwDataValues</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>Ifs.Fnd.ApplicationForms.cTableWindow, Ifs.Fnd.ApplicationForms, Version=4.52.9.0, Culture=neutral, PublicKeyToken=ff90f512e10aef0d</value>
+  </data>
+</root>

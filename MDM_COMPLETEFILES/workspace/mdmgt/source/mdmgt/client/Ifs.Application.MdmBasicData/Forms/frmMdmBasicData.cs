@@ -109,7 +109,7 @@ namespace Ifs.Application.MdmBasicData
         private void Method_cmdReOpen_Execute()
         {
             ecmbTemplateId.Enabled = true;
-            dfnRevision.Enabled = true;
+            dfnRevision.Enabled = false;
             dfsDescription.Enabled = true;
             dfsState.Enabled = true;
             dfsCreatedBy.Enabled = true;
@@ -132,7 +132,7 @@ namespace Ifs.Application.MdmBasicData
                 using (SignatureHints hints1 = SignatureHints.NewContext())
                 {
                     hints1.Add("mdm_basic_data_header_api.Get_Status", System.Data.ParameterDirection.Input, System.Data.ParameterDirection.Input);
-                    if (DbPLSQLBlock(cSessionManager.c_hSql, ":hWndForm.frmPmTab.sResult := &AO.mdm_basic_data_header_api.Get_Status( :hWndForm.frmMdmBasicData.ecmbTemplateId, :hWndForm.frmMdmBasicData.dfnRevision)"))
+                    if (DbPLSQLBlock(cSessionManager.c_hSql, ":hWndForm.frmMdmBasicData.sResult := &AO.mdm_basic_data_header_api.Get_Status( :hWndForm.frmMdmBasicData.ecmbTemplateId, :hWndForm.frmMdmBasicData.dfnRevision)"))
                     {
                         sKeyArray[3] = sResult;
                     }
@@ -142,7 +142,7 @@ namespace Ifs.Application.MdmBasicData
                 using (SignatureHints hints1 = SignatureHints.NewContext())
                 {
                     hints1.Add("mdm_basic_data_header_api.Get_Objid", System.Data.ParameterDirection.Input, System.Data.ParameterDirection.Input);
-                    DbPLSQLBlock(cSessionManager.c_hSql, ":i_hWndFrame.frmPmTab.sObjid := &AO.mdm_basic_data_header_api.Get_Objid (:hWndForm.frmMdmBasicData.ecmbTemplateId.i_sMyValue,:i_hWndFrame.frmMdmBasicData.dfnRevision)");
+                    DbPLSQLBlock(cSessionManager.c_hSql, ":i_hWndFrame.frmMdmBasicData.sObjid := &AO.mdm_basic_data_header_api.Get_Objid (:hWndForm.frmMdmBasicData.ecmbTemplateId.i_sMyValue,:i_hWndFrame.frmMdmBasicData.dfnRevision)");
                 }
                 ecmbTemplateId.__sRecordObjid[ecmbTemplateId.__nArrayEntries] = sObjid;
                 ecmbTemplateId.__nArrayEntries = ecmbTemplateId.__nArrayEntries + 1;

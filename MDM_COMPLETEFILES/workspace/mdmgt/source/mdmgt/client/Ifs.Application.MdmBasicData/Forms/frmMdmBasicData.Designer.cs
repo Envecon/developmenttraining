@@ -68,6 +68,8 @@ namespace Ifs.Application.MdmBasicData
             this.labelProfileId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.ecmbTemplateId = new Ifs.Fnd.ApplicationForms.cRecListDataField();
             this.labelTemplateId = new Ifs.Fnd.ApplicationForms.cBackgroundText();
+            this.dfsNotes = new Ifs.Fnd.ApplicationForms.cDataField();
+            this.labelNotes = new Ifs.Fnd.ApplicationForms.cBackgroundText();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +80,6 @@ namespace Ifs.Application.MdmBasicData
             // picTab
             // 
             resources.ApplyResources(this.picTab, "picTab");
-            this.picTab.SelectedIndex = 1;
             // 
             // commandManager
             // 
@@ -86,7 +87,6 @@ namespace Ifs.Application.MdmBasicData
             this.commandManager.Commands.Add(this.cmdReOpen);
             this.commandManager.Commands.Add(this.cmdCreateRevision);
             this.commandManager.ContextMenus.Add(this.contextMenu);
-            this.commandManager.ImageList = null;
             // 
             // dfnRevision
             // 
@@ -246,10 +246,26 @@ namespace Ifs.Application.MdmBasicData
             resources.ApplyResources(this.labelTemplateId, "labelTemplateId");
             this.labelTemplateId.Name = "labelTemplateId";
             // 
+            // dfsNotes
+            // 
+            resources.ApplyResources(this.dfsNotes, "dfsNotes");
+            this.dfsNotes.Name = "dfsNotes";
+            this.dfsNotes.NamedProperties.Put("EnumerateMethod", "");
+            this.dfsNotes.NamedProperties.Put("FieldFlags", "294");
+            this.dfsNotes.NamedProperties.Put("LovReference", "");
+            this.dfsNotes.NamedProperties.Put("SqlColumn", "NOTES");
+            // 
+            // labelNotes
+            // 
+            resources.ApplyResources(this.labelNotes, "labelNotes");
+            this.labelNotes.Name = "labelNotes";
+            // 
             // frmMdmBasicData
             // 
             resources.ApplyResources(this, "$this");
             this.ContextMenuStrip = this.contextMenu;
+            this.Controls.Add(this.dfsNotes);
+            this.Controls.Add(this.labelNotes);
             this.Controls.Add(this.ecmbTemplateId);
             this.Controls.Add(this.labelTemplateId);
             this.Controls.Add(this.dfsProfileId);
@@ -286,6 +302,8 @@ namespace Ifs.Application.MdmBasicData
             this.Controls.SetChildIndex(this.dfsProfileId, 0);
             this.Controls.SetChildIndex(this.labelTemplateId, 0);
             this.Controls.SetChildIndex(this.ecmbTemplateId, 0);
+            this.Controls.SetChildIndex(this.labelNotes, 0);
+            this.Controls.SetChildIndex(this.dfsNotes, 0);
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -330,5 +348,7 @@ namespace Ifs.Application.MdmBasicData
         protected cBackgroundText labelProfileId;
         protected cRecListDataField ecmbTemplateId;
         protected cBackgroundText labelTemplateId;
+        protected cDataField dfsNotes;
+        protected cBackgroundText labelNotes;
     }
 }
